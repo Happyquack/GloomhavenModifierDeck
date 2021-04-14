@@ -1,5 +1,9 @@
 # GloomhavenModifierDeck
 
+<h3> Link to the tool </h3>
+
+<a href="https://happyquack.github.io/GloomhavenModifierDeck/" Gloomhaven Attack Modifier Deck Simulator </a>
+
 <h1> Overview </h1>
 
 This is a WIP tool for the board game Gloomhaven, designed by Isaac Childres and published by Cephalofair Games ([link to BoardGameGeek page](https://boardgamegeek.com/boardgame/174430/gloomhaven)), that you can use during your Gloomhaven game to check the current (if you're playing a scenario) or overall stats of your attack modifier deck.
