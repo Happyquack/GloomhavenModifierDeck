@@ -2,7 +2,7 @@
 
 <h3> Link to the tool </h3>
 
-<a href="https://happyquack.github.io/GloomhavenModifierDeck/" target="_blank" rel="noreferrer noopener">Gloomhaven Attack Modifier Deck Simulator</a>
+<a href="https://happyquack.github.io/GloomhavenModifierDeck" target="_blank" rel="noreferrer noopener">Gloomhaven Attack Modifier Deck Simulator</a>
 
 <h1> Overview </h1>
 
