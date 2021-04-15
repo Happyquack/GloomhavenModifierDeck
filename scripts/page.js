@@ -51,7 +51,7 @@ classIconImgs = [classSelection01, classSelection02, classSelection03,
 imageSideLength = PAGEWIDTH/8;
 classSelectionBox.style.paddingLeft = imageSideLength;
 classSelectionBox.style.paddingRight = imageSideLength;
-for (let [index, image] of Object.entries(classIconImgs)) {
+for (let [index, image] of classIconImgs.entries()) {
  image.style.position = "absolute";
  image.style.top = floor(index/6)*imageSideLength;
  image.style.left = (index%6)*imageSideLength;
