@@ -53,7 +53,7 @@ classSelectionBox.style.paddingLeft = imageSideLength;
 classSelectionBox.style.paddingRight = imageSideLength;
 for (let [index, image] of classIconImgs.entries()) {
  image.style.position = "absolute";
- image.style.top = floor(index/6)*imageSideLength;
+ image.style.top = Math.floor(index/6)*imageSideLength;
  image.style.left = (index%6)*imageSideLength;
  classSelectionBox.appendChild(image);
 }
