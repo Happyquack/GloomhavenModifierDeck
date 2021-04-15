@@ -58,8 +58,8 @@ for (let [index, image] of classIconImgs.entries()) {
  console.log("Its top offset is " + (Math.floor(index/6)*imageSideLength));
  image.style.left = (index%6)*imageSideLength + "";
  console.log("Its left offset is " + ((index%6)*imageSideLength));
- image.style.width = imageSideLength + "";
- image.style.height = imageSideLength + "";
+ image.width = imageSideLength + "";
+ image.height = imageSideLength + "";
  console.log("Its width and height are " + imageSideLength);
  classSelectionBox.appendChild(image);
 }
