@@ -2,16 +2,18 @@ class Deck {
   constructor(character) {
     this.character = character;
     this.createDecks();
+    this.perks = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   }
   
   createDecks() {
     this.loadBaseDeck();
     this.loadCharacterDeck();
+    this.formDeck();
   }
   
   loadBaseDeck() {
-    this.baseDeck = []
-    dir = "../images/modifierDecks/zbase/"
+    this.baseDeck = [];
+    dir = "../images/modifierDecks/zbase/";
     cardDir = dir + "baseCard";
     backDir = dir + "baseCardBack.png";
     this.baseDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
@@ -70,8 +72,8 @@ class Deck {
   }
   
   loadBerserkerDeck() {
-    this.characterDeck = []
-    dir = "../images/modifierDecks/berserker/"
+    this.characterDeck = [];
+    dir = "../images/modifierDecks/berserker/";
     cardDir = dir + "beCard";
     backDir = dir + "beCardBack.png";
     this.baseDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
@@ -92,8 +94,8 @@ class Deck {
   }
   
   loadBruteDeck() {
-    this.characterDeck = []
-    dir = "../images/modifierDecks/brute/"
+    this.characterDeck = [];
+    dir = "../images/modifierDecks/brute/";
     cardDir = dir + "brCard";
     backDir = dir + "brCardBack.png";
     this.baseDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
@@ -122,8 +124,8 @@ class Deck {
   }
   
   loadCragheartDeck() {
-    this.characterDeck = []
-    dir = "../images/modifierDecks/cragheart/"
+    this.characterDeck = [];
+    dir = "../images/modifierDecks/cragheart/";
     cardDir = dir + "crCard";
     backDir = dir + "crCardBack.png";
     this.baseDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
@@ -147,8 +149,8 @@ class Deck {
   }
   
   loadElementalistDeck() {
-    this.characterDeck = []
-    dir = "../images/modifierDecks/elementalist/"
+    this.characterDeck = [];
+    dir = "../images/modifierDecks/elementalist/";
     cardDir = dir + "elCard";
     backDir = dir + "elCardBack.png";
     this.baseDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
@@ -178,8 +180,8 @@ class Deck {
   }
   
   loadMindthiefDeck() {
-    this.characterDeck = []
-    dir = "../images/modifierDecks/mindthief/"
+    this.characterDeck = [];
+    dir = "../images/modifierDecks/mindthief/";
     cardDir = dir + "miCard";
     backDir = dir + "miCardBack.png";
     this.baseDeck.push(new Card(2, 0, false, cardDir + "01.png", backDir));
@@ -205,8 +207,8 @@ class Deck {
   }
   
   loadScoundrelDeck() {
-    this.characterDeck = []
-    dir = "../images/modifierDecks/scoundrel/"
+    this.characterDeck = [];
+    dir = "../images/modifierDecks/scoundrel/";
     cardDir = dir + "scCard";
     backDir = dir + "scCardBack.png";
     this.baseDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
@@ -229,8 +231,8 @@ class Deck {
   }
   
   loadSpellweaverDeck() {
-    this.characterDeck = []
-    dir = "../images/modifierDecks/spellweaver/"
+    this.characterDeck = [];
+    dir = "../images/modifierDecks/spellweaver/";
     cardDir = dir + "spCard";
     backDir = dir + "spCardBack.png";
     this.baseDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
@@ -254,8 +256,8 @@ class Deck {
   }
   
   loadSunkeeperDeck() {
-    this.characterDeck = []
-    dir = "../images/modifierDecks/sunkeeper/"
+    this.characterDeck = [];
+    dir = "../images/modifierDecks/sunkeeper/";
     cardDir = dir + "suCard";
     backDir = dir + "suCardBack.png";
     this.baseDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
@@ -280,8 +282,8 @@ class Deck {
   }
   
   loadTinkererDeck() {
-    this.characterDeck = []
-    dir = "../images/modifierDecks/tinkerer/"
+    this.characterDeck = [];
+    dir = "../images/modifierDecks/tinkerer/";
     cardDir = dir + "tiCard";
     backDir = dir + "tiCardBack.png";
     this.baseDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
@@ -301,10 +303,10 @@ class Deck {
     this.baseDeck.push(new Card(1, "healSelf2", false, cardDir + "15.png", backDir));
     this.baseDeck.push(new Card(0, "target", false, cardDir + "16.png", backDir));
   }
-  
+  /*
   loadTEMPLATEDeck() {
-    this.characterDeck = []
-    dir = "../images/modifierDecks/TEMPLATE/"
+    this.characterDeck = [];
+    dir = "../images/modifierDecks/TEMPLATE/";
     cardDir = dir + "TECard";
     backDir = dir + "TECardBack.png";
     this.baseDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
@@ -324,5 +326,45 @@ class Deck {
     this.baseDeck.push(new Card(0, 0, false, cardDir + "15.png", backDir));
     this.baseDeck.push(new Card(0, 0, false, cardDir + "16.png", backDir));
     this.baseDeck.push(new Card(0, 0, false, cardDir + "17.png", backDir));
+  }
+  */
+  formDeck() {
+    this.playerDeck = [];
+    for (let baseCard of this.baseDeck) {
+      this.playerDeck.push(baseCard);
+    }
+  }
+  
+  modPerk(checkmarkNum, turnPerkOn) {
+    switch(character) {
+        case "berserker": 
+        this.modBerserkerPerk(checkmarkNum, turnPerkOn); 
+        break;
+      case "brute": 
+        this.modBrutePerk(checkmarkNum, turnPerkOn); 
+        break;
+      case "cragheart": 
+        this.modCragheartPerk(checkmarkNum, turnPerkOn); 
+        break;
+      case "elementalist": 
+        this.modElementalistPerk(checkmarkNum, turnPerkOn); 
+        break;
+      case "mindthief": 
+        this.modMindthiefPerk(checkmarkNum, turnPerkOn); 
+        break;
+      case "scoundrel": 
+        this.modScoundrelPerk(checkmarkNum, turnPerkOn); 
+        break;
+      case "spellweaver": 
+        this.modSpellweaverPerk(checkmarkNum, turnPerkOn); 
+        break;
+      case "sunkeeper": 
+        this.modSunkeeperPerk(checkmarkNum, turnPerkOn); 
+        break;
+      case "tinkerer": 
+        this.modTinkererPerk(checkmarkNum, turnPerkOn); 
+        break;
+      default: break;
+    }
   }
 }
