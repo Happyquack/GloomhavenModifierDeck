@@ -5,6 +5,8 @@ class Card {
     this.effect = effect;
     this.rolling = rolling;
     this.imgPath = imgPath;
+    this.backPath = backPath;
+    this.flipped = false;
   }
   
   getValue() {
@@ -19,15 +21,17 @@ class Card {
     return this.rolling;
   }
   
-  getImg() {
-    img = document.createElement('img');
-    img.src = this.imgPath;
-    return img;
+  isFlipped() {
+    return this.flipped;
   }
   
-  getBack() {
+  flip () {
+    this.flipped = !this.flipped;
+  }
+  
+  getImg() {
     img = document.createElement('img');
-    img.src = this.imgPath;
+    if (this.flipped) { img.src = this.backPath; } else { img.src = this.imgPath; }
     return img;
   }
 }
