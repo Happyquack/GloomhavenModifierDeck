@@ -54,9 +54,9 @@ classSelectionBox.style.paddingRight = imageSideLength;
 for (let [index, image] of classIconImgs.entries()) {
  image.style.position = "absolute";
  console.log("This is image " + (index + 1));
- image.style.top = Math.floor(index/6)*imageSideLength + "";
+ image.style.top = Math.floor(index/6)*imageSideLength;
  console.log("Its top offset is " + (Math.floor(index/6)*imageSideLength));
- image.style.left = (index%6)*imageSideLength + "";
+ image.style.left = (index%6)*imageSideLength;
  console.log("Its left offset is " + ((index%6)*imageSideLength));
  image.width = imageSideLength + "";
  image.height = imageSideLength + "";
