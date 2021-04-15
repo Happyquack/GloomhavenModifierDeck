@@ -2,7 +2,7 @@
 
 PAGEWIDTH = window.innerWidth;
 PAGEHEIGHT = window.innerHeight;
-ICONPATH = "../images/classIcons/";
+ICONPATH = "/images/classIcons/";
 
 classSelectionBox = document.getElementById('classSelectionBoxId');
 classSelectionBox.innerHTML = "If you can see me then yay";
