@@ -1,6 +1,6 @@
 
 class Card {
-  constructor(value, effect, rolling, imgPath) {
+  constructor(value, effect, rolling, imgPath, backPath) {
     this.value = value;
     this.effect = effect;
     this.rolling = rolling;
@@ -20,6 +20,12 @@ class Card {
   }
   
   getImg() {
+    img = document.createElement('img');
+    img.src = this.imgPath;
+    return img;
+  }
+  
+  getBack() {
     img = document.createElement('img');
     img.src = this.imgPath;
     return img;
