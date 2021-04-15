@@ -4,7 +4,7 @@ PAGEWIDTH = window.innerWidth;
 PAGEHEIGHT = window.innerHeight;
 ICONPATH = "../images/classIcons/";
 
-classSelectionBox = document.getElementById("classSelectionBox");
+let classSelectionBox = document.getElementById("classSelectionBox");
 classSelection01 = classSelectionBox.createElement('img');
 classSelection01.src = ICONPATH + "01icon.png";
 classSelection02 = classSelectionBox.createElement('img');
