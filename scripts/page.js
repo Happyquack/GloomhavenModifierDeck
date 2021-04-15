@@ -41,3 +41,17 @@ classSelection17 = classSelectionBox.createElement('img');
 classSelection17.src = ICONPATH + "17icon.png";
 classSelection18 = classSelectionBox.createElement('img');
 classSelection18.src = ICONPATH + "18icon.png";
+classIconImgs = [classSelection01, classSelection02, classSelection03, 
+                 classSelection04, classSelection05, classSelection06, 
+                 classSelection07, classSelection08, classSelection09, 
+                 classSelection10, classSelection11, classSelection12,
+                 classSelection13, classSelection14, classSelection15,
+                 classSelection16, classSelection17, classSelection18];
+imageSideLength = PAGEWIDTH/8;
+classSelectionBox.style.paddingLeft = imageSideLength;
+classSelectionBox.style.paddingRight = imageSideLength;
+for (let [index, image] of classIconImgs) {
+ image.style.position = "absolute";
+ image.style.top = floor(index/6)*imageSideLength;
+ image.style.left = (index%6)*imageSideLength;
+}
