@@ -4,7 +4,8 @@ PAGEWIDTH = window.innerWidth;
 PAGEHEIGHT = window.innerHeight;
 ICONPATH = "../images/classIcons/";
 
-let classSelectionBox = document.getElementById('classSelectionBoxId');
+classSelectionBox = document.getElementById('classSelectionBoxId');
+classSelectionBox.innerHTML = "If you can see me then yay";
 classSelection01 = classSelectionBox.createElement('img');
 classSelection01.src = ICONPATH + "01icon.png";
 classSelection02 = classSelectionBox.createElement('img');
