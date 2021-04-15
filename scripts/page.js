@@ -49,14 +49,17 @@ classIconImgs = [classSelection01, classSelection02, classSelection03,
                  classSelection13, classSelection14, classSelection15,
                  classSelection16, classSelection17, classSelection18];
 imageSideLength = PAGEWIDTH/8;
-console.log(imageSideLength + "     SGUYUDGUYGHKJSGHJK");
 classSelectionBox.style.paddingLeft = imageSideLength;
 classSelectionBox.style.paddingRight = imageSideLength;
 for (let [index, image] of classIconImgs.entries()) {
  image.style.position = "absolute";
+ console.log("This is image " + (index + 1));
  image.style.top = Math.floor(index/6)*imageSideLength;
+ console.log("Its top offset is " + (Math.floor(index/6)*imageSideLength));
  image.style.left = (index%6)*imageSideLength;
+ console.log("Its left offset is " + ((index%6)*imageSideLength));
  image.style.width = imageSideLength;
  image.style.height = imageSideLength;
+ console.log("Its width and height are " + imageSideLength);
  classSelectionBox.appendChild(image);
 }
