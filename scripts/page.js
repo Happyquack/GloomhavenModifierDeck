@@ -49,7 +49,7 @@ classIconImgs = [classSelection01, classSelection02, classSelection03,
                  classSelection13, classSelection14, classSelection15,
                  classSelection16, classSelection17, classSelection18];
 imageSideLength = PAGEWIDTH/8;
-Console.log(imageSideLength + "     SGUYUDGUYGHKJSGHJK");
+console.log(imageSideLength + "     SGUYUDGUYGHKJSGHJK");
 classSelectionBox.style.paddingLeft = imageSideLength;
 classSelectionBox.style.paddingRight = imageSideLength;
 for (let [index, image] of classIconImgs.entries()) {
