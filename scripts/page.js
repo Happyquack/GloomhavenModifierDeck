@@ -54,4 +54,5 @@ for (let [index, image] of classIconImgs) {
  image.style.position = "absolute";
  image.style.top = floor(index/6)*imageSideLength;
  image.style.left = (index%6)*imageSideLength;
+ classSelectionBox.appendChild(image);
 }
