@@ -45,8 +45,6 @@ for (i = 0; i < 15; i++) {
  deckDisplayColumns.push(document.createElement('div'));
 }
 
-deckSortingColumns = []
-
 function displayDeck() {
  // empty previous contents
  for (column of deckDisplayColumns.entries()) {
@@ -58,9 +56,36 @@ function displayDeck() {
   deckDisplayBox.removeChild(column.firstChild));
  }
  // modify new contents
+ deckSortingColumns = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
  for (card of deckOfCards.entries()) {
-  if card.
+  if (card.isRolling()) {
+   if (card.getValue() == 0) {
+    deckSortingColumns[12].append(card); break;
+   } else {
+    deckSortingColumns[10].append(card); break;
+   }
+  } else {
+   switch (card.getValue()) {
+    case "null": deckSortingColumns[0].append(card); break;
+    case -2: deckSortingColumns[1].append(card); break;
+    case -1: deckSortingColumns[2].append(card); break;
+    case 0: if (card.getEffect() == 0) {deckSortingColumns[3].append(card); break;}
+    case 1: deckSortingColumns[4].append(card); break;
+    case 2: deckSortingColumns[6].append(card); break;
+    case "x2": deckSortingColumns[9].append(card); break;
+    default: deckSortingColumns[7].append(card); break;
+   }
+  }
+  for (let [index, column] of deckSortingColumns.entries()) {
+   if (column.length > 9) deckSortingColumns[index+1] = column[index].splice(Math.floor(column.length/2), column.length - Math.floor(column.length/2)));
+  }
  }
  // add new contents
- 
+ numberOfColumns = 0;
+ for (column of deckSortingColumns.entries()) {
+  if (column.length > 0) {
+   deckDisplayColumns[numberOfColumns] = column;
+   numberOfColumns++;
+  }
+ }
 }
