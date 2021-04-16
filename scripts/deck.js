@@ -15,7 +15,7 @@ class Deck {
   
   loadBaseDeck() {
     this.baseDeck = [];
-    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/zbase/";
+    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/zBase/";
     var cardDir = dir + "baseCard";
     var backDir = dir + "baseCardBack.png";
     this.baseDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
