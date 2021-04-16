@@ -98,5 +98,5 @@ deckDisplayColumns.forEach(column => {
  column.children.forEach(card => {
   card.width = deckDisplayColumnWidth*4/5;
   card.style.margin = deckDisplayColumnWidth/10 + "px";
- }
-}
+ } );
+} );
