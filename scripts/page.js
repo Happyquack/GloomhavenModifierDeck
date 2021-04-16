@@ -15,6 +15,9 @@ for (i = 0; i < 18; i++) {
 imageSideLength = classSelectionBox.offsetWidth/6 * 4/5;
 //classSelectionBox.style.paddingLeft = imageSideLength;
 //classSelectionBox.style.paddingRight = imageSideLength;
+classSelectionBox.style.borderColor = "rgb(234,236,239)";
+classSelectionBox.style.borderStyle = "solid";
+classSelectionBox.style.borderWidth = "1px";
 for (let [index, image] of classIconImgs.entries()) {
  //image.style.position = "absolute";
  //image.style.top = Math.floor(index/6)*imageSideLength + "px";
