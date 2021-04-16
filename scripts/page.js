@@ -3,6 +3,9 @@ ICONPATH = "https://happyquack.github.io/GloomhavenModifierDeck/images/classIcon
 
 classSelectionBox = document.getElementById('classSelectionBoxId');
 classSelectionBox.innerHTML = "";
+classSelectionBox.style.borderColor = "rgb(234,236,239)";
+classSelectionBox.style.borderStyle = "solid";
+classSelectionBox.style.borderWidth = "1px";
 
 classIconImgs = []
 for (i = 0; i < 18; i++) {
@@ -13,11 +16,6 @@ for (i = 0; i < 18; i++) {
 }
 
 imageSideLength = classSelectionBox.offsetWidth/6 * 4/5;
-//classSelectionBox.style.paddingLeft = imageSideLength;
-//classSelectionBox.style.paddingRight = imageSideLength;
-classSelectionBox.style.borderColor = "rgb(234,236,239)";
-classSelectionBox.style.borderStyle = "solid";
-classSelectionBox.style.borderWidth = "1px";
 for (let [index, image] of classIconImgs.entries()) {
  //image.style.position = "absolute";
  //image.style.top = Math.floor(index/6)*imageSideLength + "px";
@@ -30,3 +28,27 @@ for (let [index, image] of classIconImgs.entries()) {
 
 // display deck layout
 
+import {Deck} from 'deck.js';
+
+deck = new Deck();
+
+deckOfCards = deck.getPlayerDeck();
+
+deckDisplayBox = document.getElementById('deckDisplayBoxId');
+deckDisplayBox.innerHTML = "";
+deckDisplayBox.style.borderColor = "rgb(134,136,139)";
+deckDisplayBox.style.borderStyle = "solid";
+deckDisplayBox.style.borderWidth = "1px";
+
+function displayDeck() {
+ // empty previous contents
+ while (deckDisplayBox.firstChild) {
+  deckDisplayBox.removeChild(deckDisplayBox.firstChild);
+ }
+ // modify new contents
+ 
+ // add new contents
+ for (let card of deckOfCards.entries()) {
+  deckDisplaybox.appendChild(card);
+ }
+}
