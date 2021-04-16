@@ -1,3 +1,5 @@
+import {Deck} from 'deck.js';
+
 // make class selection
 ICONPATH = "https://happyquack.github.io/GloomhavenModifierDeck/images/classIcons/";
 
@@ -27,8 +29,6 @@ for (let [index, image] of classIconImgs.entries()) {
 }
 
 // display deck layout
-
-import {Deck} from 'deck.js';
 
 deck = new Deck();
 
