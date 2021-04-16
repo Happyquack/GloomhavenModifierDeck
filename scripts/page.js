@@ -24,6 +24,6 @@ for (let [index, image] of classIconImgs.entries()) {
  //image.style.left = (index%6)*imageSideLength + "px";
  image.width = imageSideLength + "";
  image.height = imageSideLength + "";
- image.padding = imageSideLength/8 + "";
+ image.margin = imageSideLength/8 + "";
  classSelectionBox.appendChild(image);
 }
