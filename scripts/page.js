@@ -56,7 +56,7 @@ while (deckDisplayBox.firstChild) {
 }
 // modify new contents
 var deckSortingColumns = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
-for (card of deckOfCards.entries()) {
+for (var card of deckOfCards.entries()) {
  if (card.isRolling()) {
   if (card.getValue() == 0) {
    deckSortingColumns[12].append(card); break;
