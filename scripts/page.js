@@ -89,9 +89,10 @@ for (let column of deckSortingColumns) {
 }
 // format and display columns
 
-var deckDisplayBoxWidth = deckDisplayBox.width;
+var deckDisplayBoxWidth = deckDisplayBox.offsetWidth;
 var deckDisplayColumnWidth = deckDisplayBoxWidth/numberOfColumns;
 deckDisplayColumns.forEach(column => {
+ column.innerHTML = "";
  column.width = deckDisplayColumnWidth;
  column.style.display = "flex";
  column.style.flexWrap = "wrap";
