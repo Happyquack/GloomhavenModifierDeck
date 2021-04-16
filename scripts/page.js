@@ -13,14 +13,14 @@ for (i = 0; i < 18; i++) {
 }
 
 imageSideLength = classSelectionBox.offsetWidth/6 * 4/5;
-classSelectionBox.style.paddingLeft = imageSideLength;
-classSelectionBox.style.paddingRight = imageSideLength;
+//classSelectionBox.style.paddingLeft = imageSideLength;
+//classSelectionBox.style.paddingRight = imageSideLength;
 for (let [index, image] of classIconImgs.entries()) {
  //image.style.position = "absolute";
  //image.style.top = Math.floor(index/6)*imageSideLength + "px";
  //image.style.left = (index%6)*imageSideLength + "px";
  image.width = imageSideLength + "";
  image.height = imageSideLength + "";
- image.padding = imageSideLength/8 = "";
+ image.padding = imageSideLength/8 + "";
  classSelectionBox.appendChild(image);
 }
