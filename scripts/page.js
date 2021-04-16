@@ -59,20 +59,20 @@ var deckSortingColumns = [[], [], [], [], [], [], [], [], [], [], [], [], [], []
 for (let card of deckOfCards) {
  if (card.isRolling()) {
   if (card.getValue() == 0) {
-   deckSortingColumns[12].append(card); break;
+   deckSortingColumns[12].push(card); break;
   } else {
-   deckSortingColumns[10].append(card); break;
+   deckSortingColumns[10].push(card); break;
   }
  } else {
   switch (card.getValue()) {
-   case "null": deckSortingColumns[0].append(card); break;
-   case -2: deckSortingColumns[1].append(card); break;
-   case -1: deckSortingColumns[2].append(card); break;
-   case 0: if (card.getEffect() == 0) {deckSortingColumns[3].append(card); break;}
-   case 1: deckSortingColumns[4].append(card); break;
-   case 2: deckSortingColumns[6].append(card); break;
-   case "x2": deckSortingColumns[9].append(card); break;
-   default: deckSortingColumns[7].append(card); break;
+   case "null": deckSortingColumns[0].push(card); break;
+   case -2: deckSortingColumns[1].push(card); break;
+   case -1: deckSortingColumns[2].push(card); break;
+   case 0: if (card.getEffect() == 0) {deckSortingColumns[3].push(card); break;}
+   case 1: deckSortingColumns[4].push(card); break;
+   case 2: deckSortingColumns[6].push(card); break;
+   case "x2": deckSortingColumns[9].push(card); break;
+   default: deckSortingColumns[7].push(card); break;
   }
  }
  for (let [index, column] of deckSortingColumns.entries()) {
