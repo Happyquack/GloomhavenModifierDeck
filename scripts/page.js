@@ -76,7 +76,7 @@ for (card of deckOfCards.entries()) {
   }
  }
  for (let [index, column] of deckSortingColumns.entries()) {
-  if (column.length > 9) deckSortingColumns[index+1] = column[index].splice(Math.floor(column.length/2)), column.length - Math.floor(column.length/2)));
+  if (column.length > 9) deckSortingColumns[index+1] = column[index].splice(Math.floor(column.length/2), column.length - Math.floor(column.length/2));
  }
 }
 // add new contents
