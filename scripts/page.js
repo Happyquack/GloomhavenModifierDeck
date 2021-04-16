@@ -5,7 +5,7 @@ PAGEHEIGHT = window.innerHeight;
 ICONPATH = "https://happyquack.github.io/GloomhavenModifierDeck/images/classIcons/";
 
 classSelectionBox = document.getElementById('classSelectionBoxId');
-classSelectionBox.innerHTML = "If you can see me then yay";
+classSelectionBox.innerHTML = "";
 
 classIconImgs = []
 for (i = 0; i < 18; i++) {
