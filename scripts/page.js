@@ -46,7 +46,7 @@ for (var i = 0; i < 15; i++) {
 }
 
 // empty previous contents
-for (var column of deckDisplayColumns.entries()) {
+for (let column of deckDisplayColumns) {
  while (column.firstChild) {
   column.removeChild(column.firstChild);
  }
@@ -56,7 +56,7 @@ while (deckDisplayBox.firstChild) {
 }
 // modify new contents
 var deckSortingColumns = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
-for (var card of deckOfCards.entries()) {
+for (let card of deckOfCards) {
  if (card.isRolling()) {
   if (card.getValue() == 0) {
    deckSortingColumns[12].append(card); break;
@@ -81,7 +81,7 @@ for (var card of deckOfCards.entries()) {
 }
 // add new contents
 var numberOfColumns = 0;
-for (column of deckSortingColumns.entries()) {
+for (let column of deckSortingColumns) {
  if (column.length > 0) {
   deckDisplayColumns[numberOfColumns] = column;
   numberOfColumns++;
