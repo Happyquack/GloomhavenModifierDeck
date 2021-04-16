@@ -1,7 +1,7 @@
 import {Deck} from './deck.js';
 
 // make class selection
-ICONPATH = "https://happyquack.github.io/GloomhavenModifierDeck/images/classIcons/";
+var ICONPATH = "https://happyquack.github.io/GloomhavenModifierDeck/images/classIcons/";
 
 classSelectionBox = document.getElementById('classSelectionBoxId');
 classSelectionBox.innerHTML = "";
