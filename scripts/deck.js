@@ -41,7 +41,7 @@ class Deck {
   }
   
   loadCharacterDeck() {
-    switch (character) {
+    switch (this.character) {
       case "berserker": 
         this.loadBerserkerDeck(); 
         break;
@@ -339,7 +339,7 @@ class Deck {
   }
   
   modPerk(checkmarkNum, turnPerkOn) {
-    switch(character) {
+    switch(this.character) {
         case "berserker": 
         this.modBerserkerPerk(checkmarkNum, turnPerkOn); 
         break;
