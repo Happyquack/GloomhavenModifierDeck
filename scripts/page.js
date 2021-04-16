@@ -94,11 +94,11 @@ for (let column of deckSortingColumns) {
 var deckDisplayBoxWidth = deckDisplayBox.offsetWidth;
 var deckDisplayColumnWidth = deckDisplayBoxWidth/numberOfColumns;
 Array.from(deckDisplayBox.children).forEach(column => {
- column.style.maxWidth = deckDisplayColumnWidth;
+ column.style.maxWidth = deckDisplayColumnWidth + "px";
  column.style.display = "flex";
  column.style.flexWrap = "wrap";
  Array.from(column.children).forEach(card => {
-  card.width = deckDisplayColumnWidth*4/5 + "px";
+  card.width = deckDisplayColumnWidth*4/5;
   card.style.margin = deckDisplayColumnWidth/10 + "px";
   card.style.borderRadius = deckDisplayColumnWidth/10 + "px";
  } );
