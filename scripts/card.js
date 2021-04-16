@@ -30,7 +30,7 @@ class Card {
   }
   
   getImg() {
-    img = document.createElement('img');
+    var img = document.createElement('img');
     if (this.flipped) { img.src = this.backPath; } else { img.src = this.imgPath; }
     return img;
   }
