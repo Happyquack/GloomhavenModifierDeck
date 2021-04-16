@@ -92,7 +92,7 @@ for (let column of deckSortingColumns) {
 
 var deckDisplayBoxWidth = deckDisplayBox.offsetWidth;
 var deckDisplayColumnWidth = deckDisplayBoxWidth/numberOfColumns;
-deckDisplayColumns.forEach(column => {
+Array.from(deckDisplayBox.children).forEach(column => {
  column.width = deckDisplayColumnWidth;
  column.style.display = "flex";
  column.style.flexWrap = "wrap";
