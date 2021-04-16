@@ -10,7 +10,7 @@ classSelectionBox.style.borderStyle = "solid";
 classSelectionBox.style.borderWidth = "1px";
 
 var classIconImgs = []
-for (i = 0; i < 18; i++) {
+for (var i = 0; i < 18; i++) {
  num = i + 1;
  if (num < 10) {num = "0" + num;}
  classIconImgs.push(document.createElement('img'));
@@ -41,7 +41,7 @@ deckDisplayBox.style.borderStyle = "solid";
 deckDisplayBox.style.borderWidth = "1px";
 
 var deckDisplayColumns = []
-for (i = 0; i < 15; i++) {
+for (var i = 0; i < 15; i++) {
  deckDisplayColumns.push(document.createElement('div'));
 }
 
