@@ -9,8 +9,8 @@ classSelectionBox.innerHTML = "If you can see me then yay";
 
 classIconImgs = []
 for (i = 0; i < 18; i++) {
- num = i;
- if (num < 10) {num = "0" + i;}
+ num = i + 1;
+ if (num < 10) {num = "0" + num;}
  classIconImgs.push(document.createElement('img'));
  classIconImgs[i].src = ICONPATH + num + "icon.png";
 }
