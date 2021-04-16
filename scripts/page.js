@@ -99,6 +99,7 @@ Array.from(deckDisplayBox.children).forEach(column => {
  column.style.flexWrap = "wrap";
  Array.from(column.children).forEach(card => {
   card.width = deckDisplayColumnWidth*4/5;
+  card.height = card.width*2/3
   card.style.margin = deckDisplayColumnWidth/10 + "px";
   card.style.borderRadius = deckDisplayColumnWidth/10 + "px";
  } );
