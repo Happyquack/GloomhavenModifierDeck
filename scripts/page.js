@@ -83,7 +83,7 @@ for (let card of deckOfCards) {
 var numberOfColumns = 0;
 for (let column of deckSortingColumns) {
  if (column.length > 0) {
-  column.forEach(el => deckDisplayColumns[numberOfColumns].appendChild(el));
+  column.forEach(el => deckDisplayColumns[numberOfColumns].appendChild(el.getImg()));
   numberOfColumns++;
  }
 }
