@@ -1,4 +1,4 @@
-import {Deck} from 'deck.js';
+import {Deck} from '/deck.js';
 
 // make class selection
 ICONPATH = "https://happyquack.github.io/GloomhavenModifierDeck/images/classIcons/";
