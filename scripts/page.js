@@ -49,7 +49,7 @@ function displayDeck() {
  // empty previous contents
  for (column of deckDisplayColumns.entries()) {
   while (column.firstChild) {
-   column.removeChild(column.firstChild));
+   column.removeChild(column.firstChild);
   }
  }
  while (deckDisplayBox.firstChild) {
