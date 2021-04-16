@@ -40,15 +40,27 @@ deckDisplayBox.style.borderColor = "rgb(134,136,139)";
 deckDisplayBox.style.borderStyle = "solid";
 deckDisplayBox.style.borderWidth = "1px";
 
+deckDisplayColumns = []
+for (i = 0; i < 15; i++) {
+ deckDisplayColumns.push(document.createElement('div'));
+}
+
+deckSortingColumns = []
+
 function displayDeck() {
  // empty previous contents
+ for (column of deckDisplayColumns.entries()) {
+  while (column.firstChild) {
+   column.removeChild(column.firstChild));
+  }
+ }
  while (deckDisplayBox.firstChild) {
-  deckDisplayBox.removeChild(deckDisplayBox.firstChild);
+  deckDisplayBox.removeChild(column.firstChild));
  }
  // modify new contents
- 
- // add new contents
- for (let card of deckOfCards.entries()) {
-  deckDisplaybox.appendChild(card);
+ for (card of deckOfCards.entries()) {
+  if card.
  }
+ // add new contents
+ 
 }
