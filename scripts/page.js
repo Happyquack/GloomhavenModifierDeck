@@ -27,3 +27,6 @@ for (let [index, image] of classIconImgs.entries()) {
  image.style.margin = imageSideLength/8 + "";
  classSelectionBox.appendChild(image);
 }
+
+// display deck layout
+
