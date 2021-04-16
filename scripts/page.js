@@ -3,13 +3,13 @@ import {Deck} from './deck.js';
 // make class selection
 var ICONPATH = "https://happyquack.github.io/GloomhavenModifierDeck/images/classIcons/";
 
-classSelectionBox = document.getElementById('classSelectionBoxId');
+var classSelectionBox = document.getElementById('classSelectionBoxId');
 classSelectionBox.innerHTML = "";
 classSelectionBox.style.borderColor = "rgb(234,236,239)";
 classSelectionBox.style.borderStyle = "solid";
 classSelectionBox.style.borderWidth = "1px";
 
-classIconImgs = []
+var classIconImgs = []
 for (i = 0; i < 18; i++) {
  num = i + 1;
  if (num < 10) {num = "0" + num;}
@@ -17,7 +17,7 @@ for (i = 0; i < 18; i++) {
  classIconImgs[i].src = ICONPATH + num + "icon.png";
 }
 
-imageSideLength = classSelectionBox.offsetWidth/6 * 4/5;
+var imageSideLength = classSelectionBox.offsetWidth/6 * 4/5;
 for (let [index, image] of classIconImgs.entries()) {
  //image.style.position = "absolute";
  //image.style.top = Math.floor(index/6)*imageSideLength + "px";
@@ -30,23 +30,23 @@ for (let [index, image] of classIconImgs.entries()) {
 
 // display deck layout
 
-deck = new Deck();
+var deck = new Deck();
 
-deckOfCards = deck.getPlayerDeck();
+var deckOfCards = deck.getPlayerDeck();
 
-deckDisplayBox = document.getElementById('deckDisplayBoxId');
+var deckDisplayBox = document.getElementById('deckDisplayBoxId');
 deckDisplayBox.innerHTML = "";
 deckDisplayBox.style.borderColor = "rgb(134,136,139)";
 deckDisplayBox.style.borderStyle = "solid";
 deckDisplayBox.style.borderWidth = "1px";
 
-deckDisplayColumns = []
+var deckDisplayColumns = []
 for (i = 0; i < 15; i++) {
  deckDisplayColumns.push(document.createElement('div'));
 }
 
 // empty previous contents
-for (column of deckDisplayColumns.entries()) {
+for (var column of deckDisplayColumns.entries()) {
  while (column.firstChild) {
   column.removeChild(column.firstChild);
  }
@@ -55,7 +55,7 @@ while (deckDisplayBox.firstChild) {
  deckDisplayBox.removeChild(column.firstChild);
 }
 // modify new contents
-deckSortingColumns = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
+var deckSortingColumns = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
 for (card of deckOfCards.entries()) {
  if (card.isRolling()) {
   if (card.getValue() == 0) {
@@ -80,7 +80,7 @@ for (card of deckOfCards.entries()) {
  }
 }
 // add new contents
-numberOfColumns = 0;
+var numberOfColumns = 0;
 for (column of deckSortingColumns.entries()) {
  if (column.length > 0) {
   deckDisplayColumns[numberOfColumns] = column;
