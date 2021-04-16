@@ -1376,4 +1376,4 @@ class Deck {
   }
 }
 
-export Deck;
+export {Deck};
