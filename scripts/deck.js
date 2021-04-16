@@ -1371,7 +1371,7 @@ class Deck {
     this.addCard(this.playerDeck, this.baseDeck[0]); this.addCard(this.playerDeck, this.baseDeck[1]); this.addCard(this.playerDeck, this.baseDeck[2]); this.addCard(this.playerDeck, this.baseDeck[3]);
   }
   
-  getPlayerdeck() {
+  getPlayerDeck() {
     return this.playerDeck;
   }
 }
