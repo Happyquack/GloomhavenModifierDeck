@@ -15,7 +15,7 @@ class Deck {
   
   loadBaseDeck() {
     this.baseDeck = [];
-    var dir = "/images/modifierDecks/zbase/";
+    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/zbase/";
     var cardDir = dir + "baseCard";
     var backDir = dir + "baseCardBack.png";
     this.baseDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
@@ -75,7 +75,7 @@ class Deck {
   
   loadBruteDeck() {
     this.characterDeck = [];
-    var dir = "/images/modifierDecks/01/";
+    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/01/";
     var cardDir = dir + "brCard";
     var backDir = dir + "brCardBack.png";
     this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
@@ -105,7 +105,7 @@ class Deck {
   
   loadTinkererDeck() {
     this.characterDeck = [];
-    var dir = "/images/modifierDecks/02/";
+    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/02/";
     var cardDir = dir + "tiCard";
     var backDir = dir + "tiCardBack.png";
     this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
@@ -128,7 +128,7 @@ class Deck {
   
   loadSpellweaverDeck() {
     this.characterDeck = [];
-    var dir = "/images/modifierDecks/03/";
+    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/03/";
     var cardDir = dir + "spCard";
     var backDir = dir + "spCardBack.png";
     this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
@@ -153,7 +153,7 @@ class Deck {
   
   loadScoundrelDeck() {
     this.characterDeck = [];
-    var dir = "/images/modifierDecks/04/";
+    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/04/";
     var cardDir = dir + "scCard";
     var backDir = dir + "scCardBack.png";
     this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
@@ -177,7 +177,7 @@ class Deck {
   
   loadCragheartDeck() {
     this.characterDeck = [];
-    var dir = "/images/modifierDecks/05/";
+    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/05/";
     var cardDir = dir + "crCard";
     var backDir = dir + "crCardBack.png";
     this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
@@ -202,7 +202,7 @@ class Deck {
   
   loadMindthiefDeck() {
     this.characterDeck = [];
-    var dir = "/images/modifierDecks/06/";
+    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/06/";
     var cardDir = dir + "miCard";
     var backDir = dir + "miCardBack.png";
     this.characterDeck.push(new Card(2, 0, false, cardDir + "01.png", backDir));
@@ -229,7 +229,7 @@ class Deck {
   
   loadSunkeeperDeck() {
     this.characterDeck = [];
-    var dir = "/images/modifierDecks/07/";
+    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/07/";
     var cardDir = dir + "suCard";
     var backDir = dir + "suCardBack.png";
     this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
@@ -255,7 +255,7 @@ class Deck {
   
     loadBerserkerDeck() {
     this.characterDeck = [];
-    var dir = "/images/modifierDecks/12/";
+    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/12/";
     var cardDir = dir + "beCard";
     var backDir = dir + "beCardBack.png";
     this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
@@ -277,7 +277,7 @@ class Deck {
   
   loadElementalistDeck() {
     this.characterDeck = [];
-    var dir = "/images/modifierDecks/16/";
+    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/16/";
     var cardDir = dir + "elCard";
     var backDir = dir + "elCardBack.png";
     this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
@@ -309,7 +309,7 @@ class Deck {
   /*
   loadTEMPLATEDeck() {
     this.characterDeck = [];
-    var dir = "/images/modifierDecks/TEMPLATE/";
+    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/TEMPLATE/";
     var cardDir = dir + "TECard";
     var backDir = dir + "TECardBack.png";
     this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
