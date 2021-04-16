@@ -35,3 +35,5 @@ class Card {
     return img;
   }
 }
+
+export {Card}
