@@ -83,6 +83,7 @@ for (let card of deckOfCards) {
 var numberOfColumns = 0;
 for (let column of deckSortingColumns) {
  if (column.length > 0) {
+  column.innerHTML = "";
   column.forEach(el => deckDisplayColumns[numberOfColumns].appendChild(el.getImg()));
   numberOfColumns++;
  }
@@ -92,7 +93,6 @@ for (let column of deckSortingColumns) {
 var deckDisplayBoxWidth = deckDisplayBox.offsetWidth;
 var deckDisplayColumnWidth = deckDisplayBoxWidth/numberOfColumns;
 deckDisplayColumns.forEach(column => {
- column.innerHTML = "";
  column.width = deckDisplayColumnWidth;
  column.style.display = "flex";
  column.style.flexWrap = "wrap";
