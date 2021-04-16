@@ -94,7 +94,7 @@ for (let column of deckSortingColumns) {
 var deckDisplayBoxWidth = deckDisplayBox.offsetWidth;
 var deckDisplayColumnWidth = deckDisplayBoxWidth/numberOfColumns;
 Array.from(deckDisplayBox.children).forEach(column => {
- column.width = deckDisplayColumnWidth;
+ column.maxWidth = deckDisplayColumnWidth;
  column.style.display = "flex";
  column.style.flexWrap = "wrap";
  Array.from(column.children).forEach(card => {
