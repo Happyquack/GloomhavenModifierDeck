@@ -15,9 +15,9 @@ class Deck {
   
   loadBaseDeck() {
     this.baseDeck = [];
-    dir = "../images/modifierDecks/zbase/";
-    cardDir = dir + "baseCard";
-    backDir = dir + "baseCardBack.png";
+    var dir = "../images/modifierDecks/zbase/";
+    var cardDir = dir + "baseCard";
+    var backDir = dir + "baseCardBack.png";
     this.baseDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
     this.baseDeck.push(new Card(0, 0, false, cardDir + "02.png", backDir));
     this.baseDeck.push(new Card(0, 0, false, cardDir + "03.png", backDir));
@@ -75,9 +75,9 @@ class Deck {
   
   loadBruteDeck() {
     this.characterDeck = [];
-    dir = "../images/modifierDecks/01/";
-    cardDir = dir + "brCard";
-    backDir = dir + "brCardBack.png";
+    var dir = "../images/modifierDecks/01/";
+    var cardDir = dir + "brCard";
+    var backDir = dir + "brCardBack.png";
     this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
     this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
     this.characterDeck.push(new Card(1, 0, false, cardDir + "03.png", backDir));
@@ -105,9 +105,9 @@ class Deck {
   
   loadTinkererDeck() {
     this.characterDeck = [];
-    dir = "../images/modifierDecks/02/";
-    cardDir = dir + "tiCard";
-    backDir = dir + "tiCardBack.png";
+    var dir = "../images/modifierDecks/02/";
+    var cardDir = dir + "tiCard";
+    var backDir = dir + "tiCardBack.png";
     this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
     this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
     this.characterDeck.push(new Card(1, 0, false, cardDir + "03.png", backDir));
@@ -128,9 +128,9 @@ class Deck {
   
   loadSpellweaverDeck() {
     this.characterDeck = [];
-    dir = "../images/modifierDecks/03/";
-    cardDir = dir + "spCard";
-    backDir = dir + "spCardBack.png";
+    var dir = "../images/modifierDecks/03/";
+    var cardDir = dir + "spCard";
+    var backDir = dir + "spCardBack.png";
     this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
     this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
     this.characterDeck.push(new Card(1, 0, false, cardDir + "03.png", backDir));
@@ -153,9 +153,9 @@ class Deck {
   
   loadScoundrelDeck() {
     this.characterDeck = [];
-    dir = "../images/modifierDecks/04/";
-    cardDir = dir + "scCard";
-    backDir = dir + "scCardBack.png";
+    var dir = "../images/modifierDecks/04/";
+    var cardDir = dir + "scCard";
+    var backDir = dir + "scCardBack.png";
     this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
     this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
     this.characterDeck.push(new Card(2, 0, false, cardDir + "03.png", backDir));
@@ -177,9 +177,9 @@ class Deck {
   
   loadCragheartDeck() {
     this.characterDeck = [];
-    dir = "../images/modifierDecks/05/";
-    cardDir = dir + "crCard";
-    backDir = dir + "crCardBack.png";
+    var dir = "../images/modifierDecks/05/";
+    var cardDir = dir + "crCard";
+    var backDir = dir + "crCardBack.png";
     this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
     this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
     this.characterDeck.push(new Card(1, 0, false, cardDir + "03.png", backDir));
@@ -202,9 +202,9 @@ class Deck {
   
   loadMindthiefDeck() {
     this.characterDeck = [];
-    dir = "../images/modifierDecks/06/";
-    cardDir = dir + "miCard";
-    backDir = dir + "miCardBack.png";
+    var dir = "../images/modifierDecks/06/";
+    var cardDir = dir + "miCard";
+    var backDir = dir + "miCardBack.png";
     this.characterDeck.push(new Card(2, 0, false, cardDir + "01.png", backDir));
     this.characterDeck.push(new Card(2, 0, false, cardDir + "02.png", backDir));
     this.characterDeck.push(new Card(0, 0, false, cardDir + "03.png", backDir));
@@ -229,9 +229,9 @@ class Deck {
   
   loadSunkeeperDeck() {
     this.characterDeck = [];
-    dir = "../images/modifierDecks/07/";
-    cardDir = dir + "suCard";
-    backDir = dir + "suCardBack.png";
+    var dir = "../images/modifierDecks/07/";
+    var cardDir = dir + "suCard";
+    var backDir = dir + "suCardBack.png";
     this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
     this.characterDeck.push(new Card(2, 0, false, cardDir + "02.png", backDir));
     this.characterDeck.push(new Card(1, 0, true, cardDir + "03.png", backDir));
@@ -255,9 +255,9 @@ class Deck {
   
     loadBerserkerDeck() {
     this.characterDeck = [];
-    dir = "../images/modifierDecks/12/";
-    cardDir = dir + "beCard";
-    backDir = dir + "beCardBack.png";
+    var dir = "../images/modifierDecks/12/";
+    var cardDir = dir + "beCard";
+    var backDir = dir + "beCardBack.png";
     this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
     this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
     this.characterDeck.push(new Card(2, 0, true, cardDir + "03.png", backDir));
@@ -277,9 +277,9 @@ class Deck {
   
   loadElementalistDeck() {
     this.characterDeck = [];
-    dir = "../images/modifierDecks/16/";
-    cardDir = dir + "elCard";
-    backDir = dir + "elCardBack.png";
+    var dir = "../images/modifierDecks/16/";
+    var cardDir = dir + "elCard";
+    var backDir = dir + "elCardBack.png";
     this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
     this.characterDeck.push(new Card(2, 0, false, cardDir + "02.png", backDir));
     this.characterDeck.push(new Card(3, 0, false, cardDir + "03.png", backDir));
@@ -309,9 +309,9 @@ class Deck {
   /*
   loadTEMPLATEDeck() {
     this.characterDeck = [];
-    dir = "../images/modifierDecks/TEMPLATE/";
-    cardDir = dir + "TECard";
-    backDir = dir + "TECardBack.png";
+    var dir = "../images/modifierDecks/TEMPLATE/";
+    var cardDir = dir + "TECard";
+    var backDir = dir + "TECardBack.png";
     this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
     this.characterDeck.push(new Card(0, 0, false, cardDir + "02.png", backDir));
     this.characterDeck.push(new Card(0, 0, false, cardDir + "03.png", backDir));
