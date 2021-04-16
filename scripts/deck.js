@@ -1,3 +1,5 @@
+import {Card} from 'card.js';
+
 class Deck {
   constructor(character) {
     this.character = character;
@@ -1372,3 +1374,5 @@ class Deck {
     return this.playerDeck;
   }
 }
+
+export Deck;
