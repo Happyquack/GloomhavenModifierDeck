@@ -25,7 +25,7 @@ class Card {
     return this.flipped;
   }
   
-  flip () {
+  flip() {
     this.flipped = !this.flipped;
   }
   
