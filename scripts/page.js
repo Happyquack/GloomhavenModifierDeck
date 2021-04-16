@@ -95,7 +95,7 @@ deckDisplayColumns.forEach(column => {
  column.width = deckDisplayColumnWidth;
  column.style.display = "flex";
  column.style.flexWrap = "wrap";
- column.children.forEach(card => {
+ Array.from(column.children).forEach(card => {
   card.width = deckDisplayColumnWidth*4/5;
   card.style.margin = deckDisplayColumnWidth/10 + "px";
  } );
