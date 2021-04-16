@@ -83,9 +83,20 @@ for (let card of deckOfCards) {
 var numberOfColumns = 0;
 for (let column of deckSortingColumns) {
  if (column.length > 0) {
-  deckDisplayColumns[numberOfColumns] = column;
+  column.forEach(el => deckDisplayColumns[numberOfColumns].appendChild(el));
   numberOfColumns++;
  }
 }
 // format and display columns
 
+var deckDisplayBoxWidth = deckDisplayBox.width;
+var deckDisplayColumnWidth = deckDisplayBoxWidth/numberOfColumns;
+deckDisplayColumns.forEach(column => {
+ column.width = deckDisplayColumnWidth;
+ column.style.display = "flex";
+ column.style.flexWrap = "wrap";
+ column.children.forEach(card => {
+  card.width = deckDisplayColumnWidth*4/5;
+  card.style.margin = deckDisplayColumnWidth/10 + "px";
+ }
+}
