@@ -73,31 +73,9 @@ class Deck {
     }
   }
   
-  loadBerserkerDeck() {
-    this.characterDeck = [];
-    dir = "../images/modifierDecks/berserker/";
-    cardDir = dir + "beCard";
-    backDir = dir + "beCardBack.png";
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
-    this.characterDeck.push(new Card(2, 0, true, cardDir + "03.png", backDir));
-    this.characterDeck.push(new Card(2, 0, true, cardDir + "04.png", backDir));
-    this.characterDeck.push(new Card(0, "wound", true, cardDir + "05.png", backDir));
-    this.characterDeck.push(new Card(0, "wound", true, cardDir + "06.png", backDir));
-    this.characterDeck.push(new Card(0, "wound", true, cardDir + "07.png", backDir));
-    this.characterDeck.push(new Card(0, "wound", true, cardDir + "08.png", backDir));
-    this.characterDeck.push(new Card(0, "stun", true, cardDir + "09.png", backDir));
-    this.characterDeck.push(new Card(0, "stun", true, cardDir + "10.png", backDir));
-    this.characterDeck.push(new Card(1, "disarm", true, cardDir + "11.png", backDir));
-    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "12.png", backDir));
-    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "13.png", backDir));
-    this.characterDeck.push(new Card(2, "fire", false, cardDir + "14.png", backDir));
-    this.characterDeck.push(new Card(2, "fire", false, cardDir + "15.png", backDir));
-  }
-  
   loadBruteDeck() {
     this.characterDeck = [];
-    dir = "../images/modifierDecks/brute/";
+    dir = "../images/modifierDecks/01/";
     cardDir = dir + "brCard";
     backDir = dir + "brCardBack.png";
     this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
@@ -125,9 +103,81 @@ class Deck {
     this.characterDeck.push(new Card(1, "shieldSelf1", false, cardDir + "22.png", backDir));
   }
   
+  loadTinkererDeck() {
+    this.characterDeck = [];
+    dir = "../images/modifierDecks/02/";
+    cardDir = dir + "tiCard";
+    backDir = dir + "tiCardBack.png";
+    this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
+    this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
+    this.characterDeck.push(new Card(1, 0, false, cardDir + "03.png", backDir));
+    this.characterDeck.push(new Card(3, 0, false, cardDir + "04.png", backDir));
+    this.characterDeck.push(new Card(0, "flame", true, cardDir + "05.png", backDir));
+    this.characterDeck.push(new Card(0, "flame", true, cardDir + "06.png", backDir));
+    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "07.png", backDir));
+    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "08.png", backDir));
+    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "09.png", backDir));
+    this.characterDeck.push(new Card(1, "wound", true, cardDir + "10.png", backDir));
+    this.characterDeck.push(new Card(1, "wound", false, cardDir + "11.png", backDir));
+    this.characterDeck.push(new Card(1, "immobilize", false, cardDir + "12.png", backDir));
+    this.characterDeck.push(new Card(1, "immobilize", false, cardDir + "13.png", backDir));
+    this.characterDeck.push(new Card(1, "healSelf2", false, cardDir + "14.png", backDir));
+    this.characterDeck.push(new Card(1, "healSelf2", false, cardDir + "15.png", backDir));
+    this.characterDeck.push(new Card(0, "target", false, cardDir + "16.png", backDir));
+  }
+  
+  loadSpellweaverDeck() {
+    this.characterDeck = [];
+    dir = "../images/modifierDecks/03/";
+    cardDir = dir + "spCard";
+    backDir = dir + "spCardBack.png";
+    this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
+    this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
+    this.characterDeck.push(new Card(1, 0, false, cardDir + "03.png", backDir));
+    this.characterDeck.push(new Card(1, 0, false, cardDir + "04.png", backDir));
+    this.characterDeck.push(new Card(1, 0, false, cardDir + "05.png", backDir));
+    this.characterDeck.push(new Card(1, 0, false, cardDir + "06.png", backDir));
+    this.characterDeck.push(new Card(0, "stun", false, cardDir + "07.png", backDir));
+    this.characterDeck.push(new Card(1, "wound", false, cardDir + "08.png", backDir));
+    this.characterDeck.push(new Card(1, "immobilize", false, cardDir + "09.png", backDir));
+    this.characterDeck.push(new Card(1, "curse", false, cardDir + "10.png", backDir));
+    this.characterDeck.push(new Card(2, "flame", false, cardDir + "11.png", backDir));
+    this.characterDeck.push(new Card(2, "flame", false, cardDir + "12.png", backDir));
+    this.characterDeck.push(new Card(2, "frost", false, cardDir + "13.png", backDir));
+    this.characterDeck.push(new Card(2, "frost", false, cardDir + "14.png", backDir));
+    this.characterDeck.push(new Card(0, "earth", true, cardDir + "15.png", backDir));
+    this.characterDeck.push(new Card(0, "wind", true, cardDir + "16.png", backDir));
+    this.characterDeck.push(new Card(0, "sun", true, cardDir + "17.png", backDir));
+    this.characterDeck.push(new Card(0, "night", true, cardDir + "18.png", backDir));
+  }
+  
+  loadScoundrelDeck() {
+    this.characterDeck = [];
+    dir = "../images/modifierDecks/04/";
+    cardDir = dir + "scCard";
+    backDir = dir + "scCardBack.png";
+    this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
+    this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
+    this.characterDeck.push(new Card(2, 0, false, cardDir + "03.png", backDir));
+    this.characterDeck.push(new Card(2, 0, false, cardDir + "04.png", backDir));
+    this.characterDeck.push(new Card(1, 0, true, cardDir + "05.png", backDir));
+    this.characterDeck.push(new Card(1, 0, true, cardDir + "06.png", backDir));
+    this.characterDeck.push(new Card(1, 0, true, cardDir + "07.png", backDir));
+    this.characterDeck.push(new Card(1, 0, true, cardDir + "08.png", backDir));
+    this.characterDeck.push(new Card(0, "pierce3", true, cardDir + "09.png", backDir));
+    this.characterDeck.push(new Card(0, "pierce3", true, cardDir + "10.png", backDir));
+    this.characterDeck.push(new Card(0, "poison", true, cardDir + "11.png", backDir));
+    this.characterDeck.push(new Card(0, "poison", true, cardDir + "12.png", backDir));
+    this.characterDeck.push(new Card(0, "poison", true, cardDir + "13.png", backDir));
+    this.characterDeck.push(new Card(0, "poison", true, cardDir + "14.png", backDir));
+    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "15.png", backDir));
+    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "16.png", backDir));
+    this.characterDeck.push(new Card(0, "invisible", true, cardDir + "17.png", backDir));
+  }
+  
   loadCragheartDeck() {
     this.characterDeck = [];
-    dir = "../images/modifierDecks/cragheart/";
+    dir = "../images/modifierDecks/05/";
     cardDir = dir + "crCard";
     backDir = dir + "crCardBack.png";
     this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
@@ -150,9 +200,84 @@ class Deck {
     this.characterDeck.push(new Card(0, "wind", true, cardDir + "18.png", backDir));
   }
   
+  loadMindthiefDeck() {
+    this.characterDeck = [];
+    dir = "../images/modifierDecks/06/";
+    cardDir = dir + "miCard";
+    backDir = dir + "miCardBack.png";
+    this.characterDeck.push(new Card(2, 0, false, cardDir + "01.png", backDir));
+    this.characterDeck.push(new Card(2, 0, false, cardDir + "02.png", backDir));
+    this.characterDeck.push(new Card(0, 0, false, cardDir + "03.png", backDir));
+    this.characterDeck.push(new Card(2, 0, false, cardDir + "04.png", backDir));
+    this.characterDeck.push(new Card(2, 0, false, cardDir + "05.png", backDir));
+    this.characterDeck.push(new Card(1, 0, false, cardDir + "06.png", backDir));
+    this.characterDeck.push(new Card(1, 0, true, cardDir + "07.png", backDir));
+    this.characterDeck.push(new Card(1, 0, true, cardDir + "08.png", backDir));
+    this.characterDeck.push(new Card(1, 0, true, cardDir + "09.png", backDir));
+    this.characterDeck.push(new Card(0, "push1", true, cardDir + "10.png", backDir));
+    this.characterDeck.push(new Card(0, "push1", true, cardDir + "11.png", backDir));
+    this.characterDeck.push(new Card(0, "push1", true, cardDir + "12.png", backDir));
+    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "13.png", backDir));
+    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "14.png", backDir));
+    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "15.png", backDir));
+    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "16.png", backDir));
+    this.characterDeck.push(new Card(0, "immobilize", true, cardDir + "17.png", backDir));
+    this.characterDeck.push(new Card(0, "immobilize", true, cardDir + "18.png", backDir));
+    this.characterDeck.push(new Card(0, "stun", true, cardDir + "19.png", backDir));
+    this.characterDeck.push(new Card(0, "disarm", true, cardDir + "20.png", backDir));
+  }
+  
+  loadSunkeeperDeck() {
+    this.characterDeck = [];
+    dir = "../images/modifierDecks/07/";
+    cardDir = dir + "suCard";
+    backDir = dir + "suCardBack.png";
+    this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
+    this.characterDeck.push(new Card(2, 0, false, cardDir + "02.png", backDir));
+    this.characterDeck.push(new Card(1, 0, true, cardDir + "03.png", backDir));
+    this.characterDeck.push(new Card(1, 0, true, cardDir + "04.png", backDir));
+    this.characterDeck.push(new Card(1, 0, true, cardDir + "05.png", backDir));
+    this.characterDeck.push(new Card(1, 0, true, cardDir + "06.png", backDir));
+    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "07.png", backDir));
+    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "08.png", backDir));
+    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "09.png", backDir));
+    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "10.png", backDir));
+    this.characterDeck.push(new Card(0, "stun", true, cardDir + "11.png", backDir));
+    this.characterDeck.push(new Card(0, "sun", true, cardDir + "12.png", backDir));
+    this.characterDeck.push(new Card(0, "sun", true, cardDir + "13.png", backDir));
+    this.characterDeck.push(new Card(0, "sun", true, cardDir + "14.png", backDir));
+    this.characterDeck.push(new Card(0, "sun", true, cardDir + "15.png", backDir));
+    this.characterDeck.push(new Card(0, "shieldSelf1", true, cardDir + "16.png", backDir));
+    this.characterDeck.push(new Card(0, "shieldSelf1", true, cardDir + "17.png", backDir));
+    this.characterDeck.push(new Card(1, 0, false, cardDir + "18.png", backDir));
+    this.characterDeck.push(new Card(1, 0, false, cardDir + "19.png", backDir));
+  }
+  
+    loadBerserkerDeck() {
+    this.characterDeck = [];
+    dir = "../images/modifierDecks/12/";
+    cardDir = dir + "beCard";
+    backDir = dir + "beCardBack.png";
+    this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
+    this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
+    this.characterDeck.push(new Card(2, 0, true, cardDir + "03.png", backDir));
+    this.characterDeck.push(new Card(2, 0, true, cardDir + "04.png", backDir));
+    this.characterDeck.push(new Card(0, "wound", true, cardDir + "05.png", backDir));
+    this.characterDeck.push(new Card(0, "wound", true, cardDir + "06.png", backDir));
+    this.characterDeck.push(new Card(0, "wound", true, cardDir + "07.png", backDir));
+    this.characterDeck.push(new Card(0, "wound", true, cardDir + "08.png", backDir));
+    this.characterDeck.push(new Card(0, "stun", true, cardDir + "09.png", backDir));
+    this.characterDeck.push(new Card(0, "stun", true, cardDir + "10.png", backDir));
+    this.characterDeck.push(new Card(1, "disarm", true, cardDir + "11.png", backDir));
+    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "12.png", backDir));
+    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "13.png", backDir));
+    this.characterDeck.push(new Card(2, "fire", false, cardDir + "14.png", backDir));
+    this.characterDeck.push(new Card(2, "fire", false, cardDir + "15.png", backDir));
+  }
+  
   loadElementalistDeck() {
     this.characterDeck = [];
-    dir = "../images/modifierDecks/elementalist/";
+    dir = "../images/modifierDecks/16/";
     cardDir = dir + "elCard";
     backDir = dir + "elCardBack.png";
     this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
@@ -181,130 +306,6 @@ class Deck {
     this.characterDeck.push(new Card(0, "target", false, cardDir + "24.png", backDir));
   }
   
-  loadMindthiefDeck() {
-    this.characterDeck = [];
-    dir = "../images/modifierDecks/mindthief/";
-    cardDir = dir + "miCard";
-    backDir = dir + "miCardBack.png";
-    this.characterDeck.push(new Card(2, 0, false, cardDir + "01.png", backDir));
-    this.characterDeck.push(new Card(2, 0, false, cardDir + "02.png", backDir));
-    this.characterDeck.push(new Card(0, 0, false, cardDir + "03.png", backDir));
-    this.characterDeck.push(new Card(2, 0, false, cardDir + "04.png", backDir));
-    this.characterDeck.push(new Card(2, 0, false, cardDir + "05.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "06.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "07.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "08.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "09.png", backDir));
-    this.characterDeck.push(new Card(0, "push1", true, cardDir + "10.png", backDir));
-    this.characterDeck.push(new Card(0, "push1", true, cardDir + "11.png", backDir));
-    this.characterDeck.push(new Card(0, "push1", true, cardDir + "12.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "13.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "14.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "15.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "16.png", backDir));
-    this.characterDeck.push(new Card(0, "immobilize", true, cardDir + "17.png", backDir));
-    this.characterDeck.push(new Card(0, "immobilize", true, cardDir + "18.png", backDir));
-    this.characterDeck.push(new Card(0, "stun", true, cardDir + "19.png", backDir));
-    this.characterDeck.push(new Card(0, "disarm", true, cardDir + "20.png", backDir));
-  }
-  
-  loadScoundrelDeck() {
-    this.characterDeck = [];
-    dir = "../images/modifierDecks/scoundrel/";
-    cardDir = dir + "scCard";
-    backDir = dir + "scCardBack.png";
-    this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
-    this.characterDeck.push(new Card(2, 0, false, cardDir + "03.png", backDir));
-    this.characterDeck.push(new Card(2, 0, false, cardDir + "04.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "05.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "06.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "07.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "08.png", backDir));
-    this.characterDeck.push(new Card(0, "pierce3", true, cardDir + "09.png", backDir));
-    this.characterDeck.push(new Card(0, "pierce3", true, cardDir + "10.png", backDir));
-    this.characterDeck.push(new Card(0, "poison", true, cardDir + "11.png", backDir));
-    this.characterDeck.push(new Card(0, "poison", true, cardDir + "12.png", backDir));
-    this.characterDeck.push(new Card(0, "poison", true, cardDir + "13.png", backDir));
-    this.characterDeck.push(new Card(0, "poison", true, cardDir + "14.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "15.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "16.png", backDir));
-    this.characterDeck.push(new Card(0, "invisible", true, cardDir + "17.png", backDir));
-  }
-  
-  loadSpellweaverDeck() {
-    this.characterDeck = [];
-    dir = "../images/modifierDecks/spellweaver/";
-    cardDir = dir + "spCard";
-    backDir = dir + "spCardBack.png";
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "03.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "04.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "05.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "06.png", backDir));
-    this.characterDeck.push(new Card(0, "stun", false, cardDir + "07.png", backDir));
-    this.characterDeck.push(new Card(1, "wound", false, cardDir + "08.png", backDir));
-    this.characterDeck.push(new Card(1, "immobilize", false, cardDir + "09.png", backDir));
-    this.characterDeck.push(new Card(1, "curse", false, cardDir + "10.png", backDir));
-    this.characterDeck.push(new Card(2, "flame", false, cardDir + "11.png", backDir));
-    this.characterDeck.push(new Card(2, "flame", false, cardDir + "12.png", backDir));
-    this.characterDeck.push(new Card(2, "frost", false, cardDir + "13.png", backDir));
-    this.characterDeck.push(new Card(2, "frost", false, cardDir + "14.png", backDir));
-    this.characterDeck.push(new Card(0, "earth", true, cardDir + "15.png", backDir));
-    this.characterDeck.push(new Card(0, "wind", true, cardDir + "16.png", backDir));
-    this.characterDeck.push(new Card(0, "sun", true, cardDir + "17.png", backDir));
-    this.characterDeck.push(new Card(0, "night", true, cardDir + "18.png", backDir));
-  }
-  
-  loadSunkeeperDeck() {
-    this.characterDeck = [];
-    dir = "../images/modifierDecks/sunkeeper/";
-    cardDir = dir + "suCard";
-    backDir = dir + "suCardBack.png";
-    this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
-    this.characterDeck.push(new Card(2, 0, false, cardDir + "02.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "03.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "04.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "05.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "06.png", backDir));
-    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "07.png", backDir));
-    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "08.png", backDir));
-    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "09.png", backDir));
-    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "10.png", backDir));
-    this.characterDeck.push(new Card(0, "stun", true, cardDir + "11.png", backDir));
-    this.characterDeck.push(new Card(0, "sun", true, cardDir + "12.png", backDir));
-    this.characterDeck.push(new Card(0, "sun", true, cardDir + "13.png", backDir));
-    this.characterDeck.push(new Card(0, "sun", true, cardDir + "14.png", backDir));
-    this.characterDeck.push(new Card(0, "sun", true, cardDir + "15.png", backDir));
-    this.characterDeck.push(new Card(0, "shieldSelf1", true, cardDir + "16.png", backDir));
-    this.characterDeck.push(new Card(0, "shieldSelf1", true, cardDir + "17.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "18.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "19.png", backDir));
-  }
-  
-  loadTinkererDeck() {
-    this.characterDeck = [];
-    dir = "../images/modifierDecks/tinkerer/";
-    cardDir = dir + "tiCard";
-    backDir = dir + "tiCardBack.png";
-    this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "03.png", backDir));
-    this.characterDeck.push(new Card(3, 0, false, cardDir + "04.png", backDir));
-    this.characterDeck.push(new Card(0, "flame", true, cardDir + "05.png", backDir));
-    this.characterDeck.push(new Card(0, "flame", true, cardDir + "06.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "07.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "08.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "09.png", backDir));
-    this.characterDeck.push(new Card(1, "wound", true, cardDir + "10.png", backDir));
-    this.characterDeck.push(new Card(1, "wound", false, cardDir + "11.png", backDir));
-    this.characterDeck.push(new Card(1, "immobilize", false, cardDir + "12.png", backDir));
-    this.characterDeck.push(new Card(1, "immobilize", false, cardDir + "13.png", backDir));
-    this.characterDeck.push(new Card(1, "healSelf2", false, cardDir + "14.png", backDir));
-    this.characterDeck.push(new Card(1, "healSelf2", false, cardDir + "15.png", backDir));
-    this.characterDeck.push(new Card(0, "target", false, cardDir + "16.png", backDir));
-  }
   /*
   loadTEMPLATEDeck() {
     this.characterDeck = [];
@@ -475,7 +476,7 @@ class Deck {
     }
   }
   
-  modBerserkerPerk(checkmarkNum, turnPerkOn) {
+  modBrutePerk(checkmarkNum, turnPerkOn) {
     switch (checkmarkNum) {
       case 0:
         if (turnPerkOn) {
@@ -587,7 +588,7 @@ class Deck {
     }
   }
   
-  modBerserkerPerk(checkmarkNum, turnPerkOn) {
+  modCragheartPerk(checkmarkNum, turnPerkOn) {
     switch (checkmarkNum) {
       case 0:
         if (turnPerkOn) {
@@ -685,7 +686,7 @@ class Deck {
     }
   }
   
-  modBerserkerPerk(checkmarkNum, turnPerkOn) {
+  modElementalistPerk(checkmarkNum, turnPerkOn) {
     switch (checkmarkNum) {
       case 0:
         if (turnPerkOn) {
@@ -797,7 +798,7 @@ class Deck {
     }
   }
   
-  modBerserkerPerk(checkmarkNum, turnPerkOn) {
+  modMindthiefPerk(checkmarkNum, turnPerkOn) {
     switch (checkmarkNum) {
       case 0:
         if (turnPerkOn) {
@@ -909,7 +910,7 @@ class Deck {
     }
   }
   
-  modBerserkerPerk(checkmarkNum, turnPerkOn) {
+  modScoundrelPerk(checkmarkNum, turnPerkOn) {
     switch (checkmarkNum) {
       case 0:
         if (turnPerkOn) {
@@ -1021,7 +1022,7 @@ class Deck {
     }
   }
   
-  modBerserkerPerk(checkmarkNum, turnPerkOn) {
+  modSpellweaverPerk(checkmarkNum, turnPerkOn) {
     switch (checkmarkNum) {
       case 0:
         if (turnPerkOn) {
@@ -1133,7 +1134,7 @@ class Deck {
     }
   }
   
-  modBerserkerPerk(checkmarkNum, turnPerkOn) {
+  modSunkeeperPerk(checkmarkNum, turnPerkOn) {
     switch (checkmarkNum) {
       case 0:
         if (turnPerkOn) {
@@ -1245,7 +1246,7 @@ class Deck {
     }
   }
   
-  modBerserkerPerk(checkmarkNum, turnPerkOn) {
+  modTinkererPerk(checkmarkNum, turnPerkOn) {
     switch (checkmarkNum) {
       case 0:
         if (turnPerkOn) {
