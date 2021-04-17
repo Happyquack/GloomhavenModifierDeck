@@ -98,9 +98,11 @@ Array.from(deckDisplayBox.children).forEach(column => {
  column.style.display = "flex";
  column.style.flexDirection = "column";
  Array.from(column.children).forEach(card => {
-  card.width = deckDisplayColumnWidth*4/5;
-  card.height = card.width*2/3
-  card.style.margin = deckDisplayColumnWidth/10 + "px";
-  card.style.borderRadius = deckDisplayColumnWidth/10 + "px";
+  Array.from(card.children).forEach(images => {
+   images.width = deckDisplayColumnWidth*4/5;
+   images.height = card.width*2/3
+   images.style.margin = deckDisplayColumnWidth/10 + "px";
+   images.style.borderRadius = deckDisplayColumnWidth/10 + "px";
+  }
  } );
 } );
