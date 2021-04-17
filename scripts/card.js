@@ -21,7 +21,6 @@ class Card {
     this.imgCard = document.createElement('div');
     this.imgCard.appendChild(img);
     this.imgCard.appendChild(back);
-    this.imgCard.style.pointerEvents = "none";
     this.imgCard.addEventListener("click", this.flip);
   }
   
