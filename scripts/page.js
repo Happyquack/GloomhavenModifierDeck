@@ -86,7 +86,7 @@ for (let column of deckSortingColumns) {
   column.innerHTML = "";
   column.forEach(el => {
    deckDisplayColumns[numberOfColumns].appendChild(el.getImg());
-   el.getImg().addEventListener("click", el.flip());
+   el.getImg().addEventListener("click", el.flip);
   });
   deckDisplayBox.appendChild(deckDisplayColumns[numberOfColumns]);
   numberOfColumns++;
