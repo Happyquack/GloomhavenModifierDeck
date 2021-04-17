@@ -84,7 +84,10 @@ var numberOfColumns = 0;
 for (let column of deckSortingColumns) {
  if (column.length > 0) {
   column.innerHTML = "";
-  column.forEach(el => deckDisplayColumns[numberOfColumns].appendChild(el.getImg()));
+  column.forEach(el => {
+   deckDisplayColumns[numberOfColumns].appendChild(el.getImg());
+   el.getImg().addEventListener("click", el.flip());
+  });
   deckDisplayBox.appendChild(deckDisplayColumns[numberOfColumns]);
   numberOfColumns++;
  }
@@ -100,7 +103,6 @@ Array.from(deckDisplayBox.children).forEach(column => {
  Array.from(column.children).forEach(card => {
   card.style.width = deckDisplayColumnWidth + "px";
   card.style.height = deckDisplayColumnWidth*2/3 + "px";
-  card.addEventListener("click", card.flip());
   Array.from(card.children).forEach(images => {
    images.width = deckDisplayColumnWidth*4/5;
    images.height = images.width*2/3;
