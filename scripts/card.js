@@ -41,7 +41,7 @@ class Card {
   }
   
   getImg() {
-    return this.imgCard;
+    return this.outerCard;
   }
   
   flip(event) {
