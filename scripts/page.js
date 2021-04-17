@@ -103,6 +103,6 @@ Array.from(deckDisplayBox.children).forEach(column => {
    images.height = card.width*2/3
    images.style.margin = deckDisplayColumnWidth/10 + "px";
    images.style.borderRadius = deckDisplayColumnWidth/10 + "px";
-  }
+  } );
  } );
 } );
