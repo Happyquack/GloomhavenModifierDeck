@@ -42,6 +42,7 @@ class Card {
   flip() {
     this.flipped = !this.flipped;
     this.imgCard.style.transform = "rotateY(180deg)";
+    console.log("kjahskjhds");
   }
 }
 
