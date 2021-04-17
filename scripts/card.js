@@ -46,7 +46,7 @@ class Card {
   }
   
   flip(event) {
-    console.log(this.imgPath);
+    console.log(FLIPPED);
     this.flipped = !this.flipped;
     Array.from(event.target.children).forEach(el => el.style.transform = "rotateY(180deg)");
   }
