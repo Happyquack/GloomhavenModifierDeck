@@ -5,9 +5,9 @@ var ICONPATH = "https://happyquack.github.io/GloomhavenModifierDeck/images/class
 
 var classSelectionBox = document.getElementById('classSelectionBoxId');
 classSelectionBox.innerHTML = "";
-classSelectionBox.style.borderColor = "rgb(234,236,239)";
-classSelectionBox.style.borderStyle = "solid";
-classSelectionBox.style.borderWidth = "1px";
+classSelectionBox.style.outlineColor = "rgb(234,236,239)";
+classSelectionBox.style.outlineStyle = "solid";
+classSelectionBox.style.outlineWidth = "1px";
 
 var classIconImgs = []
 for (var i = 0; i < 18; i++) {
@@ -36,9 +36,9 @@ var deckOfCards = deck.getPlayerDeck();
 
 var deckDisplayBox = document.getElementById('deckDisplayBoxId');
 deckDisplayBox.innerHTML = "";
-deckDisplayBox.style.borderColor = "rgb(134,136,139)";
-deckDisplayBox.style.borderStyle = "solid";
-deckDisplayBox.style.borderWidth = "1px";
+deckDisplayBox.style.outlineColor = "rgb(134,136,139)";
+deckDisplayBox.style.outlineStyle = "solid";
+deckDisplayBox.style.outlineWidth = "1px";
 
 var deckDisplayColumns = []
 for (var i = 0; i < 15; i++) {
@@ -96,7 +96,7 @@ var deckDisplayColumnWidth = deckDisplayBoxWidth/numberOfColumns;
 Array.from(deckDisplayBox.children).forEach(column => {
  column.style.maxWidth = deckDisplayColumnWidth + "px";
  column.style.display = "flex";
- column.style.flexWrap = "wrap";
+ column.style.flexDirection = "column";
  Array.from(column.children).forEach(card => {
   card.width = deckDisplayColumnWidth*4/5;
   card.height = card.width*2/3
