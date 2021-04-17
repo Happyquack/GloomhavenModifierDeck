@@ -103,6 +103,8 @@ Array.from(deckDisplayBox.children).forEach(column => {
    images.height = images.width*2/3
    images.style.margin = deckDisplayColumnWidth/10 + "px";
    images.style.borderRadius = deckDisplayColumnWidth/10 + "px";
+   images.style.position = "absolute";
+   images.style.backfaceVisibility = "hidden";
   } );
  } );
 } );
