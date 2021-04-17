@@ -100,7 +100,7 @@ Array.from(deckDisplayBox.children).forEach(column => {
  Array.from(column.children).forEach(card => {
   Array.from(card.children).forEach(images => {
    images.width = deckDisplayColumnWidth*4/5;
-   images.height = card.width*2/3
+   images.height = images.width*2/3
    images.style.margin = deckDisplayColumnWidth/10 + "px";
    images.style.borderRadius = deckDisplayColumnWidth/10 + "px";
   } );
