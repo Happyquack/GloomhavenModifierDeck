@@ -29,7 +29,7 @@ class Card {
     var img = document.createElement('img');
     img.src = this.imgPath;
     var back = document.createElement('img');
-    back.src = this.imgPath;
+    back.src = this.backPath;
     back.style.transform = "rotateY(180deg)";
     this.imgCard = document.createElement('div');
     this.imgCard.appendChild(img);
