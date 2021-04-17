@@ -100,6 +100,7 @@ Array.from(deckDisplayBox.children).forEach(column => {
  Array.from(column.children).forEach(card => {
   card.style.width = deckDisplayColumnWidth + "px";
   card.style.height = deckDisplayColumnWidth*2/3 + "px";
+  card.addEventListener("click", card.flip());
   Array.from(card.children).forEach(images => {
    images.width = deckDisplayColumnWidth*4/5;
    images.height = images.width*2/3;
