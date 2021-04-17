@@ -48,7 +48,7 @@ class Card {
     console.log("FLIPPED");
     this.flipped = !this.flipped;
     event.target.firstChild.style.transform = "rotateY(180deg)";
-    event.target.style.transform = "rotateY(180deg)";
+    //event.target.style.transform = "rotateY(180deg)";
   }
 }
 
