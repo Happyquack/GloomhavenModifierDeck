@@ -11,7 +11,7 @@ class Card {
     img.src = this.imgPath;
     img.style.transition = "transform 0.6s";
     img.style.transformStyle = "preserve-3d";
-    img.style.addEventListener("click", this.flip);
+    img.addEventListener("click", this.flip);
     var back = document.createElement('img');
     back.src = this.backPath;
     back.style.transform = "rotateY(180deg)";
