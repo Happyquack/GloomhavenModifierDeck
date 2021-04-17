@@ -36,7 +36,7 @@ class Card {
     this.imgCard.appendChild(back);
     this.imgCard.style.transition = "transform 0.6s";
     this.imgCard.style.transformStyle = "preserve-3d";
-    this.addEventListener("click", this.flip());
+    addEventListener("click", this.flip());
     return this.imgCard;
   }
   
