@@ -17,7 +17,7 @@ class Card {
     this.imgCard.appendChild(back);
     this.imgCard.style.transition = "transform 0.6s";
     this.imgCard.style.transformStyle = "preserve-3d";
-    this.imgCard.addEventListener("click", this.flip);
+    this.imgCard.addEventListener("click", this.flip(e));
   }
   
   getValue() {
@@ -40,10 +40,10 @@ class Card {
     return this.imgCard;
   }
   
-  flip() {
+  flip(event) {
     console.log(this.imgPath);
     this.flipped = !this.flipped;
-    this.imgCard.style.transform = "rotateY(180deg)";
+    event.target.style.transform = "rotateY(180deg)";
   }
 }
 
