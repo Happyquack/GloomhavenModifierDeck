@@ -19,7 +19,9 @@ class Card {
     this.imgCard.transformStyle = "preserve-3d";
     this.imgCard.appendChild(img);
     this.imgCard.appendChild(back);
-    this.imgCard.addEventListener("click", this.flip);
+    this.outerCard = document.createElement('div')
+    this.outerCard.appendChild(this.imgCard);
+    this.outerCard.addEventListener("click", this.flip);
   }
   
   getValue() {
@@ -45,7 +47,7 @@ class Card {
   flip(event) {
     console.log("FLIPPED");
     this.flipped = !this.flipped;
-    event.target.style.transform = "rotateY(180deg)";
+    event.target.firstChild.style.transform = "rotateY(180deg)";
   }
 }
 
