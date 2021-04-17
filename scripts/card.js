@@ -25,14 +25,24 @@ class Card {
     return this.flipped;
   }
   
-  flip() {
-    this.flipped = !this.flipped;
-  }
-  
   getImg() {
     var img = document.createElement('img');
-    if (this.flipped) { img.src = this.backPath; } else { img.src = this.imgPath; }
-    return img;
+    img.src = this.imgPath;
+    var back = document.createElement('img');
+    back.src = this.imgPath;
+    back.style.transform = "rotateY(180deg)";
+    this.imgCard = document.createElement('div');
+    imgCard.appendChild(img);
+    imgCard.appendChild(back);
+    imgCard.style.transition = "transform 0.6s";
+    imgCard.style.transformStyle = "preserve-3d";
+    imgCard.onClick = this.flip();
+    return this.imgCard;
+  }
+  
+  flip() {
+    this.flipped = !this.flipped;
+    this.imgCard.style.transform = "rotateY(180deg)";
   }
 }
 
