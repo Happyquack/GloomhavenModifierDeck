@@ -7,6 +7,17 @@ class Card {
     this.imgPath = imgPath;
     this.backPath = backPath;
     this.flipped = false;
+    var img = document.createElement('img');
+    img.src = this.imgPath;
+    var back = document.createElement('img');
+    back.src = this.backPath;
+    back.style.transform = "rotateY(180deg)";
+    this.imgCard = document.createElement('div');
+    this.imgCard.appendChild(img);
+    this.imgCard.appendChild(back);
+    this.imgCard.style.transition = "transform 0.6s";
+    this.imgCard.style.transformStyle = "preserve-3d";
+    this.imgCard.addEventListener("click", this.flip);
   }
   
   getValue() {
@@ -26,17 +37,6 @@ class Card {
   }
   
   getImg() {
-    var img = document.createElement('img');
-    img.src = this.imgPath;
-    var back = document.createElement('img');
-    back.src = this.backPath;
-    back.style.transform = "rotateY(180deg)";
-    this.imgCard = document.createElement('div');
-    this.imgCard.appendChild(img);
-    this.imgCard.appendChild(back);
-    this.imgCard.style.transition = "transform 0.6s";
-    this.imgCard.style.transformStyle = "preserve-3d";
-    this.imgCard.addEventListener("click", this.flip);
     return this.imgCard;
   }
   
