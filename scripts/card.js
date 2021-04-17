@@ -32,11 +32,11 @@ class Card {
     back.src = this.imgPath;
     back.style.transform = "rotateY(180deg)";
     this.imgCard = document.createElement('div');
-    imgCard.appendChild(img);
-    imgCard.appendChild(back);
-    imgCard.style.transition = "transform 0.6s";
-    imgCard.style.transformStyle = "preserve-3d";
-    imgCard.onClick = this.flip();
+    this.imgCard.appendChild(img);
+    this.imgCard.appendChild(back);
+    this.imgCard.style.transition = "transform 0.6s";
+    this.imgCard.style.transformStyle = "preserve-3d";
+    this.imgCard.onClick = this.flip();
     return this.imgCard;
   }
   
