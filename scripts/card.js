@@ -57,10 +57,10 @@ class Card {
     this.flipped = !this.flipped;
     if (this.flipped) {
       this.img.style.transform = "rotateY(180deg)";
-      this.back.style.transform = "rotateY(180deg)";
+      this.back.style.transform = "rotateY(0deg)";
     } else {
       this.img.style.transform = "rotateY(0deg)";
-      this.back.style.transform = "rotateY(0deg)";
+      this.back.style.transform = "rotateY(180deg)";
     }
     
   }
