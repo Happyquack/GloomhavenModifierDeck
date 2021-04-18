@@ -23,7 +23,7 @@ class Card {
     this.imgCard.appendChild(back);
     this.outerCard = document.createElement('div')
     this.outerCard.appendChild(this.imgCard);
-    this.outerCard.addEventListener("click", this.flip);
+    //this.outerCard.addEventListener("click", this.flip);
   }
   
   getValue() {
@@ -46,15 +46,15 @@ class Card {
     return this.outerCard;
   }
   
-  flip(event) {
+  flip() {
     console.log("FLIPPED");
     this.flipped = !this.flipped;
     if (this.flipped) {
-      event.target.firstChild.style.transform = "rotateY(180deg)";
-      event.target.style.transform = "rotateY(180deg)";
+      this.imgCard.style.transform = "rotateY(180deg)";
+      this.outerCard.style.transform = "rotateY(180deg)";
     } else {
-      event.target.firstChild.style.transform = "rotateY(0deg)";
-      event.target.style.transform = "rotateY(0deg)";
+      this.imgCard.style.transform = "rotateY(0deg)";
+      this.outerCard.style.transform = "rotateY(0deg)";
     }
     
   }
