@@ -13,6 +13,7 @@ class Card {
     img.style.backfaceVisibility = "hidden";
     img.style.WebkitBackfaceVisibility = "hidden";
     img.style.transformStyle = "preserve-3d";
+    img.style.opacity = "0.99";
     var back = document.createElement('img');
     back.src = this.backPath;
     back.style.transform = "rotateY(180deg)";
@@ -20,6 +21,7 @@ class Card {
     back.style.backfaceVisibility = "hidden";
     back.style.WebkitBackfaceVisibility = "hidden";
     back.style.transformStyle = "preserve-3d";
+    img.style.opacity = "0.99";
     this.imgCard = document.createElement('div');
     this.imgCard.style.transition = "transform 0.6s";
     this.imgCard.transformStyle = "preserve-3d";
