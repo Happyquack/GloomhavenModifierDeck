@@ -292,10 +292,10 @@ class Deck {
   }
   
   loadDeck(targetDeck, cardDir, backDir, valueList, effectList, rollingList) {
-    var cardNum = 1;
+    var cardNum = 0;
     valueList.forEach( foo => {
-      var cardStr = cardNum;
-      if (cardNum < 10) cardStr = "0" + cardStr;
+      var cardStr = cardNum+1;
+      if (cardNum < 9) cardStr = "0" + cardStr;
       targetDeck.push(new Card(valueList[cardNum], effectList[cardNum], rollingList[cardNum], cardDir + cardStr + ".png", backDir));
       cardNum++;
     });
