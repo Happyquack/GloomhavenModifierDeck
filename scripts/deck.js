@@ -20,7 +20,7 @@ class Deck {
     var backDir = dir + "baseCardBack.png";
     var valueList = [0,0,0,0,0,0,1,1,1,1,1,-1,-1,-1,-1,-1,-2,2,"null","x2"];
     var effectList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-    var rollingList = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+    var rollingList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     this.loadDeck(this.baseDeck, cardDir, backDir, valueList, effectList, rollingList);
   }
   
@@ -62,30 +62,10 @@ class Deck {
     var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/01/";
     var cardDir = dir + "brCard";
     var backDir = dir + "brCardBack.png";
-    
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "03.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "04.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "05.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "06.png", backDir));
-    this.characterDeck.push(new Card(0, "push1", true, cardDir + "07.png", backDir));
-    this.characterDeck.push(new Card(0, "push1", true, cardDir + "08.png", backDir));
-    this.characterDeck.push(new Card(0, "push1", true, cardDir + "09.png", backDir));
-    this.characterDeck.push(new Card(0, "push1", true, cardDir + "10.png", backDir));
-    this.characterDeck.push(new Card(0, "push1", true, cardDir + "11.png", backDir));
-    this.characterDeck.push(new Card(0, "push1", true, cardDir + "12.png", backDir));
-    this.characterDeck.push(new Card(0, "push1", true, cardDir + "13.png", backDir));
-    this.characterDeck.push(new Card(0, "pierce3", true, cardDir + "14.png", backDir));
-    this.characterDeck.push(new Card(0, "pierce3", true, cardDir + "15.png", backDir));
-    this.characterDeck.push(new Card(0, "stun", true, cardDir + "16.png", backDir));
-    this.characterDeck.push(new Card(0, "stun", true, cardDir + "17.png", backDir));
-    this.characterDeck.push(new Card(0, "disarm", true, cardDir + "18.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "19.png", backDir));
-    this.characterDeck.push(new Card(0, "target", true, cardDir + "20.png", backDir));
-    this.characterDeck.push(new Card(0, "target", true, cardDir + "21.png", backDir));
-    this.characterDeck.push(new Card(0, "target", true, cardDir + "21.png", backDir));
-    this.characterDeck.push(new Card(1, "shieldSelf1", false, cardDir + "22.png", backDir));
+    var valueList = [1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1];
+    var effectList = [0,0,0,0,0,0,"push1","push1","push1","push1","push1","push1","push1","pierce3","pierce3","stun","stun","disarm","muddle","target","target","shieldSelf1"];
+    var rollinglist = [0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0];
+    this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
   }
   
   loadTinkererDeck() {
@@ -93,22 +73,10 @@ class Deck {
     var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/02/";
     var cardDir = dir + "tiCard";
     var backDir = dir + "tiCardBack.png";
-    this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "03.png", backDir));
-    this.characterDeck.push(new Card(3, 0, false, cardDir + "04.png", backDir));
-    this.characterDeck.push(new Card(0, "flame", true, cardDir + "05.png", backDir));
-    this.characterDeck.push(new Card(0, "flame", true, cardDir + "06.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "07.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "08.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "09.png", backDir));
-    this.characterDeck.push(new Card(1, "wound", true, cardDir + "10.png", backDir));
-    this.characterDeck.push(new Card(1, "wound", false, cardDir + "11.png", backDir));
-    this.characterDeck.push(new Card(1, "immobilize", false, cardDir + "12.png", backDir));
-    this.characterDeck.push(new Card(1, "immobilize", false, cardDir + "13.png", backDir));
-    this.characterDeck.push(new Card(1, "healSelf2", false, cardDir + "14.png", backDir));
-    this.characterDeck.push(new Card(1, "healSelf2", false, cardDir + "15.png", backDir));
-    this.characterDeck.push(new Card(0, "target", false, cardDir + "16.png", backDir));
+    var valueList = [0,1,1,3,0,0,0,0,0,1,1,1,1,1,1,0];
+    var effectList = [0,0,0,0,"fire","fire","muddle","muddle","muddle","wound","wound","immobilize","immobilize","healSelf2","healSelf2","target"];
+    var rollingList = [0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0];
+    this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
   }
   
   loadSpellweaverDeck() {
@@ -116,24 +84,10 @@ class Deck {
     var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/03/";
     var cardDir = dir + "spCard";
     var backDir = dir + "spCardBack.png";
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "03.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "04.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "05.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "06.png", backDir));
-    this.characterDeck.push(new Card(0, "stun", false, cardDir + "07.png", backDir));
-    this.characterDeck.push(new Card(1, "wound", false, cardDir + "08.png", backDir));
-    this.characterDeck.push(new Card(1, "immobilize", false, cardDir + "09.png", backDir));
-    this.characterDeck.push(new Card(1, "curse", false, cardDir + "10.png", backDir));
-    this.characterDeck.push(new Card(2, "flame", false, cardDir + "11.png", backDir));
-    this.characterDeck.push(new Card(2, "flame", false, cardDir + "12.png", backDir));
-    this.characterDeck.push(new Card(2, "frost", false, cardDir + "13.png", backDir));
-    this.characterDeck.push(new Card(2, "frost", false, cardDir + "14.png", backDir));
-    this.characterDeck.push(new Card(0, "earth", true, cardDir + "15.png", backDir));
-    this.characterDeck.push(new Card(0, "wind", true, cardDir + "16.png", backDir));
-    this.characterDeck.push(new Card(0, "sun", true, cardDir + "17.png", backDir));
-    this.characterDeck.push(new Card(0, "night", true, cardDir + "18.png", backDir));
+    var valueList = [1,1,1,1,1,1,0,1,1,1,2,2,2,2,0,0,0,0];
+    var effectList = [0,0,0,0,0,0,"stun","wound","immobilize","curse","fire","fire","cold","cold","earth","wind","sun","night"];
+    var rollingList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1];
+    this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
   }
   
   loadScoundrelDeck() {
@@ -141,23 +95,10 @@ class Deck {
     var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/04/";
     var cardDir = dir + "scCard";
     var backDir = dir + "scCardBack.png";
-    this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
-    this.characterDeck.push(new Card(2, 0, false, cardDir + "03.png", backDir));
-    this.characterDeck.push(new Card(2, 0, false, cardDir + "04.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "05.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "06.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "07.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "08.png", backDir));
-    this.characterDeck.push(new Card(0, "pierce3", true, cardDir + "09.png", backDir));
-    this.characterDeck.push(new Card(0, "pierce3", true, cardDir + "10.png", backDir));
-    this.characterDeck.push(new Card(0, "poison", true, cardDir + "11.png", backDir));
-    this.characterDeck.push(new Card(0, "poison", true, cardDir + "12.png", backDir));
-    this.characterDeck.push(new Card(0, "poison", true, cardDir + "13.png", backDir));
-    this.characterDeck.push(new Card(0, "poison", true, cardDir + "14.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "15.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "16.png", backDir));
-    this.characterDeck.push(new Card(0, "invisible", true, cardDir + "17.png", backDir));
+    var valueList = [0,1,2,2,1,1,1,1,0,0,0,0,0,0,0,0,0];
+    var effectList = [0,0,0,0,0,0,0,0,"pierce3","pierce3","poison","poison","poison","poison","muddle",",muddle","invisible"];
+    var rollingList = [0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1];
+    this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
   }
   
   loadCragheartDeck() {
@@ -165,24 +106,10 @@ class Deck {
     var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/05/";
     var cardDir = dir + "crCard";
     var backDir = dir + "crCardBack.png";
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "03.png", backDir));
-    this.characterDeck.push(new Card(-2, 0, false, cardDir + "04.png", backDir));
-    this.characterDeck.push(new Card(+2, 0, false, cardDir + "05.png", backDir));
-    this.characterDeck.push(new Card(+2, 0, false, cardDir + "06.png", backDir));
-    this.characterDeck.push(new Card(1, "immobilize", false, cardDir + "07.png", backDir));
-    this.characterDeck.push(new Card(1, "immobilize", false, cardDir + "08.png", backDir));
-    this.characterDeck.push(new Card(2, "muddle", false, cardDir + "09.png", backDir));
-    this.characterDeck.push(new Card(2, "muddle", false, cardDir + "10.png", backDir));
-    this.characterDeck.push(new Card(0, "push2", true, cardDir + "11.png", backDir));
-    this.characterDeck.push(new Card(0, "push2", true, cardDir + "12.png", backDir));
-    this.characterDeck.push(new Card(0, "earth", true, cardDir + "13.png", backDir));
-    this.characterDeck.push(new Card(0, "earth", true, cardDir + "14.png", backDir));
-    this.characterDeck.push(new Card(0, "earth", true, cardDir + "15.png", backDir));
-    this.characterDeck.push(new Card(0, "earth", true, cardDir + "16.png", backDir));
-    this.characterDeck.push(new Card(0, "wind", true, cardDir + "17.png", backDir));
-    this.characterDeck.push(new Card(0, "wind", true, cardDir + "18.png", backDir));
+    var valueList = [1,1,1,-2,2,2,1,1,2,2,0,0,0,0,0,0,0,0];
+    var effectList = [0,0,0,0,0,0,"immobilize","immobilize","muddle","muddle","push2","push2","earth","earth","earth","earth","wind","wind"];
+    var rollingList = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1];
+    this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
   }
   
   loadMindthiefDeck() {
@@ -190,26 +117,9 @@ class Deck {
     var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/06/";
     var cardDir = dir + "miCard";
     var backDir = dir + "miCardBack.png";
-    this.characterDeck.push(new Card(2, 0, false, cardDir + "01.png", backDir));
-    this.characterDeck.push(new Card(2, 0, false, cardDir + "02.png", backDir));
-    this.characterDeck.push(new Card(0, 0, false, cardDir + "03.png", backDir));
-    this.characterDeck.push(new Card(2, 0, false, cardDir + "04.png", backDir));
-    this.characterDeck.push(new Card(2, 0, false, cardDir + "05.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "06.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "07.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "08.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "09.png", backDir));
-    this.characterDeck.push(new Card(0, "push1", true, cardDir + "10.png", backDir));
-    this.characterDeck.push(new Card(0, "push1", true, cardDir + "11.png", backDir));
-    this.characterDeck.push(new Card(0, "push1", true, cardDir + "12.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "13.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "14.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "15.png", backDir));
-    this.characterDeck.push(new Card(0, "muddle", true, cardDir + "16.png", backDir));
-    this.characterDeck.push(new Card(0, "immobilize", true, cardDir + "17.png", backDir));
-    this.characterDeck.push(new Card(0, "immobilize", true, cardDir + "18.png", backDir));
-    this.characterDeck.push(new Card(0, "stun", true, cardDir + "19.png", backDir));
-    this.characterDeck.push(new Card(0, "disarm", true, cardDir + "20.png", backDir));
+    var valueList = [2,2,0,2,2,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0];
+    var effectList = [0,0,0,0,0,0,0,0,0,"push1","push1","push1","muddle","muddle","muddle","muddle","immobilize","immobilize","stun","disarm"];
+    this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
   }
   
   loadSunkeeperDeck() {
@@ -217,47 +127,21 @@ class Deck {
     var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/07/";
     var cardDir = dir + "suCard";
     var backDir = dir + "suCardBack.png";
-    this.characterDeck.push(new Card(0, 0, false, cardDir + "01.png", backDir));
-    this.characterDeck.push(new Card(2, 0, false, cardDir + "02.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "03.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "04.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "05.png", backDir));
-    this.characterDeck.push(new Card(1, 0, true, cardDir + "06.png", backDir));
-    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "07.png", backDir));
-    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "08.png", backDir));
-    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "09.png", backDir));
-    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "10.png", backDir));
-    this.characterDeck.push(new Card(0, "stun", true, cardDir + "11.png", backDir));
-    this.characterDeck.push(new Card(0, "sun", true, cardDir + "12.png", backDir));
-    this.characterDeck.push(new Card(0, "sun", true, cardDir + "13.png", backDir));
-    this.characterDeck.push(new Card(0, "sun", true, cardDir + "14.png", backDir));
-    this.characterDeck.push(new Card(0, "sun", true, cardDir + "15.png", backDir));
-    this.characterDeck.push(new Card(0, "shieldSelf1", true, cardDir + "16.png", backDir));
-    this.characterDeck.push(new Card(0, "shieldSelf1", true, cardDir + "17.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "18.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "19.png", backDir));
+    var valueList = [0,2,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1];
+    var effectList = [0,0,0,0,0,0,"healSelf1","healSelf1","healSelf1","healSelf1","stun","sun","sun","sun","sun","shieldSelf1","shieldSelf1",0,0];
+    var RollingList = [0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0];
+    this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
   }
   
-    loadBerserkerDeck() {
+  loadBerserkerDeck() {
     this.characterDeck = [];
     var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/12/";
     var cardDir = dir + "beCard";
     var backDir = dir + "beCardBack.png";
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "02.png", backDir));
-    this.characterDeck.push(new Card(2, 0, true, cardDir + "03.png", backDir));
-    this.characterDeck.push(new Card(2, 0, true, cardDir + "04.png", backDir));
-    this.characterDeck.push(new Card(0, "wound", true, cardDir + "05.png", backDir));
-    this.characterDeck.push(new Card(0, "wound", true, cardDir + "06.png", backDir));
-    this.characterDeck.push(new Card(0, "wound", true, cardDir + "07.png", backDir));
-    this.characterDeck.push(new Card(0, "wound", true, cardDir + "08.png", backDir));
-    this.characterDeck.push(new Card(0, "stun", true, cardDir + "09.png", backDir));
-    this.characterDeck.push(new Card(0, "stun", true, cardDir + "10.png", backDir));
-    this.characterDeck.push(new Card(1, "disarm", true, cardDir + "11.png", backDir));
-    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "12.png", backDir));
-    this.characterDeck.push(new Card(0, "healSelf1", true, cardDir + "13.png", backDir));
-    this.characterDeck.push(new Card(2, "fire", false, cardDir + "14.png", backDir));
-    this.characterDeck.push(new Card(2, "fire", false, cardDir + "15.png", backDir));
+    var valueList = [1,1,2,2,0,0,0,0,0,0,1,0,0,2,2];
+    var effectList = [0,0,0,0,"wound","wound","wound","wound","stun","stun","disarm","healSelf1","healSelf1","fire","fire"];
+    var rollingList = [0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0];
+    this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
   }
   
   loadElementalistDeck() {
@@ -265,30 +149,10 @@ class Deck {
     var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/16/";
     var cardDir = dir + "elCard";
     var backDir = dir + "elCardBack.png";
-    this.characterDeck.push(new Card(1, 0, false, cardDir + "01.png", backDir));
-    this.characterDeck.push(new Card(2, 0, false, cardDir + "02.png", backDir));
-    this.characterDeck.push(new Card(3, 0, false, cardDir + "03.png", backDir));
-    this.characterDeck.push(new Card(0, "flame", false, cardDir + "04.png", backDir));
-    this.characterDeck.push(new Card(0, "flame", false, cardDir + "05.png", backDir));
-    this.characterDeck.push(new Card(0, "flame", false, cardDir + "06.png", backDir));
-    this.characterDeck.push(new Card(0, "flame", false, cardDir + "07.png", backDir));
-    this.characterDeck.push(new Card(0, "frost", false, cardDir + "08.png", backDir));
-    this.characterDeck.push(new Card(0, "frost", false, cardDir + "09.png", backDir));
-    this.characterDeck.push(new Card(0, "frost", false, cardDir + "10.png", backDir));
-    this.characterDeck.push(new Card(0, "frost", false, cardDir + "11.png", backDir));
-    this.characterDeck.push(new Card(0, "wind", false, cardDir + "12.png", backDir));
-    this.characterDeck.push(new Card(0, "wind", false, cardDir + "13.png", backDir));
-    this.characterDeck.push(new Card(0, "wind", false, cardDir + "14.png", backDir));
-    this.characterDeck.push(new Card(0, "wind", false, cardDir + "15.png", backDir));
-    this.characterDeck.push(new Card(0, "earth", false, cardDir + "16.png", backDir));
-    this.characterDeck.push(new Card(0, "earth", false, cardDir + "17.png", backDir));
-    this.characterDeck.push(new Card(0, "earth", false, cardDir + "18.png", backDir));
-    this.characterDeck.push(new Card(0, "earth", false, cardDir + "19.png", backDir));
-    this.characterDeck.push(new Card(1, "push1", false, cardDir + "20.png", backDir));
-    this.characterDeck.push(new Card(1, "push1", false, cardDir + "21.png", backDir));
-    this.characterDeck.push(new Card(1, "wound", false, cardDir + "22.png", backDir));
-    this.characterDeck.push(new Card(0, "stun", false, cardDir + "23.png", backDir));
-    this.characterDeck.push(new Card(0, "target", false, cardDir + "24.png", backDir));
+    var valueList = [1,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0];
+    var effectList = [0,0,0,"fire","fire","fire","fire","cold","cold","cold","cold","wind","wind","wind","wind","earth","earth","earth","earth","push1","push1","wound","stun","target"];
+    var rollingList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
   }
   
   loadDeck(targetDeck, cardDir, backDir, valueList, effectList, rollingList) {
