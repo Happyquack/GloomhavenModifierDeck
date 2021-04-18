@@ -97,14 +97,7 @@ for (let column of deckSortingColumns) {
 
 //make card flipping function
 
-function flipCard(event) {
- 
- var flippedBox = event.target;
- deckOfCards.forEach(el => {
-  if (el.getImg() = flippedBox) el.flip();
- });
- 
-}
+function flipCard(event) { deckOfCards.forEach(el =>  if (el.getImg() == event.target) el.flip() );}
 
 // format and display columns
 
