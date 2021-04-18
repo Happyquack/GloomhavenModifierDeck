@@ -12,12 +12,14 @@ class Card {
     img.style.pointerEvents = "none";
     img.style.backfaceVisibility = "hidden";
     img.style.WebkitBackfaceVisibility = "hidden";
+    img.style.transformStyle = "preserve-3d";
     var back = document.createElement('img');
     back.src = this.backPath;
     back.style.transform = "rotateY(180deg)";
     back.style.pointerEvents = "none";
     back.style.backfaceVisibility = "hidden";
     back.style.WebkitBackfaceVisibility = "hidden";
+    back.style.transformStyle = "preserve-3d";
     this.imgCard = document.createElement('div');
     this.imgCard.style.transition = "transform 0.6s";
     this.imgCard.transformStyle = "preserve-3d";
