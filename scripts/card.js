@@ -25,8 +25,8 @@ class Card {
     this.imgCard = document.createElement('div');
     this.imgCard.style.transition = "transform 0.6s";
     this.imgCard.transformStyle = "preserve-3d";
-    this.imgCard.appendChild(img);
-    this.imgCard.appendChild(back);
+    this.imgCard.appendChild(this.img);
+    this.imgCard.appendChild(this.back);
     this.outerCard = document.createElement('div')
     this.outerCard.appendChild(this.imgCard);
     //this.outerCard.addEventListener("click", this.flip);
