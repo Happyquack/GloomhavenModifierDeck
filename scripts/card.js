@@ -20,7 +20,7 @@ class Card {
     this.back.style.transform = "rotateY(180deg)";
     this.back.style.pointerEvents = "none";
     this.back.style.backfaceVisibility = "hidden";
-    this.back.style.WebkitBackfaceVisibility = "hidden";.
+    this.back.style.WebkitBackfaceVisibility = "hidden";
     this.back.style.transformStyle = "preserve-3d";
     this.back.style.transition = "transform 0.6s";
     this.img.style.opacity = "0.99";
