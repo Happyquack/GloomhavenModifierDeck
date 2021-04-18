@@ -111,7 +111,6 @@ Array.from(deckDisplayBox.children).forEach(column => {
    images.style.margin = deckDisplayColumnWidth/10 + "px";
    images.style.borderRadius = deckDisplayColumnWidth/10 + "px";
    images.style.position = "absolute";
-   images.style.backfaceVisibility = "hidden";
   } );
  } );
 } );
