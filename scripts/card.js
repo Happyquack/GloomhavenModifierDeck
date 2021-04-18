@@ -50,11 +50,11 @@ class Card {
     console.log("FLIPPED");
     this.flipped = !this.flipped;
     if (this.flipped) {
-      //this.imgCard.style.transform = "rotateY(180deg)";
-      this.outerCard.style.transform = "rotateY(180deg)";
+      this.imgCard.style.transform = "rotateY(180deg)";
+      //this.outerCard.style.transform = "rotateY(180deg)";
     } else {
-      //this.imgCard.style.transform = "rotateY(0deg)";
-      this.outerCard.style.transform = "rotateY(0deg)";
+      this.imgCard.style.transform = "rotateY(0deg)";
+      //this.outerCard.style.transform = "rotateY(0deg)";
     }
     
   }
