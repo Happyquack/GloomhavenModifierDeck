@@ -20,9 +20,9 @@ class Card {
     this.back.style.transform = "rotateY(180deg)";
     this.back.style.pointerEvents = "none";
     this.back.style.backfaceVisibility = "hidden";
-    this.back.style.WebkitBackfaceVisibility = "hidden";
+    this.back.style.WebkitBackfaceVisibility = "hidden";.
     this.back.style.transformStyle = "preserve-3d";
-    this.imgCard.style.transition = "transform 0.6s";
+    this.back.style.transition = "transform 0.6s";
     this.img.style.opacity = "0.99";
     this.imgCard = document.createElement('div');
     //this.imgCard.style.transition = "transform 0.6s";
