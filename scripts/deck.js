@@ -19,8 +19,8 @@ class Deck {
     var cardDir = dir + "baseCard";
     var backDir = dir + "baseCardBack.png";
     var valueList = [0,0,0,0,0,0,1,1,1,1,1,-1,-1,-1,-1,-1,-2,2,"null","x2"];
-    var effectList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    var rollingList = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+    var effectList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    var rollingList = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
     this.loadDeck(this.baseDeck, cardDir, backDir, valueList, effectList, rollingList);
   }
   
