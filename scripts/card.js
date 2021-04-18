@@ -10,10 +10,12 @@ class Card {
     var img = document.createElement('img');
     img.src = this.imgPath;
     img.style.pointerEvents = "none";
+    img.style.backfaceVisibility = "hidden";
     var back = document.createElement('img');
     back.src = this.backPath;
     back.style.transform = "rotateY(180deg)";
     back.style.pointerEvents = "none";
+    back.style.backfaceVisibility = "hidden";
     this.imgCard = document.createElement('div');
     this.imgCard.style.transition = "transform 0.6s";
     this.imgCard.transformStyle = "preserve-3d";
