@@ -94,6 +94,18 @@ for (let column of deckSortingColumns) {
   numberOfColumns++;
  }
 }
+
+//make card flipping function
+
+function flipCard(event) {
+ 
+ var flippedBox = event.target;
+ deckOfCards.forEach(el => {
+  if (el.getImg() = flippedBox) el.flip();
+ });
+ 
+}
+
 // format and display columns
 
 var deckDisplayBoxWidth = deckDisplayBox.offsetWidth;
@@ -105,6 +117,7 @@ Array.from(deckDisplayBox.children).forEach(column => {
  Array.from(column.children).forEach(card => {
   card.style.width = deckDisplayColumnWidth + "px";
   card.style.height = deckDisplayColumnWidth*2/3 + "px";
+  card.addEventListener("click", flipCard);
   Array.from(card.firstChild.children).forEach(images => {
    images.width = deckDisplayColumnWidth*4/5;
    images.height = images.width*2/3;
