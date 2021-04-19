@@ -29,15 +29,17 @@ function classSelectorClicked(event) {
 
 var imageSideLength = classSelectionBox.offsetWidth/6 * 4/5;
 for (let [index, image] of classIconImgs.entries()) {
- //image.style.position = "absolute";
- //image.style.top = Math.floor(index/6)*imageSideLength + "px";
- //image.style.left = (index%6)*imageSideLength + "px";
- image.width = imageSideLength*7/8 + "";
- image.height = imageSideLength*7/8 + "";
- image.style.borderWidth = imageSideLength/16 + "px";
+ if (image.width > image.height) {
+  image.height = image.height/image.width*imageSideLength*7/8 + "";
+  image.width = imageSideLength*7/8 + "";
+  image.style.padding = (imageSideLength - image.height)/2 + "px " + (imageSideLength/8) + "px " + (imageSideLength - image.height)/2 + "px " + (imageSideLength/8) + "px";
+ } else {
+  image.width = image.width/image.height*imageSideLength*7/8 + "";
+  image.height = imageSideLength*7/8 + "";
+  image.style.padding = (imageSideLength/8) + "px " + (imageSideLength - image.width)/2 + "px " + (imageSideLength/8) + "px " + (imageSideLength - image.width)/2 + "px";
+ }
  image.style.borderStyle = "solid";
  image.style.borderColor = "white";
- image.style.padding = imageSideLength/8 + "px";
  var label = index + 1 + "";
  if (index < 9) label = "0" + label;
  image.id = "label";
