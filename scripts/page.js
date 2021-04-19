@@ -43,38 +43,45 @@ for (let [index, image] of classIconImgs.entries()) {
  classSelectionBox.appendChild(image);
 }
 
+//make card flipping function
+
+function flipCard(event) { deckOfCards.forEach(el => {
+ if (el.getImg() == event.target) el.flip(); 
+});}
+
 // display deck layout
+function displayDeck () {
 
-var deckOfCards = deck.getPlayerDeck();
+ var deckOfCards = deck.getPlayerDeck();
 
-var deckDisplayBox = document.getElementById('deckDisplayBoxId');
-deckDisplayBox.innerHTML = "";
-deckDisplayBox.style.outlineColor = "rgb(134,136,139)";
-deckDisplayBox.style.outlineStyle = "solid";
-deckDisplayBox.style.outlineWidth = "1px";
+ var deckDisplayBox = document.getElementById('deckDisplayBoxId');
+ deckDisplayBox.innerHTML = "";
+ deckDisplayBox.style.outlineColor = "rgb(134,136,139)";
+ deckDisplayBox.style.outlineStyle = "solid";
+ deckDisplayBox.style.outlineWidth = "1px";
 
-var deckDisplayColumns = []
-for (var i = 0; i < 15; i++) {
- deckDisplayColumns.push(document.createElement('div'));
-}
-
-// empty previous contents
-for (let column of deckDisplayColumns) {
- while (column.firstChild) {
-  column.removeChild(column.firstChild);
+ var deckDisplayColumns = []
+ for (var i = 0; i < 15; i++) {
+  deckDisplayColumns.push(document.createElement('div'));
  }
-}
-while (deckDisplayBox.firstChild) {
- deckDisplayBox.removeChild(column.firstChild);
-}
-// modify new contents
-var deckSortingColumns = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
-for (let card of deckOfCards) {
- if (card.isRolling()) {
-  if (card.getValue() == 0) {
-   deckSortingColumns[12].push(card); break;
-  } else {
-   deckSortingColumns[10].push(card); break;
+
+ // empty previous contents
+ for (let column of deckDisplayColumns) {
+  while (column.firstChild) {
+   column.removeChild(column.firstChild);
+  }
+ }
+ while (deckDisplayBox.firstChild) {
+  deckDisplayBox.removeChild(column.firstChild);
+ }
+ // modify new contents
+ var deckSortingColumns = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
+ for (let card of deckOfCards) {
+  if (card.isRolling()) {
+   if (card.getValue() == 0) {
+    deckSortingColumns[12].push(card); break;
+   } else {
+    deckSortingColumns[10].push(card); break;
   }
  } else {
   switch (card.getValue()) {
@@ -102,14 +109,8 @@ for (let column of deckSortingColumns) {
   numberOfColumns++;
  }
 }
-
-//make card flipping function
-
-function flipCard(event) { deckOfCards.forEach(el => {
- if (el.getImg() == event.target) el.flip(); 
-});}
-
-// format and display columns
+ 
+ // format and display columns
 
 var deckDisplayBoxWidth = deckDisplayBox.offsetWidth;
 var deckDisplayColumnWidth = deckDisplayBoxWidth/numberOfColumns;
@@ -130,3 +131,7 @@ Array.from(deckDisplayBox.children).forEach(column => {
   } );
  } );
 } );
+ 
+}
+
+displayDeck();
