@@ -182,7 +182,30 @@ class Deck {
   }
   
   modPerk(checkmarkNum, turnPerkOn) {
-    // TODO
+    var checkmarkIndex = checkmarkNum - 1;
+    var instructions = this.perkList[checkmarkIndex].slice();
+    var steps = instructions.split("-");
+    steps.forEach(task => {
+      if (task[0] == "x") {
+        if (turnPerkOn) {
+          this.removeCard(this.playerDeck, this.baseDeck[task.splice(1,2)]);
+        } else {
+          this.addCard(this.playerDeck, this.baseDeck[task.splice(1,2)]);
+        }
+      } else if (task[0] == "+") {
+        if (turnPerkOn) {
+          this.addCard(this.playerDeck, this.characterDeck[task.splice(1,2)]);
+        } else {
+          this.removeCard(this.playerDeck, this.characterDeck[task.splice(1,2)]);
+        }
+      } else {
+        if (turnPerkOn) {
+          this.removeFourZeroes();
+        } else {
+          this.addFourZeroes();
+        }
+      }
+    });
   }
     
   removeCard(arr, card) {
