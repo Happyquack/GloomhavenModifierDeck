@@ -27,16 +27,16 @@ function classSelectorClicked(event) {
  image.style.borderColor = "black";
 }
 
-var imageSideLength = classSelectionBox.offsetWidth/6 * 4/5;
+var imageSideLength = classSelectionBox.offsetWidth/6;
 for (let [index, image] of classIconImgs.entries()) {
  if (image.width > image.height) {
-  image.height = image.height/image.width*imageSideLength*7/8 + "";
-  image.width = imageSideLength*7/8 + "";
+  image.height = image.height/image.width*imageSideLength*3/4 + "";
+  image.width = imageSideLength*3/4 + "";
   image.style.padding = (imageSideLength - image.height)/2 + "px " + (imageSideLength/8) + "px " + (imageSideLength - image.height)/2 + "px " + (imageSideLength/8) + "px";
  } else {
-  image.width = image.width/image.height*imageSideLength*7/8 + "";
-  image.height = imageSideLength*7/8 + "";
-  image.style.padding = (imageSideLength/8) + "px " + (imageSideLength - image.width) + "px " + (imageSideLength/8) + "px " + (imageSideLength - image.width) + "px";
+  image.width = image.width/image.height*imageSideLength*3/4 + "";
+  image.height = imageSideLength*3*4 + "";
+  image.style.padding = (imageSideLength/8) + "px " + (imageSideLength - image.width)/2 + "px " + (imageSideLength/8) + "px " + (imageSideLength - image.width)/2 + "px";
  }
  image.style.borderStyle = "solid";
  image.style.borderColor = "white";
