@@ -23,6 +23,7 @@ var deckOfCards = deck.getPlayerDeck();
 
 function classSelectorClicked(event) {
  var image = event.target;
+ console.log("skjhlsjak");
  classIconImgs.entries().forEach(el => el.style.borderColor = "white");
  image.style.borderColor = "black";
 }
