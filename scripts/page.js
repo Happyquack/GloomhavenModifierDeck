@@ -17,20 +17,33 @@ for (var i = 0; i < 18; i++) {
  classIconImgs[i].src = ICONPATH + num + "icon.png";
 }
 
+var deck = new Deck();
+
+function classSelectorClicked(event) {
+ var image = event.target;
+ classIconImgs.entries().forEach(el => el.style.outlineColor = "white");
+ image.style.outlineColor = "black";
+}
+
 var imageSideLength = classSelectionBox.offsetWidth/6 * 4/5;
 for (let [index, image] of classIconImgs.entries()) {
  //image.style.position = "absolute";
  //image.style.top = Math.floor(index/6)*imageSideLength + "px";
  //image.style.left = (index%6)*imageSideLength + "px";
- image.width = imageSideLength + "";
- image.height = imageSideLength + "";
+ image.width = imageSideLength*7/8 + "";
+ image.height = imageSideLength*7/8 + "";
+ image.style.outlineWidth = imageSideLength/16 + "px";
+ image.style.outlineStyle = "solid";
+ image.style.outlineColor = "white";
  image.style.margin = imageSideLength/8 + "px";
+ var label = index + 1 + "";
+ if (index < 9) label = "0" + label;
+ image.id = "label";
+ image.addEventListener("click", classSelectorClicked);
  classSelectionBox.appendChild(image);
 }
 
 // display deck layout
-
-var deck = new Deck();
 
 var deckOfCards = deck.getPlayerDeck();
 
