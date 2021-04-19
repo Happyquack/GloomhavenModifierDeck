@@ -32,9 +32,9 @@ for (let [index, image] of classIconImgs.entries()) {
  //image.style.left = (index%6)*imageSideLength + "px";
  image.width = imageSideLength*7/8 + "";
  image.height = imageSideLength*7/8 + "";
- image.style.outlineWidth = imageSideLength/16 + "px";
- image.style.outlineStyle = "solid";
- image.style.outlineColor = "white";
+ image.style.borderWidth = imageSideLength/16 + "px";
+ image.style.borderStyle = "solid";
+ image.style.borderColor = "white";
  image.style.margin = imageSideLength/8 + "px";
  var label = index + 1 + "";
  if (index < 9) label = "0" + label;
