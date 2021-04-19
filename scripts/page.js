@@ -141,3 +141,9 @@ Array.from(deckDisplayBox.children).forEach(column => {
 }
 
 displayDeck();
+
+// make stat/perk box
+
+//var controllerBox = document.getElementById("controllerBox");
+//var statsBox = document.createElement("div");
+
