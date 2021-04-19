@@ -36,7 +36,7 @@ for (let [index, image] of classIconImgs.entries()) {
  } else {
   image.width = image.width/image.height*imageSideLength*7/8 + "";
   image.height = imageSideLength*7/8 + "";
-  image.style.padding = (imageSideLength/8) + "px " + (imageSideLength - image.width)/2 + "px " + (imageSideLength/8) + "px " + (imageSideLength - image.width)/2 + "px";
+  image.style.padding = (imageSideLength/8) + "px " + (imageSideLength - image.width) + "px " + (imageSideLength/8) + "px " + (imageSideLength - image.width) + "px";
  }
  image.style.borderStyle = "solid";
  image.style.borderColor = "white";
