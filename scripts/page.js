@@ -27,7 +27,7 @@ function classSelectorClicked(event) {
  image.style.borderColor = "black";
 }
 
-var boxSideLength = classSelectionBox.offsetWidth/6;
+var boxSideLength = classSelectionBox.clientWidth/6;
 var imageSideLength = boxSideLength*15/16;
 for (let [index, image] of classIconImgs.entries()) {
  if (image.width > image.height) {
