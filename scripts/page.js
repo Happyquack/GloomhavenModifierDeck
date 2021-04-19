@@ -35,6 +35,7 @@ for (let [index, image] of classIconImgs.entries()) {
  image.style.borderWidth = imageSideLength/16 + "px";
  image.style.borderStyle = "solid";
  image.style.borderColor = "white";
+ image.style.padding = imageSideLength/8 + "px";
  var label = index + 1 + "";
  if (index < 9) label = "0" + label;
  image.id = "label";
