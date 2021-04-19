@@ -19,6 +19,8 @@ for (var i = 0; i < 18; i++) {
 
 var deck = new Deck();
 
+var deckOfCards = deck.getPlayerDeck();
+
 function classSelectorClicked(event) {
  var image = event.target;
  classIconImgs.entries().forEach(el => el.style.borderColor = "white");
@@ -52,7 +54,7 @@ function flipCard(event) { deckOfCards.forEach(el => {
 // display deck layout
 function displayDeck () {
 
- var deckOfCards = deck.getPlayerDeck();
+ deckOfCards = deck.getPlayerDeck();
 
  var deckDisplayBox = document.getElementById('deckDisplayBoxId');
  deckDisplayBox.innerHTML = "";
