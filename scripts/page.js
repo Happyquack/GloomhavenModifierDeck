@@ -33,11 +33,11 @@ for (let [index, image] of classIconImgs.entries()) {
  if (image.width > image.height) {
   image.height = image.height/image.width*imageSideLength*3/4 + "";
   image.width = imageSideLength*3/4 + "";
-  image.style.padding = (imageSideLength - image.height)/2 + "px " + (imageSideLength/16) + "px " + (imageSideLength - image.height)/2 + "px " + (imageSideLength/16) + "px";
+  image.style.padding = (imageSideLength - image.height)/2 + "px " + (imageSideLength/8) + "px " + (imageSideLength - image.height)/2 + "px " + (imageSideLength/8) + "px";
  } else {
   image.width = image.width/image.height*imageSideLength*3/4 + "";
   image.height = imageSideLength*3/4 + "";
-  image.style.padding = (imageSideLength/16) + "px " + (imageSideLength - image.width)/2 + "px " + (imageSideLength/16) + "px " + (imageSideLength - image.width)/2 + "px";
+  image.style.padding = (imageSideLength/8) + "px " + (imageSideLength - image.width)/2 + "px " + (imageSideLength/8) + "px " + (imageSideLength - image.width)/2 + "px";
  }
  image.style.borderWidth = boxSideLength/32
  image.style.borderStyle = "solid";
