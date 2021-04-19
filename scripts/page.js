@@ -22,7 +22,7 @@ var deck = new Deck();
 function classSelectorClicked(event) {
  var image = event.target;
  classIconImgs.entries().forEach(el => el.style.outlineColor = "white");
- image.style.outlineColor = "black";
+ image.style.borderColor = "black";
 }
 
 var imageSideLength = classSelectionBox.offsetWidth/6 * 4/5;
