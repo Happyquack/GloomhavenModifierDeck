@@ -21,7 +21,7 @@ var deck = new Deck();
 
 function classSelectorClicked(event) {
  var image = event.target;
- classIconImgs.entries().forEach(el => el.style.outlineColor = "white");
+ classIconImgs.entries().forEach(el => el.style.borderColor = "white");
  image.style.borderColor = "black";
 }
 
@@ -35,7 +35,6 @@ for (let [index, image] of classIconImgs.entries()) {
  image.style.borderWidth = imageSideLength/16 + "px";
  image.style.borderStyle = "solid";
  image.style.borderColor = "white";
- image.style.margin = imageSideLength/8 + "px";
  var label = index + 1 + "";
  if (index < 9) label = "0" + label;
  image.id = "label";
