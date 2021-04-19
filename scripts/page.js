@@ -8,6 +8,7 @@ classSelectionBox.innerHTML = "";
 classSelectionBox.style.outlineColor = "rgb(234,236,239)";
 classSelectionBox.style.outlineStyle = "solid";
 classSelectionBox.style.outlineWidth = "1px";
+classSelectionBox.style.pointerEvents = "none";
 
 var classIconImgs = []
 for (var i = 0; i < 18; i++) {
