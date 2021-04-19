@@ -3,16 +3,11 @@ import {Deck} from './deck.js';
 // make class selection
 var ICONPATH = "https://happyquack.github.io/GloomhavenModifierDeck/images/classIcons/";
 
-function testFunction() {
- console.log("ekjhgdsfhjgdfs");
-}
-
 var classSelectionBox = document.getElementById('classSelectionBoxId');
 classSelectionBox.innerHTML = "";
 classSelectionBox.style.outlineColor = "rgb(234,236,239)";
 classSelectionBox.style.outlineStyle = "solid";
 classSelectionBox.style.outlineWidth = "1px";
-classSelectionBox.addEventListener("click", testFunction);
 
 var classIconImgs = []
 for (var i = 0; i < 18; i++) {
