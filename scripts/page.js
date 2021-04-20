@@ -81,7 +81,7 @@ function displayDeck () {
   }
  }
  while (deckDisplayBox.firstChild) {
-  deckDisplayBox.removeChild(column.firstChild);
+  deckDisplayBox.removeChild(deckDisplayBox.firstChild);
  }
  // modify new contents
  var deckSortingColumns = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
