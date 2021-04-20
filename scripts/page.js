@@ -27,6 +27,7 @@ function classSelectorClicked(event) {
  image.style.borderColor = "black";
  deck.updateCharacter(image.src.slice().split("/").pop());
  updatePerks();
+ displayDeck();
 }
 
 var boxSideLength = classSelectionBox.clientWidth/6;
