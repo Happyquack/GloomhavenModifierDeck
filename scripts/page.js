@@ -191,14 +191,28 @@ function updatePerks() {
    perkLine.appendChild(checkboxQueue.pop());
   }
   instruction = instruction.split("=");
-  var commandWords = ["air","bless","cold","curse","disarm","fire","heal","immobilize","invisible","muddle","night","pierce","plant","poison","push","rolling","shield","strengthen","stun","sun"];
+  var commandWords = ["air","bless","cold","curse","disarm","fire","heal","immobilize","invisible","muddle","night","pierce","plant","poison","push","rolling","shield","strengthen","stun","sun","target"];
   instruction.forEach(el => {
    if (commandWords.includes(el)) {
     var newImage = document.createElement("img");
     newImage.src = "https://happyquack.github.io/GloomhavenModifierDeck/images/statusIcons/" + el + ".png";
     var fontSize = parseInt(window.getComputedStyle(document.getElementById("controllerBox"),null).getPropertyValue('font-size'));
-    newImage.width = fontSize;
+    newImage.width = 2*fontSize;
     newImage.height = fontSize;
+    if (!["air","cold","fire","night","plant","rolling","sun"]) {
+     var textToAdd = document.createElement("span");
+     switch (el) {
+      case "heal":
+       textToAdd.innerHTML = "Heal"; break;
+      case "shield":
+       textToAdd.innerHTML = "Shield"; break;
+      case "target":
+       textToAdd.innerHTML = "ADD TARGET" break;
+      default:
+       textToAdd.innerHTML = el.toUpperCase(); break;
+     }
+     perkLine.appendChild(textToAdd);
+    }
     perkLine.appendChild(newImage);
    } else {
     var textToAdd = document.createElement("span");
