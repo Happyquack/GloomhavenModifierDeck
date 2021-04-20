@@ -87,6 +87,7 @@ function displayDeck () {
  var deckSortingColumns = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
  for (let card of deckOfCards) {
   if (card.isRolling()) {
+   console.log("bingo");
    if (card.getValue() == 0) {
     deckSortingColumns[12].push(card);
    } else {
