@@ -25,6 +25,7 @@ class Deck {
   
   updateCharacter(label)
   {
+    this.loadBaseDeck();
     var characters = ["","brute","tinkerer","spellweaver","scoundrel","cragheart","mindthief","sunkeeper", "", "", "", "", "berserker", "", "", "", "elementalist", ""];
     this.character = characters[parseInt(label)];
     this.loadCharacterDeck();
