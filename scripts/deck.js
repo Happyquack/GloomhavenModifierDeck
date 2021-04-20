@@ -203,15 +203,15 @@ class Deck {
     steps.forEach(task => {
       if (task[0] == "x") {
         if (turnPerkOn) {
-          this.removeCard(this.playerDeck, this.baseDeck[task.substring(1,task.length)]);
+          this.removeCard(this.playerDeck, this.baseDeck[parseInt(task.substring(1,task.length))]);
         } else {
-          this.addCard(this.playerDeck, this.baseDeck[task.substring(1,task.length)]);
+          this.addCard(this.playerDeck, this.baseDeck[parseInt(task.substring(1,task.length))]);
         }
       } else if (task[0] == "+") {
         if (turnPerkOn) {
-          this.addCard(this.playerDeck, this.characterDeck[task.substring(1,task.length)]);
+          this.addCard(this.playerDeck, this.characterDeck[parseInt(task.substring(1,task.length))]);
         } else {
-          this.removeCard(this.playerDeck, this.characterDeck[task.substring(1,task.length)]);
+          this.removeCard(this.playerDeck, this.characterDeck[parseInt(task.substring(1,task.length))]);
         }
       } else {
         if (turnPerkOn) {
