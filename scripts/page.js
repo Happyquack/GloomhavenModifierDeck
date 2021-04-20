@@ -25,6 +25,7 @@ function classSelectorClicked(event) {
  var image = event.target;
  classIconImgs.forEach(el => el.style.borderColor = "white");
  image.style.borderColor = "black";
+ updatePerks();
 }
 
 var boxSideLength = classSelectionBox.clientWidth/6;
@@ -157,8 +158,52 @@ statsBox.id = "statsBox";
 perkBox.style.width = controllerBox.offsetWidth*2/5 + "px";
 perkBox.id = "perkBox";
 
+// make checkbox event function
+
+function checkboxTriggered(event) {
+ var checkbox = event.target;
+ var checkboxNum = parseInt(checkbox.id.slice.splice(8,checkbox.id.length));
+ deck.modPerk(checkboxNum, checkbox.checked);
+}
+
+// make perk checkboxes
+var checkboxes = [];
+for (i = 15; i > 0; i--) {
+ var checkbox = document.createElement("myCheck");
+ checkbox.id = "checkbox" + i;
+ checkbox.addEventListener("click", checkboxTriggered);
+ checkboxes.push(checkbox);
+}
+
+
 function updatePerks() {
  var thePerkBox = document.getElementById("perkBox");
+ var perkInstructions = deck.getPerkInstructions();
+ var checkboxQueue = checkboxes.slice();
+ perkInstructions.forEach(el => {
+  var instruction = el.slice()
+  var perkLine = document.createElement("div");
+  var numOfCheckboxes = instruction.splice(0,1);
+  for (i = 0, i < numOfCheckboxes; i++) {
+   perkLine.appendChild(checkboxQueue.pop());
+  }
+  instruction = instruction.split("=");
+  var commandWords = ["air","bless","cold","curse","disarm","fire","heal","immobilize","invisible","muddle","night","pierce","plant","poison","push","rolling","shield","strengthen","stun","sun"];
+  instruction.forEach(el => {
+   if commandWords.includes(el); {
+    var newImage = document.createElement("img");
+    newImage.src = "https://happyquack.github.io/GloomhavenModifierDeck/images/statusIcons/" + el + ".png";
+    var fontSize = parseInt(window.getComputedStyle(document.getElementById("controllerBox"),null).getPropertyValue('font-size'));
+    newImage.width = fontSize;
+    newImage.height = fontSize;
+    perkLine.appendChild(newImage);
+   } else {
+    var textToAdd = document.createElement("p");
+    textToAdd.innerHTML = el;
+    perkLine.appendChild(textToAdd);
+   }
+  }
+ });
 }
 
 
