@@ -203,6 +203,7 @@ function updatePerks() {
     perkLine.appendChild(textToAdd);
    }
   });
+  thePerkBox.appendChild("perkLine");
  });
 }
 
