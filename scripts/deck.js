@@ -9,7 +9,6 @@ class Deck {
   
   createDecks() {
     this.loadBaseDeck();
-    this.loadCharacterDeck();
     this.formDeck();
   }
   
