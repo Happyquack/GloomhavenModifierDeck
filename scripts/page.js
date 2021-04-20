@@ -145,7 +145,7 @@ displayDeck();
 // make stat/perk box
 
 var controllerBox = document.getElementById("controllerBox");
-controllerBox.style.display = "flex";
+
 var statsBox = document.createElement("div");
 statsBox.width = controllerBox.style.offsetWidth*2/3;
 statsBox.id = "statsBox";
