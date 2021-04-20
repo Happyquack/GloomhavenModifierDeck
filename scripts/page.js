@@ -200,7 +200,7 @@ function updatePerks() {
     var fontSize = parseInt(window.getComputedStyle(document.getElementById("controllerBox"),null).getPropertyValue('font-size'));
     newImage.width = 1.5*fontSize;
     newImage.height = 1.5*fontSize;
-    if (!["air","cold","fire","night","plant","rolling","sun"]) {
+    if (!["air","cold","fire","night","plant","rolling","sun"].includes(el)) {
      var textToAdd = document.createElement("span");
      switch (el) {
       case "heal":
