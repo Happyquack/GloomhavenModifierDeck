@@ -153,11 +153,13 @@ controllerBox.appendChild(perkBox);
 
 statsBox.style.width = controllerBox.offsetWidth*3/5 + "px";
 statsBox.id = "statsBox";
-statsBox.innerHTML = "test";
 
 perkBox.style.width = controllerBox.offsetWidth*2/5 + "px";
 perkBox.id = "perkBox";
-perkBox.innerHTML = "testing";
+
+function updatePerks() {
+ var thePerkBox = document.getElementById("perkBox");
+}
 
 
 
