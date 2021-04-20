@@ -208,7 +208,7 @@ function updatePerks() {
       case "shield":
        textToAdd.innerHTML = "Shield"; break;
       case "target":
-       textToAdd.innerHTML = "ADD TARGET" break;
+       textToAdd.innerHTML = "ADD TARGET"; break;
       default:
        textToAdd.innerHTML = el.toUpperCase(); break;
      }
