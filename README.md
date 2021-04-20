@@ -38,4 +38,7 @@ This (dynamic) list is mostly for me, but these are the features I plan to imple
   <li> A menu to select which class perks are to be applied to the deck, graphically similar to the character sheet. </li>
   <li> A way to select which modifier cards have already been drawn, so that the output stats can reflect the current state of your deck. </li>
   <li> An output for average attack modifier (for both normal drawing, as well as with advantage or disadvantage), as well as an estimate of how many rounds before the deck will be reshuffled. </li>
+  <li> Support for those who prefer to consider "null" as "-2" and "x2" as "+2"
+  <li> A "sandbox" mode for adding custom cards </li>
+  <li> A way to add curses, blesses, and and penalty "-1"s. </li>
 </ul>
