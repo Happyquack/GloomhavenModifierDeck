@@ -201,7 +201,7 @@ function updatePerks() {
     newImage.height = fontSize;
     perkLine.appendChild(newImage);
    } else {
-    var textToAdd = document.createElement("p");
+    var textToAdd = document.createElement("span");
     textToAdd.innerHTML = el;
     perkLine.appendChild(textToAdd);
    }
