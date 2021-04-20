@@ -104,8 +104,11 @@ function displayDeck () {
    default: deckSortingColumns[7].push(card); break;
   }
  }
- for (let [index, column] of deckSortingColumns.entries()) {
-  if (column.length > 9) deckSortingColumns[index+1] = column[index].splice(Math.floor(column.length/2), column.length - Math.floor(column.length/2));
+ for (var i = 1; i < deckSortingColumns.length; i++) {
+  if (column.length > 9) {
+   deckSortingColumns[i+1] = deckSortingColumns[i].splice(Math.floor(column.length/2), column.length - Math.floor(column.length/2));
+   i++;
+  }
  }
 }
 // add new contents
