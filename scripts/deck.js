@@ -67,6 +67,7 @@ class Deck {
     var rollinglist = [0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["x11-x12","x13-+0","+1-+2","+3-+4","+6","+7-+8-+9","+10-+11-+12","+13-+14","+15","+16","+17-+18","+19","+20","+21","+5"];
+    this.perkInstructions = ["1Remove two =-1= cards","1Replace one =-1= card with one =+1= card","1Add two =+1= cards","1Add one =+3= card","1Add two =rolling=pierce= 3 cards","2Add one =rolling=stun= card","1add one =rolling=disarm= and one =rolling=muddle= card","2Add one =+1=shield=1, Self card","Ignore negative item effects and add one =+1= card"];
   }
   
   loadTinkererDeck() {
@@ -79,6 +80,7 @@ class Deck {
     var rollingList = [0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = []; //TODO
+    this.perkInstructions = []; //TODO
   }
   
   loadSpellweaverDeck() {
@@ -91,6 +93,7 @@ class Deck {
     var rollingList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = []; //TODO
+    this.perkInstructions = []; //TODO
   }
   
   loadScoundrelDeck() {
@@ -103,6 +106,7 @@ class Deck {
     var rollingList = [0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = []; //TODO
+    this.perkInstructions = []; //TODO
   }
   
   loadCragheartDeck() {
@@ -115,6 +119,7 @@ class Deck {
     var rollingList = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["oooo","x11-+0","x12-+1","x13-+2","+3-+4-+5","+6","+7","+8","+9","+10-+11","+12-+13","+14-+15","+16-+17"];
+    this.perkInstructions = []; //TODO
   }
   
   loadMindthiefDeck() {
@@ -126,6 +131,7 @@ class Deck {
     var effectList = [0,0,0,0,0,0,0,0,0,"push1","push1","push1","muddle","muddle","muddle","muddle","immobilize","immobilize","stun","disarm"];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = []; //TODO
+    this.perkInstructions = []; //TODO
   }
   
   loadSunkeeperDeck() {
@@ -138,6 +144,7 @@ class Deck {
     var RollingList = [0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = []; //TODO
+    this.perkInstructions = []; //TODO
   }
   
   loadBerserkerDeck() {
@@ -150,6 +157,7 @@ class Deck {
     var rollingList = [0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["x11-x12","oooo","x13-+0","x14-+1","x4-+2","x5-+3","+4-+5","+6-+7","+8","+9","+10","+11-+12","+13","+14"];
+    this.perkInstructions = []; //TODO
   }
   
   loadElementalistDeck() {
@@ -162,6 +170,7 @@ class Deck {
     var rollingList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = []; //TODO
+    this.perkInstructions = []; //TODO
   }
   
   loadDeck(targetDeck, cardDir, backDir, valueList, effectList, rollingList) {
@@ -223,6 +232,11 @@ class Deck {
   
   getPlayerDeck() {
     return this.playerDeck;
+  }
+  
+  getPerkInstructions() {
+    return this.perkInstructions;
+    }
   }
 }
 
