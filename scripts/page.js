@@ -25,7 +25,7 @@ function classSelectorClicked(event) {
  var image = event.target;
  classIconImgs.forEach(el => el.style.borderColor = "white");
  image.style.borderColor = "black";
- deck.updateCharacter(image.src.slice().splice("/").pop());
+ deck.updateCharacter(image.src.slice().split("/").pop());
  updatePerks();
 }
 
