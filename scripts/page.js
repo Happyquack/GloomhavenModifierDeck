@@ -198,8 +198,8 @@ function updatePerks() {
     var newImage = document.createElement("img");
     newImage.src = "https://happyquack.github.io/GloomhavenModifierDeck/images/statusIcons/" + el + ".png";
     var fontSize = parseInt(window.getComputedStyle(document.getElementById("controllerBox"),null).getPropertyValue('font-size'));
-    newImage.width = 2*fontSize;
-    newImage.height = fontSize;
+    newImage.width = 1.5*fontSize;
+    newImage.height = 1.5*fontSize;
     if (!["air","cold","fire","night","plant","rolling","sun"]) {
      var textToAdd = document.createElement("span");
      switch (el) {
