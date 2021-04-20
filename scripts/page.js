@@ -73,6 +73,7 @@ var deckDisplayBox = document.getElementById('deckDisplayBoxId');
 function displayDeck () {
 
  deckOfCards = deck.getPlayerDeck();
+ console.log(deckOfCards);
 
  // empty previous contents
  for (let column of deckDisplayColumns) {
