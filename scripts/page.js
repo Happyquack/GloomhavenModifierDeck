@@ -191,6 +191,9 @@ function updatePerks() {
   instruction = instruction.slice(1,instruction.length);
   for (i = 0; i < numOfCheckboxes; i++) {
    perkLine.appendChild(checkboxQueue.pop());
+   var spacer = document.createElement("span");
+   spacer.innerHTML = " ";
+   perkLine.appendChild(spacer);
   }
   instruction = instruction.split("=");
   var commandWords = ["air","bless","cold","curse","disarm","fire","heal","immobilize","invisible","muddle","night","pierce","plant","poison","push","rolling","shield","strengthen","stun","sun","target"];
