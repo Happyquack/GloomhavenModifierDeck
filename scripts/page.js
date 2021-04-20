@@ -190,7 +190,7 @@ function updatePerks() {
   instruction = instruction.split("=");
   var commandWords = ["air","bless","cold","curse","disarm","fire","heal","immobilize","invisible","muddle","night","pierce","plant","poison","push","rolling","shield","strengthen","stun","sun"];
   instruction.forEach(el => {
-   if commandWords.includes(el); {
+   if commandWords.includes(el) {
     var newImage = document.createElement("img");
     newImage.src = "https://happyquack.github.io/GloomhavenModifierDeck/images/statusIcons/" + el + ".png";
     var fontSize = parseInt(window.getComputedStyle(document.getElementById("controllerBox"),null).getPropertyValue('font-size'));
