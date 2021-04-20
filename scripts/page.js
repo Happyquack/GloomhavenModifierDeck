@@ -164,7 +164,7 @@ perkBox.id = "perkBox";
 
 function checkboxTriggered(event) {
  var checkbox = event.target;
- var checkboxNum = parseInt(checkbox.id[8]);
+ var checkboxNum = parseInt(checkbox.id.substring(8,checkbox.id.length);
  deck.modPerk(checkboxNum, checkbox.checked);
  displayDeck();
 }
