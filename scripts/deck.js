@@ -1,8 +1,8 @@
 import {Card} from './card.js';
 
 class Deck {
-  constructor(character) {
-    this.character = character;
+  constructor() {
+    this.character = "";
     this.createDecks();
     this.perkList = [];
   }
