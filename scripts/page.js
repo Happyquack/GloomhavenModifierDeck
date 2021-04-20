@@ -58,12 +58,7 @@ function flipCard(event) { deckOfCards.forEach(el => {
  if (el.getImg() == event.target) el.flip(); 
 });}
 
-// display deck layout
-function displayDeck () {
-
- deckOfCards = deck.getPlayerDeck();
-
- var deckDisplayBox = document.getElementById('deckDisplayBoxId');
+var deckDisplayBox = document.getElementById('deckDisplayBoxId');
  deckDisplayBox.innerHTML = "";
  deckDisplayBox.style.outlineColor = "rgb(134,136,139)";
  deckDisplayBox.style.outlineStyle = "solid";
@@ -73,6 +68,11 @@ function displayDeck () {
  for (var i = 0; i < 15; i++) {
   deckDisplayColumns.push(document.createElement('div'));
  }
+
+// display deck layout
+function displayDeck () {
+
+ deckOfCards = deck.getPlayerDeck();
 
  // empty previous contents
  for (let column of deckDisplayColumns) {
