@@ -184,6 +184,7 @@ function updatePerks() {
  perkInstructions.forEach(el => {
   var instruction = el.slice()
   var perkLine = document.createElement("div");
+  console.log(instruction);
   var numOfCheckboxes = instruction.splice(0,1);
   for (i = 0; i < numOfCheckboxes; i++) {
    perkLine.appendChild(checkboxQueue.pop());
