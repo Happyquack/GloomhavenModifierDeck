@@ -154,7 +154,7 @@ statsBox.innerHTML = "test";
 var perkBox = document.createElement("div");
 perkBox.style.width = controllerBox.offsetWidth/3;
 perkBox.id = "perkBox";
-perkBox.id = "testing";
+perkBox.innerHTML = "testing";
 
 controllerBox.appendChild(statsBox);
 controllerBox.appendChild(perkBox);
