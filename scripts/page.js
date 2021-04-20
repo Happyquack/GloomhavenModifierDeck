@@ -144,6 +144,20 @@ displayDeck();
 
 // make stat/perk box
 
-//var controllerBox = document.getElementById("controllerBox");
-//var statsBox = document.createElement("div");
+var controllerBox = document.getElementById("controllerBox");
+controllerBox.style.display = "flex";
+var statsBox = document.createElement("div");
+statsBox.width = controllerBox.style.offsetWidth*2/3;
+statsBox.id = "statsBox";
+statsBox.innerHTML = "test";
+
+var perkBox = document.createElement("div");
+perkBox.width = controllerBox.style.offsetWidth/3;
+perkBox.id = "perkBox";
+perkBox.id = "testing";
+
+controllerBox.appendChild(statsBox);
+controllerBox.appendChild(perkBox);
+
+
 
