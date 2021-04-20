@@ -23,6 +23,13 @@ class Deck {
     this.loadDeck(this.baseDeck, cardDir, backDir, valueList, effectList, rollingList);
   }
   
+  updateCharacter(label)
+  {
+    var characters = ["","brute","tinkerer","spellweaver","scoundrel","cragheart","mindthief","sunkeeper", "", "", "", "", "berserker", "", "", "", "elementalist", ""];
+    this.character = characters[parseInt(label)];
+    this.loadCharacterDeck();
+  }
+  
   loadCharacterDeck() {
     switch (this.character) {
       case "berserker": 
