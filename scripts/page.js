@@ -147,12 +147,12 @@ displayDeck();
 var controllerBox = document.getElementById("controllerBox");
 
 var statsBox = document.createElement("div");
-statsBox.style.width = controllerBox.offsetWidth*2/3;
+statsBox.width = controllerBox.offsetWidth*2/3;
 statsBox.id = "statsBox";
 statsBox.innerHTML = "test";
 
 var perkBox = document.createElement("div");
-perkBox.style.width = controllerBox.offsetWidth/3;
+perkBox.width = controllerBox.offsetWidth/3;
 perkBox.id = "perkBox";
 perkBox.innerHTML = "testing";
 
