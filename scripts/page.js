@@ -27,7 +27,6 @@ function classSelectorClicked(event) {
  image.style.borderColor = "black";
  deck.updateCharacter(image.src.slice().split("/").pop());
  updatePerks();
- displayDeck();
 }
 
 var boxSideLength = classSelectionBox.clientWidth/6;
@@ -167,6 +166,7 @@ function checkboxTriggered(event) {
  var checkbox = event.target;
  var checkboxNum = parseInt(checkbox.id[8]);
  deck.modPerk(checkboxNum, checkbox.checked);
+ displayDeck();
 }
 
 // make perk checkboxes
