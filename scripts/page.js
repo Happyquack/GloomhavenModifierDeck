@@ -170,7 +170,8 @@ function checkboxTriggered(event) {
 // make perk checkboxes
 var checkboxes = [];
 for (i = 15; i > 0; i--) {
- var checkbox = document.createElement("myCheck");
+ var checkbox = document.createElement("input");
+ checkbox.type = "checkbox";
  checkbox.id = "checkbox" + i;
  checkbox.addEventListener("click", checkboxTriggered);
  checkboxes.push(checkbox);
