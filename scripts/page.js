@@ -105,6 +105,7 @@ function displayDeck () {
   }
  }
  for (var i = 1; i < deckSortingColumns.length; i++) {
+  var column = deckSortingColumns[i];
   if (column.length > 9) {
    deckSortingColumns[i+1] = deckSortingColumns[i].splice(Math.floor(column.length/2), column.length - Math.floor(column.length/2));
    i++;
