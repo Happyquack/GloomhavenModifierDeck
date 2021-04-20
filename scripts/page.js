@@ -88,9 +88,9 @@ function displayDeck () {
  for (let card of deckOfCards) {
   if (card.isRolling()) {
    if (card.getValue() == 0) {
-    deckSortingColumns[12].push(card); break;
+    deckSortingColumns[12].push(card);
    } else {
-    deckSortingColumns[10].push(card); break;
+    deckSortingColumns[10].push(card);
   }
  } else {
   switch (card.getValue()) {
