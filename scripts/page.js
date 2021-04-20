@@ -206,7 +206,7 @@ function updatePerks() {
     perkLine.appendChild(textToAdd);
    }
   });
-  thePerkBox.appendChild("perkLine");
+  thePerkBox.appendChild(perkLine);
  });
 }
 
