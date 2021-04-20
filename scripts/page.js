@@ -202,7 +202,7 @@ function updatePerks() {
     textToAdd.innerHTML = el;
     perkLine.appendChild(textToAdd);
    }
-  }
+  });
  });
 }
 
