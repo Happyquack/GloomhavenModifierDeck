@@ -201,8 +201,6 @@ class Deck {
     var checkmarkIndex = checkmarkNum - 1;
     var instructions = this.perkList[checkmarkIndex].slice();
     var steps = instructions.split("-");
-    console.log(instructions);
-    console.log(steps);
     steps.forEach(task => {
       if (task[0] == "x") {
         if (turnPerkOn) {
