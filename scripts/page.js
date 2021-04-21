@@ -30,6 +30,7 @@ function classSelectorClicked(event) {
  });
  image.style.borderColor = "green";
  deck.updateCharacter(image.src.slice().split("/").pop());
+ displayDeck();
  updatePerks();
 }
 
