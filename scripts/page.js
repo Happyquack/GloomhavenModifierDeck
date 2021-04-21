@@ -76,6 +76,7 @@ function displayDeck () {
 
  // empty previous contents
  for (let column of deckDisplayColumns) {
+  console.log(column.length);
   while (column.firstChild) {
    column.removeChild(column.firstChild);
   }
