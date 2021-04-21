@@ -203,6 +203,7 @@ for (i = 15; i > 0; i--) {
 
 
 function updatePerks() {
+ checkboxes.forEach(el => el.checked = false);
  var thePerkBox = document.getElementById("perkBox");
  thePerkBox.innerHTML = "";
  var perkInstructions = deck.getPerkInstructions();
