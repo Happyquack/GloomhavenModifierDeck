@@ -26,7 +26,7 @@ class Deck {
   updateCharacter(label)
   {
     this.formDeck();
-    var characters = ["","brute","tinkerer","spellweaver","scoundrel","cragheart","mindthief","sunkeeper", "", "", "", "", "berserker", "", "", "", "elementalist", ""];
+    var characters = ["","brute","tinkerer","spellweaver","scoundrel","cragheart","mindthief","sunkeeper", "", "", "", "plagueherald", "berserker", "", "", "", "elementalist", ""];
     this.character = characters[parseInt(label)];
     this.loadCharacterDeck();
   }
@@ -47,6 +47,9 @@ class Deck {
         break;
       case "mindthief": 
         this.loadMindthiefDeck(); 
+        break;
+      case "plagueherald":
+        this.loadPlagueHeraldDeck();
         break;
       case "scoundrel": 
         this.loadScoundrelDeck(); 
@@ -153,6 +156,19 @@ class Deck {
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["x11-x12","x13-x14","oooo","x16-+0","x0-+1","+2-+3","+4-+5","+6-+7","+8-+9","+10","+11-+12","+13-+14","+15-+16","+17-+18"];
     this.perkInstructions = ["2Remove two =-1= cards","1Remove four =+0= cards","1Replace one =-2= card with one =+0= card","1Replace one =+0= card with one =+2= card","2Add two =rolling=+1= cards","2Add two =rolling=heal=1 cards","1Add one =rolling=stun= card","2Add two =rolling=sun= cards","1Add two =rolling=shield=1, Self cards","1Ignore negative item effects and add two =+1= cards"];
+  }
+  
+  loadPlagueHeraldDeck() {
+    this.characterDeck = [];
+    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/11/";
+    var cardDir = dir + "phCard";
+    var backDir = dir + "phCardBack.png";
+    var valueList = [0,1,1,1,1,1,2,2,1,1,1,0,0,0,0,0,0,0,0,0];
+    var effectList = [0,0,0,0,0,0,0,0,"air","air","air","poison","poison","poison","curse","curse","immobilize","immobilize","stun","stun"];
+    var rollingList = [0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1];
+    this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
+    this.perkList = ["x16-+0","x11-+1","x12-+2","x0-+3","x1-+4","+5-+6","+7","+8","+9","+10-+11-+12","+13-+14","+15-+16","+17","+18","+19"];
+    this.perkInstructions = ["1Replace one =-2= card with one =+0= card","2Replace one =-1= card with one =+1= card","2Replace one =+0= card with one =+2= card","1Add two =+1= card","3Add one =+1=air= card","1Add three =rolling=poison= cards","1Add two =rolling=curse= cards","1Add two =rolling=immobilize= cards","2Add one =rolling=stun= card","Ignore negative scenario effects and add one =+1= card"];
   }
   
   loadBerserkerDeck() {
