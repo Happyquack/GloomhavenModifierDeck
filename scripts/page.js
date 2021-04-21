@@ -26,7 +26,7 @@ var deckOfCards = deck.getPlayerDeck();
 function classSelectorClicked(event) {
  var image = event.target;
  classIconImgs.forEach(el => {
-  if (WHITELISTED_CLASSES.contains(el.id)) {el.style.borderColor = "white";}
+  if (WHITELISTED_CLASSES.includes(el.id)) {el.style.borderColor = "white";}
  });
  image.style.borderColor = "black";
  deck.updateCharacter(image.src.slice().split("/").pop());
@@ -51,7 +51,7 @@ for (let [index, image] of classIconImgs.entries()) {
  var label = index + 1 + "";
  if (index < 9) label = "0" + label;
  image.id = label;
- if (WHITELISTED_CLASSES.contains(label)) {
+ if (WHITELISTED_CLASSES.includes(label)) {
   image.addEventListener("click", classSelectorClicked);
  } else {
   image.style.borderColor = "grey";
