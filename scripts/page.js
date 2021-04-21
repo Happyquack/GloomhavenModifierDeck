@@ -79,6 +79,7 @@ function displayDeck () {
  deckDisplayColumns.forEach(el => el.innerHTML = "");
  deckDisplayBox.innerHTML = "";
  
+ 
  //for (let column of deckDisplayColumns) {
   //while (column.firstChild) {
    //column.removeChild(column.firstChild);
