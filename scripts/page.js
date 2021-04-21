@@ -114,6 +114,7 @@ function displayDeck () {
   }
  }
 }
+ console.log(deckSortingColumns);
 // add new contents
 var numberOfColumns = 0;
 for (let column of deckSortingColumns) {
