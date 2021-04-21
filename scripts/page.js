@@ -124,7 +124,7 @@ function displayDeck () {
 for (var i = 0; i < deckSortingColumns.length; i++) {
  var column = deckSortingColumns[i];
  if (column.length > 9) {
-  deckSortingColumns[i+1] = deckSortingColumns[i].splice(Math.ceiling(column.length/2), column.length - Math.floor(column.length/2));
+  deckSortingColumns[i+1] = deckSortingColumns[i].splice(Math.ceil(column.length/2), column.length - Math.ceil(column.length/2));
   i++;
  }
 }
