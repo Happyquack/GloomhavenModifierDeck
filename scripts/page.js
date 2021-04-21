@@ -26,15 +26,15 @@ var deckOfCards = deck.getPlayerDeck();
 function classSelectorClicked(event) {
  var image = event.target;
  classIconImgs.forEach(el => {
-  if (WHITELISTED_CLASSES.includes(el.id)) {el.style.outlineColor = "black";}
+  if (WHITELISTED_CLASSES.includes(el.id)) {el.style.borderColor = "black";}
  });
- image.style.outlineColor = "green";
+ image.style.borderColor = "green";
  deck.updateCharacter(image.src.slice().split("/").pop());
  updatePerks();
 }
 
 var boxSideLength = classSelectionBox.clientWidth/6;
-var imageSideLength = boxSideLength*15/16;
+var imageSideLength = boxSideLength*7/8;
 for (let [index, image] of classIconImgs.entries()) {
  if (image.width > image.height) {
   image.height = image.height/image.width*imageSideLength*3/4 + "";
@@ -45,16 +45,16 @@ for (let [index, image] of classIconImgs.entries()) {
   image.height = imageSideLength*3/4 + "";
   image.style.padding = (imageSideLength/8) + "px " + (imageSideLength - image.width)/2 + "px";
  }
- image.style.outlineWidth = boxSideLength/16
- image.style.outlineStyle = "solid";
- image.style.outlineColor = "black";
+ image.style.borderWidth = boxSideLength/16
+ image.style.borderStyle = "solid";
+ image.style.borderColor = "black";
  var label = index + 1 + "";
  if (index < 9) label = "0" + label;
  image.id = label;
  if (WHITELISTED_CLASSES.includes(label)) {
   image.addEventListener("click", classSelectorClicked);
  } else {
-  image.style.outlineColor = "grey";
+  image.style.borderColor = "grey";
  }
  classSelectionBox.appendChild(image);
 }
