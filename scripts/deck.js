@@ -84,7 +84,7 @@ class Deck {
     var backDir = dir + "tiCardBack.png";
     var valueList = [0,1,1,3,0,0,0,0,0,1,1,1,1,1,1,0];
     var effectList = [0,0,0,0,"fire","fire","muddle","muddle","muddle","wound","wound","immobilize","immobilize","healSelf2","healSelf2","target"];
-    var rollingList = [0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0];
+    var rollingList = [0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["x11-x12","x13-x14","x16-+0","+1-+2","+3","+4-+5","+6-+7-+8","+9","+10","+11","+12","+13","+14","+15"];
     this.perkInstructions = ["2Remove two =-1= cards","1Replace one =-2= card with one =+0= card","1Add two =+1= cards","1Add one =+3= card","1Add two =rolling=fire= cards","1Add three =rolling=muddle= cards","2Add one =+1=wound= card","2Add one =+1=immobilize= card","2Add one =+1=heal=2 card","1Add one =+0=target= card"];
