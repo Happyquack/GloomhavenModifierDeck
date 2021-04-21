@@ -3,6 +3,8 @@ import {Deck} from './deck.js';
 // make class selection
 var ICONPATH = "https://happyquack.github.io/GloomhavenModifierDeck/images/classIcons/";
 
+var WHITELISTED_CLASSES = ["01","02","03","04","05","06,"07","12","16"];
+
 var classSelectionBox = document.getElementById('classSelectionBoxId');
 classSelectionBox.innerHTML = "";
 classSelectionBox.style.outlineColor = "rgb(234,236,239)";
@@ -23,7 +25,7 @@ var deckOfCards = deck.getPlayerDeck();
 
 function classSelectorClicked(event) {
  var image = event.target;
- classIconImgs.forEach(el => el.style.borderColor = "white");
+ classIconImgs.forEach(el => if (WHITELISTED_CLASSES.contains(el.id)) {el.style.borderColor = "white"});
  image.style.borderColor = "black";
  deck.updateCharacter(image.src.slice().split("/").pop());
  updatePerks();
@@ -46,8 +48,12 @@ for (let [index, image] of classIconImgs.entries()) {
  image.style.borderColor = "white";
  var label = index + 1 + "";
  if (index < 9) label = "0" + label;
- image.id = "label";
- image.addEventListener("click", classSelectorClicked);
+ image.id = label;
+ if (WHITELISTED_CLASSES.contains(label)) {
+  image.addEventListener("click", classSelectorClicked);
+ } else {
+  image.style.borderColor = "grey";
+ }
  classSelectionBox.appendChild(image);
 }
 
