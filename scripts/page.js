@@ -34,7 +34,7 @@ function classSelectorClicked(event) {
 }
 
 var boxSideLength = classSelectionBox.clientWidth/6;
-var imageSideLength = boxSideLength*3/4;
+var imageSideLength = boxSideLength;
 for (let [index, image] of classIconImgs.entries()) {
  if (image.width > image.height) {
   image.height = image.height/image.width*imageSideLength*3/4 + "";
