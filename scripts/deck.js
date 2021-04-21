@@ -70,7 +70,7 @@ class Deck {
     var cardDir = dir + "brCard";
     var backDir = dir + "brCardBack.png";
     var valueList = [1,1,1,1,1,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1];
-    var effectList = [0,0,0,0,0,0,0,"push1","push1","push1","push1","push1","push1","push1","pierce3","pierce3","stun","stun","disarm","muddle","target","target","shieldSelf1"];
+    var effectList = [0,0,0,0,0,0,0,"push1","push1","push1","push1","push1","push1","pierce3","pierce3","stun","stun","disarm","muddle","target","target","shieldSelf1"];
     var rollingList = [0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["x11-x12","x13-+0","+1-+2","+3-+4","+6","+7-+8-+9","+10-+11-+12","+13-+14","+15","+16","+17-+18","+19","+20","+21","+5"];
