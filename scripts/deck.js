@@ -167,8 +167,8 @@ class Deck {
     var effectList = [0,0,0,0,0,0,0,0,"air","air","air","poison","poison","poison","curse","curse","immobilize","immobilize","stun","stun"];
     var rollingList = [0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
-    this.perkList = ["x16-+0","x11-+1","x12-+2","x0-+3","x1-+4","+5-+6","+7","+8","+9","+10-+11-+12","+13-+14","+15-+16","+17","+18","+19"];
-    this.perkInstructions = ["1Replace one =-2= card with one =+0= card","2Replace one =-1= card with one =+1= card","2Replace one =+0= card with one =+2= card","1Add two =+1= card","3Add one =+1=air= card","1Add three =rolling=poison= cards","1Add two =rolling=curse= cards","1Add two =rolling=immobilize= cards","2Add one =rolling=stun= card","Ignore negative scenario effects and add one =+1= card"];
+    this.perkList = ["x16-+0","x11-+1","x12-+2","x0-+6","x1-+7","+3-+4","+8","+9","+10","+11-+12-+13","+14-+15","+16-+17","+18","+19","+5"];
+    this.perkInstructions = ["1Replace one =-2= card with one =+0= card","2Replace one =-1= card with one =+1= card","2Replace one =+0= card with one =+2= card","1Add two =+1= card","3Add one =+1=air= card","1Add three =rolling=poison= cards","1Add two =rolling=curse= cards","1Add two =rolling=immobilize= cards","2Add one =rolling=stun= card","1Ignore negative scenario effects and add one =+1= card"];
   }
   
   loadBerserkerDeck() {
