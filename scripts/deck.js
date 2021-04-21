@@ -173,7 +173,7 @@ class Deck {
     var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/16/";
     var cardDir = dir + "elCard";
     var backDir = dir + "elCardBack.png";
-    var valueList = [1,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0];
+    var valueList = [1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0];
     var effectList = [0,0,0,"fire","fire","fire","fire","cold","cold","cold","cold","wind","wind","wind","wind","earth","earth","earth","earth","push1","push1","wound","stun","target"];
     var rollingList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
