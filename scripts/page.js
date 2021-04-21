@@ -3,7 +3,7 @@ import {Deck} from './deck.js';
 // make class selection
 var ICONPATH = "https://happyquack.github.io/GloomhavenModifierDeck/images/classIcons/";
 
-var WHITELISTED_CLASSES = ["01","02","03","04","05","06","07","12","16"];
+var WHITELISTED_CLASSES = ["01","02","03","04","05","06","07","11","12","16"];
 
 var classSelectionBox = document.getElementById('classSelectionBoxId');
 classSelectionBox.innerHTML = "";
