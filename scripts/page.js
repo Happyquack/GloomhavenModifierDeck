@@ -221,7 +221,7 @@ function updatePerks() {
    perkLine.appendChild(spacer);
   }
   instruction = instruction.split("=");
-  var commandWords = ["air","bless","cold","curse","disarm","fire","heal","immobilize","invisible","muddle","night","pierce","plant","poison","push","rolling","shield","strengthen","stun","sun","target","wound"];
+  var commandWords = ["air","bless","cold","curse","disarm","fire","heal","immobilize","invisible","muddle","night","pierce","plant","poison","push", "pull","rolling","shield","strengthen","stun","sun","target","wound"];
   instruction.forEach(el => {
    if (commandWords.includes(el)) {
     var newImage = document.createElement("img");
