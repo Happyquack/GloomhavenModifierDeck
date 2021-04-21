@@ -96,11 +96,11 @@ class Deck {
     var cardDir = dir + "spCard";
     var backDir = dir + "spCardBack.png";
     var valueList = [1,1,1,1,1,1,0,1,1,1,2,2,2,2,0,0,0,0];
-    var effectList = [0,0,0,0,0,0,"stun","wound","immobilize","curse","fire","fire","cold","cold","earth","wind","sun","night"];
+    var effectList = [0,0,0,0,0,0,"stun","wound","immobilize","curse","fire","fire","cold","cold","earth","air","sun","night"];
     var rollingList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["oooo","x11-+0","x12-+1","+2-+3","+4-+5","+6","+7","+8","+9","+10","+11","+12","+13","+14-+15","+16-+17"];
-    this.perkInstructions = ["1Remove four =+0= cards","2Replace one =-1= card with one =+1= card","2Add two =+1= cards","1Add one =+0=stun= card","1Add one =+1=wound= card","1Add one =+1=immobilize= card","1Add one =+1=curse= card","2Add one =+2=fire= card","2Add one =+2=cold= card","1Add one =rolling=earth= and one =rolling=wind= card","1Add one =rolling=sun= and one =rolling=night= card"];
+    this.perkInstructions = ["1Remove four =+0= cards","2Replace one =-1= card with one =+1= card","2Add two =+1= cards","1Add one =+0=stun= card","1Add one =+1=wound= card","1Add one =+1=immobilize= card","1Add one =+1=curse= card","2Add one =+2=fire= card","2Add one =+2=cold= card","1Add one =rolling=earth= and one =rolling=air= card","1Add one =rolling=sun= and one =rolling=night= card"];
   }
   
   loadScoundrelDeck() {
@@ -122,11 +122,11 @@ class Deck {
     var cardDir = dir + "crCard";
     var backDir = dir + "crCardBack.png";
     var valueList = [1,1,1,-2,2,2,1,1,2,2,0,0,0,0,0,0,0,0];
-    var effectList = [0,0,0,0,0,0,"immobilize","immobilize","muddle","muddle","push2","push2","earth","earth","earth","earth","wind","wind"];
+    var effectList = [0,0,0,0,0,0,"immobilize","immobilize","muddle","muddle","push2","push2","earth","earth","earth","earth","air","air"];
     var rollingList = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["oooo","x11-+0","x12-+1","x13-+2","+3-+4-+5","+6","+7","+8","+9","+10-+11","+12-+13","+14-+15","+16-+17"];
-    this.perkInstructions = ["1Remove four =+0= cards","3Replace one =-1= card with one =+1= card","1Add one =-2= card and two =+2= cards","2Add one =+1=immobilize= card","2Add one =+2=muddle= card","1Add two =rolling=push=2 cards","2Add two =rolling=earth= cards","1Add two =rolling=wind= cards"];
+    this.perkInstructions = ["1Remove four =+0= cards","3Replace one =-1= card with one =+1= card","1Add one =-2= card and two =+2= cards","2Add one =+1=immobilize= card","2Add one =+2=muddle= card","1Add two =rolling=push=2 cards","2Add two =rolling=earth= cards","1Add two =rolling=air= cards"];
   }
   
   loadMindthiefDeck() {
@@ -174,11 +174,11 @@ class Deck {
     var cardDir = dir + "elCard";
     var backDir = dir + "elCardBack.png";
     var valueList = [1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0];
-    var effectList = [0,0,0,"fire","fire","fire","fire","cold","cold","cold","cold","wind","wind","wind","wind","earth","earth","earth","earth","push1","push1","wound","stun","target"];
+    var effectList = [0,0,0,"fire","fire","fire","fire","cold","cold","cold","cold","air","air","air","air","earth","earth","earth","earth","push1","push1","wound","stun","target"];
     var rollingList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["x11-x12","x13-x14","x15-+0","x0-+1","x1-+2","+3-+4-+5","+7-+8-+9","+11-+12-+13","+15-+16-+17","x2-x3-+6-+18","x4-x5-+10-+14","+19-+20","+21","+22","+23"];
-    this.perkInstructions = ["2Remove two =-1= cards","1Replace one =-1= card with one =+1= card","2Replace one =+0= card with one =+2= card","1Add three =+0=fire= cards","1Add three =+0=cold= cards","1Add three =+0=wind= cards","1Add three =+0=plant= cards","1Replace two =+0= cards with one =+0=fire= and one =+0=plant= card","1Replace two =+0= cards with one =+0=cold= and one =+0=wind= card","1Add two =+1=push=1 cards","1Add one =+1=wound= card","1Add one =+0=stun= card","1Add one =+0=target= card"];
+    this.perkInstructions = ["2Remove two =-1= cards","1Replace one =-1= card with one =+1= card","2Replace one =+0= card with one =+2= card","1Add three =+0=fire= cards","1Add three =+0=cold= cards","1Add three =+0=air= cards","1Add three =+0=plant= cards","1Replace two =+0= cards with one =+0=fire= and one =+0=plant= card","1Replace two =+0= cards with one =+0=cold= and one =+0=air= card","1Add two =+1=push=1 cards","1Add one =+1=wound= card","1Add one =+0=stun= card","1Add one =+0=target= card"];
   }
   
   loadDeck(targetDeck, cardDir, backDir, valueList, effectList, rollingList) {
