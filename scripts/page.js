@@ -26,9 +26,9 @@ var deckOfCards = deck.getPlayerDeck();
 function classSelectorClicked(event) {
  var image = event.target;
  classIconImgs.forEach(el => {
-  if (WHITELISTED_CLASSES.includes(el.id)) {el.style.borderColor = "green";}
+  if (WHITELISTED_CLASSES.includes(el.id)) {el.style.borderColor = "black";}
  });
- image.style.borderColor = "black";
+ image.style.borderColor = "green";
  deck.updateCharacter(image.src.slice().split("/").pop());
  updatePerks();
 }
@@ -45,9 +45,9 @@ for (let [index, image] of classIconImgs.entries()) {
   image.height = imageSideLength*3/4 + "";
   image.style.padding = (imageSideLength/8) + "px " + (imageSideLength - image.width)/2 + "px";
  }
- image.style.borderWidth = boxSideLength/32
+ image.style.borderWidth = boxSideLength/16
  image.style.borderStyle = "solid";
- image.style.borderColor = "green";
+ image.style.borderColor = "black";
  var label = index + 1 + "";
  if (index < 9) label = "0" + label;
  image.id = label;
