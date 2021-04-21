@@ -25,7 +25,9 @@ var deckOfCards = deck.getPlayerDeck();
 
 function classSelectorClicked(event) {
  var image = event.target;
- classIconImgs.forEach(el => if (WHITELISTED_CLASSES.contains(el.id)) {el.style.borderColor = "white"});
+ classIconImgs.forEach(el => {
+  if (WHITELISTED_CLASSES.contains(el.id)) {el.style.borderColor = "white";}
+ });
  image.style.borderColor = "black";
  deck.updateCharacter(image.src.slice().split("/").pop());
  updatePerks();
