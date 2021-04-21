@@ -162,7 +162,7 @@ class Deck {
     var backDir = dir + "beCardBack.png";
     var valueList = [1,1,2,2,0,0,0,0,0,0,1,0,0,2,2];
     var effectList = [0,0,0,0,"wound","wound","wound","wound","stun","stun","disarm","healSelf1","healSelf1","fire","fire"];
-    var rollingList = [0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0];
+    var rollingList = [0,0,1,1,1,1,1,1,1,1,1,1,1,0,0];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["x11-x12","oooo","x13-+0","x14-+1","x4-+2","x5-+3","+4-+5","+6-+7","+8","+9","+10","+11-+12","+13","+14"];
     this.perkInstructions = ["1Remove two =-1= cards","1Remove four =+0= cards","2Replace one =-1= card with one =+1= card", "2Replace one =+0= card with one =rolling=+2= card","2Add two =rolling=wound= cards","2Add one =rolling=stun= card","1Add one =rolling=+1=disarm=card","1Add two =rolling=heal=1 cards","2Add one =+2=fire= card"];
