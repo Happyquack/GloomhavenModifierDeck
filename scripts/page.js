@@ -83,6 +83,7 @@ function displayDeck () {
  }
  while (deckDisplayBox.firstChild) {
   deckDisplayBox.removeChild(deckDisplayBox.firstChild);
+  console.log("poppin");
  }
  // modify new contents
  var deckSortingColumns = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
