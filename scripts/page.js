@@ -196,6 +196,7 @@ for (i = 15; i > 0; i--) {
 
 function updatePerks() {
  var thePerkBox = document.getElementById("perkBox");
+ thePerkBox.innerHTML = "";
  var perkInstructions = deck.getPerkInstructions();
  var checkboxQueue = checkboxes.slice();
  perkInstructions.forEach(el => {
