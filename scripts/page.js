@@ -72,20 +72,24 @@ var deckDisplayBox = document.getElementById('deckDisplayBoxId');
 function displayDeck () {
 
  deckOfCards = deck.getPlayerDeck();
- console.log(deckDisplayColumns);
+ //console.log(deckDisplayColumns);
 
  // empty previous contents
- for (let column of deckDisplayColumns) {
-  while (column.firstChild) {
-   column.removeChild(column.firstChild);
-  }
- }
- while (deckDisplayBox.firstChild) {
-  deckDisplayBox.removeChild(deckDisplayBox.firstChild);
-  console.log("poppin");
- }
  
- console.log(deckDisplayColumns);
+ deckDisplayColumns.forEach(el => el.innerHTML = "");
+ deckDisplayBox.innerHTML = "";
+ 
+ //for (let column of deckDisplayColumns) {
+  //while (column.firstChild) {
+   //column.removeChild(column.firstChild);
+  //}
+ //}
+ //while (deckDisplayBox.firstChild) {
+  //deckDisplayBox.removeChild(deckDisplayBox.firstChild);
+  //console.log("poppin");
+ //}
+ 
+ //console.log(deckDisplayColumns);
  // modify new contents
  var deckSortingColumns = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
  for (let card of deckOfCards) {
