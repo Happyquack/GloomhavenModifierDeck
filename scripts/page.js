@@ -111,7 +111,7 @@ function displayDeck () {
    default: deckSortingColumns[7].push(card); break;
   }
  }
- for (var i = 1; i < deckSortingColumns.length; i++) {
+ for (var i = 0; i < deckSortingColumns.length; i++) {
   var column = deckSortingColumns[i];
   if (column.length > 9) {
    deckSortingColumns[i+1] = deckSortingColumns[i].splice(Math.floor(column.length/2), column.length - Math.floor(column.length/2));
