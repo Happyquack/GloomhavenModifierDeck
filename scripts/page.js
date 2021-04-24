@@ -169,17 +169,15 @@ displayDeck();
 
 // make stat/perk box
 
-var controllerBox = document.getElementById("controllerBox");
-var statsBox = document.createElement("div");
+var controllerBox = document.getElementById("perkContainer");
+var perkBoxOffset = document.createElement("div");
 var perkBox = document.createElement("div");
 
-controllerBox.appendChild(statsBox);
+controllerBox.appendChild(perkBoxOffset);
 controllerBox.appendChild(perkBox);
 
-statsBox.style.width = controllerBox.offsetWidth*3/5 + "px";
-statsBox.id = "statsBox";
+perkBoxOffset.style.width = controllerBox.offsetWidth/4 + "px";
 
-perkBox.style.width = controllerBox.offsetWidth*2/5 + "px";
 perkBox.id = "perkBox";
 
 // make checkbox event function
