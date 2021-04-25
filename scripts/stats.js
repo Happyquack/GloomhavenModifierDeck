@@ -2,17 +2,21 @@ function displayStats(outputDiv, deck) {
   
 }
 
-function simulateNormalDeck(deck, runningVals, runningEffects, rollingVals, rollingEffects, rollingVal) {
+function simulateNormalDeck(deck, runningVals, rollingVals, rollingEffects, rollingVal) {
   deck.forEach (card => {
     if (card.isRolling) {
       var newDeck = deck.slice();
       if (card.getEffect != 0) {rollingEffects.push(card.getEffect()}
-      this.simulateDeck(newDeck, runningVals, runningEffects, rollingVals, rollingEffects, rollingVal + card.getValue());
+      simulateNormalDeck(newDeck, runningVals, rollingVals, rollingEffects, rollingVal + card.getValue());
     } else {
-      if (card.getEffect != 0) {runningEffects.push(card.getEffect())}
-      if (card.getValue == "x2") {runningEffects.push(
+      if (card.getValue == "null") {
+        runningVals[0]++;
+      } else if (card.getValue == "x2") {
+        runningVals[1]++;
+      } else {
+        runningVals.push(card.getValue());
+      }
       runningVals.push(rollingVal);
-      this.simulateDeck(deck, runningVals, runningEffects, rollingVals, rollingEffects, 0);
     }
   });
 }
