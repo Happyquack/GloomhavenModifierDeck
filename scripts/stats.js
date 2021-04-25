@@ -1,22 +1,18 @@
-const effectsList = ["x2","null","air","bless","cold","curse","disarm","fire","heal","immobilize","invisible","muddle", "night","pierce","plant","poison","push", "pull","rolling","shield","strengthen","stun","sun","target","wound"];
-
 function displayStats(outputDiv, deck) {
   
 }
 
-function simulateNormalDeck(deck, runningVals, rollingVals, effects, rollingVal) {
+function simulateNormalDeck(deck, runningVals, runningEffects, rollingVals, rollingEffects, rollingVal) {
   deck.forEach (card => {
     if (card.isRolling) {
       var newDeck = deck.slice();
-      this.simulateDeck(newDeck, runningVals, rollingVals, rollingVal + card.getValue());
+      if (card.getEffect != 0) {rollingEffects.push(card.getEffect()}
+      this.simulateDeck(newDeck, runningVals, runningEffects, rollingVals, rollingEffects, rollingVal + card.getValue());
     } else {
-      if () {
-          
-      } else {
-        runningVals.push(rollingVal);
-      
-      }
-      this.simulateDeck(deck, runningVals, rollingVals ,0);
+      if (card.getEffect != 0) {runningEffects.push(card.getEffect())}
+      if (card.getValue == "x2") {runningEffects.push(
+      runningVals.push(rollingVal);
+      this.simulateDeck(deck, runningVals, runningEffects, rollingVals, rollingEffects, 0);
     }
   });
 }
