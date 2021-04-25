@@ -1,4 +1,4 @@
-const effectsList = [];
+const effectsList = ["x2","null","air","bless","cold","curse","disarm","fire","heal","immobilize","invisible","muddle", "night","pierce","plant","poison","push", "pull","rolling","shield","strengthen","stun","sun","target","wound"];
 
 function displayStats(outputDiv, deck) {
   
