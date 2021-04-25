@@ -5,9 +5,28 @@ function displayStats(outputDiv, deck) {
 function simulateNormalDeck(deck, runningVals, rollingVals, rollingEffects, rollingVal) {
   deck.forEach (card => {
     if (card.isRolling) {
-      var newDeck = deck.slice();
+      deck = deck.filter(el => el != card);
+      if (card.getEffect != 0) {rollingEffects.push(card.getEffect())}
+      simulateNormalDeck(deck, runningVals, rollingVals, rollingEffects, rollingVal + card.getValue());
+    } else {
+      if (card.getValue == "null") {
+        runningVals[0]++;
+      } else if (card.getValue == "x2") {
+        runningVals[1]++;
+      } else {
+        runningVals.push(card.getValue());
+      }
+      runningVals.push(rollingVal);
+    }
+  });
+}
+
+function simulateAdvDeck(deck, runningVals, rollingVals, rollingEffects, rollingVal, first) {
+  deck.forEach (card => {
+    if (card.isRolling && first) {
+      deck = deck.filter(el => el != card);
       if (card.getEffect != 0) {rollingEffects.push(card.getEffect()}
-      simulateNormalDeck(newDeck, runningVals, rollingVals, rollingEffects, rollingVal + card.getValue());
+      simulateAdvDeck(deck, runningVals, rollingVals, rollingEffects, rollingVal + card.getValue(), false);
     } else {
       if (card.getValue == "null") {
         runningVals[0]++;
