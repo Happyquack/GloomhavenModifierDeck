@@ -11,12 +11,16 @@ classSelectionBox.style.outlineColor = "rgb(234,236,239)";
 classSelectionBox.style.outlineStyle = "solid";
 classSelectionBox.style.outlineWidth = "1px";
 
-var classIconImgs = []
+var classIconImgs = [];
+var classIconWidths = [1675,1667,1669,1560,1495,1675,1668,842,1666,1675,863,1322,1675,1675,863,1322,1675,1632,1675,1675,1675,1678];
+var classIconHeights = [1482,1667,1667,1667,1667,1445,1667,1667,1667,1632,1667,1667,1660,1667,876,1451,1532,1596];
 for (var i = 0; i < 18; i++) {
  var num = i + 1;
  if (num < 10) {num = "0" + num;}
  classIconImgs.push(document.createElement('img'));
  classIconImgs[i].src = ICONPATH + num + "icon.png";
+ classIconImgs[i].width = classIconWidths[i] + "";
+ classIconImgs[i].height = classIconHeights[i] + "";
 }
 
 var deck = new Deck();
