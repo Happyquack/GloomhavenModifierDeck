@@ -243,6 +243,9 @@ function updatePerks() {
       default:
        textToAdd.innerHTML = el.toUpperCase(); break;
      }
+     if (el.charAt(0) == "+" || el.charAt(0) == "-") {
+      textToAdd.appendChild(document.createTextNode(" "));
+     }
      perkLine.appendChild(textToAdd);
     }
     perkLine.appendChild(newImage);
