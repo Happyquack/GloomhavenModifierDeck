@@ -3,6 +3,10 @@
 
 @import "jekyll-theme-primer";
 
-#testing {
-  color: red;
+#classSelectionIcon {
+  max-width: calc(100% / 6);
+}
+
+#classSelectionIcon:after {
+  padding-bottom: 100%;
 }
