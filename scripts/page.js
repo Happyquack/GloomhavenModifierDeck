@@ -41,6 +41,7 @@ function classSelectorClicked(event) {
 var boxSideLength = classSelectionBox.clientWidth/6;
 var imageSideLength = boxSideLength*19/20;
 for (let [index, image] of classIconImgs.entries()) {
+ /*
  if (image.width > image.height) {
   image.height = image.height/image.width*imageSideLength*3/4 + "";
   image.width = imageSideLength*3/4 + "";
@@ -51,6 +52,7 @@ for (let [index, image] of classIconImgs.entries()) {
   image.style.padding = (imageSideLength/8) + "px " + (imageSideLength - image.width)/2 + "px";
  }
  image.style.borderWidth = boxSideLength/8
+ */
  image.style.borderStyle = "solid";
  image.style.borderColor = "black";
  var label = index + 1 + "";
