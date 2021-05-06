@@ -53,7 +53,7 @@ for (let [index, image] of classIconImgs.entries()) {
  }
  image.style.borderWidth = boxSideLength/8
  */
- image.classList.addClass("classSelectionIcon");
+ image.classList.add("classSelectionIcon");
  image.style.borderStyle = "solid";
  image.style.borderColor = "black";
  var label = index + 1 + "";
