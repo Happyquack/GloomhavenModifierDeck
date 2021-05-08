@@ -136,7 +136,6 @@ for (var i = 0; i < deckSortingColumns.length; i++) {
   i++;
  }
 }
- console.log(deckSortingColumns);
 // add new contents
 var numberOfColumns = 0;
 for (let column of deckSortingColumns) {
