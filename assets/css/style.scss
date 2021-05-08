@@ -3,11 +3,11 @@
 
 @import "jekyll-theme-primer";
 
-#classSelectionIcon {
+.classSelectionIcon {
   max-width: 16.66%;
   border-width: 2%;
 }
 
-#classSelectionIcon:after {
+.classSelectionIcon:after {
   padding-bottom: 100%;
 }
