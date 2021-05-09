@@ -19,8 +19,8 @@ for (var i = 0; i < 18; i++) {
  if (num < 10) {num = "0" + num;}
  classIconImgs.push(document.createElement('img'));
  classIconImgs[i].src = ICONPATH + num + "icon.png";
- //classIconImgs[i].width = classIconWidths[i] + "";
- //classIconImgs[i].height = classIconHeights[i] + "";
+ classIconImgs[i].width = classIconWidths[i] + "";
+ classIconImgs[i].height = classIconHeights[i] + "";
 }
 
 var deck = new Deck();
