@@ -103,7 +103,7 @@ class Deck {
     var rollingList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["oooo","x11-+0","x12-+1","+2-+3","+4-+5","+6","+7","+8","+9","+10","+11","+12","+13","+14-+15","+16-+17"];
-    this.perkInstructions = ["1Remove four =+0= cards","2Replace one =-1= card with one =+1= card","2Add two =+1= cards","1Add one =+0=stun= card","1Add one =+1=wound= card","1Add one =+1=immobilize= card","1Add one =+1=curse= card","2Add one =+2=fire= card","2Add one =+2=cold= card","1Add one =rolling=earth= and one =rolling=air= card","1Add one =rolling=sun= and one =rolling=night= card"];
+    this.perkInstructions = ["1Remove four =+0= cards","2Replace one =-1= card with one =+1= card","2Add two =+1= cards","1Add one =+0=stun= card","1Add one =+1=wound= card","1Add one =+1=immobilize= card","1Add one =+1=curse= card","2Add one =+2=fire= card","2Add one =+2=cold= card","1Add one =rolling=plant= and one =rolling=air= card","1Add one =rolling=sun= and one =rolling=night= card"];
   }
   
   loadScoundrelDeck() {
