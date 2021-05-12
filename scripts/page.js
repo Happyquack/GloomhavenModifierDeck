@@ -19,8 +19,8 @@ for (var i = 0; i < 18; i++) {
  if (num < 10) {num = "0" + num;}
  classIconImgs.push(document.createElement('img'));
  classIconImgs[i].src = ICONPATH + num + "icon.png";
- classIconImgs[i].width = classIconWidths[i] + "";
- classIconImgs[i].height = classIconHeights[i] + "";
+ //classIconImgs[i].width = classIconWidths[i] + "";
+ //classIconImgs[i].height = classIconHeights[i] + "";
 }
 
 var deck = new Deck();
@@ -41,7 +41,7 @@ function classSelectorClicked(event) {
 var boxSideLength = classSelectionBox.clientWidth/6;
 var imageSideLength = boxSideLength*19/20;
 for (let [index, image] of classIconImgs.entries()) {
- 
+ /*
  if (image.width > image.height) {
   image.height = image.height/image.width*imageSideLength*3/4 + "";
   image.width = imageSideLength*3/4 + "";
@@ -52,6 +52,7 @@ for (let [index, image] of classIconImgs.entries()) {
   image.style.padding = (imageSideLength/8) + "px " + (imageSideLength - image.width)/2 + "px";
  }
  image.style.borderWidth = boxSideLength/8
+ */
  
  image.classList.add("classSelectionIcon");
  image.style.borderStyle = "solid";
@@ -64,7 +65,10 @@ for (let [index, image] of classIconImgs.entries()) {
  } else {
   image.style.borderColor = "grey";
  }
- classSelectionBox.appendChild(image);
+ var wrappingDiv = document.createElement("div");
+ wrappingDiv.appendChild(image);
+ wrappingDiv.classList.add("classSelectionIconWrapper");
+ classSelectionBox.appendChild(wrappingDiv);
 }
 
 //make card flipping function
