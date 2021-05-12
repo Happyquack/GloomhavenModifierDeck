@@ -13,6 +13,8 @@ classSelectionBox.style.outlineWidth = "1px";
 
 // create class icons and wrapping divs
 
+var classIconImgs = [];
+
 for (var i = 0; i < 18; i++) {
  var num = i + 1;
  if (num < 10) {num = "0" + num;}
