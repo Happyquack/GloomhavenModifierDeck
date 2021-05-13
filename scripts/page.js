@@ -150,7 +150,6 @@ for (var i = 0; i < deckSortingColumns.length; i++) {
     }
    }
   }
- }
   
   // format and display columns
  
