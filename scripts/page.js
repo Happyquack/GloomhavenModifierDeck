@@ -26,6 +26,7 @@ for (var i = 0; i < 18; i++) {
  wrapper.classList.add("classSelectionIconWrapper");
  
  var secondWrapper = document.createElement('div');
+ secondWrapper.classList.add("classSelectionIconWrapperWrapper");
  secondWrapper.id = num;
  secondWrapper.style.borderStyle = "solid";
  secondWrapper.style.borderColor = "black";
