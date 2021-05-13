@@ -131,51 +131,51 @@ for (var i = 0; i < deckSortingColumns.length; i++) {
   i++;
  }
  */
-}
  
-// add new contents
- 
-var numberOfColumns = 0;
-for (let column of deckSortingColumns) {
- if (column.length > 0) {
-  //column.innerHTML = "";
-  var numSplit = Math.ceil(column.length/MAX_CARDS_IN_COLUMN);
-  var numPerColumn = Math.ceil(column.length/numSplit);
+ // add new contents
   
-  for (var i = 0; i < column.length; i++) {
-   deckDisplayColumns[numberOfColumns].appendChild(column[i].getImg());
-   if ((i+1) % numPerColumn == 0) {
-    deckDisplayBox.appendChild(deckDisplayColumns[numberOfColumns]);
-    numberOfColumns++;
+ var numberOfColumns = 0;
+ for (let column of deckSortingColumns) {
+  if (column.length > 0) {
+   //column.innerHTML = "";
+   var numSplit = Math.ceil(column.length/MAX_CARDS_IN_COLUMN);
+   var numPerColumn = Math.ceil(column.length/numSplit);
+   
+   for (var i = 0; i < column.length; i++) {
+    deckDisplayColumns[numberOfColumns].appendChild(column[i].getImg());
+    if ((i+1) % numPerColumn == 0) {
+     deckDisplayBox.appendChild(deckDisplayColumns[numberOfColumns]);
+     numberOfColumns++;
+     }
     }
    }
   }
  }
-}
+  
+  // format and display columns
  
- // format and display columns
-
-var deckDisplayBoxWidth = deckDisplayBox.offsetWidth;
-var deckDisplayColumnWidth = deckDisplayBoxWidth/numberOfColumns;
-Array.from(deckDisplayBox.children).forEach(column => {
- column.style.maxWidth = deckDisplayColumnWidth + "px";
- column.style.display = "flex";
- column.style.flexDirection = "column";
- Array.from(column.children).forEach(card => {
-  card.style.width = deckDisplayColumnWidth + "px";
-  card.style.height = deckDisplayColumnWidth*2/3 + "px";
-  card.addEventListener("click", flipCard);
-  Array.from(card.firstChild.children).forEach(images => {
-   images.width = deckDisplayColumnWidth*4/5;
-   images.height = images.width*2/3;
-   images.style.margin = deckDisplayColumnWidth/10 + "px";
-   images.style.borderRadius = deckDisplayColumnWidth/10 + "px";
-   images.style.position = "absolute";
+ var deckDisplayBoxWidth = deckDisplayBox.offsetWidth;
+ var deckDisplayColumnWidth = deckDisplayBoxWidth/numberOfColumns;
+ Array.from(deckDisplayBox.children).forEach(column => {
+  column.style.maxWidth = deckDisplayColumnWidth + "px";
+  column.style.display = "flex";
+  column.style.flexDirection = "column";
+  Array.from(column.children).forEach(card => {
+   card.style.width = deckDisplayColumnWidth + "px";
+   card.style.height = deckDisplayColumnWidth*2/3 + "px";
+   card.addEventListener("click", flipCard);
+   Array.from(card.firstChild.children).forEach(images => {
+    images.width = deckDisplayColumnWidth*4/5;
+    images.height = images.width*2/3;
+    images.style.margin = deckDisplayColumnWidth/10 + "px";
+    images.style.borderRadius = deckDisplayColumnWidth/10 + "px";
+    images.style.position = "absolute";
+   } );
   } );
  } );
-} );
- 
+  
 }
+
 
 displayDeck();
 
