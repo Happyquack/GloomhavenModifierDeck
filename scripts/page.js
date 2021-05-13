@@ -57,7 +57,7 @@ function classSelectorClicked(event) {
   if (WHITELISTED_CLASSES.includes(el.id)) {el.style.borderColor = "black";}
  });
  image.style.borderColor = "green";
- deck.updateCharacter(image.src.slice().split("/").pop());
+ deck.updateCharacter(image.id);
  displayDeck();
  updatePerks();
 }
