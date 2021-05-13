@@ -138,8 +138,8 @@ for (var i = 0; i < deckSortingColumns.length; i++) {
  for (let column of deckSortingColumns) {
   if (column.length > 0) {
    //column.innerHTML = "";
-   var numSplit = Math.ceil(column.length/MAX_CARDS_IN_COLUMN);
-   var numPerColumn = Math.ceil(column.length/numSplit);
+   var numSplit = Math.round(Math.ceil(column.length/MAX_CARDS_IN_COLUMN),2);
+   var numPerColumn = Math.round(Math.ceil(column.length/numSplit),2);
    
    for (var i = 0; i < column.length; i++) {
     deckDisplayColumns[numberOfColumns].appendChild(column[i].getImg());
