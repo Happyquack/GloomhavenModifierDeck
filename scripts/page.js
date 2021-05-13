@@ -85,7 +85,7 @@ deckDisplayBox.style.outlineWidth = "1px";
 // create the columns that will contain cards
 
 var deckDisplayColumns = []
-for (var i = 0; i < 15; i++) {
+for (var i = 0; i < 20; i++) {
  deckDisplayColumns.push(document.createElement('div'));
 }
 
