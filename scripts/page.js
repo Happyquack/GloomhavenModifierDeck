@@ -138,6 +138,7 @@ for (var i = 0; i < deckSortingColumns.length; i++) {
  for (let column of deckSortingColumns) {
   if (column.length > 0) {
    //column.innerHTML = "";
+   console.log(
    var numSplit = Math.round(Math.ceil(column.length/MAX_CARDS_IN_COLUMN),2);
    var numPerColumn = Math.round(Math.ceil(column.length/numSplit),2);
    
@@ -148,6 +149,7 @@ for (var i = 0; i < deckSortingColumns.length; i++) {
      numberOfColumns++;
      }
     }
+   numberOfColumns++;
    }
   }
   
