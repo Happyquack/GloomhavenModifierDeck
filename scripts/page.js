@@ -24,19 +24,22 @@ for (var i = 0; i < 18; i++) {
  
  var wrapper = document.createElement('div');
  wrapper.classList.add("classSelectionIconWrapper");
- wrapper.id = num;
- wrapper.style.borderStyle = "solid";
- wrapper.style.borderColor = "black";
+ 
+ var secondWrapper = document.createElement('div');
+ secondWrapper.id = num;
+ secondWrapper.style.borderStyle = "solid";
+ secondWrapper.style.borderColor = "black";
  
  if (WHITELISTED_CLASSES.includes(num)) {
-  wrapper.addEventListener("click", classSelectorClicked);
+  secondWrapper.addEventListener("click", classSelectorClicked);
  } else {
-  wrapper.style.borderColor = "grey";
+  secondWrapper.style.borderColor = "grey";
  }
  
  wrapper.appendChild(image);
- classIconImgs.push(wrapper);
- classSelectionBox.appendChild(wrapper);
+ secondWrapper.appendChild(wrapper);
+ classIconImgs.push(secondWrapper);
+ classSelectionBox.appendChild(secondWrapper);
 }
 
 // create player deck
