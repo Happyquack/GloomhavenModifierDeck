@@ -53,11 +53,16 @@ var deckOfCards = deck.getPlayerDeck();
 
 function classSelectorClicked(event) {
  var image = event.target;
+ var wrapper;
  classIconImgs.forEach(el => {
-  if (WHITELISTED_CLASSES.includes(el.id)) {el.style.borderColor = "black";}
+  if (WHITELISTED_CLASSES.includes(el.id)) {
+   el.style.borderColor = "black";
+   wrapper = el;
+  }
  });
- image.style.borderColor = "green";
- deck.updateCharacter(image.id);
+ 
+ wrapper.style.borderColor = "green";
+ deck.updateCharacter(wrapper.id);
  displayDeck();
  updatePerks();
 }
