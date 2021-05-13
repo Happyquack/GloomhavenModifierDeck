@@ -53,8 +53,8 @@ var deckOfCards = deck.getPlayerDeck();
 
 function classSelectorClicked(event) {
  var image = event.target;
- var URL = document.getElementById(image.src.slice().split("/"));
- var wrapper = URL[URL.length - 2];
+ var URL = image.src.slice().split("/");
+ var wrapper = document.getElementById(URL[URL.length - 2]);
  classIconImgs.forEach(el => {
   if (WHITELISTED_CLASSES.includes(el.id)) {
    el.style.borderColor = "black";
