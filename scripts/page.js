@@ -16,7 +16,7 @@ classSelectionBox.style.outlineWidth = "1px";
 var classIconImgs = [];
 
 for (var i = 0; i < 18; i++) {
- var num = i + 1;
+ var num = i + 1 + "";
  if (num < 10) {num = "0" + num;}
  var image = document.createElement('img');
  image.src = ICONPATH + num + "icon.png";
