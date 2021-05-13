@@ -147,6 +147,7 @@ for (let column of deckSortingColumns) {
    if ((i+1) % numPerColumn == 0) {
     deckDisplayBox.appendChild(deckDisplayColumns[numberOfColumns]);
     numberOfColumns++;
+    }
    }
   }
  }
