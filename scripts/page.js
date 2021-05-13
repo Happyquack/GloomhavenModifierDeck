@@ -1,5 +1,7 @@
 import {Deck} from './deck.js';
 
+var MAX_CARDS_IN_COLUMN = 6;
+
 // make class selection
 var ICONPATH = "https://happyquack.github.io/GloomhavenModifierDeck/images/classIcons/";
 
@@ -121,12 +123,14 @@ function displayDeck () {
   }
  }
 }
+ /*
 for (var i = 0; i < deckSortingColumns.length; i++) {
  var column = deckSortingColumns[i];
  if (column.length > 9) {
   deckSortingColumns[i+1] = deckSortingColumns[i].splice(Math.ceil(column.length/2), column.length - Math.ceil(column.length/2));
   i++;
  }
+ */
 }
  
 // add new contents
@@ -134,10 +138,17 @@ for (var i = 0; i < deckSortingColumns.length; i++) {
 var numberOfColumns = 0;
 for (let column of deckSortingColumns) {
  if (column.length > 0) {
-  column.innerHTML = "";
-  column.forEach(el => deckDisplayColumns[numberOfColumns].appendChild(el.getImg()));
-  deckDisplayBox.appendChild(deckDisplayColumns[numberOfColumns]);
-  numberOfColumns++;
+  //column.innerHTML = "";
+  var numSplit = Math.ceil(column.length/MAX_CARDS_IN_COLUMN);
+  var numPerColumn = Math.ceil(column.length/numSplit);
+  
+  for (var i = 0; i < column.length; i++) {
+   deckDisplayColumns[numberOfColumns].appendChild(column[i].getImg());
+   if ((i+1) % numPerColumn == 0) {
+    deckDisplayBox.appendChild(deckDisplayColumns[numberOfColumns]);
+    numberOfColumns++;
+   }
+  }
  }
 }
  
