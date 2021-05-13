@@ -34,6 +34,7 @@ for (var i = 0; i < 18; i++) {
   wrapper.style.borderColor = "grey";
  }
  
+ wrapper.appendChild(image);
  classIconImgs.push(wrapper);
  classSelectionBox.appendChild(wrapper);
 }
