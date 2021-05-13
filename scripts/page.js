@@ -138,9 +138,10 @@ for (var i = 0; i < deckSortingColumns.length; i++) {
  for (let column of deckSortingColumns) {
   if (column.length > 0) {
    //column.innerHTML = "";
-   console.log(
    var numSplit = Math.round(Math.ceil(column.length/MAX_CARDS_IN_COLUMN),2);
    var numPerColumn = Math.round(Math.ceil(column.length/numSplit),2);
+   console.log(numSplit);
+   console.log(numPerColumn);
    
    for (var i = 0; i < column.length; i++) {
     deckDisplayColumns[numberOfColumns].appendChild(column[i].getImg());
