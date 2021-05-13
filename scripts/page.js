@@ -149,8 +149,8 @@ for (var i = 0; i < deckSortingColumns.length; i++) {
      deckDisplayBox.appendChild(deckDisplayColumns[numberOfColumns]);
      numberOfColumns++;
      }
-    }
-   numberOfColumns++;
+    numberOfColumns++;
+   }
    }
   }
   
