@@ -9,9 +9,6 @@ var WHITELISTED_CLASSES = ["01","02","03","04","05","06","07","11","12","16"];
 
 var classSelectionBox = document.getElementById('classSelectionBoxId');
 classSelectionBox.innerHTML = "";
-classSelectionBox.style.outlineColor = "rgb(234,236,239)";
-classSelectionBox.style.outlineStyle = "solid";
-classSelectionBox.style.outlineWidth = "1px";
 
 // create class icons and wrapping divs
 
@@ -30,13 +27,12 @@ for (var i = 0; i < 18; i++) {
  var secondWrapper = document.createElement('div');
  secondWrapper.classList.add("classSelectionIconWrapperWrapper");
  secondWrapper.id = num;
- secondWrapper.style.borderStyle = "solid";
- secondWrapper.style.borderColor = "black";
  
  if (WHITELISTED_CLASSES.includes(num)) {
   secondWrapper.addEventListener("click", classSelectorClicked);
+  secondWrapper.classList.add("classSelectionLegal");
  } else {
-  secondWrapper.style.borderColor = "grey";
+  secondWrapper.classList.add("classSelectionIllegal");
  }
  
  wrapper.appendChild(image);
@@ -58,11 +54,11 @@ function classSelectorClicked(event) {
  var wrapper = document.getElementById(image.src.slice().split("/").pop().substring(0,2));
  classIconImgs.forEach(el => {
   if (WHITELISTED_CLASSES.includes(el.id)) {
-   el.style.borderColor = "black";
+   el.classList.remove("classSelectionSelected");
   }
  });
  
- wrapper.style.borderColor = "green";
+ wrapper.classList.add("classSelectionSelected");
  deck.updateCharacter(wrapper.id);
  displayDeck();
  updatePerks();
@@ -78,9 +74,6 @@ function flipCard(event) { deckOfCards.forEach(el => {
 
 var deckDisplayBox = document.getElementById('deckDisplayBoxId');
 deckDisplayBox.innerHTML = "";
-deckDisplayBox.style.outlineColor = "rgb(134,136,139)";
-deckDisplayBox.style.outlineStyle = "solid";
-deckDisplayBox.style.outlineWidth = "1px";
 
 // create the columns that will contain cards
 
@@ -106,9 +99,9 @@ function displayDeck () {
  for (let card of deckOfCards) {
   if (card.isRolling()) {
    if (card.getValue() == 0) {
-    deckSortingColumns[12].push(card);
+    deckSortingColumns[9].push(card);
    } else {
-    deckSortingColumns[10].push(card);
+    deckSortingColumns[8].push(card);
   }
  } else {
   switch (card.getValue()) {
@@ -117,31 +110,20 @@ function displayDeck () {
    case -1: deckSortingColumns[2].push(card); break;
    case 0: deckSortingColumns[3].push(card); break;
    case 1: deckSortingColumns[4].push(card); break;
-   case 2: deckSortingColumns[6].push(card); break;
-   case "x2": deckSortingColumns[9].push(card); break;
-   default: deckSortingColumns[7].push(card); break;
+   case 2: deckSortingColumns[5].push(card); break;
+   case "x2": deckSortingColumns[7].push(card); break;
+   default: deckSortingColumns[6].push(card); break;
   }
  }
 }
- /*
-for (var i = 0; i < deckSortingColumns.length; i++) {
- var column = deckSortingColumns[i];
- if (column.length > 9) {
-  deckSortingColumns[i+1] = deckSortingColumns[i].splice(Math.ceil(column.length/2), column.length - Math.ceil(column.length/2));
-  i++;
- }
- */
  
  // add new contents
   
  var numberOfColumns = 0;
  for (let column of deckSortingColumns) {
   if (column.length > 0) {
-   //column.innerHTML = "";
    var numSplit = Math.round(Math.ceil(column.length/MAX_CARDS_IN_COLUMN),2);
    var numPerColumn = Math.round(Math.ceil(column.length/numSplit),2);
-   console.log(numSplit);
-   console.log(numPerColumn);
    
    for (var i = 0; i < column.length; i++) {
     deckDisplayColumns[numberOfColumns].appendChild(column[i].getImg());
@@ -163,8 +145,6 @@ for (var i = 0; i < deckSortingColumns.length; i++) {
  var deckDisplayColumnWidth = deckDisplayBoxWidth/numberOfColumns;
  Array.from(deckDisplayBox.children).forEach(column => {
   column.style.maxWidth = deckDisplayColumnWidth + "px";
-  column.style.display = "flex";
-  column.style.flexDirection = "column";
   Array.from(column.children).forEach(card => {
    card.style.width = deckDisplayColumnWidth + "px";
    card.style.height = deckDisplayColumnWidth*2/3 + "px";
@@ -186,16 +166,12 @@ displayDeck();
 
 // make stat/perk box
 
-var controllerBox = document.getElementById("perkContainer");
-var perkBoxOffset = document.createElement("div");
-var perkBox = document.createElement("div");
+var controllerBox = document.getElementById("controllerBox");
+var deckAdjustingBox = document.getElementById("deckAdjustingBox");
+var perkBox = document.getElementById("perkBox");
 
-controllerBox.appendChild(perkBoxOffset);
+controllerBox.appendChild(deckAdjustingBox);
 controllerBox.appendChild(perkBox);
-
-perkBoxOffset.style.width = controllerBox.offsetWidth/4 + "px";
-
-perkBox.id = "perkBox";
 
 // make checkbox event function
 
@@ -221,8 +197,7 @@ for (i = 15; i > 0; i--) {
 
 function updatePerks() {
  checkboxes.forEach(el => el.checked = false);
- var thePerkBox = document.getElementById("perkBox");
- thePerkBox.innerHTML = "";
+ perkBox.innerHTML = "";
  var perkInstructions = deck.getPerkInstructions();
  var checkboxQueue = checkboxes.slice();
  perkInstructions.forEach(el => {
@@ -242,7 +217,7 @@ function updatePerks() {
    if (commandWords.includes(el)) {
     var newImage = document.createElement("img");
     newImage.src = "https://happyquack.github.io/GloomhavenModifierDeck/images/statusIcons/" + el + ".png";
-    var fontSize = parseInt(window.getComputedStyle(document.getElementById("perkContainer"),null).getPropertyValue('font-size'));
+    var fontSize = parseInt(window.getComputedStyle(controllerBox,null).getPropertyValue('font-size'));
     newImage.width = 1.5*fontSize;
     newImage.height = 1.5*fontSize;
     if (!["air","cold","fire","night","plant","rolling","sun"].includes(el)) {
@@ -257,19 +232,20 @@ function updatePerks() {
       default:
        textToAdd.innerHTML = el.toUpperCase(); break;
      }
-     if (el.charAt(0) == "+" || el.charAt(0) == "-") {
-      textToAdd.appendChild(document.createTextNode(" "));
-     }
      perkLine.appendChild(textToAdd);
     }
     perkLine.appendChild(newImage);
    } else {
     var textToAdd = document.createElement("span");
     textToAdd.innerHTML = el;
+    if (el.charAt(0) == "+" || el.charAt(0) == "-") {
+      textToAdd.appendChild(document.createTextNode(" "));
+      textToAdd.classList.add("numberModifier");
+     }
     perkLine.appendChild(textToAdd);
    }
   });
-  thePerkBox.appendChild(perkLine);
+  perkBox.appendChild(perkLine);
  });
 }
 

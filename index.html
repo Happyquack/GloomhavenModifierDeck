@@ -5,6 +5,46 @@ layout: default
 <body>
  
  <style>
+  @font-face {
+      font-family: 'Pirata One';
+      src: url('fonts/PirataOne-Regular.eot');
+      src: url('fonts/PirataOne-Regular.eot?#iefix') format('embedded-opentype'),
+          url('fonts/PirataOne-Regular.woff2') format('woff2'),
+          url('fonts/PirataOne-Regular.woff') format('woff'),
+          url('fonts/PirataOne-Regular.svg#PirataOne-Regular') format('svg');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+  }
+
+  @font-face {
+      font-family: 'Nyala';
+      src: url('/fonts/Nyala-Regular.eot');
+      src: url('/fonts/Nyala-Regular.eot?#iefix') format('embedded-opentype'),
+          url('/fonts/Nyala-Regular.woff2') format('woff2'),
+          url('/fonts/Nyala-Regular.woff') format('woff'),
+          url('/fonts/Nyala-Regular.svg#Nyala-Regular') format('svg');
+      font-weight: normal;
+      font-style: normal;
+  }
+
+  * {
+    font-family: "Nyala";
+  }
+
+  #heading {
+    text-align: center;
+    font-size: 130%
+  }
+
+  #classSelectionBoxId {
+    outline-color: rgb(234,236,239);
+    outline-style: solid;
+    outline-width: 1px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .classSelectionIcon {
    width: 90%;
    height: 90%;
@@ -23,20 +63,66 @@ layout: default
   .classSelectionIconWrapperWrapper {
    width: 16.66%;
    border-width: 2%;
+   border-style: solid;
    position: relative;
+  }
+
+  .classSelectionLegal {
+    border-color: black;
+  }
+
+  .classSelectionIllegal {
+    border-color: grey;
+  }
+
+  .classSelectionSelected {
+    border-color: green;
+  }
+
+  #deckDisplayBoxId {
+    outline-color: rgb(134,136,139);
+    outline-style: solid;
+    outline-width: 1px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #deckDisplayBoxId div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #controllerBox {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #deckAdjustingBox {
+    width: 40%;
+  }
+
+  #perkBox {
+    font-size: 120%;
+  }
+
+  .numberModifier {
+    font-family: 'Pirata One';
   }
   
  </style>
  
  <div id="heading">
-   <h1 style="text-align:center"> Class Selection </h1>
+   <h1> Class Selection </h1>
  </div>
  
- <div id="classSelectionBoxId" style="display:flex; flex-wrap:wrap"></div>
+ <div id="classSelectionBoxId"></div>
 
- <div id="perkContainer" style="display:flex; flex-wrap:wrap"></div>
+ <div id="controllerBox">
+  <div id="deckAdjustingBox"></div>
+  <div id="perkBox"></div>
+</div>
  
- <div id="deckDisplayBoxId" style="display:flex; flex-wrap:wrap"></div>
+ <div id="deckDisplayBoxId"></div>
   
  <script src="scripts/page.js" type="module"></script>
  
