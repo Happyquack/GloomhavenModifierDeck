@@ -148,13 +148,13 @@ for (var i = 0; i < deckSortingColumns.length; i++) {
     if ((i+1) % numPerColumn == 0) {
      deckDisplayBox.appendChild(deckDisplayColumns[numberOfColumns]);
      numberOfColumns++;
-     }
-    numberOfColumns++;
-   }
+    }
    }
   }
+  numberOfColumns++;
+ }
   
-  // format and display columns
+ // format and display columns
  
  var deckDisplayBoxWidth = deckDisplayBox.offsetWidth;
  var deckDisplayColumnWidth = deckDisplayBoxWidth/numberOfColumns;
