@@ -150,7 +150,10 @@ for (var i = 0; i < deckSortingColumns.length; i++) {
      numberOfColumns++;
     }
    }
-   if (numSplit > 1) {numberOfColumns++;}
+   if (numSplit > 1) {
+    deckDisplayBox.appendChild(deckDisplayColumns[numberOfColumns]);
+    numberOfColumns++;
+   }
   }
  }
   
