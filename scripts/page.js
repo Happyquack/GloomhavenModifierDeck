@@ -150,8 +150,8 @@ for (var i = 0; i < deckSortingColumns.length; i++) {
      numberOfColumns++;
     }
    }
+   numberOfColumns++;
   }
-  numberOfColumns++;
  }
   
  // format and display columns
