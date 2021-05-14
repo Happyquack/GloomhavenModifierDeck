@@ -132,7 +132,7 @@ function displayDeck () {
      numberOfColumns++;
     }
    }
-   if (numSplit > 1) {
+   if (numSplit > 1 && numSplit*numPerColumn != column.length) {
     deckDisplayBox.appendChild(deckDisplayColumns[numberOfColumns]);
     numberOfColumns++;
    }
