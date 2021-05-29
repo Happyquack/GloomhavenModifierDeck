@@ -1,5 +1,9 @@
 import {Card} from './card.js';
 
+var BASE_DECK = 0;
+var CLASS_DECK = 1;
+var ADDITIONAL_DECK = 2;
+
 class Deck {
   constructor() {
     this.character = "";
@@ -9,6 +13,7 @@ class Deck {
   
   createDecks() {
     this.loadBaseDeck();
+    this.loadAdditions();
     this.formDeck();
   }
   
@@ -18,9 +23,20 @@ class Deck {
     var cardDir = dir + "baseCard";
     var backDir = dir + "baseCardBack.png";
     var valueList = [0,0,0,0,0,0,1,1,1,1,1,-1,-1,-1,-1,-1,-2,2,"null","x2"];
-    var effectList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-    var rollingList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    var effectList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"shuffle","shuffle"];
+    var rollingList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     this.loadDeck(this.baseDeck, cardDir, backDir, valueList, effectList, rollingList);
+  }
+
+  loadAdditions() {
+    this.additionDeck = [];
+    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/zGeneralAdditions/";
+    var cardDir = dir + "addCard";
+    var backDir = dir + "addCardBack.png";
+    var valueList = ["null","null","null","null","null","null","null","null","null","null","x2","x2","x2","x2","x2","x2","x2","x2","x2","x2",-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
+    var effectList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    var rollingList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    this.loadDeck(this.additionDeck, cardDir, backDir, valueList, effectList, rollingList);
   }
   
   updateCharacter(label)
@@ -29,6 +45,11 @@ class Deck {
     var characters = ["","brute","tinkerer","spellweaver","scoundrel","cragheart","mindthief","sunkeeper", "", "", "", "plagueherald", "berserker", "", "", "", "elementalist", ""];
     this.character = characters[parseInt(label)];
     this.loadCharacterDeck();
+    this.characterDeck.forEach(card => {
+      if (card.getValue() == -1) {
+        this.addedMinusOnes[CLASS_DECK].push(card);
+      }
+    });
   }
   
   loadCharacterDeck() {
@@ -212,24 +233,45 @@ class Deck {
     for (let baseCard of this.baseDeck) {
       this.playerDeck.push(baseCard);
     }
+    this.numMinusOnes = 0;
+    this.numBlesses = 0;
+    this.numCurses = 0;
+    this.removedMinusOnes = [[], [], []];
+    this.addedMinusOnes = [[], [], []];
+    this.blesses = [[],[]];
+    this.curses = [[],[]];
+    this.playerDeck.forEach(card => {
+      if (card.getValue() == -1) {
+        this.addedMinusOnes[BASE_DECK].push(card);
+      }
+    });
+    this.additionDeck.forEach(card => {
+      if (card.getValue() == -1) {
+        this.removedMinusOnes[ADDITIONAL_DECK].push(card);
+      } else if (card.getValue() == "x2") {
+        this.blesses[0].push(card);
+      } else {
+        this.curses[0].push(card);
+      }
+    });
   }
   
   modPerk(checkmarkNum, turnPerkOn) {
     var checkmarkIndex = checkmarkNum - 1;
     var instructions = this.perkList[checkmarkIndex].slice();
-    var steps = instructions.split("-");
+    var steps = instructions.slice().split("-");
     steps.forEach(task => {
       if (task[0] == "x") {
         if (turnPerkOn) {
-          this.removeCard(this.playerDeck, this.baseDeck[parseInt(task.substring(1,task.length))]);
+          this.removeCard(this.baseDeck[parseInt(task.substring(1,task.length))]);
         } else {
-          this.addCard(this.playerDeck, this.baseDeck[parseInt(task.substring(1,task.length))]);
+          this.addCard(this.baseDeck[parseInt(task.substring(1,task.length))]);
         }
       } else if (task[0] == "+") {
         if (turnPerkOn) {
-          this.addCard(this.playerDeck, this.characterDeck[parseInt(task.substring(1,task.length))]);
+          this.addCard(this.characterDeck[parseInt(task.substring(1,task.length))]);
         } else {
-          this.removeCard(this.playerDeck, this.characterDeck[parseInt(task.substring(1,task.length))]);
+          this.removeCard(this.characterDeck[parseInt(task.substring(1,task.length))]);
         }
       } else {
         if (turnPerkOn) {
@@ -239,19 +281,130 @@ class Deck {
         }
       }
     });
+    this.deckSort();
   }
     
-  removeCard(arr, card) {
-    arr.indexOf(card) !== -1 && arr.splice(arr.indexOf(card), 1);
+  removeCard(card) {
+    if (card.getValue() == -1) {
+      this.removeMinusOne(false);
+    } else {
+     this.playerDeck.indexOf(card) !== -1 && this.playerDeck.splice(this.playerDeck.indexOf(card), 1);
+    }
   }
-  addCard(arr, card) {
-    arr.indexOf(card) == -1 && arr.push(card);
+  addCard(card) {
+    if (card.getValue() == -1) {
+      this.addMinusOne(false);
+    } else {
+      this.playerDeck.indexOf(card) == -1 && this.playerDeck.push(card);
+    }
   }
   removeFourZeroes() {
-    this.removeCard(this.playerDeck, this.baseDeck[0]); this.removeCard(this.playerDeck, this.baseDeck[1]); this.removeCard(this.playerDeck, this.baseDeck[2]); this.removeCard(this.playerDeck, this.baseDeck[3]);
+    this.removeCard(this.baseDeck[0]); this.removeCard(this.baseDeck[1]); this.removeCard(this.baseDeck[2]); this.removeCard(this.baseDeck[3]);
   }
   addFourZeroes() {
-    this.addCard(this.playerDeck, this.baseDeck[0]); this.addCard(this.playerDeck, this.baseDeck[1]); this.addCard(this.playerDeck, this.baseDeck[2]); this.addCard(this.playerDeck, this.baseDeck[3]);
+    this.addCard(this.baseDeck[0]); this.addCard(this.baseDeck[1]); this.addCard(this.baseDeck[2]); this.addCard(this.baseDeck[3]);
+  }
+
+  deckSort() {
+    for (var card in this.playerDeck) {
+      for (var i = 0; i < this.playerDeck - 1; i++) {
+        if (this.deckCompare(this.playerDeck[i], this.playerDeck[i+1])) {
+          var temp = this.playerDeck[i];
+          this.playerDeck[i] = this.playerDeck[i+1];
+          this.playerDeck[i+1] = this.playerDeck[i];
+        }
+      }
+    }
+  }
+
+  deckCompare(cardOne, cardTwo) {
+    var cardOneValue = cardOne.getValue();
+    var cardTwoValue = cardTwo.getValue();
+    if (cardOneValue < cardTwoValue) {
+      return false;
+    } else if (cardOneValue == cardTwoValue) {
+      var cardOnePath = cardTwo.backPath.slice().split("/");
+      var cardTwoPath = cardOne.backPath.slice().split("/");
+      var cardOneTieBreaker = 1;
+      if (cardOnePath.includes("zBase")) { cardOneTieBreaker = 0;}
+      if (cardOnePath.includes("zGeneralAdditions")) { cardOneTieBreaker = 2; }
+      var cardTwoTieBreaker = 1;
+      if (cardTwoTieBreaker.includes("zBase")) { cardOneTieBreaker = 0; }
+      if (cardTwoTieBreaker.includes("zGeneralAdditions")) { cardOneTieBreaker = 2; }
+      return (cardTwoTieBreaker >= cardOneTieBreaker);
+    } else {
+      return true;
+    }
+  }
+
+  addMinusOne(manual) {
+    var tryOrder = [BASE_DECK, CLASS_DECK, ADDITIONAL_DECK];
+    if (manual) tryOrder = [ADDITIONAL_DECK, BASE_DECK, CLASS_DECK];
+    var cardAdded = false;
+    tryOrder.forEach ( el => {
+      if (!cardAdded && this.removedMinusOnes[el].length > 0) {
+        var minusOneBeingAdded = this.removedMinusOnes[el].pop();
+        this.playerDeck.indexOf(minusOneBeingAdded) == -1 && this.playerDeck.push(minusOneBeingAdded);
+        this.addedMinusOnes[el].push(minusOneBeingAdded);
+        cardAdded = true;
+        if (manual) this.numMinusOnes++;
+      }
+    });
+    if (!cardAdded) console.log("Uh oh, tried to add a card but none were available to add.");
+  }
+
+  removeMinusOne(manual) {
+    var tryOrder = [ADDITIONAL_DECK, CLASS_DECK, BASE_DECK];
+    var cardAdded = false;
+    tryOrder.forEach ( el => {
+      if (!cardAdded && this.addedMinusOnes[el].length > 0) {
+        var minusOneBeingRemoved = this.addedMinusOnes[el].pop();
+        this.playerDeck.indexOf(minusOneBeingRemoved) !== -1 && this.playerDeck.splice(this.playerDeck.indexOf(minusOneBeingRemoved), 1);
+        this.removedMinusOnes[el].push(minusOneBeingRemoved);
+        cardAdded = true;
+        if (manual) this.numMinusOnes--;
+      }
+    });
+    if (!cardAdded) console.log("Uh oh, tried to remove a card but none were available to remove.");
+  }
+
+  // I chose "moddle" because "modify" and "toggle" both don't work but I 
+  // couldn't think of a term that encompassed both "adding" and "removing"
+
+  moddleBlesses(isAdding){
+    if (isAdding) {
+      if (this.blesses[0].length > 0) {
+        var addedCard = this.blesses[0].pop();
+        this.blesses[1].push(addedCard);
+        this.addCard(addedCard);
+        this.numBlesses++;
+      }
+    } else {
+      if (this.blesses[1].length > 0) {
+        var removedCard = this.blesses[1].pop();
+        this.blesses[0].push(removedCard);
+        this.removeCard(removedCard);
+        this.numBlesses--;
+      }
+    }
+  }
+
+  moddleCurses(isAdding){
+    if (isAdding) {
+      if (this.curses[0].length > 0) {
+        var addedCard = this.curses[0].pop();
+        this.curses[1].push(addedCard);
+        this.addCard(addedCard);
+        this.numCurses++;
+      }
+    } else {
+      if (this.curses[1].length > 0) {
+        var removedCard = this.curses[1].pop();
+        this.curses[0].push(removedCard);
+        this.removeCard(removedCard);
+        this.numCurses--;
+      }
+    }
   }
   
   getPlayerDeck() {

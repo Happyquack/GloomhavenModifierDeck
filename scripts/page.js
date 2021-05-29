@@ -3,7 +3,7 @@ import {Deck} from './deck.js';
 var MAX_CARDS_IN_COLUMN = 6;
 
 // make class selection
-var ICONPATH = "https://happyquack.github.io/GloomhavenModifierDeck/images/classIcons/";
+var ICONPATH = "/images/classIcons/";
 
 var WHITELISTED_CLASSES = ["01","02","03","04","05","06","07","11","12","16"];
 
@@ -72,7 +72,7 @@ function flipCard(event) { deckOfCards.forEach(el => {
 
 // create deck display box
 
-var deckDisplayBox = document.getElementById('deckDisplayBoxId');
+var deckDisplayBox = document.getElementById('deckDisplayBox');
 deckDisplayBox.innerHTML = "";
 
 // create the columns that will contain cards
@@ -144,27 +144,16 @@ function displayDeck () {
  var deckDisplayBoxWidth = deckDisplayBox.offsetWidth;
  var deckDisplayColumnWidth = deckDisplayBoxWidth/numberOfColumns;
  Array.from(deckDisplayBox.children).forEach(column => {
-  column.style.maxWidth = deckDisplayColumnWidth + "px";
   Array.from(column.children).forEach(card => {
-   card.style.width = deckDisplayColumnWidth + "px";
-   card.style.height = deckDisplayColumnWidth*2/3 + "px";
    card.addEventListener("click", flipCard);
-   Array.from(card.firstChild.children).forEach(images => {
-    images.width = deckDisplayColumnWidth*4/5;
-    images.height = images.width*2/3;
-    images.style.margin = deckDisplayColumnWidth/10 + "px";
-    images.style.borderRadius = deckDisplayColumnWidth/10 + "px";
-    images.style.position = "absolute";
-   } );
   } );
  } );
   
 }
 
-
 displayDeck();
 
-// make stat/perk box
+// make card adjusting and perk box
 
 var controllerBox = document.getElementById("controllerBox");
 var deckAdjustingBox = document.getElementById("deckAdjustingBox");
@@ -172,6 +161,95 @@ var perkBox = document.getElementById("perkBox");
 
 controllerBox.appendChild(deckAdjustingBox);
 controllerBox.appendChild(perkBox);
+
+// make card adjusting box
+
+function manualAddMinusOne() {
+  if (deck.numMinusOnes < 15) {
+    deck.addMinusOne(true);
+    displayDeck();
+  }
+}
+
+function manualRemoveMinusOne() {
+  if (deck.numMinusOnes > 0) {
+    deck.removeMinusOne(true);
+    displayDeck();
+  }
+}
+
+var minusOneModdlingBox = document.getElementById("minusOneModdlingBox");
+var minusOneImage = document.createElement("img");
+minusOneImage.src = "/images/statusIcons/minusOne.png";
+minusOneModdlingBox.appendChild(minusOneImage);
+var minusOneRemoveBox = document.createElement("button");
+minusOneRemoveBox.type = "button";
+minusOneRemoveBox.value = "<";
+minusOneRemoveBox.onclick = manualRemoveMinusOne;
+var minusOneAddBox = document.createElement("button");
+minusOneAddBox.type = "button";
+minusOneAddBox.value = ">";
+minusOneAddBox.onclick = manualAddMinusOne;
+minusOneModdlingBox.appendChild(minusOneRemoveBox);
+minusOneModdlingBox.appendChild(minusOneAddBox);
+
+function manualAddBless() {
+  if (deck.numBlesses < 10) {
+    deck.moddleBlesses(true);
+    displayDeck();
+  }
+}
+
+function manualRemoveBless() {
+  if (deck.numBlesses > 0) {
+    deck.moddleBlesses(false);
+    displayDeck();
+  }
+}
+
+var blessModdlingBox = document.getElementById("blessModdlingBox");
+var blessImage = document.createElement("img");
+blessImage.src = "/images/statusIcons/bless.png";
+blessModdlingBox.appendChild(blessImage);
+var blessRemoveBox = document.createElement("button");
+blessRemoveBox.type = "button";
+blessRemoveBox.value = "<";
+blessRemoveBox.onclick = manualRemoveBless;
+var blessAddBox = document.createElement("button");
+blessAddBox.type = "button";
+blessAddBox.value = ">";
+blessAddBox.onclick = manualAddBless;
+blessModdlingBox.appendChild(blessRemoveBox);
+blessModdlingBox.appendChild(blessAddBox);
+
+function manualAddCurse() {
+  if (deck.numCurses < 10) {
+    deck.moddleCurses(true);
+    displayDeck();
+  }
+}
+
+function manualRemoveCurse() {
+  if (deck.numCurses > 0) {
+    deck.moddleCurses(false);
+    displayDeck();
+  }
+}
+
+var curseModdlingBox = document.getElementById("curseModdlingBox");
+var curseImage = document.createElement("img");
+curseImage.src = "/images/statusIcons/curse.png";
+curseModdlingBox.appendChild(curseImage);
+var curseRemoveBox = document.createElement("button");
+curseRemoveBox.type = "button";
+curseRemoveBox.value = "<";
+curseRemoveBox.onclick = manualRemoveCurse;
+var curseAddBox = document.createElement("button");
+curseAddBox.type = "button";
+curseAddBox.value = ">";
+curseAddBox.onclick = manualAddCurse;
+curseModdlingBox.appendChild(curseRemoveBox);
+curseModdlingBox.appendChild(curseAddBox);
 
 // make checkbox event function
 
@@ -188,12 +266,12 @@ var checkboxes = [];
 for (i = 15; i > 0; i--) {
  var checkbox = document.createElement("input");
  checkbox.type = "checkbox";
- checkbox.style.content = "■";
  checkbox.id = "checkbox" + i;
  checkbox.addEventListener("click", checkboxTriggered);
  checkboxes.push(checkbox);
 }
 
+// make perk updating function (for when classes change)
 
 function updatePerks() {
  checkboxes.forEach(el => el.checked = false);

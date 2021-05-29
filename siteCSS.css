@@ -1,17 +1,4 @@
----
-layout: default
----
-
-<body>
- 
-  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-  <link rel="manifest" href="/favicon/site.webmanifest">
-  <!--<link rel="stylesheet" type="text/css" href="/siteCSS.css">-->
-
-  <style>
-    @font-face {
+@font-face {
     font-family: 'Pirata One';
     src: url('fonts/PirataOne-Regular.eot');
     src: url('fonts/PirataOne-Regular.eot?#iefix') format('embedded-opentype'),
@@ -144,10 +131,6 @@ layout: default
 
 #deckAdjustingBox div img {
   display: block;
-  width: 20%;
-  height: auto;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 #perkBox {
@@ -161,25 +144,3 @@ input:checked {
 .numberModifier {
   font-family: 'Pirata One';
 }
-  </style>
- 
- <div id="heading">
-   <h1> Class Selection </h1>
- </div>
- 
- <div id="classSelectionBoxId"></div>
-
- <div id="controllerBox">
-  <div id="deckAdjustingBox">
-    <div id="minusOneModdlingBox"></div>
-    <div id="blessModdlingBox"></div>
-    <div id="curseModdlingBox"></div>
-  </div>
-  <div id="perkBox"></div>
-</div>
- 
- <div id="deckDisplayBox"></div>
-  
- <script src="scripts/page.js" type="module"></script>
- 
-</body>
