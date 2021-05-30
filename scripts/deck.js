@@ -19,7 +19,7 @@ class Deck {
   
   loadBaseDeck() {
     this.baseDeck = [];
-    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/zBase/";
+    var dir = "images/modifierDecks/zBase/";
     var cardDir = dir + "baseCard";
     var backDir = dir + "baseCardBack.png";
     var valueList = [0,0,0,0,0,0,1,1,1,1,1,-1,-1,-1,-1,-1,-2,2,"null","x2"];
@@ -30,7 +30,7 @@ class Deck {
 
   loadAdditions() {
     this.additionDeck = [];
-    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/zGeneralAdditions/";
+    var dir = "images/modifierDecks/zGeneralAdditions/";
     var cardDir = dir + "addCard";
     var backDir = dir + "addCardBack.png";
     var valueList = ["null","null","null","null","null","null","null","null","null","null","x2","x2","x2","x2","x2","x2","x2","x2","x2","x2",-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
@@ -90,7 +90,7 @@ class Deck {
   
   loadBruteDeck() {
     this.characterDeck = [];
-    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/01/";
+    var dir = "images/modifierDecks/01/";
     var cardDir = dir + "brCard";
     var backDir = dir + "brCardBack.png";
     var valueList = [1,1,1,1,1,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1];
@@ -103,7 +103,7 @@ class Deck {
   
   loadTinkererDeck() {
     this.characterDeck = [];
-    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/02/";
+    var dir = "images/modifierDecks/02/";
     var cardDir = dir + "tiCard";
     var backDir = dir + "tiCardBack.png";
     var valueList = [0,1,1,3,0,0,0,0,0,1,1,1,1,1,1,0];
@@ -116,7 +116,7 @@ class Deck {
   
   loadSpellweaverDeck() {
     this.characterDeck = [];
-    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/03/";
+    var dir = "images/modifierDecks/03/";
     var cardDir = dir + "spCard";
     var backDir = dir + "spCardBack.png";
     var valueList = [1,1,1,1,1,1,0,1,1,1,2,2,2,2,0,0,0,0];
@@ -129,7 +129,7 @@ class Deck {
   
   loadScoundrelDeck() {
     this.characterDeck = [];
-    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/04/";
+    var dir = "images/modifierDecks/04/";
     var cardDir = dir + "scCard";
     var backDir = dir + "scCardBack.png";
     var valueList = [0,1,2,2,1,1,1,1,0,0,0,0,0,0,0,0,0];
@@ -142,7 +142,7 @@ class Deck {
   
   loadCragheartDeck() {
     this.characterDeck = [];
-    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/05/";
+    var dir = "images/modifierDecks/05/";
     var cardDir = dir + "crCard";
     var backDir = dir + "crCardBack.png";
     var valueList = [1,1,1,-2,2,2,1,1,2,2,0,0,0,0,0,0,0,0];
@@ -155,7 +155,7 @@ class Deck {
   
   loadMindthiefDeck() {
     this.characterDeck = [];
-    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/06/";
+    var dir = "images/modifierDecks/06/";
     var cardDir = dir + "miCard";
     var backDir = dir + "miCardBack.png";
     var valueList = [2,2,0,2,2,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0];
@@ -168,7 +168,7 @@ class Deck {
   
   loadSunkeeperDeck() {
     this.characterDeck = [];
-    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/07/";
+    var dir = "images/modifierDecks/07/";
     var cardDir = dir + "suCard";
     var backDir = dir + "suCardBack.png";
     var valueList = [0,2,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1];
@@ -181,7 +181,7 @@ class Deck {
   
   loadPlagueHeraldDeck() {
     this.characterDeck = [];
-    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/11/";
+    var dir = "images/modifierDecks/11/";
     var cardDir = dir + "phCard";
     var backDir = dir + "phCardBack.png";
     var valueList = [0,1,1,1,1,1,2,2,1,1,1,0,0,0,0,0,0,0,0,0];
@@ -194,7 +194,7 @@ class Deck {
   
   loadBerserkerDeck() {
     this.characterDeck = [];
-    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/12/";
+    var dir = "images/modifierDecks/12/";
     var cardDir = dir + "beCard";
     var backDir = dir + "beCardBack.png";
     var valueList = [1,1,2,2,0,0,0,0,0,0,1,0,0,2,2];
@@ -207,7 +207,7 @@ class Deck {
   
   loadElementalistDeck() {
     this.characterDeck = [];
-    var dir = "https://happyquack.github.io/GloomhavenModifierDeck/images/modifierDecks/16/";
+    var dir = "images/modifierDecks/16/";
     var cardDir = dir + "elCard";
     var backDir = dir + "elCardBack.png";
     var valueList = [1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0];

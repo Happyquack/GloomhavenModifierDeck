@@ -179,7 +179,7 @@ function manualRemoveMinusOne() {
 
 var minusOneModdlingBox = document.getElementById("minusOneModdlingBox");
 var minusOneImage = document.createElement("img");
-minusOneImage.src = BASEPATH + "/images/statusIcons/minusOne.png";
+minusOneImage.src = "images/statusIcons/minusOne.png";
 minusOneModdlingBox.appendChild(minusOneImage);
 var minusOneRemoveBox = document.createElement("button");
 minusOneRemoveBox.type = "button";
@@ -206,7 +206,7 @@ function manualRemoveBless() {
 
 var blessModdlingBox = document.getElementById("blessModdlingBox");
 var blessImage = document.createElement("img");
-blessImage.src = BASEPATH + "/images/statusIcons/bless.png";
+blessImage.src = "images/statusIcons/bless.png";
 blessModdlingBox.appendChild(blessImage);
 var blessRemoveBox = document.createElement("button");
 blessRemoveBox.type = "button";
@@ -237,7 +237,7 @@ function manualRemoveCurse() {
 
 var curseModdlingBox = document.getElementById("curseModdlingBox");
 var curseImage = document.createElement("img");
-curseImage.src = BASEPATH + "/images/statusIcons/curse.png";
+curseImage.src = "images/statusIcons/curse.png";
 curseModdlingBox.appendChild(curseImage);
 var curseRemoveBox = document.createElement("button");
 curseRemoveBox.type = "button";
@@ -295,7 +295,7 @@ function updatePerks() {
   instruction.forEach(el => {
    if (commandWords.includes(el)) {
     var newImage = document.createElement("img");
-    newImage.src = "https://happyquack.github.io/GloomhavenModifierDeck/images/statusIcons/" + el + ".png";
+    newImage.src = "images/statusIcons/" + el + ".png";
     var fontSize = parseInt(window.getComputedStyle(controllerBox,null).getPropertyValue('font-size'));
     newImage.width = 1.5*fontSize;
     newImage.height = 1.5*fontSize;
