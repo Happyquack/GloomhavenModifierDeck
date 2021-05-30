@@ -18,7 +18,7 @@ for (var i = 0; i < 18; i++) {
  var num = i + 1 + "";
  if (num < 10) {num = "0" + num;}
  var image = document.createElement('img');
- image.src = BASEPATH + "/images/classIcons/" + num + "icon.png";
+ image.src = "images/classIcons/" + num + "icon.png";
  image.classList.add("classSelectionIcon");
  
  var wrapper = document.createElement('div');
