@@ -16,6 +16,7 @@ class Card {
     this.cardDiv = document.createElement('div');
     this.cardDiv.appendChild(this.img);
     this.cardDiv.appendChild(this.back);
+    this.flippable = false;
   }
   
   getValue() {
