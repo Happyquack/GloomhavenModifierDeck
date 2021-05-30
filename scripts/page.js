@@ -3,7 +3,7 @@ import {Deck} from './deck.js';
 var MAX_CARDS_IN_COLUMN = 6;
 
 // make class selection
-var ICONPATH = "https://happyquack.github.io/GloomhavenModifierDeck/images/classIcons/";
+var BASEPATH = "https://happyquack.github.io/GloomhavenModifierDeck";
 
 var WHITELISTED_CLASSES = ["01","02","03","04","05","06","07","11","12","16"];
 
@@ -18,7 +18,7 @@ for (var i = 0; i < 18; i++) {
  var num = i + 1 + "";
  if (num < 10) {num = "0" + num;}
  var image = document.createElement('img');
- image.src = ICONPATH + num + "icon.png";
+ image.src = BASEPATH + "/images/classIcons/" + num + "icon.png";
  image.classList.add("classSelectionIcon");
  
  var wrapper = document.createElement('div');
@@ -179,7 +179,7 @@ function manualRemoveMinusOne() {
 
 var minusOneModdlingBox = document.getElementById("minusOneModdlingBox");
 var minusOneImage = document.createElement("img");
-minusOneImage.src = "/images/statusIcons/minusOne.png";
+minusOneImage.src = BASEPATH + "/images/statusIcons/minusOne.png";
 minusOneModdlingBox.appendChild(minusOneImage);
 var minusOneRemoveBox = document.createElement("button");
 minusOneRemoveBox.type = "button";
@@ -206,7 +206,7 @@ function manualRemoveBless() {
 
 var blessModdlingBox = document.getElementById("blessModdlingBox");
 var blessImage = document.createElement("img");
-blessImage.src = "/images/statusIcons/bless.png";
+blessImage.src = BASEPATH + "/images/statusIcons/bless.png";
 blessModdlingBox.appendChild(blessImage);
 var blessRemoveBox = document.createElement("button");
 blessRemoveBox.type = "button";
@@ -237,7 +237,7 @@ function manualRemoveCurse() {
 
 var curseModdlingBox = document.getElementById("curseModdlingBox");
 var curseImage = document.createElement("img");
-curseImage.src = "/images/statusIcons/curse.png";
+curseImage.src = BASEPATH + "/images/statusIcons/curse.png";
 curseModdlingBox.appendChild(curseImage);
 var curseRemoveBox = document.createElement("button");
 curseRemoveBox.type = "button";
