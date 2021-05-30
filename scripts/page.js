@@ -3,7 +3,7 @@ import {Deck} from './deck.js';
 var MAX_CARDS_IN_COLUMN = 6;
 
 // make class selection
-var ICONPATH = "/images/classIcons/";
+var ICONPATH = "https://happyquack.github.io/GloomhavenModifierDeck/images/classIcons/";
 
 var WHITELISTED_CLASSES = ["01","02","03","04","05","06","07","11","12","16"];
 
@@ -141,17 +141,20 @@ function displayDeck () {
   
  // format and display columns
  
- var deckDisplayBoxWidth = deckDisplayBox.offsetWidth;
- var deckDisplayColumnWidth = deckDisplayBoxWidth/numberOfColumns;
  Array.from(deckDisplayBox.children).forEach(column => {
   Array.from(column.children).forEach(card => {
    card.addEventListener("click", flipCard);
   } );
  } );
-  
-}
 
-displayDeck();
+ // update moddling arrows
+  deck.numMinusOnes < 15 ? document.getElementById("minusOneAddBox").disabled = false : document.getElementById("minusOneAddBox").disabled = true;
+  !deck.addedMinusOnes.every(el => el.length == 0) ? document.getElementById("minusOneRemoveBox").disabled = false : document.getElementById("minusOneRemoveBox").disabled = true;
+  deck.numBlesses < 10 ? document.getElementById("blessAddBox").disabled = false : document.getElementById("blessAddBox").disabled = true;
+  deck.numBlesses > 0 ? document.getElementById("blessRemoveBox").disabled = false : document.getElementById("blessRemoveBox").disabled = true;
+  deck.numCurses < 10 ? document.getElementById("curseAddBox").disabled = false : document.getElementById("curseAddBox").disabled = true;
+  deck.numCurses > 0 ? document.getElementById("curseRemoveBox").disabled = false : document.getElementById("curseRemoveBox").disabled = true;
+}
 
 // make card adjusting and perk box
 
@@ -165,17 +168,13 @@ controllerBox.appendChild(perkBox);
 // make card adjusting box
 
 function manualAddMinusOne() {
-  if (deck.numMinusOnes < 15) {
-    deck.addMinusOne(true);
-    displayDeck();
-  }
+  deck.addMinusOne(true);
+  displayDeck();
 }
 
 function manualRemoveMinusOne() {
-  if (deck.numMinusOnes > 0) {
-    deck.removeMinusOne(true);
-    displayDeck();
-  }
+  deck.removeMinusOne(true);
+  displayDeck();
 }
 
 var minusOneModdlingBox = document.getElementById("minusOneModdlingBox");
@@ -184,27 +183,25 @@ minusOneImage.src = "/images/statusIcons/minusOne.png";
 minusOneModdlingBox.appendChild(minusOneImage);
 var minusOneRemoveBox = document.createElement("button");
 minusOneRemoveBox.type = "button";
-minusOneRemoveBox.value = "<";
+minusOneRemoveBox.innerHTML = "←";
 minusOneRemoveBox.onclick = manualRemoveMinusOne;
+minusOneRemoveBox.id = "minusOneRemoveBox";
 var minusOneAddBox = document.createElement("button");
 minusOneAddBox.type = "button";
-minusOneAddBox.value = ">";
+minusOneAddBox.innerHTML = "→";
 minusOneAddBox.onclick = manualAddMinusOne;
+minusOneAddBox.id = "minusOneAddBox";
 minusOneModdlingBox.appendChild(minusOneRemoveBox);
 minusOneModdlingBox.appendChild(minusOneAddBox);
 
 function manualAddBless() {
-  if (deck.numBlesses < 10) {
-    deck.moddleBlesses(true);
-    displayDeck();
-  }
+  deck.moddleBlesses(true);
+  displayDeck();
 }
 
 function manualRemoveBless() {
-  if (deck.numBlesses > 0) {
-    deck.moddleBlesses(false);
-    displayDeck();
-  }
+  deck.moddleBlesses(false);
+  displayDeck();
 }
 
 var blessModdlingBox = document.getElementById("blessModdlingBox");
@@ -213,12 +210,14 @@ blessImage.src = "/images/statusIcons/bless.png";
 blessModdlingBox.appendChild(blessImage);
 var blessRemoveBox = document.createElement("button");
 blessRemoveBox.type = "button";
-blessRemoveBox.value = "<";
+blessRemoveBox.innerHTML = "←";
 blessRemoveBox.onclick = manualRemoveBless;
+blessRemoveBox.id = "blessRemoveBox";
 var blessAddBox = document.createElement("button");
 blessAddBox.type = "button";
-blessAddBox.value = ">";
+blessAddBox.innerHTML = "→";
 blessAddBox.onclick = manualAddBless;
+blessAddBox.id = "blessAddBox";
 blessModdlingBox.appendChild(blessRemoveBox);
 blessModdlingBox.appendChild(blessAddBox);
 
@@ -242,11 +241,13 @@ curseImage.src = "/images/statusIcons/curse.png";
 curseModdlingBox.appendChild(curseImage);
 var curseRemoveBox = document.createElement("button");
 curseRemoveBox.type = "button";
-curseRemoveBox.value = "<";
+curseRemoveBox.innerHTML = "←";
+curseRemoveBox.id = "curseRemoveBox";
 curseRemoveBox.onclick = manualRemoveCurse;
 var curseAddBox = document.createElement("button");
 curseAddBox.type = "button";
-curseAddBox.value = ">";
+curseAddBox.innerHTML = "→";
+curseAddBox.id = "curseAddBox";
 curseAddBox.onclick = manualAddCurse;
 curseModdlingBox.appendChild(curseRemoveBox);
 curseModdlingBox.appendChild(curseAddBox);
@@ -327,7 +328,4 @@ function updatePerks() {
  });
 }
 
-
-
-
-
+displayDeck();

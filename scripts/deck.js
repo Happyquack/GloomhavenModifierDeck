@@ -339,7 +339,7 @@ class Deck {
 
   addMinusOne(manual) {
     var tryOrder = [BASE_DECK, CLASS_DECK, ADDITIONAL_DECK];
-    if (manual) tryOrder = [ADDITIONAL_DECK, BASE_DECK, CLASS_DECK];
+    if (manual) tryOrder = [BASE_DECK, ADDITIONAL_DECK, CLASS_DECK];
     var cardAdded = false;
     tryOrder.forEach ( el => {
       if (!cardAdded && this.removedMinusOnes[el].length > 0) {
