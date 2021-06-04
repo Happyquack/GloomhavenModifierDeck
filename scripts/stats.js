@@ -1,5 +1,6 @@
 
-var CUMULATIVE_EFFECTS = ["push", "pull", "heal", "shield", "pierce"];
+var CUMULATIVE_EFFECTS = ["push", "pull", "healSelf", "shieldSelf", "pierce", "target"];
+var CUMULATIVE_EFFECT_DISPLAY = ["Push", "Pull", "Heal (self)", "Shield (self)", "Pierce", "Target"];
 
 class StatsHandler {
 
@@ -116,7 +117,30 @@ class StatsHandler {
 
     //print rolling modifiers
 
-    
+    if (rollingStats.length > 1) {
+
+      var rollingBox = document.createElement("div");
+      rollingBox.classList.add("rollingModifierBox");
+      rollingStats.forEach( el => {
+        var key = el[0];
+        var chance = (el[1] * 100).toFixed(2);
+        var entry = document.createElement("div");
+        if (!isNaN(key) && parseInt(key) != 0) {
+          entry.innerHTML = "Attack modifier +" + key + ": " + chance + "%";
+        } else if (CUMULATIVE_EFFECTS.includes(key.slice(0,key.length-1))) {
+          var index = CUMULATIVE_EFFECTS.indexOf(key.slice(0,key.length-1));
+          entry.innerHTML = CUMULATIVE_EFFECT_DISPLAY[index] + " " + key.charAt(key.length-1) + ": " + chance + "%";
+        } else if (isNaN(key)) {
+          entry.innerHTML = key.charAt(0).toUpperCase() + key.slice(1) + ": " + chance + "%";
+        }
+        rollingBox.appendChild(entry);
+      });
+
+      var rollingModiferTitle = document.createElement("h4");
+      rollingModiferTitle.innerHTML = "Rolling modifier stats:";
+      targetDiv.appendChild(rollingModiferTitle);
+      targetDiv.appendChild(rollingBox);
+    }
   }
 
   getAverage (vals) {

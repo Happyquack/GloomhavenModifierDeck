@@ -94,7 +94,7 @@ class Deck {
     var cardDir = dir + "brCard";
     var backDir = dir + "brCardBack.png";
     var valueList = [1,1,1,1,1,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1];
-    var effectList = [0,0,0,0,0,0,0,"push1","push1","push1","push1","push1","push1","pierce3","pierce3","stun","stun","disarm","muddle","target","target","shieldSelf1"];
+    var effectList = [0,0,0,0,0,0,0,"push1","push1","push1","push1","push1","push1","pierce3","pierce3","stun","stun","disarm","muddle","target1","target1","shieldSelf1"];
     var rollingList = [0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["x11-x12","x13-+0","+1-+2","+3-+4","+6","+7-+8-+9","+10-+11-+12","+13-+14","+15","+16","+17-+18","+19","+20","+21","+5"];
@@ -107,7 +107,7 @@ class Deck {
     var cardDir = dir + "tiCard";
     var backDir = dir + "tiCardBack.png";
     var valueList = [0,1,1,3,0,0,0,0,0,1,1,1,1,1,1,0];
-    var effectList = [0,0,0,0,"fire","fire","muddle","muddle","muddle","wound","wound","immobilize","immobilize","healSelf2","healSelf2","target"];
+    var effectList = [0,0,0,0,"fire","fire","muddle","muddle","muddle","wound","wound","immobilize","immobilize","healSelf2","healSelf2","target1"];
     var rollingList = [0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["x11-x12","x13-x14","x16-+0","+1-+2","+3","+4-+5","+6-+7-+8","+9","+10","+11","+12","+13","+14","+15"];
@@ -211,7 +211,7 @@ class Deck {
     var cardDir = dir + "elCard";
     var backDir = dir + "elCardBack.png";
     var valueList = [1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0];
-    var effectList = [0,0,0,"fire","fire","fire","fire","cold","cold","cold","cold","air","air","air","air","earth","earth","earth","earth","push1","push1","wound","stun","target"];
+    var effectList = [0,0,0,"fire","fire","fire","fire","cold","cold","cold","cold","air","air","air","air","earth","earth","earth","earth","push1","push1","wound","stun","target1"];
     var rollingList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["x11-x12","x13-x14","x15-+0","x0-+1","x1-+2","+3-+4-+5","+7-+8-+9","+11-+12-+13","+15-+16-+17","x2-x3-+6-+18","x4-x5-+10-+14","+19-+20","+21","+22","+23"];
