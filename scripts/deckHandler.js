@@ -1,4 +1,5 @@
 import { Deck } from "./deck.js";
+import { StatsHandler } from "./stats.js";
 
 var MAX_CARDS_IN_COLUMN = 6;
 
@@ -6,6 +7,7 @@ class DeckHandler {
 
     constructor() {
         this.deck = new Deck();
+        this.statsHandler = new StatsHandler(this);
         this.deckOfCards = this.deck.getPlayerDeck();
         this.deckDisplayBox = document.getElementById('deckDisplayBox');
         this.deckDisplayBox.innerHTML = "";
@@ -88,6 +90,8 @@ class DeckHandler {
         this.deck.numBlesses > 0 ? document.getElementById("blessRemoveBox").disabled = false : document.getElementById("blessRemoveBox").disabled = true;
         this.deck.numCurses < 10 ? document.getElementById("curseAddBox").disabled = false : document.getElementById("curseAddBox").disabled = true;
         this.deck.numCurses > 0 ? document.getElementById("curseRemoveBox").disabled = false : document.getElementById("curseRemoveBox").disabled = true;
+
+        this.statsHandler.update();
     }
 
     updateCharacter(characterName) {
@@ -98,6 +102,7 @@ class DeckHandler {
     flipCard(event) { 
         this.deckOfCards.forEach(el => {
             if (el.getImg() == event.target) el.flip(); 
+            this.statsHandler.update();
         });
     }
 }

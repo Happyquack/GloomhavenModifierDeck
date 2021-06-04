@@ -163,6 +163,16 @@ input:checked {
 .numberModifier {
   font-family: 'Pirata One';
 }
+
+#statsBox {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#statsBox div {
+  flex: 1;
+}
+
   </style>
  
  <div id="heading">
@@ -181,6 +191,21 @@ input:checked {
 </div>
  
  <div id="deckDisplayBox"></div>
+
+ <div id="statsBox">
+   <div id="generalStatsBox">
+     <h3> Overall Deck Stats </h3>
+     <div id="generalStatsNormalBox"></div>
+     <div id="generalStatsAdvBox"></div>
+     <div id="generalStatsDisBox"></div>
+   </div>
+   <div id="currentStatsBox">
+     <h3> Current Deck Stats </h3>
+    <div id="currentStatsNormalBox"></div>
+    <div id="currentStatsAdvBox"></div>
+    <div id="currentStatsDisBox"></div>
+  </div>
+ </div>
   
  <script src="scripts/page.js" type="module"></script>
  

@@ -13,7 +13,7 @@ var perkHandler = new PerkHandler(deckHandler);
 
 // make class selection
 
-var classSelectionUI = new ClassSelectionUI(deckHandler,perkHandler);
+var classSelectionUI = new ClassSelectionUI(deckHandler, perkHandler);
 
 // make deck adjusting handler
 

@@ -133,7 +133,7 @@ class Deck {
     var cardDir = dir + "scCard";
     var backDir = dir + "scCardBack.png";
     var valueList = [0,1,2,2,1,1,1,1,0,0,0,0,0,0,0,0,0];
-    var effectList = [0,0,0,0,0,0,0,0,"pierce3","pierce3","poison","poison","poison","poison","muddle",",muddle","invisible"];
+    var effectList = [0,0,0,0,0,0,0,0,"pierce3","pierce3","poison","poison","poison","poison","muddle","muddle","invisible"];
     var rollingList = [0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["x11-x12","x13-x14","oooo","x16-+0","x15-+1","x4-+2","x5-+3","+4-+5","+6-+7","+8-+9","+10-+11","+12-+13","+14-+15","+16"];
