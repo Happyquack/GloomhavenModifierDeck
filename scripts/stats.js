@@ -1,11 +1,13 @@
 
 var CUMULATIVE_EFFECTS = ["push", "pull", "healSelf", "shieldSelf", "pierce", "target"];
 var CUMULATIVE_EFFECT_DISPLAY = ["Push", "Pull", "Heal (self)", "Shield (self)", "Pierce", "Target"];
+var STORAGE;
 
 class StatsHandler {
 
   constructor (deckHandler) {
     this.deckHandler = deckHandler;
+    STORAGE = new Map();
   }
 
   update() {
@@ -18,37 +20,115 @@ class StatsHandler {
   //    return 2d array of rolling effects along with chances
   //         ex: [["fire", 0.78],[+1, 0.01]]
   normalDeck(currentDeck, targetDiv) {
-    var possibleEndCards = [];
-    var rollingEndCounts = new Map();
-    var tempRolling = new Map();
-    tempRolling.set("value", 0);
-    this.normalDeckEvaluation(currentDeck, tempRolling, currentDeck.length, possibleEndCards, rollingEndCounts);
-    var totalOutcomes = possibleEndCards.length;
+    // first we look at all of the non-rolling cards
+    var possibleEndCards = currentDeck.filter(el => !el.isRolling());
+    // if this list is empty we have to start from a fresh reshuffle
+    if (possibleEndCards.length == 0) {
+      currentDeck = [...this.deckHandler.deck.getPlayerDeck()];
+      possibleEndCards = currentDeck.filter(el => !el.isRolling());
+    }
+    // now that we have the end cards taken care of, we take a look at rolling cards
     var endRollingChances = [];
-    for (var [key, val] of rollingEndCounts.entries()) {
-      endRollingChances.push([key, val]);
+    if (possibleEndCards.length != currentDeck.length) {
+      this.normalDeckEvaluation(currentDeck, endRollingChances);
     }
     this.displayChart(possibleEndCards, endRollingChances, targetDiv);
   }
 
-  normalDeckEvaluation(currentDeck, runningRolling, runningBigN, endCards, endRolling) {
-    currentDeck.forEach(card => {
-      if (card.isRolling()) {
-        var cardValue = card.getValue();
-        var newRolling = new Map();
-        for (var [key,val] of runningRolling.entries()) {
-          newRolling.set(key, val);
+  normalDeckEvaluation(currentDeck, endRolling) {
+    // first we need to make sure that there are non-rolling cards, and store the rollings if there are none.
+    var cumulativeRollingCards = [];
+    if (currentDeck.filter(el => !el.isRolling()).length == 0) {
+      cumulativeRollingCards = currentDeck;
+      currentDeck = [...this.deckHandler.deck.getPlayerDeck()];
+    }
+    var rollingCards = currentDeck.filter(el => el.isRolling());
+    // now we have to look at how many there are of each rolling card
+    var summarizedRollings = new Map();
+    rollingCards.forEach(card => {
+      var effect = card.getEffect();
+      if (summarizedRollings.has(effect)) { summarizedRollings.set(effect, summarizedRollings.get(effect) + 1)}
+      else {summarizedRollings.set(effect, 1)}
+    });
+
+    // next, we calculate the chances of pulling each number of card
+    var numberStorage = new Map();
+    var totalNum = currentDeck.length;
+    var rollingNum = rollingCards.length;
+    for (var [key, val] of summarizedRollings.entries()) {
+      if (key != 0) {
+        if (CUMULATIVE_EFFECTS.includes(key.slice(0,-1))) {
+          for (let i = 1; i <= val; i++) { // if the modifier is cumulative then we have to calculate probabilities for each amount of the card there is
+            endRolling.push([key.slice(0,-1) + (parseInt(key.charAt(key.length-1)) * (i)), this.probabilityOfDesiredNumberOfCards(i, rollingNum-(val-i), totalNum, statisticsStorage)*(val-i+1)])
+          }
+        } else { // if the modifier is not cumulative then calculate the P of drawing one and multiply it by the num of cards
+          endRolling.push([key, this.probabilityOfDesiredNumberOfCards(1, rollingNum, totalNum)*val]);
         }
-        newRolling.set("value", newRolling.get("value") + cardValue);
-        this.parseRollingEffects(card, newRolling);
-        var nextDeck = currentDeck.filter(el => el != card);
-        if (nextDeck.length == 0) nextDeck = [...this.deckHandler.deck.getPlayerDeck()];
-        this.normalDeckEvaluation(nextDeck, newRolling, runningBigN * currentDeck.length, endCards, endRolling);
-      } else {
-        endCards.push(card);
-        this.saveRollingEffects(runningRolling, runningBigN, endRolling);
+      }
+    }
+    // now we gotta take care of those pesky number modifiers
+    var listOfNums = [];
+    var maxVal = 0;
+    var numPosMods = 0;
+    rollingCards.forEach(card => {
+      var value = card.getValue();
+      maxVal += value;
+      if (value > 0) {
+        numPosMods++;
+        listOfNums.push(value);
       }
     });
+    // make a 2d array to store information needed for probability calculations
+    // each index of the outer array pertains to a total that can be added up to, 
+    // each index of the inner array pertains to how many cards are needed,
+    // and the values inside keep track of how many unique ways that can be achieved.
+    var modifierInfo = [...Array(maxVal)].map(e => Array(numPosMods).fill(0)); // thank you https://stackoverflow.com/a/52727729
+    // next steps - loop through list of nums and do nested loops until a desired num is hit and add it to modifier info
+    this.recursiveRollingModCalculator(0,0,listOfNums,modifierInfo);
+
+    // now what we can do is find the chance of getting any ending value x by, for every value in the xth array in modifierInfo, 
+    // calculating the probability of drawing A cards (where A in the index in the xth array) and multiplying it by the value.
+
+    for (let endVal = 1; endVal <= maxVal; endVal++) {
+      let numberModifierProbability = 0;
+      for (let numNeededCards = 1; numNeededCards <= numPosMods; numNeededCards++) {
+        if (modifierInfo[endVal-1][numNeededCards-1] != 0) {
+          var baseProbability = this.probabilityOfDesiredNumberOfCards(numNeededCards, rollingCards.length-(numPosMods-numNeededCards), currentDeck.length);
+          numberModifierProbability += modifierInfo[endVal-1][numNeededCards-1] * baseProbability;
+        }
+      }
+      endRolling.push([endVal, numberModifierProbability]);
+    }
+  }
+
+  recursiveRollingModCalculator(runningVal, numCards, listOfAvailableMods, modifierInfo) {
+    for (let i = 0; i < listOfAvailableMods.length; i++)
+    {
+      var newVal = runningVal + listOfAvailableMods[i];
+      modifierInfo[newVal-1][numCards]++;
+      this.recursiveRollingModCalculator(newVal, numCards+1, listOfAvailableMods.slice(i+1), modifierInfo);
+    }
+  }
+
+  probabilityOfDesiredNumberOfCards(numWant, numRolling, numTotal) {
+    if (numWant == 0) return 1; // this is the default
+    if (numWant > numRolling) return 0; // this is impossible
+    // check to see if this has been calculated yet
+    if (STORAGE.has("" + numWant + "x" + numRolling + "x" + numTotal)) return STORAGE.get("" + numWant + "x" + numRolling + "x" + numTotal);
+    // now calculate a new probability using a formula I conjected
+    var output = 0;
+    for (let i = 0; i <= numRolling-1; i++) {
+      var product = numWant/(numTotal-i) * (numTotal + 1) / (numRolling + 1 - numWant) * this.probabilityOfDesiredNumberOfCards(numWant-1, numRolling-1-i, numTotal-1-i);
+      for (let j = 0; j <= i; j++) {
+        product = product * (numRolling + 1 - numWant - j) / (numTotal + 1 - j);
+      }
+      output += product;
+    }
+    // save the result so that we can refer back to it
+    STORAGE.set("" + numWant + "x" + numRolling + "x" + numTotal, output);
+    console.log(numWant, numRolling, numTotal);
+    console.log(output);
+    return output;
   }
 
   parseRollingEffects(card, rollingMap) {
@@ -117,7 +197,7 @@ class StatsHandler {
 
     //print rolling modifiers
 
-    if (rollingStats.length > 1) {
+    if (rollingStats.length > 0) {
 
       var rollingBox = document.createElement("div");
       rollingBox.classList.add("rollingModifierBox");

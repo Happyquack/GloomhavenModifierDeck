@@ -1,7 +1,7 @@
 import {ClassSelectionUI} from './classSelection.js';
 import {DeckHandler} from './deckHandler.js';
 import {ModdlingBox} from './moddling.js';
-import { PerkHandler } from './perkHandler.js';
+import {PerkHandler} from './perkHandler.js';
 
 // create player deck
 
