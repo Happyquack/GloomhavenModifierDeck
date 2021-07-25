@@ -59,7 +59,7 @@ class StatsHandler {
       if (key != 0) {
         if (CUMULATIVE_EFFECTS.includes(key.slice(0,-1))) {
           for (let i = 1; i <= val; i++) { // if the modifier is cumulative then we have to calculate probabilities for each amount of the card there is
-            endRolling.push([key.slice(0,-1) + (parseInt(key.charAt(key.length-1)) * (i)), this.probabilityOfDesiredNumberOfCards(i, rollingNum-(val-i), totalNum, statisticsStorage)*(val-i+1)])
+            endRolling.push([key.slice(0,-1) + (parseInt(key.charAt(key.length-1)) * (i)), this.probabilityOfDesiredNumberOfCards(i, rollingNum-(val-i), totalNum)*(val-i+1)])
           }
         } else { // if the modifier is not cumulative then calculate the P of drawing one and multiply it by the num of cards
           endRolling.push([key, this.probabilityOfDesiredNumberOfCards(1, rollingNum, totalNum)*val]);
@@ -126,8 +126,6 @@ class StatsHandler {
     }
     // save the result so that we can refer back to it
     STORAGE.set("" + numWant + "x" + numRolling + "x" + numTotal, output);
-    console.log(numWant, numRolling, numTotal);
-    console.log(output);
     return output;
   }
 
