@@ -24,8 +24,7 @@ class StatsHandler {
     var possibleEndCards = currentDeck.filter(el => !el.isRolling());
     // if this list is empty we have to start from a fresh reshuffle
     if (possibleEndCards.length == 0) {
-      currentDeck = [...this.deckHandler.deck.getPlayerDeck()];
-      possibleEndCards = currentDeck.filter(el => !el.isRolling());
+      possibleEndCards = this.deckHandler.deck.getPlayerDeck().filter(el => !el.isRolling());
     }
     // now that we have the end cards taken care of, we take a look at rolling cards
     var endRollingChances = [];
@@ -37,9 +36,17 @@ class StatsHandler {
 
   normalDeckEvaluation(currentDeck, endRolling) {
     // first we need to make sure that there are non-rolling cards, and store the rollings if there are none.
-    var cumulativeRollingCards = [];
+    var cumulativeRollingEffects = new Map();
+    var cumulativeRollingValue = 0;
     if (currentDeck.filter(el => !el.isRolling()).length == 0) {
-      cumulativeRollingCards = currentDeck;
+      if (currentDeck.length > 0) {
+        currentDeck.forEach(card => {
+          cumulativeRollingValue += card.getValue();
+          var effect = card.getEffect();
+          if (cumulativeRollingEffects.has(effect)) { cumulativeRollingEffects.set(effect, cumulativeRollingEffects.get(effect) + 1)}
+          else {cumulativeRollingEffects.set(effect, 1)}
+        });
+      }
       currentDeck = [...this.deckHandler.deck.getPlayerDeck()];
     }
     var rollingCards = currentDeck.filter(el => el.isRolling());
@@ -57,12 +64,21 @@ class StatsHandler {
     var rollingNum = rollingCards.length;
     for (var [key, val] of summarizedRollings.entries()) {
       if (key != 0) {
+        var offset = 0;
+        if (cumulativeRollingEffects.has(key)) {
+          offset = cumulativeRollingEffects.get(key);
+          endRolling.push([key.slice(0,-1) + parseInt(key.charAt(key.length-1)) * (offset), 1]);
+        }
         if (CUMULATIVE_EFFECTS.includes(key.slice(0,-1))) {
           for (let i = 1; i <= val; i++) { // if the modifier is cumulative then we have to calculate probabilities for each amount of the card there is
-            endRolling.push([key.slice(0,-1) + (parseInt(key.charAt(key.length-1)) * (i)), this.probabilityOfDesiredNumberOfCards(i, rollingNum-(val-i), totalNum)*(val-i+1)])
+            endRolling.push([key.slice(0,-1) + (parseInt(key.charAt(key.length-1)) * (i + offset)), this.probabilityOfDesiredNumberOfCards(i, rollingNum-(val-i), totalNum)*(val-i+1)])
           }
         } else { // if the modifier is not cumulative then calculate the P of drawing one and multiply it by the num of cards
-          endRolling.push([key, this.probabilityOfDesiredNumberOfCards(1, rollingNum, totalNum)*val]);
+          if (cumulativeRollingEffects.has(key)) {
+            endRolling.push([key, 1]);
+          } else {
+            endRolling.push([key, this.probabilityOfDesiredNumberOfCards(1, rollingNum, totalNum)*val]);
+          }
         }
       }
     }
@@ -89,6 +105,10 @@ class StatsHandler {
     // now what we can do is find the chance of getting any ending value x by, for every value in the xth array in modifierInfo, 
     // calculating the probability of drawing A cards (where A in the index in the xth array) and multiplying it by the value.
 
+    if (cumulativeRollingValue > 0) {
+      endRolling.push([cumulativeRollingValue, 1]);
+    }
+
     for (let endVal = 1; endVal <= maxVal; endVal++) {
       let numberModifierProbability = 0;
       for (let numNeededCards = 1; numNeededCards <= numPosMods; numNeededCards++) {
@@ -97,7 +117,7 @@ class StatsHandler {
           numberModifierProbability += modifierInfo[endVal-1][numNeededCards-1] * baseProbability;
         }
       }
-      endRolling.push([endVal, numberModifierProbability]);
+      endRolling.push([endVal + cumulativeRollingValue, numberModifierProbability]);
     }
   }
 
@@ -188,8 +208,8 @@ class StatsHandler {
       targetDiv.appendChild(endCardStatOutput);
       targetDiv.appendChild(endCardStatOutputTwo);
     } else if (endCardValues.length == 1) {
-      endCardStatOutput.innerHTML = "Typical deck average: " + endCardStatOutput[0];
       var endCardStatOutput = document.createElement("p");
+      endCardStatOutput.innerHTML = "Typical deck average: " + endCardValues[0];
       targetDiv.appendChild(endCardStatOutput);
     }
 
