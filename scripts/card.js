@@ -38,6 +38,10 @@ class Card {
   getImg() {
     return this.cardDiv;
   }
+
+  getCardSummary() {
+    return this.value + ":" + this.effect;
+  }
   
   flip() {
     this.flipped = !this.flipped;
