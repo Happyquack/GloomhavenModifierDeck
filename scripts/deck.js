@@ -124,7 +124,7 @@ class Deck {
     var rollingList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["oooo","x11-+0","x12-+1","+2-+3","+4-+5","+6","+7","+8","+9","+10","+11","+12","+13","+14-+15","+16-+17"];
-    this.perkInstructions = ["1Remove four =+0= cards","2Replace one =-1= card with one =+1= card","2Add two =+1= cards","1Add one =+0=stun= card","1Add one =+1=wound= card","1Add one =+1=immobilize= card","1Add one =+1=curse= card","2Add one =+2=fire= card","2Add one =+2=cold= card","1Add one =rolling=plant= and one =rolling=air= card","1Add one =rolling=sun= and one =rolling=night= card"];
+    this.perkInstructions = ["1Remove four =+0= cards","2Replace one =-1= card with one =+1= card","2Add two =+1= cards","1Add one =+0=stun= card","1Add one =+1=wound= card","1Add one =+1=immobilize= card","1Add one =+1=curse= card","2Add one =+2=fire= card","2Add one =+2=cold= card","1Add one =rolling=earth= and one =rolling=air= card","1Add one =rolling=sun= and one =rolling=night= card"];
   }
   
   loadScoundrelDeck() {
@@ -215,7 +215,7 @@ class Deck {
     var rollingList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["x11-x12","x13-x14","x15-+0","x0-+1","x1-+2","+3-+4-+5","+7-+8-+9","+11-+12-+13","+15-+16-+17","x2-x3-+6-+18","x4-x5-+10-+14","+19-+20","+21","+22","+23"];
-    this.perkInstructions = ["2Remove two =-1= cards","1Replace one =-1= card with one =+1= card","2Replace one =+0= card with one =+2= card","1Add three =+0=fire= cards","1Add three =+0=cold= cards","1Add three =+0=air= cards","1Add three =+0=plant= cards","1Replace two =+0= cards with one =+0=fire= and one =+0=plant= card","1Replace two =+0= cards with one =+0=cold= and one =+0=air= card","1Add two =+1=push=1 cards","1Add one =+1=wound= card","1Add one =+0=stun= card","1Add one =+0=target= card"];
+    this.perkInstructions = ["2Remove two =-1= cards","1Replace one =-1= card with one =+1= card","2Replace one =+0= card with one =+2= card","1Add three =+0=fire= cards","1Add three =+0=cold= cards","1Add three =+0=air= cards","1Add three =+0=earth= cards","1Replace two =+0= cards with one =+0=fire= and one =+0=earth= card","1Replace two =+0= cards with one =+0=cold= and one =+0=air= card","1Add two =+1=push=1 cards","1Add one =+1=wound= card","1Add one =+0=stun= card","1Add one =+0=target= card"];
   }
   
   loadDeck(targetDeck, cardDir, backDir, valueList, effectList, rollingList) {

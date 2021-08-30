@@ -100,10 +100,12 @@ class DeckHandler {
     }
 
     flipCard(event) { 
+        console.log("Flipping card...");
         this.deckOfCards.forEach(el => {
-            if (el.getImg() == event.target) el.flip(); 
-            this.statsHandler.update();
+            if (el.getImg() == event.target) el.flip();
         });
+        this.statsHandler.update();
+        console.log("Card flipped!");
     }
 }
 

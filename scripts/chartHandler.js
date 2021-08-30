@@ -1,7 +1,7 @@
 
 import './chartLibrary/dist/chart.js';
-var EFFECT_CATEGORIES = ["none","air","bless","cold","curse","disarm","fire","heal","immobilize","invisible","muddle","night","pierce","plant","poison","push", "pull","shield","strengthen","stun","sun","target","wound"];
-var EFFECT_CATEGORY_LABELS = ["No effect", "Air", "Bless", "Cold", "Curse", "Disarm", "Fire", "Heal", "Immobilize", "Invisible", "Muddle", "Night", "Pierce", "Plant", "Poison", "Push", "Pull", "Shield", "Strengthen", "Stun", "Sun", "Target", "Wound"];
+var EFFECT_CATEGORIES = ["none","air","bless","cold","curse","disarm","earth", "fire","heal","immobilize","invisible","muddle","night","pierce","poison","push", "pull","shield","strengthen","stun","sun","target","wound"];
+var EFFECT_CATEGORY_LABELS = ["No effect", "Air", "Bless", "Cold", "Curse", "Disarm", "Earth", "Fire", "Heal", "Immobilize", "Invisible", "Muddle", "Night", "Pierce", "Poison", "Push", "Pull", "Shield", "Strengthen", "Stun", "Sun", "Target", "Wound"];
 var CHART_IDs = ["generalStatsNormalChart","generalStatsAdvChart","generalStatsDisChart","currentStatsNormalChart","currentStatsAdvChart","currentStatsDisChart"];
 var COLOR_ARRAY = [
     'rgb(60, 60, 60)', //none
@@ -10,6 +10,7 @@ var COLOR_ARRAY = [
     'rgb(20, 195, 237)', //cold
     'rgb(115, 88, 161)', //curse
     'rgb(110, 120, 125)', //disarm
+    'rgb(139, 165, 60)', //earth
     'rgb(225, 82, 36)', //fire
     'rgb(60, 60, 60)', //heal
     'rgb(134, 55, 51)', //immobilize
@@ -17,7 +18,6 @@ var COLOR_ARRAY = [
     'rgb(106, 89, 70)', //muddle
     'rgb(30, 44, 52)', //night
     'rgb(187, 140, 83)', //pierce
-    'rgb(139, 165, 60)', //plant
     'rgb(124, 127, 105)', //poison
     'rgb(60, 60, 60)', //push
     'rgb(60, 60, 60)', //pull
@@ -28,66 +28,47 @@ var COLOR_ARRAY = [
     'rgb(146, 36, 39)', //target
     'rgb(202, 98, 45)' //wound
 ]; //UNFINISHED
-var COLOR_MAP = {
-    none: 'rgb(60, 60, 60)', //TODO
-    air: 'rgb(155, 177, 183)',
-    bless: 'rgb(201, 164, 57)',
-    cold: 'rgb(20, 195, 237)',
-    curse: 'rgb(115, 88, 161)',
-    disarm: 'rgb(110, 120, 125)',
-    fire: 'rgb(225, 82, 36)',
-    heal: 'rgb(60, 60, 60)', //TODO
-    immobilize: 'rgb(134, 55, 51)',
-    invisible: 'rgb(26, 26, 26)',
-    muddle: 'rgb(106, 89, 70)',
-    night: 'rgb(30, 44, 52)',
-    pierce: 'rgb(187, 140, 83)',
-    plant: 'rgb(139, 165, 60)',
-    poison: 'rgb(124, 127, 105)',
-    push: 'rgb(60, 60, 60)', //TODO
-    pull: 'rgb(60, 60, 60)', //TODO
-    shield: 'rgb(60, 60, 60)', //TODO
-    strengthen: 'rgb(103, 150, 207)',
-    stun: 'rgb(57, 71, 103)',
-    sun: 'rgb(239, 173, 30)',
-    target: 'rgb(146, 36, 39)',
-    wound: 'rgb(202, 98, 45)'
-}; //UNFINISHED
-var INTIALIZE_CONFIG = {
-    type: 'bar',
-    data: {
-        labels: ['Null','-2','-1','+0','+1','+2','x2'],
-        datasets: [{
-            label: 'No effect',
-            data: [0,0,0,0,0,0,0],
-            backgroundColor: COLOR_MAP.none,
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-        x: {
-            stacked: true,
-        },
-        y: {
-            stacked: true,
-            beginAtZero: true
-        }
-        }
-    }
-}
 
 class chartHandler {
 
     constructor() {
         this.chartList = [];
         CHART_IDs.forEach(canvasID => {
-            this.chartList.push(new Chart(document.getElementById(canvasID),INTIALIZE_CONFIG));
+            this.chartList.push(new Chart(document.getElementById(canvasID),{
+                type: 'bar',
+                data: {
+                    labels: ['Null','-2','-1','+0','+1','+2','x2'],
+                    datasets: [{
+                        label: 'No effect',
+                        data: [0,0,0,0,0,0,0],
+                        backgroundColor: COLOR_ARRAY[0],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            stacked: true,
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true
+                        },
+                    },
+                    plugins: {
+                        tooltip: {
+                            mode: "point"
+                        }
+                    }
+                }
+            }));
         })
     }
 
     printChart(endCardStats, targetChart) {
+        console.log("Starting on chart " + targetChart);
         // First I want to sort the stats into the various effects/datasets
+        //console.log("Sorting cards into effects");
         var endCardStatSorter = new Map();
         endCardStats.forEach((probability, label) => {
             var [value, effect] = label.split(":");
@@ -100,6 +81,7 @@ class chartHandler {
         //arrange these into the order they'll show up on the chart
         endCardStatSorter = new Map([...endCardStatSorter.entries()].sort());
         //now we need to look at how many different columns we're gonna have
+        //console.log("Determining X axis");
         var columnNames = [];
         [...endCardStatSorter.entries()].forEach((arr, label) => {
             arr[1].forEach(subArr => {
@@ -112,6 +94,7 @@ class chartHandler {
         //sort these column names into the order they'll look nice on in the graph
         columnNames = this.sortColumnNames(columnNames);
         //now we actually organize the data together
+        //console.log("Compiling datasets");
         var chartDatasets = [];
         endCardStatSorter.forEach((arr, label) => {
             var searchLabel = label;
@@ -137,6 +120,10 @@ class chartHandler {
             labels: columnNames,
             datasets: chartDatasets
         }
+        console.log(this.chartList[targetChart].data);
+        //console.log("Updating chart " + targetChart);
+        console.log(this.chartList);
+        console.log(this.chartList[targetChart].options.plugins);
         this.chartList[targetChart].update();
     }
 

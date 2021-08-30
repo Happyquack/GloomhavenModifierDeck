@@ -39,7 +39,7 @@ class PerkHandler {
           perkLine.appendChild(spacer);
          }
          instruction = instruction.split("=");
-         var commandWords = ["air","bless","cold","curse","disarm","fire","heal","immobilize","invisible","muddle","night","pierce","plant","poison","push", "pull","rolling","shield","strengthen","stun","sun","target","wound"];
+         var commandWords = ["air","bless","cold","curse","disarm","earth","fire","heal","immobilize","invisible","muddle","night","pierce","poison","push", "pull","rolling","shield","strengthen","stun","sun","target","wound"];
          instruction.forEach(el => {
           if (commandWords.includes(el)) {
            var newImage = document.createElement("img");
@@ -47,7 +47,7 @@ class PerkHandler {
            var fontSize = parseInt(window.getComputedStyle(this.perkBox,null).getPropertyValue('font-size'));
            newImage.width = 1.5*fontSize;
            newImage.height = 1.5*fontSize;
-           if (!["air","cold","fire","night","plant","rolling","sun"].includes(el)) {
+           if (!["air","cold","earth","fire","night","rolling","sun"].includes(el)) {
             var textToAdd = document.createElement("span");
             switch (el) {
              case "heal":
