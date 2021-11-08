@@ -23,6 +23,7 @@ class Card {
     return this.value;
   }
   
+  // no effect is "0"
   getEffect() {
     return this.effect;
   }

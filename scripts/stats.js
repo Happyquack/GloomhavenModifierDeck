@@ -28,6 +28,7 @@ class StatsHandler {
   // it finds the odds of drawing each type of normal card to construct a chart and an average modifier/stdev
   // and also finds the odds of having any rolling modifiers
   normalDeck(currentDeck, targetDiv, targetChart) {
+    //********************************************NORMAL*/
     // first step is to find the odds of each normal cards
     var possibleEndCards = currentDeck.filter(el => !el.isRolling());
     if (possibleEndCards.length == 0) {
@@ -44,14 +45,36 @@ class StatsHandler {
         endCardChances.set(cardID, probabilityPerEndCard);
       }
     });
+    //********************************************ROLLING*/
     // next we evaluate the rolling modifiers in the deck and determine the chances of each effect
     var endRollingChances = [];
     if (possibleEndCards.length != currentDeck.length) {
       this.normalDeckRollings(currentDeck, endRollingChances);
     }
-
+    //********************************************DISPLAY*/
     // now we display the statistics to the page
     this.displayChart(endCardChances, endRollingChances, targetDiv, targetChart);
+  }
+
+  advantageDeck(currentDeck, targetDiv, targetChart) {
+    //********************************************NORMAL*/
+    // Filter out rollings, and reshuffle if needed
+    var possibleEndCards = currentDeck.filter(el => !el.isRolling());
+    if (possibleEndCards.length == 0) {
+      possibleEndCards = this.deckHandler.deck.getPlayerDeck().filter(el => !el.isRolling());
+    }
+    // turn this list of end cards into a frequency distribution
+    var endCardChances = new Map();
+    possibleEndCards.forEach(card => {
+      var cardID = card.getCardSummary();
+      if (endCardChances.has(cardID)) {
+        endCardChances.set(cardID,endCardChances.get(cardID) + 1);
+      } else {
+        endCardChances.set(cardID, 1);
+      }
+    });
+    //********************************************ROLLING*/
+    //********************************************DISPLAY*/
   }
 
   // this function determines statistics of rolling modifiers when there is no advantage or disadvantage
@@ -155,6 +178,42 @@ class StatsHandler {
     }
   }
 
+  // inputs [cardID, freq] and Map() [[cardID, freq]...] for rest of deck
+  // outputs [alpha, beta, gamma, delta] where alpha is the sum of freq in the deck that the first cardID beats, 
+  // beta counts losses, gamma counts indeterminites and delta is the original freq.
+  // ASSUME: the independent cardID is not in the rest of the deck
+  endCardComparisons(cardInfo, restOfDeckInfo) {
+    var output = [0, 0, 0, cardInfo[1]];
+    // cardID is composed of the numerical modifer and the effect
+    var [cardMod, cardEffect] = cardInfo[0].split(":");
+    var cardHasEffect = compCardEffect == "0";
+    restOfDeckInfo.forEach((compCardFreq, comparingCard) => {
+      var [compCardMod, compCardEffect] = comparingCard[0].split(":");
+      var compHasEffect = compCardEffect == "0";
+      // order of operations is to compare numerical modifiers
+      //    if they are the same, compare effects
+      if (compCardMod == cardMod) {
+        //        if only one has an effect, that one wins (+alpha/beta)
+        if ((compHasEffect && !cardHasEffect) || (!compHasEffect && cardHasEffect)) {
+          if (compHasEffect) {
+            output[1] += compCardFreq;
+          } else {
+            output[0] += compCardFreq;
+          }
+        }
+        //        else, they are indeterminite (+gamma)
+        output[2] += compCardFreq;
+      } else { //    if they are different, compare effects
+        //        if the lower one has an effect and the effects are different, they are indeterminite (+gamma)
+        if ((compCardEffect != cardEffect) && ((compHasEffect && (compCardMod > cardMod )) || (cardHasEffect && (cardMod > compCardMod)))) {
+          output[2] += compCardFreq;
+        } else { //        else, the higher one wins (+alpha/beta)
+          output[compCardMod > cardMod] += compCardFreq;
+        }
+      }
+    });
+    return output;
+  }
 
   probabilityOfDesiredNumberOfCards(numWant, numRolling, numTotal) {
     if (numWant == 0) return 1; // this is the default
