@@ -1,7 +1,7 @@
 
 import './chartLibrary/dist/chart.js';
-var EFFECT_CATEGORIES = ["none","air","bless","cold","curse","disarm","earth", "fire","heal","immobilize","invisible","muddle","night","pierce","poison","push", "pull","shield","strengthen","stun","sun","target","wound"];
-var EFFECT_CATEGORY_LABELS = ["No effect", "Air", "Bless", "Cold", "Curse", "Disarm", "Earth", "Fire", "Heal", "Immobilize", "Invisible", "Muddle", "Night", "Pierce", "Poison", "Push", "Pull", "Shield", "Strengthen", "Stun", "Sun", "Target", "Wound"];
+var EFFECT_CATEGORIES = ["none","air","bless","cold","curse","disarm","earth", "fire","heal","immobilize","invisible","itemRefresh","muddle","night","pierce","poison","push", "pull","shield","strengthen","stun","sun","target","wound"];
+var EFFECT_CATEGORY_LABELS = ["No effect", "Air", "Bless", "Cold", "Curse", "Disarm", "Earth", "Fire", "Heal", "Immobilize", "Invisible", "Refresh one item card", "Muddle", "Night", "Pierce", "Poison", "Push", "Pull", "Shield", "Strengthen", "Stun", "Sun", "Target", "Wound"];
 var CHART_IDs = ["generalStatsNormalChart","generalStatsAdvChart","generalStatsDisChart","currentStatsNormalChart","currentStatsAdvChart","currentStatsDisChart"];
 var COLOR_ARRAY = [
     'rgb(60, 60, 60)', //none

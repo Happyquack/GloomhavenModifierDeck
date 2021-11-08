@@ -42,7 +42,7 @@ class Deck {
   updateCharacter(label)
   {
     this.formDeck();
-    var characters = ["","brute","tinkerer","spellweaver","scoundrel","cragheart","mindthief","sunkeeper", "", "", "", "plagueherald", "berserker", "", "doomstalker", "", "elementalist", ""];
+    var characters = ["","brute","tinkerer","spellweaver","scoundrel","cragheart","mindthief","sunkeeper", "", "", "", "plagueherald", "berserker", "", "doomstalker", "sawbones", "elementalist", "beasttyrant"];
     this.character = characters[parseInt(label)];
     this.loadCharacterDeck();
     this.characterDeck.forEach(card => {
@@ -54,6 +54,9 @@ class Deck {
   
   loadCharacterDeck() {
     switch (this.character) {
+      case "beasttyrant":
+        this.loadBeastTyrantDeck();
+        break;
       case "berserker": 
         this.loadBerserkerDeck(); 
         break;
@@ -74,6 +77,9 @@ class Deck {
         break;
       case "plagueherald":
         this.loadPlagueHeraldDeck();
+        break;
+      case "sawbones":
+        this.loadSawbonesDeck();
         break;
       case "scoundrel": 
         this.loadScoundrelDeck(); 
@@ -220,6 +226,19 @@ class Deck {
     this.perkList = ["x11-x12","x0-x1-+0-+1","x2-x3-+2-+3","x4-x5-+4-+5","+6-+7","+8-+9","+10","+11","+12","+13","+14","+15","+16"];
     this.perkInstructions = ["1Remove two =-1= cards","3Replace two =+0= cards with two =+1= cards","2Add two =rolling=+1= cards","1Add one =+2=muddle= card","1Add one =+1=poison= card","1Add one =+1=wound= card","1Add one =+1=immobilize= card","1Add one =+0=stun= card","2Add one =rolling=target= card"];
   }
+
+  loadSawbonesDeck() {
+    this.characterDeck = [];
+    var dir = "images/modifierDecks/15/";
+    var cardDir = dir + "sbCard";
+    var backDir = dir + "sbCardBack.png";
+    var valueList = [2,2,2,2,1,1,0,0,0,0,0,0,0,0];
+    var effectList = [0,0,0,0,"immobilize","immobilize","wound","wound","wound","wound","stun","healSelf3","healSelf3","itemRefresh"];
+    var rollingList = [0,0,1,1,0,0,1,1,1,1,1,1,1,0];
+    this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
+    this.perkList = ["x11-x12","x13-x14","oooo","x4-+0","x5-+1","+2","+3","+4","+5","+6-+7","+8-+9","+10","+11","+12","+13"];
+    this.perkInstructions = ["2Remove two =-1= cards","1Remove four =+0= cards","2Replace one =+0= card with one =+2= card","2Add one =rolling=+2= cards","2Add one =+1=immobilize= card","2Add two =rolling=wound= cards","1Add one =rolling=stun= card","2Add one =rolling=heal=3 cards","1Add one =+0= Refresh an item card"];
+  }
   
   loadElementalistDeck() {
     this.characterDeck = [];
@@ -232,6 +251,19 @@ class Deck {
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["x11-x12","x13-x14","x15-+0","x0-+1","x1-+2","+3-+4-+5","+7-+8-+9","+11-+12-+13","+15-+16-+17","x2-x3-+6-+18","x4-x5-+10-+14","+19-+20","+21","+22","+23"];
     this.perkInstructions = ["2Remove two =-1= cards","1Replace one =-1= card with one =+1= card","2Replace one =+0= card with one =+2= card","1Add three =+0=fire= cards","1Add three =+0=cold= cards","1Add three =+0=air= cards","1Add three =+0=earth= cards","1Replace two =+0= cards with one =+0=fire= and one =+0=earth= card","1Replace two =+0= cards with one =+0=cold= and one =+0=air= card","1Add two =+1=push=1 cards","1Add one =+1=wound= card","1Add one =+0=stun= card","1Add one =+0=target= card"];
+  }
+
+  loadBeastTyrantDeck() {
+    this.characterDeck = [];
+    var dir = "images/modifierDecks/17/";
+    var cardDir = dir + "btCard";
+    var backDir = dir + "btCardBack.png";
+    var valueList = [1,1,1,2,2,1,1,1,1,0,0,0,0,0,0,0,0];
+    var effectList = [0,0,0,0,0,"wound","wound","immobilize","immobilize","healSelf1","healSelf1","healSelf1","healSelf1","healSelf1","healSelf1","earth","earth"];
+    var rollingList = [0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1];
+    this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
+    this.perkList = ["x11-x12","x13-+0","x14+1","x15-+2","x0-+3","x1-+4","+5","+6","+7","+8","+9-+10","+11-+12","+13-+14","+15-+16"];
+    this.perkInstructions = ["1Remove two =-1= cards","3Replace one =-1= card with one =+1= card","2Replace one =+0= card with one =+2= card", "2Add one =+1=wound= card","2Add one =+1=immobilize= card","3Add two =rolling=heal=1 cards","1Add two =rolling=earth= cards"];
   }
   
   loadDeck(targetDeck, cardDir, backDir, valueList, effectList, rollingList) {

@@ -1,5 +1,5 @@
 
-var WHITELISTED_CLASSES = ["01","02","03","04","05","06","07","11","12","14","16"];
+var WHITELISTED_CLASSES = ["01","02","03","04","05","06","07","11","12","14","15","16","17"];
 
 class ClassSelectionUI {
 
