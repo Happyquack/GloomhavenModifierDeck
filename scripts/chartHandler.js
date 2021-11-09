@@ -1,8 +1,15 @@
-
+// This uses the chart.js library
 import './chartLibrary/dist/chart.js';
+
+// These two arrays are used to convert card effects to the display label for those effects
 var EFFECT_CATEGORIES = ["none","air","bless","cold","curse","disarm","earth", "fire","heal","immobilize","invisible","itemRefresh","muddle","night","pierce","poison","push", "pull","shield","strengthen","stun","sun","target","wound"];
 var EFFECT_CATEGORY_LABELS = ["No effect", "Air", "Bless", "Cold", "Curse", "Disarm", "Earth", "Fire", "Heal", "Immobilize", "Invisible", "Refresh one item card", "Muddle", "Night", "Pierce", "Poison", "Push", "Pull", "Shield", "Strengthen", "Stun", "Sun", "Target", "Wound"];
+
+// The HTML IDs of the chart divs
 var CHART_IDs = ["generalStatsNormalChart","generalStatsAdvChart","generalStatsDisChart","currentStatsNormalChart","currentStatsAdvChart","currentStatsDisChart"];
+
+// Array of the hex colors representing each effect
+// Colors I couldn't immediately decide on ended up being RGB 60,60,60
 var COLOR_ARRAY = [
     'rgb(60, 60, 60)', //none
     'rgb(155, 177, 183)', //air
@@ -15,6 +22,7 @@ var COLOR_ARRAY = [
     'rgb(60, 60, 60)', //heal
     'rgb(134, 55, 51)', //immobilize
     'rgb(26, 26, 26)', //invisible
+    'rgb(60, 60, 60)', //itemRefresh
     'rgb(106, 89, 70)', //muddle
     'rgb(30, 44, 52)', //night
     'rgb(187, 140, 83)', //pierce
@@ -31,6 +39,7 @@ var COLOR_ARRAY = [
 
 class chartHandler {
 
+    // Instantiates each chart, giving each the default settings
     constructor() {
         this.chartList = [];
         CHART_IDs.forEach(canvasID => {
@@ -65,6 +74,7 @@ class chartHandler {
         })
     }
 
+    // Given a probability distribution map (card_ID, chanceOfDrawing) and the index of the chart, display the probabilities
     printChart(endCardStats, targetChart) {
         console.log("Starting on chart " + targetChart);
         // First I want to sort the stats into the various effects/datasets
@@ -120,16 +130,18 @@ class chartHandler {
             labels: columnNames,
             datasets: chartDatasets
         }
-        console.log(this.chartList[targetChart].data);
+        //console.log(this.chartList[targetChart].data);
         //console.log("Updating chart " + targetChart);
-        console.log(this.chartList);
-        console.log(this.chartList[targetChart].options.plugins);
+        //console.log(this.chartList);
+        //console.log(this.chartList[targetChart].options.plugins);
         this.chartList[targetChart].update();
     }
 
+    // Given a list of numerical modifiers, sort them into ascending order with null on the left and x2 on the right
     sortColumnNames(labels) {
         var hasNull = this.remove(labels, "null");
         var hasX2 = this.remove(labels, "x2");
+        // These are all strings which makes things tricky
         var positives = [];
         var negatives = [];
         labels.forEach(label => {
@@ -149,6 +161,7 @@ class chartHandler {
         return output;
     }
 
+    // A helper method for sortColumnNames, when checking for the presence of null or x2
     remove(array, element) {
         var index = array.indexOf(element)
         if (index > -1) return array.splice(index,1);

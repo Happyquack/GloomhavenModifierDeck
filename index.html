@@ -10,6 +10,8 @@ layout: default
   <link rel="manifest" href="/favicon/site.webmanifest">
   <!--<link rel="stylesheet" type="text/css" href="/siteCSS.css">-->
 
+
+  <!-- I tried putting this into an external CSS file but it didn't seem to work, or worth it to keep trying-->
   <style>
     @font-face {
     font-family: 'Pirata One';
@@ -21,157 +23,157 @@ layout: default
     font-weight: normal;
     font-style: normal;
     font-display: swap;
-}
+  }
 
-@font-face {
-    font-family: 'Nyala';
-    src: url('fonts/Nyala-Regular.eot');
-    src: url('fonts/Nyala-Regular.eot?#iefix') format('embedded-opentype'),
-        url('fonts/Nyala-Regular.woff2') format('woff2'),
-        url('fonts/Nyala-Regular.woff') format('woff'),
-        url('fonts/Nyala-Regular.svg#Nyala-Regular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+  @font-face {
+      font-family: 'Nyala';
+      src: url('fonts/Nyala-Regular.eot');
+      src: url('fonts/Nyala-Regular.eot?#iefix') format('embedded-opentype'),
+          url('fonts/Nyala-Regular.woff2') format('woff2'),
+          url('fonts/Nyala-Regular.woff') format('woff'),
+          url('fonts/Nyala-Regular.svg#Nyala-Regular') format('svg');
+      font-weight: normal;
+      font-style: normal;
+  }
 
-* {
-  font-family: "Nyala";
-}
+  * {
+    font-family: "Nyala";
+  }
 
-#heading {
-  text-align: center;
-  font-size: 130%
-}
+  #heading {
+    text-align: center;
+    font-size: 130%
+  }
 
-#classSelectionBoxId {
-  outline-color: rgb(234,236,239);
-  outline-style: solid;
-  outline-width: 1px;
-  display: flex;
-  flex-wrap: wrap;
-}
+  #classSelectionBoxId {
+    outline-color: rgb(234,236,239);
+    outline-style: solid;
+    outline-width: 1px;
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-.classSelectionIcon {
- width: 90%;
- height: 90%;
- padding: 5%;
- object-fit: contain;
- position: absolute;
- 
-}
-
-.classSelectionIconWrapper {
- width: 100%;
- padding-bottom: 100%;
- position: relative;
-}
-
-.classSelectionIconWrapperWrapper {
- width: 16.66%;
- border-width: 2%;
- border-style: solid;
- position: relative;
-}
-
-.classSelectionLegal {
-  border-color: black;
-}
-
-.classSelectionIllegal {
-  border-color: grey;
-}
-
-.classSelectionSelected {
-  border-color: green;
-}
-
-#deckDisplayBox {
-  outline-color: rgb(134,136,139);
-  outline-style: solid;
-  outline-width: 1px;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-#deckDisplayBox div {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-}
-
-#deckDisplayBox div div {
-  width: 100%;
-  flex: none;
-  padding-bottom: 66.66%;
-  position: relative;
-}
-
-#deckDisplayBox div div img {
-  width: 80%;
-  margin: 10%;
-  border-radius: 10%;
+  .classSelectionIcon {
+  width: 90%;
+  height: 90%;
+  padding: 5%;
   object-fit: contain;
   position: absolute;
-}
+  
+  }
 
-.cardFront {
-  pointer-events: none;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform-style: preserve-3d;
-  opacity: 0.99;
-  transition: transform 0.6s;
-}
+  .classSelectionIconWrapper {
+  width: 100%;
+  padding-bottom: 100%;
+  position: relative;
+  }
 
-.cardBack {
-  transform: rotateY(180deg);
-  pointer-events: none;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform-style: preserve-3d;
-  transition: transform 0.6s;
-  opacity: 0.99;
-}
+  .classSelectionIconWrapperWrapper {
+  width: 16.66%;
+  border-width: 2%;
+  border-style: solid;
+  position: relative;
+  }
 
-#controllerBox {
-  display: flex;
-  flex-wrap: wrap;
-}
+  .classSelectionLegal {
+    border-color: black;
+  }
 
-#deckAdjustingBox {
-  width: 40%;
-  text-align: center;
-}
+  .classSelectionIllegal {
+    border-color: grey;
+  }
 
-#deckAdjustingBox div img {
-  display: block;
-  width: 20%;
-  height: auto;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 2%;
-}
+  .classSelectionSelected {
+    border-color: green;
+  }
 
-#perkBox {
-  font-size: 120%;
-}
+  #deckDisplayBox {
+    outline-color: rgb(134,136,139);
+    outline-style: solid;
+    outline-width: 1px;
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-input:checked {
-  content: "■";
-}
+  #deckDisplayBox div {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
 
-.numberModifier {
-  font-family: 'Pirata One';
-}
+  #deckDisplayBox div div {
+    width: 100%;
+    flex: none;
+    padding-bottom: 66.66%;
+    position: relative;
+  }
 
-#statsBox {
-  display: flex;
-  flex-wrap: wrap;
-}
+  #deckDisplayBox div div img {
+    width: 80%;
+    margin: 10%;
+    border-radius: 10%;
+    object-fit: contain;
+    position: absolute;
+  }
 
-#statsBox div {
-  flex: 1;
-}
+  .cardFront {
+    pointer-events: none;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+    opacity: 0.99;
+    transition: transform 0.6s;
+  }
+
+  .cardBack {
+    transform: rotateY(180deg);
+    pointer-events: none;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    opacity: 0.99;
+  }
+
+  #controllerBox {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #deckAdjustingBox {
+    width: 40%;
+    text-align: center;
+  }
+
+  #deckAdjustingBox div img {
+    display: block;
+    width: 20%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2%;
+  }
+
+  #perkBox {
+    font-size: 120%;
+  }
+
+  input:checked {
+    content: "■";
+  }
+
+  .numberModifier {
+    font-family: 'Pirata One';
+  }
+
+  #statsBox {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #statsBox div {
+    flex: 1;
+  }
 
   </style>
  

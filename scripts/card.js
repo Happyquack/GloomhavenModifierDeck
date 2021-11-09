@@ -1,4 +1,6 @@
 
+// The class that represents each card and its HTML elements
+// Each Card is composed of the face image and the back image (rotated 180 degrees), together wrapped in one div
 class Card {
   constructor(value, effect, rolling, imgPath, backPath) {
     this.value = value;
@@ -19,31 +21,37 @@ class Card {
     this.flippable = false;
   }
   
+  // Returns the numerical modifier of a card, including "null" and "x2"
   getValue() {
     return this.value;
   }
   
-  // no effect is "0"
+  // Returns the status effect a card gives - no status effect results in a value of "0"
   getEffect() {
     return this.effect;
   }
   
+  // This is 1 if the card is rolling, and 0 if it isn't
   isRolling() {
     return this.rolling;
   }
   
+  // Remembers if the card has already been drawn
   isFlipped() {
     return this.flipped;
   }
   
+  // You might think this gives the actual icon of the card, but no, this gives the wrapping div for both the front and back card icons
   getImg() {
     return this.cardDiv;
   }
 
+  // This is a compact way to represent the card, used in the statistics part of the program
   getCardSummary() {
     return this.value + ":" + this.effect;
   }
   
+  // Registers the card as flipped and transforms HTML elements to reflect this
   flip() {
     this.flipped = !this.flipped;
     if (this.flipped) {

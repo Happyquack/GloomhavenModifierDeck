@@ -3,6 +3,8 @@ import {DeckHandler} from './deckHandler.js';
 import {ModdlingBox} from './moddling.js';
 import {PerkHandler} from './perkHandler.js';
 
+// The main thing that runs and sparks everything else
+
 // create player deck
 
 var deckHandler = new DeckHandler();

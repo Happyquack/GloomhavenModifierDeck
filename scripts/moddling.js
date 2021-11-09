@@ -1,4 +1,5 @@
 
+// This exists specifically to display a controller to manually change the amount of -1's, blesses, and curses in the deck
 class ModdlingBox {
 
     constructor(deckHandler) {
@@ -9,6 +10,7 @@ class ModdlingBox {
         this.drawBoxes("curse", function() {self.manualAddCurse(self.deckHandler)}, function(){self.manualRemoveCurse(self.deckHandler)});
     }
 
+    //For each of the three cards to moddle, create the buttons, tie them to moddling methods, and display them
     drawBoxes(boxType, addFunction, removeFunction) {
         var moddlingBox = document.getElementById(boxType + "ModdlingBox");
         var image = document.createElement("img");
@@ -28,6 +30,7 @@ class ModdlingBox {
         moddlingBox.appendChild(addBox);
     }
 
+    // These are all of the moddling functions
     manualAddMinusOne(deckHandler) {
         deckHandler.deck.addMinusOne(true);
         deckHandler.displayDeck();

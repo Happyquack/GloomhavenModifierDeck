@@ -5,6 +5,16 @@ var NORMAL_STORAGE;
 // I know this looks quite redundant but it's in the name of readability
 var CHART1 = 0; var CHART2 = 1; var CHART3 = 2; var CHART4 = 3; var CHART5 = 4; var CHART6 = 5;
 
+
+
+
+
+// THIS IS A WORK IN PROGRESS CLASS - COMMENTING WILL NOT BE THOROUGH FOR READABILITY, NOR WILL THE CODE BE COMPLETE
+
+
+
+
+
 class StatsHandler {
 
   constructor (deckHandler) {
