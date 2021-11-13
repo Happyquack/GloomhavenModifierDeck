@@ -2,7 +2,7 @@
 import './chartLibrary/dist/chart.js';
 
 // These two arrays are used to convert card effects to the display label for those effects
-var EFFECT_CATEGORIES = ["none","air","bless","cold","curse","disarm","earth", "fire","heal","immobilize","invisible","itemRefresh","muddle","night","pierce","poison","push", "pull","shield","strengthen","stun","sun","target","wound"];
+var EFFECT_CATEGORIES = ["none","air","bless","cold","curse","disarm","earth", "fire","healSelf","immobilize","invisible","itemRefresh","muddle","night","pierce","poison","push", "pull","shield","strengthen","stun","sun","target","wound"];
 var EFFECT_CATEGORY_LABELS = ["No effect", "Air", "Bless", "Cold", "Curse", "Disarm", "Earth", "Fire", "Heal", "Immobilize", "Invisible", "Refresh one item card", "Muddle", "Night", "Pierce", "Poison", "Push", "Pull", "Shield", "Strengthen", "Stun", "Sun", "Target", "Wound"];
 
 // The HTML IDs of the chart divs
@@ -39,8 +39,13 @@ var COLOR_ARRAY = [
 
 class chartHandler {
 
+    //                                                                                                                      COMMENT
+    constructor(statsHandler) {
+        this.createCharts();
+    }
+
     // Instantiates each chart, giving each the default settings
-    constructor() {
+    createCharts() {
         this.chartList = [];
         CHART_IDs.forEach(canvasID => {
             this.chartList.push(new Chart(document.getElementById(canvasID),{

@@ -559,8 +559,8 @@ class Deck {
     var effectList = [0,0,0,0,0,0,0,0,0,0,"muddle","poison","wound","immobilize","stun","target1","target1"];
     var rollingList = [0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,1];
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
-    this.perkList = ["x11-x12","x0-x1-+0-+1","x2-x3-+2-+3","x4-x5-+4-+5","+6-+7","+8-+9","+10","+11","+12","+13","+14","+15","+16"];
-    this.perkInstructions = ["1Remove two =-1= cards","3Replace two =+0= cards with two =+1= cards","2Add two =rolling=+1= cards","1Add one =+2=muddle= card","1Add one =+1=poison= card","1Add one =+1=wound= card","1Add one =+1=immobilize= card","1Add one =+0=stun= card","2Add one =rolling=target= card"];
+    this.perkList = ["x11-x12","x13-x14","x0-x1-+0-+1","x2-x3-+2-+3","x4-x5-+4-+5","+6-+7","+8-+9","+10","+11","+12","+13","+14","+15","+16"];
+    this.perkInstructions = ["2Remove two =-1= cards","3Replace two =+0= cards with two =+1= cards","2Add two =rolling=+1= cards","1Add one =+2=muddle= card","1Add one =+1=poison= card","1Add one =+1=wound= card","1Add one =+1=immobilize= card","1Add one =+0=stun= card","2Add one =rolling=target= card"];
   }
 
   loadSawbonesDeck() {
