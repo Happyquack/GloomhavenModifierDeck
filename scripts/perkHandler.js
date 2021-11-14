@@ -26,6 +26,8 @@ class PerkHandler {
     // Retrieves the perk instructions from the deck and displays text similar to the in-game perk sheet
     updatePerks() {
         // Reset display
+        var checkedCheckboxes = this.deckHandler.deck.getCheckboxList().slice();
+        console.log(checkedCheckboxes);
         this.checkboxes.forEach(el => el.checked = false);
         this.perkBox.innerHTML = "";
         // Get new instructions
@@ -50,10 +52,12 @@ class PerkHandler {
          var numOfCheckboxes = instruction[0];
          instruction = instruction.slice(1,instruction.length);
          for (var i = 0; i < numOfCheckboxes; i++) {
-          perkLine.appendChild(checkboxQueue.pop());
-          var spacer = document.createElement("span");
-          spacer.innerHTML = " ";
-          perkLine.appendChild(spacer);
+            var checkboxToAdd = checkboxQueue.pop();
+            checkboxToAdd.checked = checkedCheckboxes.shift();
+            perkLine.appendChild(checkboxToAdd);
+            var spacer = document.createElement("span");
+            spacer.innerHTML = " ";
+            perkLine.appendChild(spacer);
          }
          // Parse the instructions
          instruction = instruction.split("=");

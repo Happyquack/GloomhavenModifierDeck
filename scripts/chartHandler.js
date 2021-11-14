@@ -39,13 +39,8 @@ var COLOR_ARRAY = [
 
 class chartHandler {
 
-    //                                                                                                                      COMMENT
-    constructor(statsHandler) {
-        this.createCharts();
-    }
-
     // Instantiates each chart, giving each the default settings
-    createCharts() {
+    constructor(statsHandler) {
         this.chartList = [];
         CHART_IDs.forEach(canvasID => {
             this.chartList.push(new Chart(document.getElementById(canvasID),{
@@ -73,17 +68,16 @@ class chartHandler {
                         tooltip: {
                             mode: "point"
                         }
-                    }
+                    },
                 }
             }));
-        })
+        });
     }
 
     // Given a probability distribution map (card_ID, chanceOfDrawing) and the index of the chart, display the probabilities
     printChart(endCardStats, targetChart) {
-        console.log("Starting on chart " + targetChart);
-        // First I want to sort the stats into the various effects/datasets
-        //console.log("Sorting cards into effects");
+        // First we're gonna sort all of the results into datasets by effect - this is so we can color-code the effects
+        // endCardStatSorter is a map of (effectName, [[cardModifier, chanceOfDrawing]])
         var endCardStatSorter = new Map();
         endCardStats.forEach((probability, label) => {
             var [value, effect] = label.split(":");
@@ -93,52 +87,69 @@ class chartHandler {
                 endCardStatSorter.set(effect, [[value,probability]]);
             }
         });
-        //arrange these into the order they'll show up on the chart
+        // next we're gonna rearrange the order of the map to have no effect show up on the bottom of the stacked bar chart, 
+        // and the rest stacked alphabetically
         endCardStatSorter = new Map([...endCardStatSorter.entries()].sort());
-        //now we need to look at how many different columns we're gonna have
-        //console.log("Determining X axis");
+        // Now that we've got datasets figured out, we're going to scan through all of them to see how many different columns there will be
         var columnNames = [];
-        [...endCardStatSorter.entries()].forEach((arr, label) => {
-            arr[1].forEach(subArr => {
+        endCardStatSorter.forEach((arr, label) => {
+            // For referernce, arr is [[cardModifier, chanceOfDrawing]]
+            // This loops through each possible modifier in each any given effect and logs it if it hasn't been logged yet
+            arr.forEach(subArr => {
                 var modifier = subArr[0];
                 if (columnNames.indexOf(modifier) == -1) {
                     columnNames.push(modifier);
                 }
             });
         });
-        //sort these column names into the order they'll look nice on in the graph
+        // Take these modifiers, or column names, and sort them into ascending order
         columnNames = this.sortColumnNames(columnNames);
-        //now we actually organize the data together
-        //console.log("Compiling datasets");
-        var chartDatasets = [];
+        // We also keep track of overall probability of each modifier - this will come in handy later
+        var probabilitiesByColumns = new Array(columnNames.length).fill(0);
+
+        // Now let's put it all together
+        var chartDatasets = []; // This is gonna be an array [{label: effectLabel, data: [[chanceOfModifier]], backgroundColor: effectColor}]
+        // We'll loop through each effect to make these entries
         endCardStatSorter.forEach((arr, label) => {
+            // label is the name of the effect - so far we've been using shorthand strings but we're gonna have to convert these to display labels
             var searchLabel = label;
-            if (searchLabel == 0) searchLabel = "none";
+            if (searchLabel == 0) searchLabel = "none"; // for no effect, we've been using "0", so now we're changing it for readability
+            //  some effects have a number at the end, so let's check for that number and save it for later
             var lastDigit = searchLabel.slice(-1);
             if (lastDigit == parseInt(lastDigit)) {
                 searchLabel = searchLabel.slice(0,-1);
             } else {
                 lastDigit = "";
             }
+
+            // Next we compile the data itself - dataArr is an array the same length as the x-axis (number of total modifiers)
+            // We look though the [[cardModifier, chanceOfDrawing]], finding the index of cardModifier in columnNames
+            // and putting the respective probability in that index
             var dataArr = new Array(columnNames.length).fill(0);
             arr.forEach(subArr => {
                 dataArr[columnNames.indexOf(subArr[0])] = subArr[1];
+                probabilitiesByColumns[columnNames.indexOf(subArr[0])] += subArr[1]; // Sum up the probabilties of each column
             });
+
+            // Now we put it all together, converting shorthand label to display names and adding a complete dataset to the dataset array
             chartDatasets.push({
                 label: EFFECT_CATEGORY_LABELS[EFFECT_CATEGORIES.indexOf(searchLabel)] + " " + lastDigit,
                 data: dataArr,
                 backgroundColor: COLOR_ARRAY[EFFECT_CATEGORIES.indexOf(searchLabel)]
             });
         });
+        
+        // Now we doctor up the column names - null should be capitalized, and we also put overall percentages at the labels
         if (columnNames[0] == "null") columnNames[0] = "Null";
+        probabilitiesByColumns.forEach((probability, index) => {
+            columnNames[index] = columnNames[index] + " (" + Math.round(1000*probability)/10 + "%)";
+        });
+
+        // Once everything is together, we finally enter the new data settings and update the respective chart
         this.chartList[targetChart].data = {
             labels: columnNames,
             datasets: chartDatasets
         }
-        //console.log(this.chartList[targetChart].data);
-        //console.log("Updating chart " + targetChart);
-        //console.log(this.chartList);
-        //console.log(this.chartList[targetChart].options.plugins);
         this.chartList[targetChart].update();
     }
 

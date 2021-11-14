@@ -1,12 +1,12 @@
 import { chartHandler } from "./chartHandler.js";
 var CUMULATIVE_EFFECTS = ["push", "pull", "healSelf", "shieldSelf", "pierce", "target"];
 var CUMULATIVE_EFFECT_DISPLAY = ["Push", "Pull", "Heal (self)", "Shield (self)", "Pierce", "Target"];
-var NORMAL_STORAGE;
+var NORMAL_STORAGE; //                                                                              Why on earth is this global? I did this
 // I know this looks quite redundant but it's in the name of readability
 var CHART1 = 0; var CHART2 = 1; var CHART3 = 2; var CHART4 = 3; var CHART5 = 4; var CHART6 = 5;
 
 var ATTACK_VALUE = 3; // Default
-var THIS_INSTANCE = null;
+var THIS_INSTANCE = null; //                                                                            This looks terrible and should be fixed
 
 
 
@@ -479,7 +479,7 @@ class StatsHandler {
     }
   }
 
-  basicStats (cardIDs) {
+  basicStats (cardIDs) {// [[mod:effect, numOfCards]]
     var avg = 0;
     var weightSum = 0;
     cardIDs.forEach((dist, cardID) => {
@@ -495,7 +495,7 @@ class StatsHandler {
       var cardValue = cardID.slice(0,cardID.indexOf(":"));
       if (cardValue == "x2") cardValue = ATTACK_VALUE;
       if (cardValue == "null") cardValue = -1 * ATTACK_VALUE;
-      stdev += Math.pow((parseInt(cardValue)+ATTACK_VALUE)*dist-avg,2);
+      stdev += Math.pow((parseInt(cardValue)+ATTACK_VALUE)-avg,2)*dist;
     });
     stdev = Math.pow(stdev,1/2);
     return [avg, stdev];

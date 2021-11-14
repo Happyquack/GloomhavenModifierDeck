@@ -1,4 +1,5 @@
 import {Card} from './card.js';
+import { PerkHandler } from './perkHandler.js';
 
 // This is used to determine priority of what type of -1 card to try to add/remove to the deck when prompted
 // The fact that the class deck is included in this is not a spoiler - I did that preemptively, in case the event comes up.
@@ -34,9 +35,15 @@ class Deck {
 
   // Sets up the deck for character selection
   constructor() {
+    this.characterLabel = 0;
     this.character = "";
+    this.checkboxesChecked = new Array(15).fill(false);
     this.createDecks();
     this.perkList = [];
+    this.deckSaves = new Array(19).fill(0);
+    this.characterDecks = new Array(19);
+    this.perkLists = new Array(19);
+    this.perkInstructionLists = new Array(19);
   }
   
   // Loads up the base decks for modification
@@ -91,6 +98,7 @@ class Deck {
   
   // Resets the actual player deck, filling it with all of the base cards
   formDeck() {
+    this.checkboxesChecked.fill(false);
     this.playerDeck = [];
     for (let baseCard of this.baseDeck) {
       this.playerDeck.push(baseCard);
@@ -127,22 +135,94 @@ class Deck {
       }
     });
   }
+
+  // When we update characters, save the current settings so we can get back to it
+  saveDeck() {
+    // list of things to save:
+    // this.playerDeck
+    var savedPlayerDeck = this.playerDeck.slice();
+    // flip status of every card
+    var playerDeckIsFlipped = savedPlayerDeck.map(card => {return card.isFlipped()});
+    // perks checked
+    var savedCheckboxesChecked = this.checkboxesChecked.slice();
+    // this.numMinusOnes
+    var savedNumMinusOnes = this.numMinusOnes;
+    // this.numBlesses
+    var savedNumBlesses = this.numBlesses;
+    // this.numCurses
+    var savedNumCurses = this.numCurses;
+    // this.removedMinusOnes
+    var savedRemovedMinusOnes = [this.removedMinusOnes[0].slice(),this.removedMinusOnes[1].slice(),this.removedMinusOnes[2].slice()];
+    // this.addedMinusOnes
+    var savedAddedMinusOnes = [this.addedMinusOnes[0].slice(),this.addedMinusOnes[1].slice(),this.addedMinusOnes[2].slice()];
+    // this.blesses
+    var savedBlesses = [this.blesses[0].slice(), this.blesses[1].slice()];
+    // this.curses
+    var savedCurses = [this.curses[0].slice(), this.curses[1].slice()];
+    // finally save it all to a master array
+    this.deckSaves[this.characterLabel] = [savedPlayerDeck, playerDeckIsFlipped, savedCheckboxesChecked, savedNumMinusOnes, savedNumBlesses, savedNumCurses, savedRemovedMinusOnes, savedAddedMinusOnes, savedBlesses, savedCurses];
+  }
+
+  // When we load a character we've already put settings for, load those specific settings
+  loadSavedCharacter() {
+    var oldData = this.deckSaves[this.characterLabel];
+    // list of things we saved:
+    // this.playerDeck
+    this.playerDeck = oldData[0];
+    // flip status of every card
+    this.playerDeck.forEach((card, key) => {
+      if (card.isFlipped() != oldData[1][key]) card.flip();
+    });
+    // perks checked
+    this.checkboxesChecked = oldData[2];
+    // this.numMinusOnes
+    this.numMinusOnes = oldData[3];
+    // this.numBlesses
+    this.numBlesses = oldData[4];
+    // this.numCurses
+    this.numCurses = oldData[5];
+    // this.removedMinusOnes
+    this.removedMinusOnes = oldData[6];
+    // this.addedMinusOnes
+    this.addedMinusOnes = oldData[7];
+    // this.blesses
+    this.blesses = oldData[8];
+    // this.curses
+    this.curses =oldData[9];
+
+    // Finally, we need to retrieve the pre-loaded deck information
+    this.characterDeck = this.characterDecks[this.characterLabel];
+    this.perkList = this.perkLists[this.characterLabel];
+    this.perkInstructions = this.perkInstructionLists[this.characterLabel];
+  }
   
   // This function is triggered whenever a new class is selected, and loads the new character deck
   // Label is the number of the class, starting from 1
   updateCharacter(label) {
-    // Selecting a new character resets the deck
-    this.formDeck();
-    // Based on which class number is selected, load the respective deck
-    // THE CODE OF THESE TWO FUNCTIONS HAVE SPOILERS, DON'T GO LOOKING FOR THEM IF YOU DON'T WANT CHARACTER NAME SPOILED
-    this.getCharacterName(label);
-    this.loadCharacterDeck();
-    // Keep track of any -1s in the class-specific cards
-    this.characterDeck.forEach(card => {
-      if (card.getValue() == -1) {
-        this.addedMinusOnes[CLASS_DECK].push(card);
-      }
-    });
+    // Save the previous deck
+    this.saveDeck();
+    // Begin switching to a new character
+    this.characterLabel = label;
+    // Check to see if this character already has saved settings - if not, reset the deck
+    if (this.deckSaves[label] == 0) { // Character has no saved data
+      this.formDeck();
+      // Based on which class number is selected, load the respective deck
+      // THE CODE OF THIS FUNCTIONS HAS SPOILERS, DON'T GO LOOKING FOR IT IF YOU DON'T WANT CHARACTER NAME SPOILED
+      this.loadCharacterDeck(label);
+      // Keep track of any -1s in the class-specific cards
+      this.characterDeck.forEach(card => {
+        if (card.getValue() == -1) {
+          this.addedMinusOnes[CLASS_DECK].push(card);
+        }
+      });
+    } else {
+      this.loadSavedCharacter();
+    }
+  }
+
+  // Getter method so the perkhandler knows what checkboxes to start checked when switching characters
+  getCheckboxList() {
+    return this.checkboxesChecked;
   }
 
   // The next 6 methods each load one of the 6 starting classes
@@ -251,6 +331,7 @@ class Deck {
   modPerk(checkmarkNum, turnPerkOn) {
     // First we determine which instruction this pertains to
     var checkmarkIndex = checkmarkNum - 1;
+    this.checkboxesChecked[checkmarkIndex] = !this.checkboxesChecked[checkmarkIndex];
     var instructions = this.perkList[checkmarkIndex].slice();
     // Now we have to parse the instructions and perform the deck changes
     var steps = instructions.slice().split("-");
@@ -285,7 +366,10 @@ class Deck {
     if (card.getValue() == -1) {
       this.removeMinusOne(false);
     } else {
-     this.playerDeck.indexOf(card) !== -1 && this.playerDeck.splice(this.playerDeck.indexOf(card), 1);
+      if (this.playerDeck.indexOf(card) !== -1) {
+        if(card.isFlipped()) card.flip();
+        this.playerDeck.splice(this.playerDeck.indexOf(card), 1);
+      }
     }
   }
   // Utility method to add a certain card to the player deck, if possible
@@ -294,7 +378,10 @@ class Deck {
     if (card.getValue() == -1) {
       this.addMinusOne(false);
     } else {
-      this.playerDeck.indexOf(card) == -1 && this.playerDeck.push(card);
+      if (this.playerDeck.indexOf(card) == -1) {
+        if(card.isFlipped()) card.flip();
+        this.playerDeck.push(card);
+      }
     }
   }
   // Utility method to remove 4 +0's from the player deck - note that these are specific cards
@@ -457,15 +544,12 @@ class Deck {
   //    WARNING    WARNING    WARNING    WARNING    WARNING    WARNING    WARNING    WARNING    WARNING    WARNING    WARNING    WARNING
 
 
-  // This converts a numerical class value to the actual name of the class
-  // Simply for convenience of looking at code and knowing what class it refers to
-  getCharacterName(label) {
+  // Massive switch statement taking in a class name and loading its respective class deck
+  loadCharacterDeck(label) {
+    // This converts a numerical class value to the actual name of the class
+    // Simply for convenience of looking at code and knowing what class it refers to
     var characters = ["","brute","tinkerer","spellweaver","scoundrel","cragheart","mindthief","sunkeeper", "", "", "", "plagueherald", "berserker", "", "doomstalker", "sawbones", "elementalist", "beasttyrant"];
     this.character = characters[parseInt(label)];
-  }
-
-  // Massive switch statement taking in a class name and loading its respective class deck
-  loadCharacterDeck() {
     switch (this.character) {
       case "beasttyrant":
         this.loadBeastTyrantDeck();
@@ -508,6 +592,9 @@ class Deck {
         break;
       default: break;
     }
+    this.characterDecks[this.characterLabel] = this.characterDeck;
+    this.perkLists[this.characterLabel] = this.perkList;
+    this.perkInstructionLists[this.characterLabel] = this.perkInstructions;
   }
 
   // Same as all of the basic class loading methods from above, except these have spoilers
