@@ -1,5 +1,5 @@
 import { Deck } from "./deck.js";
-import { StatsHandler } from "./stats.js";
+import { StatsHandler } from "./statsHandler.js";
 
 // This variable handles how long columns displaying cards can be before they are split up to perserve scaling
 const MAX_CARDS_IN_COLUMN = 6;
@@ -110,12 +110,22 @@ class DeckHandler {
 
     // When a card is clicked, flip it over and have the stats update
     flipCard(event) { 
-        console.log("Flipping card...");
         this.deckOfCards.forEach(el => {
             if (el.getImg() == event.target) el.flip();
         });
         this.statsHandler.update();
-        console.log("Card flipped!");
+    }
+
+    // Getter function for deck
+    getDeck() {
+        return this.deck;
+    }
+
+    // Goes off when reshuffle button pressed - called by StatsHandler
+    reshuffleDeck() {
+        this.deck.getPlayerDeck().forEach(card => {
+            if (card.isFlipped()) card.flip();
+        });
     }
 }
 

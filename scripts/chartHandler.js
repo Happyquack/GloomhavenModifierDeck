@@ -40,7 +40,7 @@ const COLOR_ARRAY = [
 class ChartHandler {
 
     // Instantiates each chart, giving each the default settings
-    constructor(statsHandler) {
+    constructor() {
         this.chartList = [];
         CHART_IDs.forEach(canvasID => {
             this.chartList.push(new Chart(document.getElementById(canvasID),{

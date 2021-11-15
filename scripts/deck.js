@@ -1,5 +1,4 @@
 import {Card} from './card.js';
-import { PerkHandler } from './perkHandler.js';
 
 // This is used to determine priority of what type of -1 card to try to add/remove to the deck when prompted
 // The fact that the class deck is included in this is not a spoiler - I did that preemptively, in case the event comes up.

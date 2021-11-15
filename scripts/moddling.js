@@ -32,35 +32,35 @@ class ModdlingBox {
 
     // These are all of the moddling functions
     manualAddMinusOne(deckHandler) {
-        deckHandler.deck.addMinusOne(true);
+        deckHandler.getDeck().addMinusOne(true);
         deckHandler.displayDeck();
     }
       
     manualRemoveMinusOne(deckHandler) {
-        deckHandler.deck.removeMinusOne(true);
+        deckHandler.getDeck().removeMinusOne(true);
         deckHandler.displayDeck();
     }
 
     manualAddBless(deckHandler) {
-        deckHandler.deck.moddleBlesses(true);
+        deckHandler.getDeck().moddleBlesses(true);
         deckHandler.displayDeck();
     }
       
     manualRemoveBless(deckHandler) {
-        deckHandler.deck.moddleBlesses(false);
+        deckHandler.getDeck().moddleBlesses(false);
         deckHandler.displayDeck();
     }
 
     manualAddCurse(deckHandler) {
-        if (deckHandler.deck.numCurses < 10) {
-            deckHandler.deck.moddleCurses(true);
+        if (deckHandler.getDeck().numCurses < 10) {
+            deckHandler.getDeck().moddleCurses(true);
             deckHandler.displayDeck();
         }
     }
       
     manualRemoveCurse(deckHandler) {
-        if (deckHandler.deck.numCurses > 0) {
-            deckHandler.deck.moddleCurses(false);
+        if (deckHandler.getDeck().numCurses > 0) {
+            deckHandler.getDeck().moddleCurses(false);
             deckHandler.displayDeck();
         }
     }

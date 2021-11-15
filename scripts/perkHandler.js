@@ -18,7 +18,7 @@ class PerkHandler {
     checkboxTriggered(event) {
         var checkbox = event.target;
         var checkboxNum = parseInt(checkbox.id.substring(8,checkbox.id.length));
-        this.deckHandler.deck.modPerk(checkboxNum, checkbox.checked);
+        this.deckHandler.getDeck().modPerk(checkboxNum, checkbox.checked);
         this.deckHandler.displayDeck();
     }
 
@@ -26,12 +26,11 @@ class PerkHandler {
     // Retrieves the perk instructions from the deck and displays text similar to the in-game perk sheet
     updatePerks() {
         // Reset display
-        var checkedCheckboxes = this.deckHandler.deck.getCheckboxList().slice();
-        console.log(checkedCheckboxes);
+        var checkedCheckboxes = this.deckHandler.getDeck().getCheckboxList().slice();
         this.checkboxes.forEach(el => el.checked = false);
         this.perkBox.innerHTML = "";
         // Get new instructions
-        var perkInstructions = this.deckHandler.deck.getPerkInstructions();
+        var perkInstructions = this.deckHandler.getDeck().getPerkInstructions();
         // The checkboxes are listed in a specfic order, "queued" up for display
         var checkboxQueue = this.checkboxes.slice();
         // Loop through each instruction, or line, on the sheet

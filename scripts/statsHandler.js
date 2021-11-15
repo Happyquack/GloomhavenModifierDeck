@@ -2,7 +2,6 @@ import { ChartHandler } from "./chartHandler.js";
 import { GameStateButtons } from "./gameStateButtons.js";
 const CUMULATIVE_EFFECTS = ["push", "pull", "healSelf", "shieldSelf", "pierce", "target"];
 const CUMULATIVE_EFFECT_DISPLAY = ["Push", "Pull", "Heal (self)", "Shield (self)", "Pierce", "Target"];
-var NORMAL_STORAGE; //                                                                              Why on earth is this global? I did this
 // I know this looks quite redundant but it's in the name of readability
 const CHART1 = 0; var CHART2 = 1; var CHART3 = 2; var CHART4 = 3; var CHART5 = 4; var CHART6 = 5;
 
@@ -21,20 +20,20 @@ class StatsHandler {
   constructor (deckHandler) {
     this.attackValue = 3;
     this.deckHandler = deckHandler;
-    this.chartHandler = new ChartHandler(this);
+    this.chartHandler = new ChartHandler();
     this.gameStateButtons = new GameStateButtons(this);
-    NORMAL_STORAGE = new Map();
+    this.rollingStatMemory = new Map();
   }
 
   // this is the function that is called outside of this class
   // when the deck is updated, this will run and update the statistics for both the overall deck and the current deck
   update() {
-    this.normalDeck(this.deckHandler.deck.getPlayerDeck(), document.getElementById("generalStatsNormalText"),CHART1);
-    this.normalDeck(this.deckHandler.deck.getPlayerDeck().filter(el => !el.isFlipped()), document.getElementById("currentStatsNormalText"),CHART4);
-    this.advantageDeck(this.deckHandler.deck.getPlayerDeck(), document.getElementById("generalStatsAdvText"),CHART2);
-    this.advantageDeck(this.deckHandler.deck.getPlayerDeck().filter(el => !el.isFlipped()), document.getElementById("currentStatsAdvText"),CHART5);
-    this.disadvantageDeck(this.deckHandler.deck.getPlayerDeck(), document.getElementById("generalStatsDisText"),CHART3);
-    this.disadvantageDeck(this.deckHandler.deck.getPlayerDeck().filter(el => !el.isFlipped()), document.getElementById("currentStatsDisText"),CHART6);
+    this.normalDeck(this.deckHandler.getDeck().getPlayerDeck(), document.getElementById("generalStatsNormalText"),CHART1);
+    this.normalDeck(this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isFlipped()), document.getElementById("currentStatsNormalText"),CHART4);
+    this.advantageDeck(this.deckHandler.getDeck().getPlayerDeck(), document.getElementById("generalStatsAdvText"),CHART2);
+    this.advantageDeck(this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isFlipped()), document.getElementById("currentStatsAdvText"),CHART5);
+    this.disadvantageDeck(this.deckHandler.getDeck().getPlayerDeck(), document.getElementById("generalStatsDisText"),CHART3);
+    this.disadvantageDeck(this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isFlipped()), document.getElementById("currentStatsDisText"),CHART6);
   }
 
   // this function takes a list of cards and finds statistics for normal drawing rules
@@ -45,7 +44,7 @@ class StatsHandler {
     // first step is to find the odds of each normal cards
     var possibleEndCards = currentDeck.filter(el => !el.isRolling());
     if (possibleEndCards.length == 0) {
-      possibleEndCards = this.deckHandler.deck.getPlayerDeck().filter(el => !el.isRolling());
+      possibleEndCards = this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isRolling());
     }
     var endCardChances = new Map();
     // turn this list of end cards into a list of probabilities
@@ -62,7 +61,7 @@ class StatsHandler {
     // next we evaluate the rolling modifiers in the deck and determine the chances of each effect
     var endRollingChances = [];
     if (possibleEndCards.length != currentDeck.length) {
-      this.normalDeckRollings(currentDeck, endRollingChances);
+      this.generateRollingStats(currentDeck, endRollingChances, false);
     }
     //********************************************DISPLAY*/
     // now we display the statistics to the page
@@ -74,13 +73,13 @@ class StatsHandler {
     // Filter out rollings, and reshuffle if needed
     var possibleEndCards = currentDeck.filter(el => !el.isRolling());
     if (possibleEndCards.length == 0) {
-      possibleEndCards = this.deckHandler.deck.getPlayerDeck().filter(el => !el.isRolling());
+      possibleEndCards = this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isRolling());
     }
     // check for lone card
     var loneCard = null;
     if (possibleEndCards.length == 1) {
       loneCard = possibleEndCards[0];
-      possibleEndCards = this.deckHandler.deck.getPlayerDeck().filter(el => !el.isRolling());
+      possibleEndCards = this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isRolling());
     }
     // turn this list of end cards into a frequency distribution
     var endCardFreq = new Map();
@@ -95,7 +94,7 @@ class StatsHandler {
     // calculate the actual probabilities
     var endCardChances = new Map();
     var numEndCards = possibleEndCards.length;
-    var numRollings = this.deckHandler.deck.getPlayerDeck().length - numEndCards;
+    var numRollings = this.deckHandler.getDeck().getPlayerDeck().length - numEndCards;
     var numCards = numEndCards+numRollings;
     var chanceFromRollings = numRollings/(numCards*numEndCards);
     if (loneCard == null) { // there is more than one card left in the deck
@@ -116,7 +115,7 @@ class StatsHandler {
     // next we evaluate the rolling modifiers in the deck and determine the chances of each effect
     var endRollingChances = [];
     if (possibleEndCards.length != currentDeck.length) {
-      this.advantageDeckRollings(currentDeck, endRollingChances);
+      this.generateRollingStats(currentDeck, endRollingChances, true);
     }
     //********************************************DISPLAY*/
     // now we display the statistics to the page
@@ -128,13 +127,13 @@ class StatsHandler {
     // Filter out rollings, and reshuffle if needed
     var possibleEndCards = currentDeck.filter(el => !el.isRolling());
     if (possibleEndCards.length == 0) {
-      possibleEndCards = this.deckHandler.deck.getPlayerDeck().filter(el => !el.isRolling());
+      possibleEndCards = this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isRolling());
     }
     // check for lone card
     var loneCard = null;
     if (possibleEndCards.length == 1) {
       loneCard = possibleEndCards[0];
-      possibleEndCards = this.deckHandler.deck.getPlayerDeck().filter(el => !el.isRolling());
+      possibleEndCards = this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isRolling());
     }
     // turn this list of end cards into a frequency distribution
     var endCardFreq = new Map();
@@ -149,7 +148,7 @@ class StatsHandler {
     // calculate the actual probabilities
     var endCardChances = new Map();
     var numEndCards = possibleEndCards.length;
-    var numRollings = this.deckHandler.deck.getPlayerDeck().length - numEndCards;
+    var numRollings = this.deckHandler.getDeck().getPlayerDeck().length - numEndCards;
     var numCards = numEndCards+numRollings;
     var chanceFromRollings = numRollings/(numCards*numEndCards);
     if (loneCard == null) { // there is more than one card left in the deck
@@ -172,9 +171,14 @@ class StatsHandler {
     //********************************************DISPLAY*/
     // now we display the statistics to the page
     this.displayChart(endCardChances, endRollingChances, targetDiv, targetChart);
-  }//                                                                                                                             TODO Lone card
+  }//                                                                                                                             TODO Lone card                                                                                                                                CONDENSE
 
-  rollingStatsPrep(currentDeck, cumulativeRollingEffects, summarizedRollings) {
+  // this function determines statistics of rolling modifiers
+  generateRollingStats(currentDeck, endRolling, advantage) {
+    // first we need to make sure that there are non-rolling cards, and store the rollings if there are none.
+    // then we have to look at how many there are of each rolling card, which we will use as a probability distribution
+    var cumulativeRollingEffects = new Map();
+    var summarizedRollings = new Map();
     // first we need to make sure that there are non-rolling cards, and store the rollings if there are none.
     var cumulativeRollingValue = 0;
     if (currentDeck.filter(el => !el.isRolling()).length == 0) { // if the deck doesn't have non-rollings we will need to reshuffle
@@ -187,7 +191,7 @@ class StatsHandler {
           else {cumulativeRollingEffects.set(effect, 1)}
         });
       }
-      currentDeck = [...this.deckHandler.deck.getPlayerDeck()];
+      currentDeck = [...this.deckHandler.getDeck().getPlayerDeck()];
     }
 
     // now we have to look at how many there are of each rolling card, which we will use as a probability distribution
@@ -198,104 +202,14 @@ class StatsHandler {
       else {summarizedRollings.set(effect, 1)}
     });
 
-    //return the values used in the rest of the rolling methods 
-    return [cumulativeRollingValue, currentDeck, rollingCards];
-  }
-
-  // this function determines statistics of rolling modifiers when there is no advantage or disadvantage
-  normalDeckRollings(currentDeck, endRolling) {
-    // first we need to make sure that there are non-rolling cards, and store the rollings if there are none.
-    // then we have to look at how many there are of each rolling card, which we will use as a probability distribution
-    // multiple functions do this so this was condensed
-    var cumulativeRollingEffects = new Map();
-    var summarizedRollings = new Map();
-    var prepResults = this.rollingStatsPrep(currentDeck, cumulativeRollingEffects, summarizedRollings);
-    var cumulativeRollingValue = prepResults[0];
-    var currentDeck = prepResults[1];
-    var rollingCards = prepResults[2];
-
-    // next, we calculate the chances of pulling each number of card
-    // we store it into the end rolling map in the form [effectLabel, chanceOfEffect]
-    var totalNum = currentDeck.length;
-    var rollingNum = rollingCards.length;
-    for (var [key, val] of summarizedRollings.entries()) {
-      if (key != 0) {
-        var offset = 0; // this variable will be used in case the effect here is one that was deemed as guaranteed earlier
-        if (CUMULATIVE_EFFECTS.includes(key.slice(0,-1))) {
-          if (cumulativeRollingEffects.has(key)) {
-            offset = cumulativeRollingEffects.get(key);
-            endRolling.push([key.slice(0,-1) + parseInt(key.charAt(key.length-1)) * (offset), 1]);
-          }
-          for (let i = 1; i <= val; i++) { // if the modifier is cumulative then we have to calculate probabilities for each amount of the card there is
-            endRolling.push([key.slice(0,-1) + (parseInt(key.charAt(key.length-1)) * (i + offset)), this.probabilityOfDesiredNumberOfCards(i, rollingNum-(val-i), totalNum)*(val-i+1)]);
-          }
-        } else { // if the modifier is not cumulative then calculate the P of drawing one and multiply it by the num of cards
-          if (cumulativeRollingEffects.has(key)) { // if this was a guaranteed effect, we make sure we log it as a 100% chance
-            endRolling.push([key, 1]);
-          } else {
-            endRolling.push([key, this.probabilityOfDesiredNumberOfCards(1, rollingNum, totalNum)*val]);
-          }
-        }
-      }
-    }
-
-    // now we gotta take care of those pesky number modifiers
-    var listOfNums = [];
-    var maxVal = 0;
-    var numPosMods = 0;
-    rollingCards.forEach(card => {
-      var value = card.getValue();
-      maxVal += value;
-      if (value > 0) {
-        numPosMods++;
-        listOfNums.push(value);
-      }
-    });
-    // make a 2d array to store information needed for probability calculations
-    // each index of the outer array pertains to a total that can be added up to, 
-    // each index of the inner array pertains to how many cards are needed,
-    // and the values inside keep track of how many unique ways that can be achieved.
-    var modifierInfo = [...Array(maxVal)].map(e => Array(numPosMods).fill(0)); // thank you https://stackoverflow.com/a/52727729
-    // next steps - loop through list of nums and do nested loops until a desired num is hit and add it to modifier info
-    this.recursiveRollingModCalculator(0,0,listOfNums,modifierInfo);
-
-    // now what we can do is find the chance of getting any ending value x by, for every value in the xth array in modifierInfo, 
-    // calculating the probability of drawing A cards (where A in the index in the xth array) and multiplying it by the value.
-
-    if (cumulativeRollingValue > 0) { // if there were rolling modifiers drawn before a reshuffle, then that is a guaranteed effect and is added on afterwards
-      endRolling.push([cumulativeRollingValue, 1]);
-    }
-
-    for (let endVal = 1; endVal <= maxVal; endVal++) {
-      let numberModifierProbability = 0;
-      for (let numNeededCards = 1; numNeededCards <= numPosMods; numNeededCards++) {
-        if (modifierInfo[endVal-1][numNeededCards-1] != 0) {
-          var baseProbability = this.probabilityOfDesiredNumberOfCards(numNeededCards, rollingCards.length-(numPosMods-numNeededCards), currentDeck.length);
-          numberModifierProbability += modifierInfo[endVal-1][numNeededCards-1] * baseProbability;
-        }
-      }
-      endRolling.push([endVal + cumulativeRollingValue, numberModifierProbability]);
-    }
-  }//                                                                                                                                 CONDENSE
-
-  // this function determines statistics of rolling modifiers when there is advantage
-  advantageDeckRollings(currentDeck, endRolling) {
-    // first we need to make sure that there are non-rolling cards, and store the rollings if there are none.
-    // then we have to look at how many there are of each rolling card, which we will use as a probability distribution
-    // multiple functions do this so this was condensed
-    var cumulativeRollingEffects = new Map();
-    var summarizedRollings = new Map();
-    var prepResults = this.rollingStatsPrep(currentDeck, cumulativeRollingEffects, summarizedRollings);
-    var cumulativeRollingValue = prepResults[0];
-    var currentDeck = prepResults[1];
-    var rollingCards = prepResults[2];
-
     // next, we calculate the chances of pulling each number of card
     // we store it into the end rolling map in the form [effectLabel, chanceOfEffect]
     var totalNum = currentDeck.length;
     var rollingNum = rollingCards.length;
     // with advantage, there's a chance that a rolling will be drawn after an end card, so we have to add that probability in
-    var advantageOffset = (totalNum-rollingNum)/(totalNum*(totalNum-1));
+    var advantageOffset = 0;
+    if (advantage) advantageOffset = (totalNum-rollingNum)/(totalNum*(totalNum-1));
+    // Now we look through every kind of rolling card and find their proabilities of being drawn
     for (var [key, val] of summarizedRollings.entries()) {
       if (key != 0) {
         var offset = 0; // this variable will be used in case the effect here is one that was deemed as guaranteed earlier
@@ -355,7 +269,7 @@ class StatsHandler {
       }
       endRolling.push([endVal + cumulativeRollingValue, numberModifierProbability]);
     }
-  }//                                                                                                                                 CONDENSE
+  }
 
   // this recursive function is used to determine, based on a list of numbers, how many ways that any number can be made by adding up the list
   recursiveRollingModCalculator(runningVal, numCards, listOfAvailableMods, modifierInfo) {
@@ -413,7 +327,7 @@ class StatsHandler {
     if (numWant == 0) return 1; // this is the default
     if (numWant > numRolling) return 0; // this is impossible
     // check to see if this has been calculated yet
-    if (NORMAL_STORAGE.has("" + numWant + "x" + numRolling + "x" + numTotal)) return NORMAL_STORAGE.get("" + numWant + "x" + numRolling + "x" + numTotal);
+    if (this.rollingStatMemory.has("" + numWant + "x" + numRolling + "x" + numTotal)) return this.rollingStatMemory.get("" + numWant + "x" + numRolling + "x" + numTotal);
     // now calculate a new probability using a formula I conjected
     var output = 0;
     for (let i = 0; i <= numRolling-1; i++) {
@@ -424,7 +338,7 @@ class StatsHandler {
       output += product;
     }
     // save the result so that we can refer back to it
-    NORMAL_STORAGE.set("" + numWant + "x" + numRolling + "x" + numTotal, output);
+    this.rollingStatMemory.set("" + numWant + "x" + numRolling + "x" + numTotal, output);
     return output;
   }
 
@@ -440,7 +354,7 @@ class StatsHandler {
       var endCardStatOutput = document.createElement("p");
       endCardStatOutput.innerHTML = "Typical deck average: " + avg.toFixed(3);
       var endCardStatOutputTwo = document.createElement("p");
-      endCardStatOutputTwo.innerHTML = "Standard deviation: " + stdev.toFixed(3) + "?";
+      endCardStatOutputTwo.innerHTML = "Standard deviation: " + stdev.toFixed(3);
       targetDiv.appendChild(endCardStatOutput);
       targetDiv.appendChild(endCardStatOutputTwo);
     } else if (endStats.size == 1) {
@@ -501,6 +415,12 @@ class StatsHandler {
 
   shiftAttackValue(mod) {
     return this.attackValue = this.attackValue + mod;
+  }
+
+  // Goes off when reshuffle button pressed - called by GameStateButtons
+  reshuffleDeck() {
+    this.deckHandler.reshuffleDeck();
+    this.update();
   }
 }
 
