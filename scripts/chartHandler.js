@@ -2,15 +2,15 @@
 import './chartLibrary/dist/chart.js';
 
 // These two arrays are used to convert card effects to the display label for those effects
-var EFFECT_CATEGORIES = ["none","air","bless","cold","curse","disarm","earth", "fire","healSelf","immobilize","invisible","itemRefresh","muddle","night","pierce","poison","push", "pull","shield","strengthen","stun","sun","target","wound"];
-var EFFECT_CATEGORY_LABELS = ["No effect", "Air", "Bless", "Cold", "Curse", "Disarm", "Earth", "Fire", "Heal", "Immobilize", "Invisible", "Refresh one item card", "Muddle", "Night", "Pierce", "Poison", "Push", "Pull", "Shield", "Strengthen", "Stun", "Sun", "Target", "Wound"];
+const EFFECT_CATEGORIES = ["none","air","bless","cold","curse","disarm","earth", "fire","healSelf","immobilize","invisible","itemRefresh","muddle","night","pierce","poison","push", "pull","shield","strengthen","stun","sun","target","wound"];
+const EFFECT_CATEGORY_LABELS = ["No effect", "Air", "Bless", "Cold", "Curse", "Disarm", "Earth", "Fire", "Heal", "Immobilize", "Invisible", "Refresh one item card", "Muddle", "Night", "Pierce", "Poison", "Push", "Pull", "Shield", "Strengthen", "Stun", "Sun", "Target", "Wound"];
 
 // The HTML IDs of the chart divs
-var CHART_IDs = ["generalStatsNormalChart","generalStatsAdvChart","generalStatsDisChart","currentStatsNormalChart","currentStatsAdvChart","currentStatsDisChart"];
+const CHART_IDs = ["generalStatsNormalChart","generalStatsAdvChart","generalStatsDisChart","currentStatsNormalChart","currentStatsAdvChart","currentStatsDisChart"];
 
 // Array of the hex colors representing each effect
 // Colors I couldn't immediately decide on ended up being RGB 60,60,60
-var COLOR_ARRAY = [
+const COLOR_ARRAY = [
     'rgb(60, 60, 60)', //none
     'rgb(155, 177, 183)', //air
     'rgb(201, 164, 57)', //bless
@@ -37,7 +37,7 @@ var COLOR_ARRAY = [
     'rgb(202, 98, 45)' //wound
 ]; //UNFINISHED
 
-class chartHandler {
+class ChartHandler {
 
     // Instantiates each chart, giving each the default settings
     constructor(statsHandler) {
@@ -185,4 +185,4 @@ class chartHandler {
     }
 }
 
-export {chartHandler};
+export {ChartHandler};

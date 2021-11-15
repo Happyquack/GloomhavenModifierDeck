@@ -2,7 +2,7 @@ import { Deck } from "./deck.js";
 import { StatsHandler } from "./stats.js";
 
 // This variable handles how long columns displaying cards can be before they are split up to perserve scaling
-var MAX_CARDS_IN_COLUMN = 6;
+const MAX_CARDS_IN_COLUMN = 6;
 
 class DeckHandler {
 

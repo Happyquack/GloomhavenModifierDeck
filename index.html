@@ -162,9 +162,14 @@ layout: default
     content: "■";
   }
 
-  #attackValueBox {
+  #utilityBox {
+    display: flex;
+  }
+
+  #utilityBox div {
     margin: auto;
     text-align: center;
+    flex: 1;
   }
 
   .numberModifier {
@@ -182,24 +187,29 @@ layout: default
 
   </style>
  
- <div id="heading">
-   <h1> Class Selection </h1>
- </div>
- 
- <div id="classSelectionBoxId"></div>
-
- <div id="controllerBox">
-  <div id="deckAdjustingBox">
-    <div id="minusOneModdlingBox"></div>
-    <div id="blessModdlingBox"></div>
-    <div id="curseModdlingBox"></div>
+  <div id="heading">
+    <h1> Class Selection </h1>
   </div>
-  <div id="perkBox"></div>
-</div>
- 
- <div id="deckDisplayBox"></div>
 
- <div id="attackValueBox"></div>
+  <div id="classSelectionBoxId"></div>
+
+  <div id="controllerBox">
+    <div id="deckAdjustingBox">
+      <div id="minusOneModdlingBox"></div>
+      <div id="blessModdlingBox"></div>
+      <div id="curseModdlingBox"></div>
+    </div>
+    <div id="perkBox"></div>
+  </div>
+
+  <div id="deckDisplayBox"></div>
+
+  <div id="utilityBox">
+    <div id="reshuffleButtonBox"></div>
+    <div id="attackValueBox"></div>
+    <div id="chartScopeToggleBox"></div>
+  </div>
+ 
 
  <div id="statsBox">
    <div id="generalStatsBox">

@@ -1,7 +1,7 @@
 
 
 // These are the classes that the author's party have unlocked - the classes left are 08, 09, 10, and 13.
-var WHITELISTED_CLASSES = ["01","02","03","04","05","06","07","11","12","14","15","16","17"];
+const WHITELISTED_CLASSES = ["01","02","03","04","05","06","07","11","12","14","15","16","17"];
 
 class ClassSelectionUI {
 

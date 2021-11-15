@@ -4,9 +4,9 @@ import { PerkHandler } from './perkHandler.js';
 // This is used to determine priority of what type of -1 card to try to add/remove to the deck when prompted
 // The fact that the class deck is included in this is not a spoiler - I did that preemptively, in case the event comes up.
 // After all, Cragheart can add a -2, so you never know with the unlockable classes
-var BASE_DECK = 0;
-var CLASS_DECK = 1;
-var ADDITIONAL_DECK = 2;
+const BASE_DECK = 0;
+const CLASS_DECK = 1;
+const ADDITIONAL_DECK = 2;
 
 //            IMPORTANT            IMPORTANT            IMPORTANT            IMPORTANT            IMPORTANT            IMPORTANT            IMPORTANT
 
@@ -204,10 +204,10 @@ class Deck {
     // Begin switching to a new character
     this.characterLabel = label;
     // Check to see if this character already has saved settings - if not, reset the deck
-    if (this.deckSaves[label] == 0) { // Character has no saved data
+    if (!this.deckSaves[label]) { // Character has no saved data
       this.formDeck();
       // Based on which class number is selected, load the respective deck
-      // THE CODE OF THIS FUNCTIONS HAS SPOILERS, DON'T GO LOOKING FOR IT IF YOU DON'T WANT CHARACTER NAME SPOILED
+      // THE CODE OF THIS FUNCTION HAS SPOILERS, DON'T GO LOOKING FOR IT IF YOU DON'T WANT CHARACTER NAME SPOILED
       this.loadCharacterDeck(label);
       // Keep track of any -1s in the class-specific cards
       this.characterDeck.forEach(card => {

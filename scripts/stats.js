@@ -1,12 +1,10 @@
-import { chartHandler } from "./chartHandler.js";
-var CUMULATIVE_EFFECTS = ["push", "pull", "healSelf", "shieldSelf", "pierce", "target"];
-var CUMULATIVE_EFFECT_DISPLAY = ["Push", "Pull", "Heal (self)", "Shield (self)", "Pierce", "Target"];
+import { ChartHandler } from "./chartHandler.js";
+import { GameStateButtons } from "./gameStateButtons.js";
+const CUMULATIVE_EFFECTS = ["push", "pull", "healSelf", "shieldSelf", "pierce", "target"];
+const CUMULATIVE_EFFECT_DISPLAY = ["Push", "Pull", "Heal (self)", "Shield (self)", "Pierce", "Target"];
 var NORMAL_STORAGE; //                                                                              Why on earth is this global? I did this
 // I know this looks quite redundant but it's in the name of readability
-var CHART1 = 0; var CHART2 = 1; var CHART3 = 2; var CHART4 = 3; var CHART5 = 4; var CHART6 = 5;
-
-var ATTACK_VALUE = 3; // Default
-var THIS_INSTANCE = null; //                                                                            This looks terrible and should be fixed
+const CHART1 = 0; var CHART2 = 1; var CHART3 = 2; var CHART4 = 3; var CHART5 = 4; var CHART6 = 5;
 
 
 
@@ -21,11 +19,11 @@ var THIS_INSTANCE = null; //                                                    
 class StatsHandler {
 
   constructor (deckHandler) {
+    this.attackValue = 3;
     this.deckHandler = deckHandler;
-    this.chartHandler = new chartHandler(this);
-    this.createAttackValueConfig();
+    this.chartHandler = new ChartHandler(this);
+    this.gameStateButtons = new GameStateButtons(this);
     NORMAL_STORAGE = new Map();
-    THIS_INSTANCE = this;
   }
 
   // this is the function that is called outside of this class
@@ -376,14 +374,14 @@ class StatsHandler {
     var output = [0, 0, 0];
     // cardID is composed of the numerical modifer and the effect
     var [cardMod, cardEffect] = cardID.split(":");
-    if (cardMod == "x2") cardMod = ATTACK_VALUE;
-    if (cardMod == "null") cardMod = ATTACK_VALUE * -1;
+    if (cardMod == "x2") cardMod = this.attackValue;
+    if (cardMod == "null") cardMod = this.attackValue * -1;
     cardMod = parseInt(cardMod);
     var cardHasEffect = cardEffect != "0";
     deckInfo.forEach((compCardFreq, comparingCard) => {
       var [compCardMod, compCardEffect] = comparingCard.split(":");
-      if (compCardMod == "x2") compCardMod = ATTACK_VALUE;
-      if (compCardMod == "null") compCardMod = ATTACK_VALUE * -1;
+      if (compCardMod == "x2") compCardMod = this.attackValue;
+      if (compCardMod == "null") compCardMod = this.attackValue * -1;
       compCardMod = parseInt(compCardMod);
       var compHasEffect = compCardEffect != "0";
       // order of operations is to compare numerical modifiers
@@ -484,56 +482,25 @@ class StatsHandler {
     var weightSum = 0;
     cardIDs.forEach((dist, cardID) => {
       var cardValue = cardID.slice(0,cardID.indexOf(":"));
-      if (cardValue == "x2") cardValue = ATTACK_VALUE;
-      if (cardValue == "null") cardValue = -1 * ATTACK_VALUE;
-      avg += (parseInt(cardValue)+ATTACK_VALUE)*dist;
+      if (cardValue == "x2") cardValue = this.attackValue;
+      if (cardValue == "null") cardValue = -1 * this.attackValue;
+      avg += (parseInt(cardValue)+this.attackValue)*dist;
       weightSum += dist;
     });
     avg = avg / weightSum;
     var stdev = 0
     cardIDs.forEach((dist, cardID) => {
       var cardValue = cardID.slice(0,cardID.indexOf(":"));
-      if (cardValue == "x2") cardValue = ATTACK_VALUE;
-      if (cardValue == "null") cardValue = -1 * ATTACK_VALUE;
-      stdev += Math.pow((parseInt(cardValue)+ATTACK_VALUE)-avg,2)*dist;
+      if (cardValue == "x2") cardValue = this.attackValue;
+      if (cardValue == "null") cardValue = -1 * this.attackValue;
+      stdev += Math.pow((parseInt(cardValue)+this.attackValue)-avg,2)*dist;
     });
     stdev = Math.pow(stdev,1/2);
     return [avg, stdev];
   }
 
-  //                                                                                                                      COMMENT
-  createAttackValueConfig() {
-    var attackValueBox = document.getElementById("attackValueBox");
-    this.decreaseBox = document.createElement("button");
-    this.decreaseBox.type = "button";
-    this.decreaseBox.innerHTML = "-";
-    this.decreaseBox.onclick = this.decreaseAttack;
-    this.decreaseBox.id = "DecreaseBox"
-    this.increaseBox = document.createElement("button");
-    this.increaseBox.type = "button";
-    this.increaseBox.innerHTML = "+";
-    this.increaseBox.onclick = this.increaseAttack;
-    this.increaseBox.id = "IncreaseBox";
-    attackValueBox.appendChild(this.decreaseBox);
-    this.attackValueSpan = document.createElement("span");
-    this.attackValueSpan.id = "AttackValueSpan";
-    this.attackValueSpan.textContent = "  Attack value:  " + ATTACK_VALUE + "  ";
-    attackValueBox.appendChild(this.attackValueSpan);
-    attackValueBox.appendChild(this.increaseBox);
-  }
-
-  decreaseAttack() {
-    ATTACK_VALUE--;
-    document.getElementById("AttackValueSpan").textContent = "  Attack value:  " + ATTACK_VALUE + "  ";
-    if (ATTACK_VALUE == 0) document.getElementById("DecreaseBox").disabled = true;
-    THIS_INSTANCE.update();
-  }
-
-  increaseAttack() {
-    document.getElementById("DecreaseBox").disabled = false;
-    ATTACK_VALUE++;
-    document.getElementById("AttackValueSpan").textContent = "  Attack value:  " + ATTACK_VALUE + "  ";
-    THIS_INSTANCE.update();
+  shiftAttackValue(mod) {
+    return this.attackValue = this.attackValue + mod;
   }
 }
 
