@@ -6,6 +6,7 @@ class GameStateButtons {
         this.statsHandler = statsHandler;
         this.createReshuffleButton();
         this.createAttackValueConfig();
+        this.createChartScopeConfig();
     }
 
     // This creates the UI for flipping all of the cards face-up
@@ -15,12 +16,9 @@ class GameStateButtons {
         var reshuffleButton = document.createElement("button");
         reshuffleButton.type = "button";
         reshuffleButton.innerHTML = "Flip all cards face-up"
-        reshuffleButton.onclick = function() {self.reshuffleDeck(self.statsHandler)};
+        reshuffleButton.onclick = function() {self.statsHandler.reshuffleDeck()};
+        reshuffleButton.id = "reshuffleButton";
         reshuffleBox.appendChild(reshuffleButton);
-    }
-
-    reshuffleDeck(statsHandler) {
-        statsHandler.reshuffleDeck();
     }
 
     // This creates the UI for seeing and changing the base attack value
@@ -50,7 +48,7 @@ class GameStateButtons {
         // Decrease attack value and update display
         document.getElementById("AttackValueSpan").textContent = "  Attack value:  " + statsHandler.shiftAttackValue(-1) + "  ";
         if (statsHandler.shiftAttackValue(0) == 0) document.getElementById("DecreaseBox").disabled = true; // Prevent negative attack values
-        statsHandler.update();
+        statsHandler.update(false);
     }
 
     // Function triggers when decrease attack button selected
@@ -59,6 +57,26 @@ class GameStateButtons {
         document.getElementById("DecreaseBox").disabled = false;
         document.getElementById("AttackValueSpan").textContent = "  Attack value:  " + statsHandler.shiftAttackValue(1) + "  ";
         statsHandler.update();
+    }
+
+    // This creates the UI for switching between stats of overall and current deck
+    createChartScopeConfig() {
+        var self = this;
+        var chartConfigBox = document.getElementById("chartScopeToggleBox");
+        var overallButton = document.createElement("button");
+        overallButton.type = "button";
+        overallButton.innerHTML = "(Showing overall deck stats)"
+        overallButton.onclick = function() {self.statsHandler.switchChartScope(false)};
+        overallButton.disabled = true;
+        overallButton.id = "showOverallButton"
+        chartConfigBox.appendChild(overallButton);
+        var currentButton = document.createElement("button");
+        currentButton.type = "button";
+        currentButton.innerHTML = "Show current deck stats"
+        currentButton.onclick = function() {self.statsHandler.switchChartScope(true)};
+        currentButton.disabled = false;
+        currentButton.id = "showCurrentButton"
+        chartConfigBox.appendChild(currentButton);
     }
 }
 

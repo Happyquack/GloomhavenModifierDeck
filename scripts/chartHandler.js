@@ -6,7 +6,7 @@ const EFFECT_CATEGORIES = ["none","air","bless","cold","curse","disarm","earth",
 const EFFECT_CATEGORY_LABELS = ["No effect", "Air", "Bless", "Cold", "Curse", "Disarm", "Earth", "Fire", "Heal", "Immobilize", "Invisible", "Refresh one item card", "Muddle", "Night", "Pierce", "Poison", "Push", "Pull", "Shield", "Strengthen", "Stun", "Sun", "Target", "Wound"];
 
 // The HTML IDs of the chart divs
-const CHART_IDs = ["generalStatsNormalChart","generalStatsAdvChart","generalStatsDisChart","currentStatsNormalChart","currentStatsAdvChart","currentStatsDisChart"];
+const CHART_IDs = ["statsNormalChart","statsAdvChart","statsDisChart"];
 
 // Array of the hex colors representing each effect
 // Colors I couldn't immediately decide on ended up being RGB 60,60,60

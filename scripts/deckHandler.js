@@ -99,7 +99,7 @@ class DeckHandler {
         this.deck.numCurses > 0 ? document.getElementById("curseRemoveBox").disabled = false : document.getElementById("curseRemoveBox").disabled = true;
 
         // Have the stats module recalculate to reflect deck changes
-        this.statsHandler.update();
+        this.statsHandler.update(false);
     }
 
     // When the class is changed, update the deck and then update the display/stats
@@ -113,7 +113,7 @@ class DeckHandler {
         this.deckOfCards.forEach(el => {
             if (el.getImg() == event.target) el.flip();
         });
-        this.statsHandler.update();
+        this.statsHandler.update(true);
     }
 
     // Getter function for deck

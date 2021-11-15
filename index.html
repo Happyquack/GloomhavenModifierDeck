@@ -176,13 +176,16 @@ layout: default
     font-family: 'Pirata One';
   }
 
-  #statsBox {
+  #statsBoxes > div {
     display: flex;
-    flex-wrap: wrap;
   }
 
-  #statsBox div {
+  #statsNormalText, #statsAdvText, #statsDisText {
     flex: 1;
+  }
+
+  #statsNormalChartDiv, #statsAdvChartDiv, #statsDisChartDiv {
+    flex: 2;
   }
 
   </style>
@@ -212,42 +215,30 @@ layout: default
  
 
  <div id="statsBox">
-   <div id="generalStatsBox">
-     <h3> Overall Deck Stats </h3>
-     <div id="generalStatsNormalBox">
-       <h4>Normal Rules</h4>
-       <canvas id="generalStatsNormalChart"></canvas>
-       <div id="generalStatsNormalText"></div>
+   <h3> Deck Stats </h3>
+   <div id="statsBoxes">
+    <h4>Normal Rules</h4>
+     <div id="statsNormalBox">
+       <div id="statsNormalChartDiv">
+          <canvas id="statsNormalChart"></canvas>
+        </div>
+        <div id="statsNormalText"></div>
      </div>
-     <div id="generalStatsAdvBox">
-      <h4>Advantage</h4>
-      <canvas id="generalStatsAdvChart"></canvas>
-      <div id="generalStatsAdvText"></div>
+     <h4>Advantage</h4>
+     <div id="statsAdvBox">
+        <div id="statsAdvChartDiv">
+          <canvas id="statsAdvChart"></canvas>
+        </div>
+        <div id="statsAdvText"></div>
      </div>
-     <div id="generalStatsDisBox">
-      <h4>Disadvantage</h4>
-      <canvas id="generalStatsDisChart"></canvas>
-      <div id="generalStatsDisText"></div>
+     <h4>Disadvantage</h4>
+     <div id="statsDisBox">
+        <div id="statsNormalChartDiv">
+          <canvas id="statsDisChart"></canvas>
+        </div>
+      <div id="statsDisText"></div>
      </div>
    </div>
-   <div id="currentStatsBox">
-     <h3> Current Deck Stats </h3>
-    <div id="currentStatsNormalBox">
-      <h4>Normal Rules</h4>
-      <canvas id="currentStatsNormalChart"></canvas>
-      <div id="currentStatsNormalText"></div>
-    </div>
-    <div id="currentStatsAdvBox">
-      <h4>Advantage</h4>
-      <canvas id="currentStatsAdvChart"></canvas>
-      <div id="currentStatsAdvText"></div>
-    </div>
-    <div id="currentStatsDisBox">
-      <h4>Disadvantage</h4>
-      <canvas id="currentStatsDisChart"></canvas>
-      <div id="currentStatsDisText"></div>
-    </div>
-  </div>
  </div>
   
  <script src="scripts/page.js" type="module"></script>

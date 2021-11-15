@@ -3,7 +3,7 @@ import { GameStateButtons } from "./gameStateButtons.js";
 const CUMULATIVE_EFFECTS = ["push", "pull", "healSelf", "shieldSelf", "pierce", "target"];
 const CUMULATIVE_EFFECT_DISPLAY = ["Push", "Pull", "Heal (self)", "Shield (self)", "Pierce", "Target"];
 // I know this looks quite redundant but it's in the name of readability
-const CHART1 = 0; var CHART2 = 1; var CHART3 = 2; var CHART4 = 3; var CHART5 = 4; var CHART6 = 5;
+const CHART1 = 0; var CHART2 = 1; var CHART3 = 2;
 
 
 
@@ -23,17 +23,18 @@ class StatsHandler {
     this.chartHandler = new ChartHandler();
     this.gameStateButtons = new GameStateButtons(this);
     this.rollingStatMemory = new Map();
+    this.showCurrentDeck = false;
   }
 
   // this is the function that is called outside of this class
   // when the deck is updated, this will run and update the statistics for both the overall deck and the current deck
-  update() {
-    this.normalDeck(this.deckHandler.getDeck().getPlayerDeck(), document.getElementById("generalStatsNormalText"),CHART1);
-    this.normalDeck(this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isFlipped()), document.getElementById("currentStatsNormalText"),CHART4);
-    this.advantageDeck(this.deckHandler.getDeck().getPlayerDeck(), document.getElementById("generalStatsAdvText"),CHART2);
-    this.advantageDeck(this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isFlipped()), document.getElementById("currentStatsAdvText"),CHART5);
-    this.disadvantageDeck(this.deckHandler.getDeck().getPlayerDeck(), document.getElementById("generalStatsDisText"),CHART3);
-    this.disadvantageDeck(this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isFlipped()), document.getElementById("currentStatsDisText"),CHART6);
+  update(cardFlipped) {
+    if (!(cardFlipped && !this.showCurrentDeck))
+    {
+      this.normalDeck(this.deckHandler.getDeck().getPlayerDeck().filter(el => !(this.showCurrentDeck && el.isFlipped())), document.getElementById("statsNormalText"),CHART1);
+      this.advantageDeck(this.deckHandler.getDeck().getPlayerDeck().filter(el => !(this.showCurrentDeck && el.isFlipped())), document.getElementById("statsAdvText"),CHART2);
+      this.disadvantageDeck(this.deckHandler.getDeck().getPlayerDeck().filter(el => !(this.showCurrentDeck && el.isFlipped())), document.getElementById("statsDisText"),CHART3);
+    }
   }
 
   // this function takes a list of cards and finds statistics for normal drawing rules
@@ -420,7 +421,28 @@ class StatsHandler {
   // Goes off when reshuffle button pressed - called by GameStateButtons
   reshuffleDeck() {
     this.deckHandler.reshuffleDeck();
-    this.update();
+    this.update(true);
+  }
+
+  // Goes off when chart config buttons pressed - called by GameStateButtons
+  switchChartScope(showCurrentDeck) {
+    if (showCurrentDeck != this.showCurrentDeck){
+      this.showCurrentDeck = showCurrentDeck;
+      var overallButton = document.getElementById("showOverallButton");
+      var currentButton = document.getElementById("showCurrentButton");
+      if (showCurrentDeck) {
+        overallButton.disabled = false;
+        overallButton.innerHTML = "Show overall deck stats";
+        currentButton.disabled = true;
+        currentButton.innerHTML = "(Showing current deck stats)";
+      } else {
+        overallButton.disabled = true;
+        overallButton.innerHTML = "(Showing overall deck stats)";
+        currentButton.disabled = false;
+        currentButton.innerHTML = "Show current deck stats";
+      }
+      this.update(false);
+    }
   }
 }
 
