@@ -14,31 +14,33 @@ If you have any suggestions or requests, please feel free to log an issue and I'
 
 <h2> Disclaimer on Coding Expertise </h2>
 
-I am an occasional coding hobbyist, nowhere near the level of those who code more than one thing a year, yet I am quite comfortable in Python and Java, and I have dabbled in HTML, CSS, and C/C++ in the past. However, I've judged that making this tool in JavaScript would be easiest, so I am learning JavaScript only as I start this project. Please understand this if you ever decide to read my source code and leave any comments - advice would be much appreciated though I will have to read up on this language a bit in order to understand what you are saying =).
+I am an occasional coding hobbyist, nowhere near the level of those who code more than one thing a year, yet I am quite comfortable in Python and Java, and I have dabbled in HTML, CSS, and C/C++ in the past. However, I've judged that making this tool in JavaScript would be easiest, so I've been learning JavaScript throughout the making of this project. This means that I know what I'm doing, but I don't know of every optimization (nor am I typically concerned with minor ones at the expense of readibility). Please understand this if you ever decide to read my source code and leave any comments - advice would be much appreciated =).
 
-<h2> Implementation Plans </h2>
+<h2> Features </h2>
 
-This (dynamic) list is mostly for me, but these are the features I plan to implement:
+Here's what the tool offers so far:
 
 <ul>
-  <li> A graphical distribution of the cards in the modifier deck. I will find images of each card and display them in horizontal columns of: </li>
-    <ul>
-      <li> Null (includes curses) </li>
-      <li> -2 </li>
-      <li> -1 </li>
-      <li> +0 </li>
-      <li> +1 </li>
-      <li> +2 </li>
-      <li> any other +X cards (if applicable) </li>
-      <li> x2 (includes blessings) </li>
-      <li> Any rolling +X cards (if applicable) </li>
-      <li> Rolling effect cards (if applicable) </li>
-    </ul>
-  <li> A menu to choose the desired class you would like to alter the deck with. This will only be labeled by symbol in order to prevent spoilers. </li>
-  <li> A menu to select which class perks are to be applied to the deck, graphically similar to the character sheet. </li>
-  <li> A way to select which modifier cards have already been drawn, so that the output stats can reflect the current state of your deck. </li>
-  <li> An output for average attack modifier (for both normal drawing, as well as with advantage or disadvantage), as well as an estimate of how many rounds before the deck will be reshuffled. </li>
-  <li> Support for those who prefer to consider "null" as "-2" and "x2" as "+2"
-  <li> A "sandbox" mode for adding custom cards </li>
-  <li> A way to add curses, blesses, and and penalty "-1"s. </li>
+  <li> A visual display of the character deck </li>
+  <li> All 17 classes from the base Gloomhaven game (except for Three Spears, Circles, Eclipse, and Music Note), including their perk lists and modifiers </li>
+  <li> The ability to add/remove -1's, blesses, and curses from your deck </li>
+  <li> The ability to designate cards as already drawn by selecting them to flip them over, as well as a single button to easily flip them all face-up </li>
+  <li> The tool remembers what perks you have selected for each character, as well as which cards have been flipped, as you switch between classes </li>
+  <li> A graphical distribution of the expected modifier card drawn during an attack, including using advantage and disadvantage rules </li>
+  <li> The expected chance of possible rolling modifier effects (WIP - numerical rolling modifiers are not entirely accurate with advantage) </li>
+  <li> A spot to enter your attack value to calculate your expected damage (WIP - does not include rolling modifiers), as well as to handle nuances in advantage/disadvantage rules </li>
+  <li> The option to show the statistics of your mid-scenario current deck, ignoring flipped-over cards </li>
+</ul>
+
+Here's what I'm working on adding:
+
+<ul>
+  <li> The probabilities of ending up with certain attack ranges (e.g. +0 or above, +1 or above) </li>
+  <li> Taking rolling modifiers into account when displaying the expected damage </li>
+  <li> Taking advantage into account when displaying numerical rolling modifier chances </li>
+  <li> Adding a confirm dialog when selecting a typically locked class, to avoid accidental spoilers </li>
+  <li> Replacing "SANDBOX" with "MONSTER DECK" and enabling it so players can keep track of monster deck statistics </li>
+  <li> Making chart results more readable </li>
+  <li> Making chart updating smoother </li>
+  <li> Acknowlege long image loading times </li>
 </ul>
