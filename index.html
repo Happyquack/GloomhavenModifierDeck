@@ -176,16 +176,22 @@ layout: default
     font-family: 'Pirata One';
   }
 
-  #statsBoxes > div {
-    display: flex;
+  @media all and (min-width: 800px) {
+    #statsBoxes > div {
+      display: grid;
+      grid-gap: 10px;
+      grid-template-columns: minmax(300px, 3fr) minmax(200px, 2fr);
+    }
   }
 
-  #statsNormalText, #statsAdvText, #statsDisText {
-    flex: 1;
-  }
+  @media all and (max-width: 800px) {
+    #utilityBox {
+      flex-direction: column;
+    }
 
-  #statsNormalChartDiv, #statsAdvChartDiv, #statsDisChartDiv {
-    flex: 2;
+    #statsBox > div {
+      grid-template-columns: 1fr;
+    }
   }
 
   </style>

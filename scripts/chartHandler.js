@@ -183,6 +183,16 @@ class ChartHandler {
         if (index > -1) return array.splice(index,1);
         return false;
     }
+
+    // A helper method for seeing if the data labels are the same
+    sameArrays(array1, array2) {
+        console.log(array1, array2);
+        var numDiffs = 0;
+        array1.forEach((item, key) => {
+            if (item == array2[key]) numDiffs++;
+        });
+        return numDiffs == 0;
+    }
 }
 
 export {ChartHandler};

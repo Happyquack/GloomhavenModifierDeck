@@ -349,18 +349,22 @@ class StatsHandler {
     }
     // the whole chart thing once we have it
     this.chartHandler.printChart(endStats,targetChart);
+
     // print end card stats
+    var deckAverage = null;
     if (endStats.size > 1) {
       var [avg, stdev] = this.basicStats(endStats);
       var endCardStatOutput = document.createElement("p");
-      endCardStatOutput.innerHTML = "Typical deck average: " + avg.toFixed(3);
+      deckAverage = avg.toFixed(3);
+      endCardStatOutput.innerHTML = "Typical deck average: " + deckAverage;
       var endCardStatOutputTwo = document.createElement("p");
       endCardStatOutputTwo.innerHTML = "Standard deviation: " + stdev.toFixed(3);
       targetDiv.appendChild(endCardStatOutput);
       targetDiv.appendChild(endCardStatOutputTwo);
     } else if (endStats.size == 1) {
       var endCardStatOutput = document.createElement("p");
-      endCardStatOutput.innerHTML = "Typical deck average: " + endStats.keys().next().value;
+      deckAverage = endStats.keys().next().value;
+      endCardStatOutput.innerHTML = "Typical deck average: " + deckAverage;
       targetDiv.appendChild(endCardStatOutput);
     }
 
@@ -368,6 +372,7 @@ class StatsHandler {
 
     if (rollingStats.length > 0) {
 
+      var averageRollingModifier = 0;
       var rollingBox = document.createElement("div");
       rollingBox.classList.add("rollingModifierBox");
       rollingStats.forEach( el => {
@@ -376,6 +381,7 @@ class StatsHandler {
         var entry = document.createElement("div");
         if (!isNaN(key) && parseInt(key) != 0) {
           entry.innerHTML = "Attack modifier +" + key + ": " + chance + "%";
+          averageRollingModifier += key * chance;
         } else if (CUMULATIVE_EFFECTS.includes(key.slice(0,key.length-1))) {
           var index = CUMULATIVE_EFFECTS.indexOf(key.slice(0,key.length-1));
           entry.innerHTML = CUMULATIVE_EFFECT_DISPLAY[index] + " " + key.charAt(key.length-1) + ": " + chance + "%";
