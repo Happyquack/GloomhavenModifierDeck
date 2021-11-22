@@ -26,7 +26,7 @@ Here's what the tool offers so far:
   <li> The ability to add/remove -1's, blesses, and curses from your deck </li>
   <li> The ability to designate cards as already drawn by selecting them to flip them over, as well as a single button to easily flip them all face-up </li>
   <li> The tool remembers what perks you have selected for each character, as well as which cards have been flipped, as you switch between classes </li>
-  <li> A graphical distribution of the expected modifier card drawn during an attack, including using advantage and disadvantage rules </li>
+  <li> A graphical distribution of the expected modifier card drawn during an attack, including using advantage and disadvantage rules (WIP - Edge cases of one card left not accounted for) </li>
   <li> The expected chance of possible rolling modifier effects (WIP - numerical rolling modifiers are not entirely accurate with advantage) </li>
   <li> A spot to enter your attack value to calculate your expected damage (WIP - does not include rolling modifiers), as well as to handle nuances in advantage/disadvantage rules </li>
   <li> The option to show the statistics of your mid-scenario current deck, ignoring flipped-over cards </li>

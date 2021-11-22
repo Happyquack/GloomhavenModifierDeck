@@ -3,7 +3,9 @@ import { GameStateButtons } from "./gameStateButtons.js";
 const CUMULATIVE_EFFECTS = ["push", "pull", "healSelf", "shieldSelf", "pierce", "target"];
 const CUMULATIVE_EFFECT_DISPLAY = ["Push", "Pull", "Heal (self)", "Shield (self)", "Pierce", "Target"];
 // I know this looks quite redundant but it's in the name of readability
-const CHART1 = 0; var CHART2 = 1; var CHART3 = 2;
+const CHART1 = 0; const CHART2 = 1; const CHART3 = 2;
+const NORMAL = 0; const ADVANTAGE = 1; const DISADVANTAGE = 2;
+
 
 
 
@@ -31,148 +33,86 @@ class StatsHandler {
   update(cardFlipped) {
     if (!(cardFlipped && !this.showCurrentDeck))
     {
-      this.normalDeck(this.deckHandler.getDeck().getPlayerDeck().filter(el => !(this.showCurrentDeck && el.isFlipped())), document.getElementById("statsNormalText"),CHART1);
-      this.advantageDeck(this.deckHandler.getDeck().getPlayerDeck().filter(el => !(this.showCurrentDeck && el.isFlipped())), document.getElementById("statsAdvText"),CHART2);
-      this.disadvantageDeck(this.deckHandler.getDeck().getPlayerDeck().filter(el => !(this.showCurrentDeck && el.isFlipped())), document.getElementById("statsDisText"),CHART3);
+      this.calcChart(NORMAL, this.deckHandler.getDeck().getPlayerDeck().filter(el => !(this.showCurrentDeck && el.isFlipped())), document.getElementById("statsNormalText"),CHART1);
+      this.calcChart(ADVANTAGE, this.deckHandler.getDeck().getPlayerDeck().filter(el => !(this.showCurrentDeck && el.isFlipped())), document.getElementById("statsAdvText"),CHART2);
+      this.calcChart(DISADVANTAGE, this.deckHandler.getDeck().getPlayerDeck().filter(el => !(this.showCurrentDeck && el.isFlipped())), document.getElementById("statsDisText"),CHART3);
     }
   }
 
-  // this function takes a list of cards and finds statistics for normal drawing rules
+  // this function takes a list of cards and finds statistics
   // it finds the odds of drawing each type of normal card to construct a chart and an average modifier/stdev
   // and also finds the odds of having any rolling modifiers
-  normalDeck(currentDeck, targetDiv, targetChart) {
+  calcChart(mode, currentDeck, targetDiv, targetChart) {
     //********************************************NORMAL*/
-    // first step is to find the odds of each normal cards
+    // Filter out rollings, and reshuffle if needed
     var possibleEndCards = currentDeck.filter(el => !el.isRolling());
     if (possibleEndCards.length == 0) {
       possibleEndCards = this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isRolling());
     }
-    var endCardChances = new Map();
-    // turn this list of end cards into a list of probabilities
-    var probabilityPerEndCard = 1 / possibleEndCards.length;
+    // check for lone card
+    var loneCard = null;
+    if (possibleEndCards.length == 1) {
+      loneCard = possibleEndCards[0];
+      possibleEndCards = this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isRolling());
+    }
+    // turn this list of end cards into a frequency distribution
+    var endCardFreq = new Map();
     possibleEndCards.forEach(card => {
       var cardID = card.getCardSummary();
-      if (endCardChances.has(cardID)) {
-        endCardChances.set(cardID,endCardChances.get(cardID) + probabilityPerEndCard);
+      if (endCardFreq.has(cardID)) {
+        endCardFreq.set(cardID,endCardFreq.get(cardID) + 1);
       } else {
-        endCardChances.set(cardID, probabilityPerEndCard);
+        endCardFreq.set(cardID, 1);
       }
     });
+    // calculate the actual probabilities
+    var endCardChances = new Map();
+    if (mode == NORMAL) {
+      var probabilityPerEndCard = 1 / possibleEndCards.length;
+      possibleEndCards.forEach(card => {
+        var cardID = card.getCardSummary();
+        if (endCardChances.has(cardID)) {
+          endCardChances.set(cardID,endCardChances.get(cardID) + probabilityPerEndCard);
+        } else {
+          endCardChances.set(cardID, probabilityPerEndCard);
+        }
+      });
+    } else {
+      var numEndCards = possibleEndCards.length;
+      var numRollings = currentDeck.length - numEndCards;
+      var numCards = numEndCards+numRollings;
+      var chanceFromRollings = numRollings/(numCards*numEndCards);
+      if (loneCard == null) { // there is more than one card left in the deck
+        endCardFreq.forEach((compCardFreq, comparingCard) => {
+          var compVars = this.endCardComparisons(comparingCard, endCardFreq);
+          var numBeats = compVars[0];
+          var numLoses = compVars[1];
+          var numAmbs = compVars[2];
+          numAmbs = numAmbs-1; // we can't have it count itself
+          if (mode == ADVANTAGE) {
+            var probabilityOfThisCard = chanceFromRollings + (numRollings+2*numBeats+numAmbs)/(numCards*(numCards-1));
+          } else {
+            var probabilityOfThisCard = chanceFromRollings + (numRollings+2*numLoses+numAmbs)/(numCards*(numCards-1));
+          }
+          endCardChances.set(comparingCard, probabilityOfThisCard * compCardFreq);
+        });
+      } else {
+        //                                                              This will be taken care of later, I don't really care about it right now
+      }
+    }
     //********************************************ROLLING*/
     // next we evaluate the rolling modifiers in the deck and determine the chances of each effect
     var endRollingChances = [];
-    if (possibleEndCards.length != currentDeck.length) {
-      this.generateRollingStats(currentDeck, endRollingChances, false);
+    if (mode != DISADVANTAGE)
+    {
+      if (possibleEndCards.length != currentDeck.length) {
+        this.generateRollingStats(currentDeck, endRollingChances, mode == ADVANTAGE);
+      }
     }
     //********************************************DISPLAY*/
     // now we display the statistics to the page
     this.displayChart(endCardChances, endRollingChances, targetDiv, targetChart);
   }
-
-  advantageDeck(currentDeck, targetDiv, targetChart) {
-    //********************************************NORMAL*/
-    // Filter out rollings, and reshuffle if needed
-    var possibleEndCards = currentDeck.filter(el => !el.isRolling());
-    if (possibleEndCards.length == 0) {
-      possibleEndCards = this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isRolling());
-    }
-    // check for lone card
-    var loneCard = null;
-    if (possibleEndCards.length == 1) {
-      loneCard = possibleEndCards[0];
-      possibleEndCards = this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isRolling());
-    }
-    // turn this list of end cards into a frequency distribution
-    var endCardFreq = new Map();
-    possibleEndCards.forEach(card => {
-      var cardID = card.getCardSummary();
-      if (endCardFreq.has(cardID)) {
-        endCardFreq.set(cardID,endCardFreq.get(cardID) + 1);
-      } else {
-        endCardFreq.set(cardID, 1);
-      }
-    });
-    // calculate the actual probabilities
-    var endCardChances = new Map();
-    var numEndCards = possibleEndCards.length;
-    var numRollings = this.deckHandler.getDeck().getPlayerDeck().length - numEndCards;
-    var numCards = numEndCards+numRollings;
-    var chanceFromRollings = numRollings/(numCards*numEndCards);
-    if (loneCard == null) { // there is more than one card left in the deck
-      endCardFreq.forEach((compCardFreq, comparingCard) => {
-        var compVars = this.endCardComparisons(comparingCard, endCardFreq);
-        var numBeats = compVars[0];
-        var numAmbs = compVars[2];
-        numAmbs = numAmbs-1; // we can't have it count itself
-        // advantage formula
-        var probabilityOfThisCard = chanceFromRollings + (numRollings+2*numBeats+numAmbs)/(numCards*(numCards-1));
-
-        endCardChances.set(comparingCard, probabilityOfThisCard * compCardFreq);
-      });
-    } else {
-      //                                                              This will be taken care of later, I don't really care about it right now
-    }
-    //********************************************ROLLING*/
-    // next we evaluate the rolling modifiers in the deck and determine the chances of each effect
-    var endRollingChances = [];
-    if (possibleEndCards.length != currentDeck.length) {
-      this.generateRollingStats(currentDeck, endRollingChances, true);
-    }
-    //********************************************DISPLAY*/
-    // now we display the statistics to the page
-    this.displayChart(endCardChances, endRollingChances, targetDiv, targetChart);
-  }//                                                                                                                             TODO Lone card
-
-  disadvantageDeck(currentDeck, targetDiv, targetChart) {
-    //********************************************NORMAL*/
-    // Filter out rollings, and reshuffle if needed
-    var possibleEndCards = currentDeck.filter(el => !el.isRolling());
-    if (possibleEndCards.length == 0) {
-      possibleEndCards = this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isRolling());
-    }
-    // check for lone card
-    var loneCard = null;
-    if (possibleEndCards.length == 1) {
-      loneCard = possibleEndCards[0];
-      possibleEndCards = this.deckHandler.getDeck().getPlayerDeck().filter(el => !el.isRolling());
-    }
-    // turn this list of end cards into a frequency distribution
-    var endCardFreq = new Map();
-    possibleEndCards.forEach(card => {
-      var cardID = card.getCardSummary();
-      if (endCardFreq.has(cardID)) {
-        endCardFreq.set(cardID,endCardFreq.get(cardID) + 1);
-      } else {
-        endCardFreq.set(cardID, 1);
-      }
-    });
-    // calculate the actual probabilities
-    var endCardChances = new Map();
-    var numEndCards = possibleEndCards.length;
-    var numRollings = this.deckHandler.getDeck().getPlayerDeck().length - numEndCards;
-    var numCards = numEndCards+numRollings;
-    var chanceFromRollings = numRollings/(numCards*numEndCards);
-    if (loneCard == null) { // there is more than one card left in the deck
-      endCardFreq.forEach((compCardFreq, comparingCard) => {
-        var compVars = this.endCardComparisons(comparingCard, endCardFreq);
-        var numLoses = compVars[1];
-        var numAmbs = compVars[2];
-        numAmbs = numAmbs-1; // we can't have it count itself
-        // advantage formula
-        var probabilityOfThisCard = chanceFromRollings + (numRollings+2*numLoses+numAmbs)/(numCards*(numCards-1));
-
-        endCardChances.set(comparingCard, probabilityOfThisCard * compCardFreq);
-      });
-    } else {
-      //                                                              This will be taken care of later, I don't really care about it right now
-    }
-    //********************************************ROLLING*/
-    // rollings are not counted
-    var endRollingChances = [];
-    //********************************************DISPLAY*/
-    // now we display the statistics to the page
-    this.displayChart(endCardChances, endRollingChances, targetDiv, targetChart);
-  }//                                                                                                                             TODO Lone card                                                                                                                                CONDENSE
 
   // this function determines statistics of rolling modifiers
   generateRollingStats(currentDeck, endRolling, advantage) {
@@ -352,11 +292,16 @@ class StatsHandler {
 
     // print end card stats
     var deckAverage = null;
+    var rollingDisclaimer = "";
+    if (rollingStats.length > 0) {
+      var hasRollingNumMod = false;
+      rollingStats.forEach(el => {if (!isNaN(el[0]) && parseInt(el[0]) != 0) rollingDisclaimer = " (before rolling modifiers)";})
+    }
     if (endStats.size > 1) {
       var [avg, stdev] = this.basicStats(endStats);
       var endCardStatOutput = document.createElement("p");
       deckAverage = avg.toFixed(3);
-      endCardStatOutput.innerHTML = "Typical deck average: " + deckAverage;
+      endCardStatOutput.innerHTML = "Typical deck average" + rollingDisclaimer + ": " + deckAverage;
       var endCardStatOutputTwo = document.createElement("p");
       endCardStatOutputTwo.innerHTML = "Standard deviation: " + stdev.toFixed(3);
       targetDiv.appendChild(endCardStatOutput);
@@ -364,7 +309,7 @@ class StatsHandler {
     } else if (endStats.size == 1) {
       var endCardStatOutput = document.createElement("p");
       deckAverage = endStats.keys().next().value;
-      endCardStatOutput.innerHTML = "Typical deck average: " + deckAverage;
+      endCardStatOutput.innerHTML = "Typical deck average" + rollingDisclaimer + ": " + deckAverage;
       targetDiv.appendChild(endCardStatOutput);
     }
 
@@ -378,7 +323,8 @@ class StatsHandler {
       rollingStats.forEach( el => {
         var key = el[0];
         var chance = (el[1] * 100).toFixed(2);
-        var entry = document.createElement("div");
+        if (el[1] > 0) {
+          var entry = document.createElement("div");
         if (!isNaN(key) && parseInt(key) != 0) {
           entry.innerHTML = "Attack modifier +" + key + ": " + chance + "%";
           averageRollingModifier += key * chance;
@@ -389,6 +335,7 @@ class StatsHandler {
           entry.innerHTML = key.charAt(0).toUpperCase() + key.slice(1) + ": " + chance + "%";
         }
         rollingBox.appendChild(entry);
+        }
       });
 
       var rollingModiferTitle = document.createElement("h4");
