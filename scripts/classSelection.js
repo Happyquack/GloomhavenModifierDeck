@@ -12,10 +12,11 @@ class ClassSelectionUI {
         this.fillIconImgs();
         this.deckHandler = deckHandler;
         this.perkHandler = perkHandler;
-        this.currentID = "00";
+        this.currentID = "01";
         this.proposedID = "00";
         this.buttonList = [];
         this.makeSpoilerButtons();
+        this.loadFirstCharacter();
     }
 
     // This retrieves all of the class icons and configures their HTML elements
@@ -112,6 +113,12 @@ class ClassSelectionUI {
             this.deckHandler.updateCharacter(this.currentID);
             this.perkHandler.updatePerks();
         }
+    }
+
+    loadFirstCharacter() {
+        document.getElementById(this.currentID).classList.add("classSelectionSelected");
+        this.deckHandler.updateCharacter(this.currentID);
+        this.perkHandler.updatePerks();
     }
 
 }

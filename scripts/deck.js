@@ -200,7 +200,6 @@ class Deck {
   // Label is the number of the class, starting from 1
   updateCharacter(label) {
     // Save the previous deck
-    console.log("checking previous character:");
     if (!this.doSpoilerCheck()) this.saveDeck();
     // Begin switching to a new character
     this.characterLabel = label;
@@ -225,7 +224,6 @@ class Deck {
 
   // returns true if this is the first time a spoiler class is being loaded
   doSpoilerCheck() {
-    console.log(this.characterLabel > 6, !this.spoilerAccepted, !this.deckSaves[this.characterLabel])
     return this.characterLabel > 6 && !this.spoilerAccepted && !this.deckSaves[this.characterLabel];
   }
 

@@ -13,13 +13,13 @@ var deckHandler = new DeckHandler();
 
 var perkHandler = new PerkHandler(deckHandler);
 
-// make class selection
-
-var classSelectionUI = new ClassSelectionUI(deckHandler, perkHandler);
-
 // make deck adjusting handler
 
 var moddlingHandler = new ModdlingBox(deckHandler);
+
+// make class selection
+
+var classSelectionUI = new ClassSelectionUI(deckHandler, perkHandler);
 
 // display the first deck
 
