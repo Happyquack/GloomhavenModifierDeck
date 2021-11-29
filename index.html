@@ -70,21 +70,28 @@ layout: default
 
   .classSelectionIconWrapperWrapper {
   width: 16.66%;
-  border-width: 2%;
+  border-width: thick;
   border-style: solid;
   position: relative;
   }
 
   .classSelectionLegal {
+    border-color: goldenrod;
+  }
+
+  .classSelectionLocked {
     border-color: black;
+  }
+  .classSelectionSelected {
+    border-color: green;
+  }
+
+  .classSelectionProposed {
+    border-color: firebrick;
   }
 
   .classSelectionIllegal {
     border-color: grey;
-  }
-
-  .classSelectionSelected {
-    border-color: green;
   }
 
   #deckDisplayBox {
@@ -136,12 +143,10 @@ layout: default
   }
 
   #controllerBox {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
   }
 
   #deckAdjustingBox {
-    width: 40%;
     text-align: center;
   }
 
@@ -156,6 +161,19 @@ layout: default
 
   #perkBox {
     font-size: 120%;
+  }
+
+  .perkBoxSpoilerWarning {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    background-color: slategrey;
+    padding: 5px;
+  }
+
+  .perkBoxSpoilerWarning > span, button {
+    margin: 5px;
   }
 
   input:checked {
@@ -182,17 +200,26 @@ layout: default
       grid-gap: 10px;
       grid-template-columns: minmax(300px, 3fr) minmax(200px, 2fr);
     }
+
+    #controllerBox {
+      grid-template-columns: 2fr 3fr;
+    }
   }
 
   @media all and (max-width: 800px) {
-    /*
     #controllerBox {
-      flex-direction: column;
+      grid-template-columns: 1fr;
     }
 
     #deckAdjustingBox {
-      display: flex;
-    }*/
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    #perkBox {
+      padding-left: 20%;
+      padding-right: 20%;
+    }
 
     #utilityBox {
       flex-direction: column;

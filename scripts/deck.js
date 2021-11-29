@@ -43,6 +43,7 @@ class Deck {
     this.characterDecks = new Array(19);
     this.perkLists = new Array(19);
     this.perkInstructionLists = new Array(19);
+    this.spoilerAccepted = true;
   }
   
   // Loads up the base decks for modification
@@ -199,11 +200,13 @@ class Deck {
   // Label is the number of the class, starting from 1
   updateCharacter(label) {
     // Save the previous deck
-    this.saveDeck();
+    console.log("checking previous character:");
+    if (!this.doSpoilerCheck()) this.saveDeck();
     // Begin switching to a new character
     this.characterLabel = label;
     // Check to see if this character already has saved settings - if not, reset the deck
     if (!this.deckSaves[label]) { // Character has no saved data
+      this.spoilerAccepted = false;
       this.formDeck();
       // Based on which class number is selected, load the respective deck
       // THE CODE OF THIS FUNCTION HAS SPOILERS, DON'T GO LOOKING FOR IT IF YOU DON'T WANT CHARACTER NAME SPOILED
@@ -215,8 +218,19 @@ class Deck {
         }
       });
     } else {
+      this.spoilerAccepted = true;
       this.loadSavedCharacter();
     }
+  }
+
+  // returns true if this is the first time a spoiler class is being loaded
+  doSpoilerCheck() {
+    console.log(this.characterLabel > 6, !this.spoilerAccepted, !this.deckSaves[this.characterLabel])
+    return this.characterLabel > 6 && !this.spoilerAccepted && !this.deckSaves[this.characterLabel];
+  }
+
+  logSpoilerAccepted() {
+    this.spoilerAccepted = true;
   }
 
   // Getter method so the perkhandler knows what checkboxes to start checked when switching characters

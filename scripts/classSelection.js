@@ -12,6 +12,10 @@ class ClassSelectionUI {
         this.fillIconImgs();
         this.deckHandler = deckHandler;
         this.perkHandler = perkHandler;
+        this.currentID = "00";
+        this.proposedID = "00";
+        this.buttonList = [];
+        this.makeSpoilerButtons();
     }
 
     // This retrieves all of the class icons and configures their HTML elements
@@ -37,6 +41,7 @@ class ClassSelectionUI {
             if (WHITELISTED_CLASSES.includes(num)) {
              secondWrapper.addEventListener("click", this.classSelectorClicked.bind(this));
              secondWrapper.classList.add("classSelectionLegal");
+             if (num > 6) secondWrapper.classList.add("classSelectionLocked");
             } else {
              secondWrapper.classList.add("classSelectionIllegal");
             }
@@ -49,19 +54,64 @@ class ClassSelectionUI {
         }
     }
 
+    makeSpoilerButtons() {
+        var buttonData = [["confirmUnlockClass","Yes, I would like to unlock this class",true],["denyUnlockClass","No, take me back to the previous class"]];
+        buttonData.forEach(arr => {
+            var button = document.createElement("button");
+            button.type = "button";
+            button.id = arr[0];
+            button.innerHTML = arr[1];
+            button.onclick = this.completeSpoilerCheck.bind(this,arr[2]);
+            this.buttonList.push(button);
+        });
+    }
+
     // This function handles what happenes when a class icon is selected
     classSelectorClicked(event) {
-        var image = event.target;
-        var wrapper = document.getElementById(image.src.slice().split("/").pop().substring(0,2));
-        this.classIconImgs.forEach(el => {
-         if (WHITELISTED_CLASSES.includes(el.id)) {
-          el.classList.remove("classSelectionSelected");
-         }
-        });
-        
-        wrapper.classList.add("classSelectionSelected");
-        this.deckHandler.updateCharacter(wrapper.id);
-        this.perkHandler.updatePerks();
+        // Clear previous color scheme
+        if (this.proposedID != "00") document.getElementById(this.proposedID).classList.remove("classSelectionProposed");
+        this.proposedID = event.target.src.slice().split("/").pop().substring(0,2);
+        this.deckHandler.updateCharacter(this.proposedID);
+        // do the spoiler check
+        if (this.deckHandler.doSpoilerCheck()) {
+            document.getElementById(this.proposedID).classList.add("classSelectionProposed");
+            this.showClassSpoilerWarning();
+        } else {
+            if (this.currentID != "00") document.getElementById(this.currentID).classList.remove("classSelectionSelected");
+            this.currentID = this.proposedID;
+            this.proposedID = "00";
+            document.getElementById(this.currentID).classList.add("classSelectionSelected");
+            this.perkHandler.updatePerks();
+        }
+    }
+
+    showClassSpoilerWarning() {
+        var perkBox = document.getElementById("perkBox");
+        perkBox.innerHTML = "";
+        var warning = document.createElement("span");
+        warning.innerHTML = "WARNING: You are about to view a class that is sealed content. Are you sure that you want to view potential spoilers?";
+        perkBox.classList.add("perkBoxSpoilerWarning");
+        perkBox.appendChild(warning);
+        perkBox.appendChild(this.buttonList[0]);
+        perkBox.appendChild(this.buttonList[1]);
+    }
+
+    completeSpoilerCheck(unlockClass) {
+        if (unlockClass) {
+            if (this.currentID != "00") document.getElementById(this.currentID).classList.remove("classSelectionSelected");
+            document.getElementById(this.proposedID).classList.remove("classSelectionProposed");
+            this.currentID = this.proposedID;
+            this.proposedID = "00";
+            document.getElementById(this.currentID).classList.add("classSelectionSelected");
+            document.getElementById(this.currentID).classList.remove("classSelectionLocked");
+            this.perkHandler.updatePerks();
+            this.deckHandler.getDeck().logSpoilerAccepted();
+        } else {
+            document.getElementById(this.proposedID).classList.remove("classSelectionProposed");
+            this.proposedID = "00";
+            this.deckHandler.updateCharacter(this.currentID);
+            this.perkHandler.updatePerks();
+        }
     }
 
 }

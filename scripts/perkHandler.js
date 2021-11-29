@@ -29,6 +29,7 @@ class PerkHandler {
         var checkedCheckboxes = this.deckHandler.getDeck().getCheckboxList().slice();
         this.checkboxes.forEach(el => el.checked = false);
         this.perkBox.innerHTML = "";
+        this.perkBox.classList.remove("perkBoxSpoilerWarning");
         // Get new instructions
         var perkInstructions = this.deckHandler.getDeck().getPerkInstructions();
         // The checkboxes are listed in a specfic order, "queued" up for display

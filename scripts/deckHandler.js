@@ -127,6 +127,10 @@ class DeckHandler {
             if (card.isFlipped()) card.flip();
         });
     }
+
+    doSpoilerCheck() {
+        return this.deck.doSpoilerCheck();
+    }
 }
 
 export {DeckHandler};
