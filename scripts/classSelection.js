@@ -1,7 +1,7 @@
 
 
 // These are the classes that the author's party have unlocked - the classes left are 08, 09, 10, and 13.
-const WHITELISTED_CLASSES = ["01","02","03","04","05","06","07","11","12","14","15","16","17"];
+const WHITELISTED_CLASSES = ["01","02","03","04","05","06","07","11","12","13","14","15","16","17"];
 
 class ClassSelectionUI {
 
@@ -42,7 +42,7 @@ class ClassSelectionUI {
             if (WHITELISTED_CLASSES.includes(num)) {
              secondWrapper.addEventListener("click", this.classSelectorClicked.bind(this));
              secondWrapper.classList.add("classSelectionLegal");
-             if (num > 6) secondWrapper.classList.add("classSelectionLocked");
+             if (num > 6 && num != 18) secondWrapper.classList.add("classSelectionLocked");
             } else {
              secondWrapper.classList.add("classSelectionIllegal");
             }

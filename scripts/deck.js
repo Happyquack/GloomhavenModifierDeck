@@ -25,7 +25,6 @@ const ADDITIONAL_DECK = 2;
 
 //            IMPORTANT            IMPORTANT            IMPORTANT            IMPORTANT            IMPORTANT            IMPORTANT            IMPORTANT
 
-
 class Deck {
   // some recurring variables:
   // this.baseDeck is the array of cards in any standard deck
@@ -101,6 +100,7 @@ class Deck {
     this.checkboxesChecked.fill(false);
     this.playerDeck = [];
     for (let baseCard of this.baseDeck) {
+      if (baseCard.isFlipped()) baseCard.flip();
       this.playerDeck.push(baseCard);
     }
 
@@ -138,7 +138,10 @@ class Deck {
 
   // When we update characters, save the current settings so we can get back to it
   saveDeck() {
-    // list of things to save:
+    if (this.characterLabel == 18) {
+      this.saveMonsterDeck();
+    } else {
+      // list of things to save:
     // this.playerDeck
     var savedPlayerDeck = this.playerDeck.slice();
     // flip status of every card
@@ -161,7 +164,12 @@ class Deck {
     var savedCurses = [this.curses[0].slice(), this.curses[1].slice()];
     // finally save it all to a master array
     this.deckSaves[this.characterLabel] = [savedPlayerDeck, playerDeckIsFlipped, savedCheckboxesChecked, savedNumMinusOnes, savedNumBlesses, savedNumCurses, savedRemovedMinusOnes, savedAddedMinusOnes, savedBlesses, savedCurses];
+    }
   }
+  /*
+  saveMonsterDeck() {
+    //ugh
+  }*/
 
   // When we load a character we've already put settings for, load those specific settings
   loadSavedCharacter() {
@@ -224,7 +232,7 @@ class Deck {
 
   // returns true if this is the first time a spoiler class is being loaded
   doSpoilerCheck() {
-    return this.characterLabel > 6 && !this.spoilerAccepted && !this.deckSaves[this.characterLabel];
+    return this.characterLabel > 6 && this.characterLabel != 18 && !this.spoilerAccepted && !this.deckSaves[this.characterLabel];
   }
 
   logSpoilerAccepted() {
@@ -336,6 +344,10 @@ class Deck {
     this.perkList = ["x11-x12","x13-x14","oooo","x6-x7-+0-+1","x16-+2","+3","+4","+5-+6","+7-+8","+9-+10-+11","+12-+13-+14","+16-+17","+18","+19-+15"];
     this.perkInstructions = ["2Remove two =-1= cards","1Remove four =+0= cards","1Replace two =+1= cards with two =+2= cards","1Replace one =-2= card with one =+0= card","2Add one =+2=cold= card","2Add two =rolling=+1= cards","1Add three =rolling=pull=1 cards","1Add three =rolling=muddle= cards","1Add two =rolling=immobilize= cards","1Add one =rolling=stun= card","1Add one =rolling=disarm= and one =rolling=muddle= card"];
   }
+  /*
+  loadMonsterDeck() {
+    //ugh
+  }*/
   
   // This function is triggered when a checkbox is interacted with
   // The parameters are which checkbox is interacted with, and whether or not the box is being turned on or turned off
@@ -559,7 +571,7 @@ class Deck {
   loadCharacterDeck(label) {
     // This converts a numerical class value to the actual name of the class
     // Simply for convenience of looking at code and knowing what class it refers to
-    var characters = ["","brute","tinkerer","spellweaver","scoundrel","cragheart","mindthief","sunkeeper", "", "", "", "plagueherald", "berserker", "", "doomstalker", "sawbones", "elementalist", "beasttyrant"];
+    var characters = ["","brute","tinkerer","spellweaver","scoundrel","cragheart","mindthief","sunkeeper", "", "", "", "plagueherald", "berserker", "soothsinger", "doomstalker", "sawbones", "elementalist", "beasttyrant", "monsterdeck"];
     this.character = characters[parseInt(label)];
     switch (this.character) {
       case "beasttyrant":
@@ -592,6 +604,9 @@ class Deck {
       case "scoundrel": 
         this.loadScoundrelDeck(); 
         break;
+      case "soothsinger":
+        this.loadSoothsingerDeck();
+        break;
       case "spellweaver": 
         this.loadSpellweaverDeck(); 
         break;
@@ -600,6 +615,9 @@ class Deck {
         break;
       case "tinkerer": 
         this.loadTinkererDeck(); 
+        break;
+      case "monsterdeck":
+        this.loadMonsterDeck();
         break;
       default: break;
     }
@@ -646,6 +664,19 @@ class Deck {
     this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
     this.perkList = ["x11-x12","oooo","x13-+0","x14-+1","x4-+2","x5-+3","+4-+5","+6-+7","+8","+9","+10","+11-+12","+13","+14"];
     this.perkInstructions = ["1Remove two =-1= cards","1Remove four =+0= cards","2Replace one =-1= card with one =+1= card", "2Replace one =+0= card with one =rolling=+2= card","2Add two =rolling=wound= cards","2Add one =rolling=stun= card","1Add one =rolling=+1=disarm=card","1Add two =rolling=heal=1 cards","2Add one =+2=fire= card"];
+  }
+
+  loadSoothsingerDeck() {
+    this.characterDeck = [];
+    var dir = "images/modifierDecks/13/";
+    var cardDir = dir + "ssCard";
+    var backDir = dir + "ssCardBack.png";
+    var valueList = [4,4,1,1,2,2,2,3,0,1,1,1,0,0,0,0];
+    var effectList = [0,0,"immobilize","disarm","wound","poison","curse","muddle","stun",0,0,0,"curse","curse","curse","curse"];
+    var rollingList = [0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1];
+    this.loadDeck(this.characterDeck, cardDir, backDir, valueList, effectList, rollingList);
+    this.perkList = ["x11-x12","x13-x14","x16","x6-x7-+0","x8-x9-+1","x0-+2","x1-+3","x2-+4","x3-+5","x4-+6","x5-+7","x14-+8","+9-+10-+11","+12-+13", "+14-+15"];
+    this.perkInstructions = ["2Remove two =-1= cards","1Remove one =-2= card", "2Replace two =+1= cards with one =+4= card", "1Replace one =+0= card with one =+1=immobilize= card", "1Replace one =+0= card with one =+1=disarm= card", "1Replace one =+0= card with one =+2=wound= card", "1Replace one =+0= card with one =+2=poison= card", "1Replace one =+0= card with one =+2=curse= card", "1Replace one =+0= card with one =+3=muddle= card", "1Replace one =-1= card with one =+0=stun= card", "1Add three =rolling=+1= cards", "2Add two =rolling=curse= cards"];
   }
 
   loadDoomstalkerDeck() {
