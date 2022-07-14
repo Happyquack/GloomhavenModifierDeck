@@ -44,7 +44,7 @@ Here's what I'm working on adding:
   <li> Making chart results more readable </li>
   <li> Making chart updating smoother </li>
   <li> Acknowlege long image loading times </li>
-  <li> Add Frosthaven classes </li>
-  <li> Adjust advantage rules for Frosthaven classes - customizable order of card preference as an approximation of what might happen </li>
-  <li> Add Crimson Scales classes </li>
+  <li> Adding Frosthaven classes </li>
+  <li> Adjusting advantage rules for Frosthaven classes - customizable order of card preference as an approximation of what might happen </li>
+  <li> Adding Crimson Scales classes </li>
 </ul>
