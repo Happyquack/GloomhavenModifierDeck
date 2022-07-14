@@ -35,6 +35,7 @@ Here's what the tool offers so far:
 Here's what I'm working on adding:
 
 <ul>
+  <li> Reorganizing code behind the scenes to make it easier to follow and add new features </li>
   <li> The probabilities of ending up with certain attack ranges (e.g. +0 or above, +1 or above) </li>
   <li> Taking rolling modifiers into account when displaying the expected damage </li>
   <li> Taking advantage into account when displaying numerical rolling modifier chances </li>
@@ -43,4 +44,7 @@ Here's what I'm working on adding:
   <li> Making chart results more readable </li>
   <li> Making chart updating smoother </li>
   <li> Acknowlege long image loading times </li>
+  <li> Add Frosthaven classes </li>
+  <li> Adjust advantage rules for Frosthaven classes - customizable order of card preference as an approximation of what might happen </li>
+  <li> Add Crimson Scales classes </li>
 </ul>
