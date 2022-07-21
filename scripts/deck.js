@@ -196,7 +196,7 @@ class Deck {
     // this.blesses
     this.blesses = oldData[8];
     // this.curses
-    this.curses =oldData[9];
+    this.curses = oldData[9];
 
     // Finally, we need to retrieve the pre-loaded deck information
     this.characterDeck = this.characterDecks[this.characterLabel];

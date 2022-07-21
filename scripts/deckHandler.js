@@ -19,7 +19,7 @@ class DeckHandler {
         }
     }
 
-    // This method is called to redisplay the entire player deck, tnen runs stats calculations
+    // This method is called to redisplay the entire player deck, then runs stats calculations
     displayDeck() {
 
         this.deckOfCards = this.deck.getPlayerDeck();
