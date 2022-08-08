@@ -29,10 +29,10 @@ class ModdlingBox {
     }
 
     // These are all of the moddling functions
-    moddle(type,isAdding) {
+    moddle(type, isAdding) {
         switch (type) {
             case MINUS_ONE:
-                if (isAdding) {this.deckHandler.getDeck().addMinusOne(true);} else {this.deckHandler.getDeck().removeMinusOne(true);}
+                this.deckHandler.getDeck().moddleMinusOnes(isAdding);
                 break;
             case BLESS:
                 this.deckHandler.getDeck().moddleBlesses(isAdding);

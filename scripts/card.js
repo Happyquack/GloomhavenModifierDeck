@@ -46,7 +46,7 @@ class Card {
     return this.cardDiv;
   }
 
-  // This is a compact way to represent the card, used in the statistics part of the program
+  // This is a compact way to represent the card, mostly used in the statistics part of the program, but also to check for -1 perks
   getCardSummary() {
     return this.value + ":" + this.effect;
   }

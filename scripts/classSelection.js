@@ -72,9 +72,9 @@ class ClassSelectionUI {
         // Clear previous color scheme
         if (this.proposedID != "00") document.getElementById(this.proposedID).classList.remove("classSelectionProposed");
         this.proposedID = event.target.src.slice().split("/").pop().substring(0,2);
-        this.deckHandler.updateCharacter(this.proposedID);
+        this.deckHandler.updateCharacter(parseInt(this.proposedID)-1);
         // do the spoiler check
-        if (this.deckHandler.doSpoilerCheck()) {
+        if (this.deckHandler.needSpoilerCheck()) {
             document.getElementById(this.proposedID).classList.add("classSelectionProposed");
             this.showClassSpoilerWarning();
         } else {
@@ -105,19 +105,19 @@ class ClassSelectionUI {
             this.proposedID = "00";
             document.getElementById(this.currentID).classList.add("classSelectionSelected");
             document.getElementById(this.currentID).classList.remove("classSelectionLocked");
+            this.deckHandler.spoilerAccepted();
             this.perkHandler.updatePerks();
-            this.deckHandler.getDeck().logSpoilerAccepted();
         } else {
             document.getElementById(this.proposedID).classList.remove("classSelectionProposed");
             this.proposedID = "00";
-            this.deckHandler.updateCharacter(this.currentID);
+            this.deckHandler.updateCharacter(parseInt(this.currentID)-1);
             this.perkHandler.updatePerks();
         }
     }
 
     loadFirstCharacter() {
         document.getElementById(this.currentID).classList.add("classSelectionSelected");
-        this.deckHandler.updateCharacter(this.currentID);
+        this.deckHandler.updateCharacter(parseInt(this.currentID)-1);
         this.perkHandler.updatePerks();
     }
 
