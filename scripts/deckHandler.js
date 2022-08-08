@@ -11,14 +11,15 @@ class DeckHandler {
 
         this.classes = new Array(18);
         this.classNumber = 0; // default class is class 0
-        this.baseDeck = new Array(4).fill(new Array());
+        this.baseDeck = [...Array(4)].map(e => new Array());
         this.blesses = [];
         this.curses = [];
-        this.minusOnes = new Array(4).fill(new Array());
+        this.minusOnes = [...Array(4)].map(e => new Array());
         this.loadGlobalDecks();
         this.globalDecks = [this.baseDeck, this.blesses, this.curses, this.minusOnes];
         this.completeClassInfo = this.getClassInfo();
         this.spoilerCheck = false;
+        this.makeBaseDeckSwitchingButtons();
 
         this.statsHandler = new StatsHandler(this);
         this.deckDisplayBox = document.getElementById('deckDisplayBox');
@@ -32,12 +33,17 @@ class DeckHandler {
 
     loadGlobalDecks() {
         // first we load all four base decks
-        // we dont have the other three base decks yet actually
         var baseValueList = [0,0,0,0,0,0,1,1,1,1,1,-1,-1,-1,-1,-1,-2,2,"null","x2"];
         var baseEffectList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         var baseRollingList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-        this.loadDeck(this.baseDeck[0], "images/modifierDecks/zBase/baseCard", baseValueList, baseEffectList, baseRollingList);
+        this.loadDeck(this.baseDeck[0], "images/modifierDecks/zBase/gh-am-p1-", baseValueList, baseEffectList, baseRollingList);
+        this.loadDeck(this.baseDeck[1], "images/modifierDecks/zBase/gh-am-p2-", baseValueList, baseEffectList, baseRollingList);
+        this.loadDeck(this.baseDeck[2], "images/modifierDecks/zBase/gh-am-p3-", baseValueList, baseEffectList, baseRollingList);
+        this.loadDeck(this.baseDeck[3], "images/modifierDecks/zBase/gh-am-p4-", baseValueList, baseEffectList, baseRollingList);
         this.minusOnes[0] = this.baseDeck[0].slice(11,16);
+        this.minusOnes[1] = this.baseDeck[1].slice(11,16);
+        this.minusOnes[2] = this.baseDeck[2].slice(11,16);
+        this.minusOnes[3] = this.baseDeck[3].slice(11,16);
         this.additionDeck = [];
         var addValueList = ["null","null","null","null","null","null","null","null","null","null","x2","x2","x2","x2","x2","x2","x2","x2","x2","x2",-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
         var addEffectList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -46,6 +52,9 @@ class DeckHandler {
         this.curses = this.additionDeck.slice(0,10);
         this.blesses = this.additionDeck.slice(10,20);
         this.minusOnes[0].push(...this.additionDeck.slice(20));
+        this.minusOnes[1].push(...this.additionDeck.slice(20));
+        this.minusOnes[2].push(...this.additionDeck.slice(20));
+        this.minusOnes[3].push(...this.additionDeck.slice(20));
     }
 
     // Given a target array, image directory, and lists of card values, effects, and if they are rolling,
@@ -94,20 +103,6 @@ class DeckHandler {
         this.classes[this.classNumber].loadGameState();
         this.displayDeck();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     // This method is called to redisplay the entire player deck, then runs stats calculations
     displayDeck() {
@@ -335,6 +330,25 @@ class DeckHandler {
             ["1Remove two =-1= cards","3Replace one =-1= card with one =+1= card","2Replace one =+0= card with one =+2= card", "2Add one =+1=wound= card","2Add one =+1=immobilize= card","3Add two =rolling=heal=1 cards","1Add two =rolling=earth= cards"]
         ]
         ];
+    }
+
+    makeBaseDeckSwitchingButtons() {
+        var baseDeckSwitcher = document.getElementById("baseDeckSwitcher");
+        var boxInfo = [["baseDeck1","Base deck 1 selected",0],["baseDeck2","Switch to base deck 2",1],["baseDeck3","Switch to base deck 3",2],["baseDeck4","Switch to base deck 4",3]];
+        boxInfo.forEach(arr => {
+            var button = document.createElement("button");
+            button.type = "button";
+            button.id = arr[0];
+            button.innerHTML = arr[1];
+            button.onclick = this.changeBaseDeck.bind(this,arr[2]);
+            baseDeckSwitcher.appendChild(button);
+        });
+        document.getElementById("baseDeck1").disabled = true;
+    }
+
+    changeBaseDeck(newBaseDeck) {
+        this.getDeck().changeBaseDeck(newBaseDeck);
+        this.displayDeck();
     }
 }
 

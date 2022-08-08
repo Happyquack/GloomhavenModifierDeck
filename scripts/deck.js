@@ -75,14 +75,19 @@ class Deck {
 
     loadGameState() {
         this.cardsFlipped.forEach((flip, index) => flip != this.getPlayerDeck()[index].isFlipped() ? this.getPlayerDeck()[index].flip() : {});
+        this.setBaseDeckButtons();
     }
 
     changeBaseDeck(newBaseDeck) {
-        if (this.BaseDeckNum == newBaseDeck) {
-            console.log("Tried to change to Base Deck " + newBaseDeck + ", but we were already there.");
+        if (this.baseDeckNum == newBaseDeck) {
+            console.log("Tried to change to Base Deck " + (newBaseDeck + 1) + ", but we were already there.");
         } else {
+            document.getElementById("baseDeck" + (this.baseDeckNum + 1)).innerHTML = "Switch to base deck " + (this.baseDeckNum + 1);
+            document.getElementById("baseDeck" + (this.baseDeckNum + 1)).disabled = false;
+            document.getElementById("baseDeck" + (newBaseDeck + 1)).innerHTML = "Base deck " + (newBaseDeck + 1) + " selected";
+            document.getElementById("baseDeck" + (newBaseDeck + 1)).disabled = true;
             for (var i = 0; i < this.playerDeck.length; i++) {
-                if (this.playerDeck[i] in this.getBaseDeck()) {
+                if (this.getBaseDeck().includes(this.playerDeck[i])) {
                     var flipQuestionMark = this.playerDeck[i].isFlipped();
                     this.playerDeck[i] = this.baseDeck[newBaseDeck][this.getBaseDeck().indexOf(this.playerDeck[i])]
                     if (flipQuestionMark) this.playerDeck[i].flip();
@@ -90,6 +95,19 @@ class Deck {
             }
             this.baseDeckNum = newBaseDeck;
         }
+    }
+
+    setBaseDeckButtons() {
+        document.getElementById("baseDeck1").innerHTML = "Switch to base deck 1";
+        document.getElementById("baseDeck1").disabled = false;
+        document.getElementById("baseDeck2").innerHTML = "Switch to base deck 2";
+        document.getElementById("baseDeck2").disabled = false;
+        document.getElementById("baseDeck3").innerHTML = "Switch to base deck 3";
+        document.getElementById("baseDeck3").disabled = false;
+        document.getElementById("baseDeck4").innerHTML = "Switch to base deck 4";
+        document.getElementById("baseDeck4").disabled = false;
+        document.getElementById("baseDeck" + (this.baseDeckNum + 1)).innerHTML = "Base deck " + (this.baseDeckNum + 1) + " selected";
+        document.getElementById("baseDeck" + (this.baseDeckNum + 1)).disabled = true;
     }
 
     // This function is triggered when a checkbox is interacted with
