@@ -208,7 +208,6 @@ class DeckHandler {
     }
 
     makeBaseDeckSwitchingButtons() {
-        console.log("adding buttons!");
         var baseDeckSwitcher = document.getElementById("baseDeckSwitcher");
         var boxInfo = [["baseDeck1","Base deck 1 selected",0],["baseDeck2","Switch to base deck 2",1],["baseDeck3","Switch to base deck 3",2],["baseDeck4","Switch to base deck 4",3]];
         boxInfo.forEach(arr => {
@@ -218,7 +217,6 @@ class DeckHandler {
             button.innerHTML = arr[1];
             button.onclick = this.changeBaseDeck.bind(this,arr[2]);
             baseDeckSwitcher.appendChild(button);
-            console.log(button);
         });
         document.getElementById("baseDeck1").disabled = true;
     }
