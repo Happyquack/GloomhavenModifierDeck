@@ -207,6 +207,27 @@ class DeckHandler {
         });
     }
 
+    makeBaseDeckSwitchingButtons() {
+        console.log("adding buttons!");
+        var baseDeckSwitcher = document.getElementById("baseDeckSwitcher");
+        var boxInfo = [["baseDeck1","Base deck 1 selected",0],["baseDeck2","Switch to base deck 2",1],["baseDeck3","Switch to base deck 3",2],["baseDeck4","Switch to base deck 4",3]];
+        boxInfo.forEach(arr => {
+            var button = document.createElement("button");
+            button.type = "button";
+            button.id = arr[0];
+            button.innerHTML = arr[1];
+            button.onclick = this.changeBaseDeck.bind(this,arr[2]);
+            baseDeckSwitcher.appendChild(button);
+            console.log(button);
+        });
+        document.getElementById("baseDeck1").disabled = true;
+    }
+
+    changeBaseDeck(newBaseDeck) {
+        this.getDeck().changeBaseDeck(newBaseDeck);
+        this.displayDeck();
+    }
+
     getClassInfo() {
         return [
             ["images/modifierDecks/01/brCard",
@@ -330,25 +351,6 @@ class DeckHandler {
             ["1Remove two =-1= cards","3Replace one =-1= card with one =+1= card","2Replace one =+0= card with one =+2= card", "2Add one =+1=wound= card","2Add one =+1=immobilize= card","3Add two =rolling=heal=1 cards","1Add two =rolling=earth= cards"]
         ]
         ];
-    }
-
-    makeBaseDeckSwitchingButtons() {
-        var baseDeckSwitcher = document.getElementById("baseDeckSwitcher");
-        var boxInfo = [["baseDeck1","Base deck 1 selected",0],["baseDeck2","Switch to base deck 2",1],["baseDeck3","Switch to base deck 3",2],["baseDeck4","Switch to base deck 4",3]];
-        boxInfo.forEach(arr => {
-            var button = document.createElement("button");
-            button.type = "button";
-            button.id = arr[0];
-            button.innerHTML = arr[1];
-            button.onclick = this.changeBaseDeck.bind(this,arr[2]);
-            baseDeckSwitcher.appendChild(button);
-        });
-        document.getElementById("baseDeck1").disabled = true;
-    }
-
-    changeBaseDeck(newBaseDeck) {
-        this.getDeck().changeBaseDeck(newBaseDeck);
-        this.displayDeck();
     }
 }
 
