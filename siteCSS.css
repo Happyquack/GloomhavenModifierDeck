@@ -195,7 +195,7 @@ input:checked {
   }
 
   #baseDeckSwitcher button {
-    margin: 10%;
+    padding: 10%;
   }
 }
 
