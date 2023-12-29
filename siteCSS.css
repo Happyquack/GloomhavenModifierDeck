@@ -179,6 +179,10 @@ input:checked {
   flex: 1;
 }
 
+#attackValueBox {
+  font-size: 130%;
+}
+
 .numberModifier {
   font-family: 'Pirata One';
 }

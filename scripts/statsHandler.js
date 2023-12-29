@@ -13,7 +13,9 @@ const NORMAL = 0; const ADVANTAGE = 1; const DISADVANTAGE = 2;
 
 // THIS IS A WORK IN PROGRESS CLASS - COMMENTING WILL NOT BE THOROUGH FOR READABILITY, NOR WILL THE CODE BE COMPLETE
 
+// TODO - Take advantage into account with rolling attack modifiers
 
+// TODO - ponder on how best to implement value ranges, and if the above implementation was a good idea
 
 
 
@@ -68,18 +70,30 @@ class StatsHandler {
     // calculate the actual probabilities
     var endCardChances = new Map();
     if (mode == NORMAL) {
-      var probabilityPerEndCard = 1 / possibleEndCards.length;
+      if (loneCard == null) {
+        var probabilityPerEndCard = 1 / possibleEndCards.length;
       possibleEndCards.forEach(card => {
         var cardID = card.getCardSummary();
         if (endCardChances.has(cardID)) {
-          endCardChances.set(cardID,endCardChances.get(cardID) + probabilityPerEndCard);
+          endCardChances.set(cardID, endCardChances.get(cardID) + probabilityPerEndCard);
         } else {
           endCardChances.set(cardID, probabilityPerEndCard);
         }
       });
-    } else {
+      } else {
+        endCardChances.set(loneCard.getCardSummary(), 1);
+      }
+    } else { // advantage or disadvantage
       var numEndCards = possibleEndCards.length;
-      var numRollings = currentDeck.length - numEndCards;
+      var numRollings = currentDeck.length - numEndCards; // that's a little sus
+      // the issue here is that, as per the first few lines of this function, if the deck is only rollings, then they get ignored
+      // specifically, the code treats it as if we can reshuffle and then draw two cards as normal
+      // instead, there are two special cases here
+      //      first, if the deck only has rollings, then the distribution should be normal
+      //      second, if the deck only has one end card, then the distribution should be all end cards versus that card
+      //                                                                                    ^ double check on this, or if we keep the card out
+      //                                                                     (important to note here - this code takes the complete reshuffle
+      //                                                                      approach when it comes to calculating rolling card effects)
       var numCards = numEndCards+numRollings;
       var chanceFromRollings = numRollings/(numCards*numEndCards);
       if (loneCard == null) { // there is more than one card left in the deck
@@ -116,26 +130,27 @@ class StatsHandler {
 
   // this function determines statistics of rolling modifiers
   generateRollingStats(currentDeck, endRolling, advantage) {
-    // first we need to make sure that there are non-rolling cards, and store the rollings if there are none.
-    // then we have to look at how many there are of each rolling card, which we will use as a probability distribution
-    var cumulativeRollingEffects = new Map();
-    var summarizedRollings = new Map();
-    // first we need to make sure that there are non-rolling cards, and store the rollings if there are none.
-    var cumulativeRollingValue = 0;
+    // first we need to make sure that there are non-rolling cards, and store the guaranteed rollings if there are none.
+    var guaranteedRollingEffects = new Map(); // for effects
+    var guaranteedRollingValue = 0; // for attack value
     if (currentDeck.filter(el => !el.isRolling()).length == 0) { // if the deck doesn't have non-rollings we will need to reshuffle
-      if (currentDeck.length > 0) { // if the deck still has cards they must be rolling and will be drawn
-        // here we store the guaranteed rolling effects
+      if (currentDeck.length > 0) { // if the deck does have any cards they must be rolling and will be drawn
+        // here we store the guaranteed rolling effects/modifiers
         currentDeck.forEach(card => {
-          cumulativeRollingValue += card.getValue();
+          guaranteedRollingValue += card.getValue();
           var effect = card.getEffect();
-          if (cumulativeRollingEffects.has(effect)) { cumulativeRollingEffects.set(effect, cumulativeRollingEffects.get(effect) + 1)}
-          else {cumulativeRollingEffects.set(effect, 1)}
+          if (guaranteedRollingEffects.has(effect)) { guaranteedRollingEffects.set(effect, guaranteedRollingEffects.get(effect) + 1)}
+          else {guaranteedRollingEffects.set(effect, 1)}
         });
+        advantage = false; // if any rolling cards were drawn, then advantage is now irrelevant
       }
-      currentDeck = [...this.deckHandler.getDeck().getPlayerDeck()];
+      currentDeck = [...this.deckHandler.getDeck().getPlayerDeck()]; // anticipating the reshuffle
     }
 
-    // now we have to look at how many there are of each rolling card, which we will use as a probability distribution
+    // -------------------- next, we focus on rolling effects
+
+    // we have to look at how many there are of each rolling card, which we will use as a probability distribution
+    var summarizedRollings = new Map();
     var rollingCards = currentDeck.filter(el => el.isRolling());
     rollingCards.forEach(card => {
       var effect = card.getEffect();
@@ -143,37 +158,50 @@ class StatsHandler {
       else {summarizedRollings.set(effect, 1)}
     });
 
-    // next, we calculate the chances of pulling each number of card
+    // then we calculate the chances of pulling each number of card
     // we store it into the end rolling map in the form [effectLabel, chanceOfEffect]
     var totalNum = currentDeck.length;
     var rollingNum = rollingCards.length;
     // with advantage, there's a chance that a rolling will be drawn after an end card, so we have to add that probability in
     var advantageOffset = 0;
-    if (advantage) advantageOffset = (totalNum-rollingNum)/(totalNum*(totalNum-1));
-    // Now we look through every kind of rolling card and find their proabilities of being drawn
-    for (var [key, val] of summarizedRollings.entries()) {
-      if (key != 0) {
-        var offset = 0; // this variable will be used in case the effect here is one that was deemed as guaranteed earlier
-        if (CUMULATIVE_EFFECTS.includes(key.slice(0,-1))) {
-          if (cumulativeRollingEffects.has(key)) {
-            offset = cumulativeRollingEffects.get(key);
-            endRolling.push([key.slice(0,-1) + parseInt(key.charAt(key.length-1)) * (offset), 1]);
+
+    // ? come back to this
+    if (advantage) advantageOffset = (totalNum-rollingNum)/(totalNum*(totalNum-1)); // the probability that one of two cards drawn is not rolling
+
+
+    // Now we look through every kind of rolling card and find their probabilities of being drawn
+    for (var [effectName, numRollingOccurrence] of summarizedRollings.entries()) {
+      if (effectName != 0) {
+        var guaranteedOffset = 0; // this variable will be used in case the effect here is one that was deemed as guaranteed earlier
+        // check for cumulative effectX
+        if (CUMULATIVE_EFFECTS.includes(effectName.slice(0,-1))) {
+          // first, take guaranteed cumulative effects into account
+          if (guaranteedRollingEffects.has(effectName)) {
+            guaranteedOffset = guaranteedRollingEffects.get(effectName);
+            endRolling.push([effectName.slice(0,-1) + parseInt(effectName.charAt(effectName.length-1)) * (guaranteedOffset), 1]);
           }
-          endRolling.push([key.slice(0,-1) + (parseInt(key.charAt(key.length-1)) * (1+offset)), (this.probabilityOfDesiredNumberOfCards(1, rollingNum-(val-1), totalNum)+advantageOffset)*(val)]);
-          for (let i = 2; i <= val; i++) { // if the modifier is cumulative then we have to calculate probabilities for each amount of the card there is
-            endRolling.push([key.slice(0,-1) + (parseInt(key.charAt(key.length-1)) * (i + offset)), this.probabilityOfDesiredNumberOfCards(i, rollingNum-(val-i), totalNum)*(val-i+1)]);
+          // next, calculate any cumulative effects from drawing 
+          endRolling.push([effectName.slice(0,-1) + (parseInt(effectName.charAt(effectName.length-1)) * (1 + guaranteedOffset)), 
+                (this.probabilityOfDesiredNumberOfCards(1, rollingNum-(numRollingOccurrence-1), totalNum) + advantageOffset)*(numRollingOccurrence)]);
+          // we have to calculate probabilities for each amount of the card there is
+          for (let i = 2; i <= numRollingOccurrence; i++) { 
+            endRolling.push([effectName.slice(0,-1) + (parseInt(effectName.charAt(effectName.length-1)) * (i + guaranteedOffset)), 
+                this.probabilityOfDesiredNumberOfCards(i, rollingNum-(numRollingOccurrence-i), totalNum)*(numRollingOccurrence-i+1)]);
           }
-        } else { // if the modifier is not cumulative then calculate the P of drawing one and multiply it by the num of cards
-          if (cumulativeRollingEffects.has(key)) { // if this was a guaranteed effect, we make sure we log it as a 100% chance
-            endRolling.push([key, 1]);
+        } else { // if the modifier is not cumulative, then calculate the P of drawing one and multiply it by the num of cards
+          // if this was a guaranteed effect, we make sure we log it as a 100% chance
+          if (guaranteedRollingEffects.has(effectName)) { 
+            endRolling.push([effectName, 1]);
           } else {
-            endRolling.push([key, (this.probabilityOfDesiredNumberOfCards(1, rollingNum, totalNum)+advantageOffset)*val]);
+            // if not, calculate the probability of drawing that card
+            endRolling.push([effectName, (this.probabilityOfDesiredNumberOfCards(1, rollingNum, totalNum) + advantageOffset) * numRollingOccurrence]);
           }
         }
       }
     }
 
-    // now we gotta take care of those pesky number modifiers
+    // -------------------- next, we focus on rolling attack modifiers
+
     var listOfNums = [];
     var maxVal = 0;
     var numPosMods = 0;
@@ -196,8 +224,8 @@ class StatsHandler {
     // now what we can do is find the chance of getting any ending value x by, for every value in the xth array in modifierInfo, 
     // calculating the probability of drawing A cards (where A in the index in the xth array) and multiplying it by the value.
 
-    if (cumulativeRollingValue > 0) { // if there were rolling modifiers drawn before a reshuffle, then that is a guaranteed effect and is added on afterwards
-      endRolling.push([cumulativeRollingValue, 1]);
+    if (guaranteedRollingValue > 0) { // if there were rolling modifiers drawn before a reshuffle, then that is a guaranteed effect and is added on afterwards
+      endRolling.push([guaranteedRollingValue, 1]);
     }
 
     for (let endVal = 1; endVal <= maxVal; endVal++) {
@@ -205,10 +233,10 @@ class StatsHandler {
       for (let numNeededCards = 1; numNeededCards <= numPosMods; numNeededCards++) {
         if (modifierInfo[endVal-1][numNeededCards-1] != 0) {
           var baseProbability = this.probabilityOfDesiredNumberOfCards(numNeededCards, rollingCards.length-(numPosMods-numNeededCards), currentDeck.length);
-          numberModifierProbability += modifierInfo[endVal-1][numNeededCards-1] * baseProbability;
+          numberModifierProbability += modifierInfo[endVal-1][numNeededCards-1] * (baseProbability + (numNeededCards == 1 ? advantageOffset : 0));
         }
       }
-      endRolling.push([endVal + cumulativeRollingValue, numberModifierProbability]);
+      endRolling.push([endVal + guaranteedRollingValue, numberModifierProbability]);
     }
   }
 
@@ -264,6 +292,8 @@ class StatsHandler {
     return output;
   }
 
+  // given the number of rolling cards desired, the number of rolling cards available, and the total number of cards,
+  // return the probability of drawing the number of rolling cards desired
   probabilityOfDesiredNumberOfCards(numWant, numRolling, numTotal) {
     if (numWant == 0) return 1; // this is the default
     if (numWant > numRolling) return 0; // this is impossible
@@ -306,10 +336,12 @@ class StatsHandler {
       endCardStatOutputTwo.innerHTML = "Standard deviation: " + stdev.toFixed(3);
       targetDiv.appendChild(endCardStatOutput);
       targetDiv.appendChild(endCardStatOutputTwo);
-    } else if (endStats.size == 1) {
+    } else if (endStats.size == 1) { // EDGE CASE : NULL AND ROLLING
       var endCardStatOutput = document.createElement("p");
-      deckAverage = endStats.keys().next().value;
-      endCardStatOutput.innerHTML = "Typical deck average" + rollingDisclaimer + ": " + deckAverage;
+      var cardValue = endStats.keys().next().value.split(":")[0];
+      if (cardValue == "x2") cardValue = this.attackValue;
+      if (cardValue == "null") cardValue = -1 * this.attackValue;
+      endCardStatOutput.innerHTML = "Typical deck average" + rollingDisclaimer + ": " + (parseInt(cardValue) + this.attackValue);
       targetDiv.appendChild(endCardStatOutput);
     }
 

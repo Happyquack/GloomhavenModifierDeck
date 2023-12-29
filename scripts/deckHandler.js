@@ -69,15 +69,19 @@ class DeckHandler {
         });
     }
 
+    // local
     createNewClassDeck(newClassNum) {
         var newClassInfo = this.completeClassInfo[newClassNum];
         this.classes[newClassNum] = new Deck(newClassInfo[0], newClassInfo.slice(1,4), newClassInfo.slice(4,6), this.globalDecks);
     }
 
     updateCharacter(newClassNum) {
+        // if the current class isn't locked, save the current setup
         this.classes[this.classNumber] == null ? {} : this.classes[this.classNumber].saveGameState();
+        // change classes
         this.classNumber = newClassNum;
         if (this.classes[this.classNumber] == null) {
+            // if this is the first time this class has been checked, make sure it's unlocked
             if (this.classNumber < 6) {
                 this.spoilerCheck = false;
                 this.createNewClassDeck(this.classNumber);
@@ -87,12 +91,14 @@ class DeckHandler {
                 this.spoilerCheck = true;
             }
         } else {
+            // if this class already has data, load it back up
             this.classes[this.classNumber].loadGameState();
             this.spoilerCheck = false;
             this.displayDeck();
         }
     }
 
+    // Keeps track of if this is a locked class
     needSpoilerCheck() {
         return this.spoilerCheck;
     }
@@ -287,10 +293,20 @@ class DeckHandler {
         
         ],
         [
-        
+            "images/modifierDecks/09/smCard",
+            [0,1,1,1,1,1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,"wound","wound","poison","poison","healSelf1","healSelf1","healSelf1","healSelf1","healSelf1","healSelf1","fire","air","night","earth"],
+            [0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            ["x11-x12","x16-+0","x13-+1","x14-+2","x15-+3","+6","+7","+8-+9","+10-+11","+12-+13","+14-+15","+16-+17","+18-+19","+20-+21", "+4-+5"],
+            ["1Remove two =-1= cards","1Replace one =-2= card with one =+0= card","3Replace one =-1= card with one =+1= card","2Add one =+2= card","1Add two =rolling=wound= cards","1Add two =rolling=poison= cards","3Add two =rolling=heal=1= cards","1Add one =rolling=fire= card and one =rolling=air= card","1Add one =rolling=night= card and one =rolling=earth= card","1Ignore negative item effects and add two =+1= cards"]
         ],
         [
-        
+            "images/modifierDecks/10/nsCard",
+            [1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,-1,-1],
+            ["night","night","invisible","invisible","muddle","muddle","muddle","muddle","muddle","muddle","healSelf1","healSelf1","curse","curse","target1",0,0,"night","night"],
+            [0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0],
+            [],
+            ["2Remove two =-1= cards","1Remove four =+0= cards","2Add one =-1=night= card","2Replace one =-1=night= card with one =+1=night= card","2Add one =+1=invisible= card","2Add three =rolling=muddle= cards","1Add two =rolling=heal=1= cards","1Add two =rolling=curse= cards","1Add one =rolling=target= card","1Ignore negative item effects and add two =+1= cards"]
         ],
         [
             "images/modifierDecks/11/phCard",
@@ -330,7 +346,7 @@ class DeckHandler {
             [0,0,0,0,"immobilize","immobilize","wound","wound","wound","wound","stun","healSelf3","healSelf3","itemRefresh"],
             [0,0,1,1,0,0,1,1,1,1,1,1,1,0],
             ["x11-x12","x13-x14","oooo","x4-+0","x5-+1","+2","+3","+4","+5","+6-+7","+8-+9","+10","+11","+12","+13"],
-            ["2Remove two =-1= cards","1Remove four =+0= cards","2Replace one =+0= card with one =+2= card","2Add one =rolling=+2= cards","2Add one =+1=immobilize= card","2Add two =rolling=wound= cards","1Add one =rolling=stun= card","2Add one =rolling=heal=3 cards","1Add one =+0= Refresh an item card"]
+            ["2Remove two =-1= cards","1Remove four =+0= cards","2Replace one =+0= card with one =+2= card","2Add one =rolling=+2= card","2Add one =+1=immobilize= card","2Add two =rolling=wound= cards","1Add one =rolling=stun= card","2Add one =rolling=heal=3 cards","1Add one =+0= Refresh an item card"]
         ],
         [
             "images/modifierDecks/16/elCard",
