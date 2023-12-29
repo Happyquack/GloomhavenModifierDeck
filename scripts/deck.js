@@ -119,27 +119,58 @@ class Deck {
         var instructions = this.perkEncoding[checkmarkIndex].slice();
         // Now we have to parse the instructions and perform the deck changes
         var steps = instructions.slice().split("-");
-        steps.forEach(task => {
+        var index = 0;
+        var safety = true;
+        for (index = 0; index < steps.length; index++) {
+            var task = steps[index];
             if (task[0] == "x") {
                 if (turnPerkOn) {
-                    this.removeCard(this.getBaseDeck()[parseInt(task.substring(1,task.length))]);
+                    safety = this.removeCard(this.getBaseDeck()[parseInt(task.substring(1,task.length))]);
                 } else {
-                    this.addCard(this.getBaseDeck()[parseInt(task.substring(1,task.length))]);
+                    safety = this.addCard(this.getBaseDeck()[parseInt(task.substring(1,task.length))]);
                 }
             } else if (task[0] == "+") {
                 if (turnPerkOn) {
-                    this.addCard(this.chararcterModifiers[parseInt(task.substring(1,task.length))]);
+                    safety = this.addCard(this.chararcterModifiers[parseInt(task.substring(1,task.length))]);
                 } else {
-                    this.removeCard(this.chararcterModifiers[parseInt(task.substring(1,task.length))]);
+                    safety = this.removeCard(this.chararcterModifiers[parseInt(task.substring(1,task.length))]);
                 }
-            } else {
+            } else if (task == "oooo"){
                 if (turnPerkOn) {
-                    this.removeFourZeroes();
+                    safety = this.removeFourZeroes();
                 } else {
-                    this.addFourZeroes();
+                    safety = this.addFourZeroes();
+                }
+            } else if (task[0] == "*"){
+                if (turnPerkOn) {
+                    safety = this.removeCard(this.chararcterModifiers[parseInt(task.substring(1,task.length))]);
+                } else {
+                    safety = this.addCard(this.chararcterModifiers[parseInt(task.substring(1,task.length))]);
                 }
             }
-        });
+            if (safety == false) { // unable to add/remove a card
+                break;
+            }
+        };
+        if (safety == false) { // ran into a problem, undo what we just did
+            for (var i = 0; i < index; i++) {
+                var task = steps[i];
+                if (task[0] == "x") {
+                    if (!turnPerkOn) { this.removeCard(this.getBaseDeck()[parseInt(task.substring(1,task.length))]);
+                    } else { this.addCard(this.getBaseDeck()[parseInt(task.substring(1,task.length))]); }
+                } else if (task[0] == "+") {
+                    if (!turnPerkOn) { this.addCard(this.chararcterModifiers[parseInt(task.substring(1,task.length))]);
+                    } else { this.removeCard(this.chararcterModifiers[parseInt(task.substring(1,task.length))]); }
+                } else if (task == "oooo"){
+                    if (!turnPerkOn) { failed = this.removeFourZeroes();
+                    } else { this.addFourZeroes(); }
+                } else if (task[0] == "*"){
+                    if (!turnPerkOn) { this.removeCard(this.chararcterModifiers[parseInt(task.substring(1,task.length))]);
+                    } else { this.addCard(this.chararcterModifiers[parseInt(task.substring(1,task.length))]); }
+                }
+            }
+        } 
+        return safety;
         // Resort the order of cards in the array for aesthetic purposes
         // this.deckSort(); (METHOD WIP)
     }
@@ -151,6 +182,9 @@ class Deck {
         if (this.playerDeck.indexOf(card) !== -1) {
             if(card.isFlipped()) card.flip();
             this.playerDeck.splice(this.playerDeck.indexOf(card), 1);
+            return true;
+        } else {
+            return false;
         }
     }
     // Utility method to add a certain card to the player deck, if possible
@@ -160,15 +194,26 @@ class Deck {
         if (this.playerDeck.indexOf(card) == -1) {
             if(card.isFlipped()) card.flip();
             this.playerDeck.push(card);
+            return true;
+        } else {
+            return false;
         }
     }
     // Utility method to remove 4 +0's from the player deck - note that these are specific cards
     removeFourZeroes() {
-        this.removeCard(this.getBaseDeck()[0]); this.removeCard(this.getBaseDeck()[1]); this.removeCard(this.getBaseDeck()[2]); this.removeCard(this.getBaseDeck()[3]);
+        this.removeCard(this.getBaseDeck()[0]);
+        this.removeCard(this.getBaseDeck()[1]);
+        this.removeCard(this.getBaseDeck()[2]);
+        this.removeCard(this.getBaseDeck()[3]);
+        return true; // yeah dunno how to deal with this returning false
     }
     // Utility method to add 4 +0's from the player deck - note that these are specific cards
     addFourZeroes() {
-        this.addCard(this.getBaseDeck()[0]); this.addCard(this.getBaseDeck()[1]); this.addCard(this.getBaseDeck()[2]); this.addCard(this.getBaseDeck()[3]);
+        this.addCard(this.getBaseDeck()[0]);
+        this.addCard(this.getBaseDeck()[1]);
+        this.addCard(this.getBaseDeck()[2]);
+        this.addCard(this.getBaseDeck()[3]);
+        return true; // yeah dunno how to deal with this returning false
     }
 
     // So a quick note on the word "moddle"

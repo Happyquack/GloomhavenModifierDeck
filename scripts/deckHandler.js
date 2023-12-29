@@ -305,7 +305,7 @@ class DeckHandler {
             [1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,-1,-1],
             ["night","night","invisible","invisible","muddle","muddle","muddle","muddle","muddle","muddle","healSelf1","healSelf1","curse","curse","target1",0,0,"night","night"],
             [0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0],
-            [],
+            ["x11-x12","x13-x14","oooo","+17","+18","*17-+0","*18-+1","+2","+3","+4-+5-+6","+7-+8-+9","+10-+11","+12-+13","+14","+15-+16"],
             ["2Remove two =-1= cards","1Remove four =+0= cards","2Add one =-1=night= card","2Replace one =-1=night= card with one =+1=night= card","2Add one =+1=invisible= card","2Add three =rolling=muddle= cards","1Add two =rolling=heal=1= cards","1Add two =rolling=curse= cards","1Add one =rolling=target= card","1Ignore negative item effects and add two =+1= cards"]
         ],
         [

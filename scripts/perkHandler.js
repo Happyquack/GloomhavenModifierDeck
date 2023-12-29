@@ -18,7 +18,9 @@ class PerkHandler {
     checkboxTriggered(event) {
         var checkbox = event.target;
         var checkboxNum = parseInt(checkbox.id.substring(8,checkbox.id.length));
-        this.deckHandler.getDeck().modPerk(checkboxNum, checkbox.checked);
+        if (!this.deckHandler.getDeck().modPerk(checkboxNum, checkbox.checked)) {
+            checkbox.checked = !checkbox.checked;
+        }
         this.deckHandler.displayDeck();
     }
 
